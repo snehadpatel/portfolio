@@ -2,13 +2,24 @@
 
 import { Button } from "@/components/ui/Button";
 import { DATA } from "@/lib/data";
-import { Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 
-export default function ContactPage() {
+function ContactForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+    const searchParams = useSearchParams();
+    const serviceParam = searchParams.get("service");
+
+    const getInitialMessage = () => {
+        if (!serviceParam) return "";
+        const service = DATA.services.find((s) => s.id === serviceParam);
+        return service
+            ? `Hi Sneha, I would like to inquire about your "${service.title}" service. Let's discuss the scope of our collaboration!`
+            : "";
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -21,101 +32,121 @@ export default function ContactPage() {
     };
 
     return (
+        <div className="grid md:grid-cols-2 gap-16">
+            {/* Contact Info */}
+            <div>
+                <h1 className="text-4xl md:text-5xl font-bold font-heading mb-6">Let's Connect</h1>
+                <p className="text-xl text-muted-foreground mb-12">
+                    I'm currently looking for internship opportunities and open to discussing new projects.
+                </p>
+
+                <div className="space-y-6">
+                    <Link href={`mailto:${DATA.profile.email}`} className="flex items-center gap-4 group p-4 rounded-xl border border-white/5 bg-white/[0.01] hover:border-white/20 transition-all duration-300">
+                        <div className="w-10 h-10 border border-white/10 bg-white/[0.02] rounded-lg flex items-center justify-center text-white group-hover:scale-105 transition-transform">
+                            <Mail className="w-5 h-5" />
+                        </div>
+                        <div>
+                            <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Email Me</div>
+                            <div className="font-semibold text-base text-white mt-0.5">{DATA.profile.email}</div>
+                        </div>
+                    </Link>
+
+                    <Link href={DATA.profile.linkedin} target="_blank" className="flex items-center gap-4 group p-4 rounded-xl border border-white/5 bg-white/[0.01] hover:border-white/20 transition-all duration-300">
+                        <div className="w-10 h-10 border border-white/10 bg-white/[0.02] rounded-lg flex items-center justify-center text-white group-hover:scale-105 transition-transform">
+                            <Linkedin className="w-5 h-5" />
+                        </div>
+                        <div>
+                            <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Connect on LinkedIn</div>
+                            <div className="font-semibold text-sm text-white mt-0.5">
+                                {DATA.profile.linkedin.replace("https://www.linkedin.com/in/", "")}
+                            </div>
+                        </div>
+                    </Link>
+
+                    <Link href={DATA.profile.github} target="_blank" className="flex items-center gap-4 group p-4 rounded-xl border border-white/5 bg-white/[0.01] hover:border-white/20 transition-all duration-300">
+                        <div className="w-10 h-10 border border-white/10 bg-white/[0.02] rounded-lg flex items-center justify-center text-white group-hover:scale-105 transition-transform">
+                            <Github className="w-5 h-5" />
+                        </div>
+                        <div>
+                            <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Check my Code</div>
+                            <div className="font-semibold text-sm text-white mt-0.5">
+                                {DATA.profile.github.replace("https://github.com/", "")}
+                            </div>
+                        </div>
+                    </Link>
+                </div>
+            </div>
+
+            {/* Form */}
+            <div className="border border-white/5 bg-white/[0.01] p-8 rounded-2xl">
+                {submitted ? (
+                    <div className="h-full flex flex-col items-center justify-center text-center py-12">
+                        <div className="w-12 h-12 border border-white/10 bg-white/[0.02] text-white rounded-xl flex items-center justify-center mb-6">
+                            <Mail className="w-6 h-6" />
+                        </div>
+                        <h3 className="text-xl font-bold mb-2 text-white">Message Sent</h3>
+                        <p className="text-zinc-400 text-xs mb-6 max-w-xs">Thanks for reaching out. I'll get back to you as soon as possible.</p>
+                        <button 
+                            onClick={() => setSubmitted(false)} 
+                            className="px-6 py-2.5 bg-white hover:bg-slate-200 text-slate-950 text-xs font-bold uppercase tracking-wider rounded-lg transition-colors"
+                        >
+                            Send Another
+                        </button>
+                    </div>
+                ) : (
+                    <form onSubmit={handleSubmit} className="space-y-8">
+                        <div className="space-y-2">
+                            <label htmlFor="name" className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Name</label>
+                            <input
+                                id="name"
+                                type="text"
+                                required
+                                className="w-full px-0 pb-2 border-b border-white/10 bg-transparent text-white focus:border-white focus:ring-0 transition-all outline-none rounded-none text-sm placeholder:text-zinc-700"
+                                placeholder="Your Name"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label htmlFor="email" className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Email</label>
+                            <input
+                                id="email"
+                                type="email"
+                                required
+                                className="w-full px-0 pb-2 border-b border-white/10 bg-transparent text-white focus:border-white focus:ring-0 transition-all outline-none rounded-none text-sm placeholder:text-zinc-700"
+                                placeholder="john@example.com"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label htmlFor="message" className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Message</label>
+                            <textarea
+                                id="message"
+                                required
+                                rows={4}
+                                defaultValue={getInitialMessage()}
+                                className="w-full px-0 pb-2 border-b border-white/10 bg-transparent text-white focus:border-white focus:ring-0 transition-all outline-none rounded-none text-sm resize-none placeholder:text-zinc-700 leading-relaxed"
+                                placeholder="Hi Sneha, I'd like to discuss..."
+                            />
+                        </div>
+                        <button 
+                            type="submit" 
+                            disabled={isSubmitting}
+                            className="w-full py-3 bg-white hover:bg-slate-200 text-slate-950 text-xs font-bold uppercase tracking-wider rounded-lg transition-colors"
+                        >
+                            {isSubmitting ? "Sending..." : "Send Message"}
+                        </button>
+                    </form>
+                )}
+            </div>
+        </div>
+    );
+}
+
+export default function ContactPage() {
+    return (
         <div className="min-h-screen pt-24 pb-20">
             <div className="container mx-auto px-6 max-w-5xl">
-                <div className="grid md:grid-cols-2 gap-16">
-
-                    {/* Contact Info */}
-                    <div>
-                        <h1 className="text-4xl md:text-5xl font-bold font-heading mb-6">Let's Connect</h1>
-                        <p className="text-xl text-muted-foreground mb-12">
-                            I'm currently looking for internship opportunities and open to discussing new projects.
-                        </p>
-
-                        <div className="space-y-8">
-                            <Link href="mailto:sneha.patel@example.com" className="flex items-center gap-4 group p-4 rounded-xl hover:bg-secondary transition-colors">
-                                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                                    <Mail className="w-6 h-6" />
-                                </div>
-                                <div>
-                                    <div className="text-sm text-muted-foreground">Email Me</div>
-                                    <div className="font-semibold text-lg">sneha.patel@example.com</div>
-                                </div>
-                            </Link>
-
-                            <Link href={DATA.profile.linkedin} target="_blank" className="flex items-center gap-4 group p-4 rounded-xl hover:bg-secondary transition-colors">
-                                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform">
-                                    <Linkedin className="w-6 h-6" />
-                                </div>
-                                <div>
-                                    <div className="text-sm text-muted-foreground">Connect on LinkedIn</div>
-                                    <div className="font-semibold text-lg">/in/sneha-patel</div>
-                                </div>
-                            </Link>
-
-                            <Link href={DATA.profile.github} target="_blank" className="flex items-center gap-4 group p-4 rounded-xl hover:bg-secondary transition-colors">
-                                <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-slate-800 group-hover:scale-110 transition-transform">
-                                    <Github className="w-6 h-6" />
-                                </div>
-                                <div>
-                                    <div className="text-sm text-muted-foreground">Check my Code</div>
-                                    <div className="font-semibold text-lg">/sneha-patel</div>
-                                </div>
-                            </Link>
-                        </div>
-                    </div>
-
-                    {/* Form */}
-                    <div className="bg-card border border-border p-8 rounded-2xl shadow-sm">
-                        {submitted ? (
-                            <div className="h-full flex flex-col items-center justify-center text-center py-12">
-                                <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-6">
-                                    <Mail className="w-8 h-8" />
-                                </div>
-                                <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
-                                <p className="text-muted-foreground mb-6">Thanks for reaching out. I'll get back to you as soon as possible.</p>
-                                <Button onClick={() => setSubmitted(false)} variant="outline">Send Another</Button>
-                            </div>
-                        ) : (
-                            <form onSubmit={handleSubmit} className="space-y-6">
-                                <div className="space-y-2">
-                                    <label htmlFor="name" className="text-sm font-medium">Name</label>
-                                    <input
-                                        id="name"
-                                        type="text"
-                                        required
-                                        className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none"
-                                        placeholder="Your Name"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <label htmlFor="email" className="text-sm font-medium">Email</label>
-                                    <input
-                                        id="email"
-                                        type="email"
-                                        required
-                                        className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none"
-                                        placeholder="john@example.com"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <label htmlFor="message" className="text-sm font-medium">Message</label>
-                                    <textarea
-                                        id="message"
-                                        required
-                                        rows={5}
-                                        className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none resize-none"
-                                        placeholder="Hi Sneha, I'd like to discuss..."
-                                    />
-                                </div>
-                                <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-                                    {isSubmitting ? "Sending..." : "Send Message"}
-                                </Button>
-                            </form>
-                        )}
-                    </div>
-
-                </div>
+                <Suspense fallback={<div className="text-center py-20 text-muted-foreground">Loading form...</div>}>
+                    <ContactForm />
+                </Suspense>
             </div>
         </div>
     );

@@ -4,27 +4,27 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%; /* Soft white/blue tint */
-    --foreground: 222 47% 11%; /* Slate 900 */
+    --background: 240 10% 3.9%; /* Charcoal dark background (#09090b) */
+    --foreground: 0 0% 98%; /* Warm off-white */
 
-    --primary: 222 47% 11%; /* Slate 900 */
-    --primary-foreground: 210 40% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222 47% 11%;
+    --secondary: 240 3.7% 12%; /* Darker gray background */
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 240 3.7% 10%; /* Muted base card */
+    --muted-foreground: 240 5% 64.9%; /* Muted text */
 
-    --accent: 199 89% 48%; /* Sky Blue for AI feel */
-    --accent-foreground: 210 40% 98%;
+    --accent: 199 89% 48%; /* Neon blue-cyan details */
+    --accent-foreground: 0 0% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card: 240 10% 5.5%; /* Cards */
+    --card-foreground: 0 0% 98%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 222 47% 11%;
+    --border: 240 5.9% 12%; /* Elegant thin gray line */
+    --input: 240 5.9% 12%;
+    --ring: 240 5% 64.9%;
     
     --radius: 0.5rem;
 
@@ -39,8 +39,58 @@
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    /* Grid background pattern reminiscent of high-end editorial portfolios */
+    background-image: 
+      radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.02) 0%, transparent 60%),
+      linear-gradient(rgba(255, 255, 255, 0.006) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.006) 1px, transparent 1px);
+    background-size: 100% 100%, 64px 64px, 64px 64px;
+    background-color: #060608;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading tracking-tight;
+    @apply font-heading tracking-tight text-white;
   }
 }
+
+@layer utilities {
+  .animate-float {
+    animation: float-anim 8s ease-in-out infinite;
+  }
+  
+  .animate-float-delayed {
+    animation: float-anim 8s ease-in-out infinite;
+    animation-delay: 4s;
+  }
+
+  .glass-card {
+    background: rgba(10, 10, 12, 0.45);
+    backdrop-filter: blur(12px) saturate(100%);
+    -webkit-backdrop-filter: blur(12px) saturate(100%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  .border-glow {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .border-glow:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.02);
+  }
+
+  .pixel-grid {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+}
+
+@keyframes float-anim {
+  0%, 100% {
+    transform: translateY(0) rotate(0.5deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-0.5deg);
+  }
+}
+
+

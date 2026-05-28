@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { DATA } from "@/lib/data";
 import { Button } from "@/components/ui/Button";
 import { ArrowLeft, ExternalLink, Github, CheckCircle2, Layers, Lightbulb, Trophy } from "lucide-react";
+import InteractiveDemo from "@/components/projects/InteractiveDemo";
 
 export default function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = use(params);
@@ -39,16 +40,20 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
 
                         <div className="space-y-6">
                             <div className="flex flex-col gap-3">
-                                <Button size="lg" className="w-full" asChild>
-                                    <Link href={project.link} target="_blank">
-                                        <ExternalLink className="w-4 h-4 mr-2" /> Live Demo
-                                    </Link>
-                                </Button>
-                                <Button variant="outline" size="lg" className="w-full" asChild>
-                                    <Link href={project.github} target="_blank">
-                                        <Github className="w-4 h-4 mr-2" /> View Code
-                                    </Link>
-                                </Button>
+                                {project.link && project.link !== "#" && (
+                                    <Button size="lg" className="w-full" asChild>
+                                        <Link href={project.link} target="_blank">
+                                            <ExternalLink className="w-4 h-4 mr-2" /> Live Demo
+                                        </Link>
+                                    </Button>
+                                )}
+                                {project.github && project.github !== "#" && (
+                                    <Button variant="outline" size="lg" className="w-full" asChild>
+                                        <Link href={project.github} target="_blank">
+                                            <Github className="w-4 h-4 mr-2" /> View Code
+                                        </Link>
+                                    </Button>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -85,6 +90,9 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                             ))}
                         </div>
                     </section>
+
+                    {/* Live Working Demo Sandbox */}
+                    <InteractiveDemo projectId={project.id} />
 
                     {/* Extended Details (Architecture, Challenges, etc) */}
                     {project.extended && (
