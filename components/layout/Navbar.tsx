@@ -20,15 +20,21 @@ export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <header className="fixed top-6 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-2xl z-50">
+        <motion.header 
+            initial={{ y: -60, opacity: 0, x: "-50%" }}
+            animate={{ y: 0, opacity: 1, x: "-50%" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed top-6 left-1/2 w-[calc(100%-2rem)] max-w-2xl z-50"
+        >
             {/* Pill Container */}
-            <div className="rounded-full border border-white/10 bg-slate-950/45 backdrop-blur-xl px-4 py-2 flex items-center justify-between shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300">
-                <Link href="/" className="text-base font-bold font-heading tracking-tighter pl-3 flex items-center gap-1 hover:opacity-80 transition-opacity">
-                    Sneha<span className="text-accent">.ai</span>
+            <div className="rounded-full border border-white/10 bg-slate-950/65 backdrop-blur-xl px-4 py-2 flex items-center justify-between shadow-[0_12px_40px_rgba(0,0,0,0.6)] hover:border-white/15 transition-all duration-300">
+                <Link href="/" className="group text-base font-bold font-heading tracking-tighter pl-3 flex items-center gap-0.5">
+                    <span className="text-white">Sneha</span>
+                    <span className="text-accent group-hover:text-purple-400 group-hover:scale-110 transition-all duration-300 transform inline-block">.ai</span>
                 </Link>
 
                 {/* Desktop Nav */}
-                <nav className="hidden md:flex items-center gap-1.5 bg-white/[0.03] p-1 rounded-full border border-white/[0.05]">
+                <nav className="hidden md:flex items-center gap-1 bg-white/[0.02] p-1 rounded-full border border-white/[0.04]">
                     {navLinks.map((link) => {
                         const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
                         return (
@@ -37,7 +43,7 @@ export default function Navbar() {
                                 href={link.href}
                                 className={cn(
                                     "relative px-4 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-full transition-all duration-300",
-                                    isActive ? "text-slate-950" : "text-muted-foreground hover:text-white"
+                                    isActive ? "text-slate-950" : "text-muted-foreground hover:text-white hover:bg-white/[0.02]"
                                 )}
                             >
                                 {isActive && (
@@ -57,7 +63,7 @@ export default function Navbar() {
                     <Link
                         href="/assets/resume.pdf"
                         target="_blank"
-                        className="px-4 py-1.5 bg-white hover:bg-slate-200 text-slate-950 text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-300 shadow-sm"
+                        className="px-4 py-1.5 bg-white hover:bg-slate-200 hover:scale-[1.04] active:scale-[0.98] text-slate-950 text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-300 shadow-sm hover:shadow-[0_0_15px_rgba(255,255,255,0.45)]"
                     >
                         Resume
                     </Link>
@@ -68,7 +74,13 @@ export default function Navbar() {
                     onClick={() => setIsOpen(!isOpen)}
                     className="md:hidden p-2 text-muted-foreground hover:text-white rounded-full bg-white/[0.03] border border-white/[0.05] transition-colors"
                 >
-                    {isOpen ? <X size={16} /> : <Menu size={16} />}
+                    <motion.div 
+                        animate={{ rotate: isOpen ? 90 : 0 }} 
+                        transition={{ duration: 0.2 }}
+                        className="w-4 h-4 flex items-center justify-center"
+                    >
+                        {isOpen ? <X size={16} /> : <Menu size={16} />}
+                    </motion.div>
                 </button>
             </div>
 
@@ -79,10 +91,10 @@ export default function Navbar() {
                         initial={{ opacity: 0, scale: 0.95, y: -10 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute top-16 left-0 right-0 p-4 rounded-3xl border border-white/10 bg-slate-950/90 backdrop-blur-2xl shadow-2xl md:hidden overflow-hidden"
+                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute top-16 left-0 right-0 p-4 rounded-3xl border border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl md:hidden overflow-hidden"
                     >
-                        <nav className="flex flex-col gap-2">
+                        <nav className="flex flex-col gap-1.5">
                             {navLinks.map((link) => {
                                 const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
                                 return (
@@ -111,6 +123,6 @@ export default function Navbar() {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </header>
+        </motion.header>
     );
 }
