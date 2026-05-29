@@ -73,16 +73,32 @@ export default function AboutPage() {
                             </h2>
                             <div className="grid sm:grid-cols-2 gap-4">
                                 <div className="p-4 bg-white/[0.01] rounded-xl border border-white/5 hover:border-white/20 transition-colors">
-                                    <h4 className="font-bold text-sm text-white mb-1">Hackathon Winner</h4>
-                                    <p className="text-xs text-zinc-500">Best AI Solution - TechFest 2024</p>
+                                    <h4 className="font-bold text-sm text-white mb-1">WSRO Nationals</h4>
+                                    <p className="text-xs text-zinc-500">Robot Race Competitor (Hardware & Programming)</p>
                                 </div>
                                 <div className="p-4 bg-white/[0.01] rounded-xl border border-white/5 hover:border-white/20 transition-colors">
-                                    <h4 className="font-bold text-sm text-white mb-1">IBM AI Certification</h4>
-                                    <p className="text-xs text-zinc-500">Professional Certificate in AI Engineering</p>
+                                    <h4 className="font-bold text-sm text-white mb-1">Hackathon Commendation</h4>
+                                    <p className="text-xs text-zinc-500">AI Supplier Ranking Agent (Appreciated by CEO of Mesh Works)</p>
                                 </div>
                                 <div className="p-4 bg-white/[0.01] rounded-xl border border-white/5 hover:border-white/20 transition-colors">
-                                    <h4 className="font-bold text-sm text-white mb-1">AWS Cloud Practitioner</h4>
-                                    <p className="text-xs text-zinc-500">Fundamentals of Cloud Computing</p>
+                                    <h4 className="font-bold text-sm text-white mb-1">AWS Academy</h4>
+                                    <p className="text-xs text-zinc-500">Machine Learning Foundations Certificate</p>
+                                </div>
+                                <div className="p-4 bg-white/[0.01] rounded-xl border border-white/5 hover:border-white/20 transition-colors">
+                                    <h4 className="font-bold text-sm text-white mb-1">GCP Data Engineer Pro</h4>
+                                    <p className="text-xs text-zinc-500">Becoming a Google Cloud Data Engineer Certificate</p>
+                                </div>
+                                <div className="p-4 bg-white/[0.01] rounded-xl border border-white/5 hover:border-white/20 transition-colors">
+                                    <h4 className="font-bold text-sm text-white mb-1">Neo4j Certified Professional</h4>
+                                    <p className="text-xs text-zinc-500">Certified Professional in Graph Database Systems</p>
+                                </div>
+                                <div className="p-4 bg-white/[0.01] rounded-xl border border-white/5 hover:border-white/20 transition-colors">
+                                    <h4 className="font-bold text-sm text-white mb-1">IBM Professional Analytics</h4>
+                                    <p className="text-xs text-zinc-500">Data Analysis Using Python & IBM Analytics Program (2024-2025)</p>
+                                </div>
+                                <div className="p-4 bg-white/[0.01] rounded-xl border border-white/5 hover:border-white/20 transition-colors">
+                                    <h4 className="font-bold text-sm text-white mb-1">Cisco Certification</h4>
+                                    <p className="text-xs text-zinc-500">Introduction to IoT & Cybersecurity Professional Certificates</p>
                                 </div>
                             </div>
                         </section>

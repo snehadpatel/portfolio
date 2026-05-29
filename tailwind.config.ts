@@ -35,7 +35,7 @@ const config: Config = {
             },
             fontFamily: {
                 sans: ["var(--font-inter)", "sans-serif"],
-                heading: ["var(--font-poppins)", "sans-serif"],
+                heading: ["var(--font-cormorant)", "serif"],
             },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

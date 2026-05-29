@@ -29,8 +29,7 @@ export default function Navbar() {
             {/* Pill Container */}
             <div className="rounded-full border border-white/10 bg-slate-950/65 backdrop-blur-xl px-4 py-2 flex items-center justify-between shadow-[0_12px_40px_rgba(0,0,0,0.6)] hover:border-white/15 transition-all duration-300">
                 <Link href="/" className="group text-base font-bold font-heading tracking-tighter pl-3 flex items-center gap-0.5">
-                    <span className="text-white">Sneha</span>
-                    <span className="text-accent group-hover:text-purple-400 group-hover:scale-110 transition-all duration-300 transform inline-block">.ai</span>
+                    <span className="text-white hover:text-accent transition-colors">Sneha Patel</span>
                 </Link>
 
                 {/* Desktop Nav */}

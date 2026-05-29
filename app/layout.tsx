@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google"; // Using Poppins as heading font
+import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const poppins = Poppins({
-    weight: ["400", "500", "600", "700"],
+const cormorant = Cormorant_Garamond({
+    weight: ["300", "400", "500", "600", "700"],
+    style: ["normal", "italic"],
     subsets: ["latin"],
-    variable: "--font-poppins"
+    variable: "--font-cormorant"
 });
 
 export const metadata: Metadata = {
@@ -24,15 +25,15 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className="scroll-smooth">
-            <body className={cn(inter.variable, poppins.variable, "min-h-screen flex flex-col relative overflow-x-hidden bg-[#09090f]")}>
-                {/* Ambient lights */}
+            <body className={cn(inter.variable, cormorant.variable, "min-h-screen flex flex-col relative overflow-x-hidden bg-[#0A0A0C]")}>
+                {/* Quiet Luxury Ambient Lights */}
                 <div className="fixed inset-0 pointer-events-none -z-30 overflow-hidden">
-                    {/* Purple/indigo glow in top-left */}
-                    <div className="absolute top-[-10%] left-[-10%] w-[55%] h-[55%] rounded-full bg-gradient-to-br from-indigo-900/12 via-purple-950/5 to-transparent blur-[140px] opacity-75" />
-                    {/* Cyan glow in middle-right */}
-                    <div className="absolute top-[30%] right-[-10%] w-[50%] h-[50%] rounded-full bg-gradient-to-pl from-cyan-900/8 via-teal-950/5 to-transparent blur-[150px] opacity-65" />
-                    {/* Deep blue/purple glow in bottom-left */}
-                    <div className="absolute bottom-[-10%] left-[-5%] w-[45%] h-[45%] rounded-full bg-gradient-to-tr from-blue-950/12 via-indigo-950/8 to-transparent blur-[120px] opacity-80" />
+                    {/* Warm Champagne Gold glow in top-left */}
+                    <div className="absolute top-[-10%] left-[-10%] w-[55%] h-[55%] rounded-full bg-gradient-to-br from-amber-950/10 via-amber-900/3 to-transparent blur-[140px] opacity-75" />
+                    {/* Amethyst Purple glow in middle-right */}
+                    <div className="absolute top-[25%] right-[-10%] w-[50%] h-[50%] rounded-full bg-gradient-to-pl from-purple-950/8 via-purple-900/3 to-transparent blur-[150px] opacity-65" />
+                    {/* Soft Charcoal bronze glow in bottom-left */}
+                    <div className="absolute bottom-[-10%] left-[-5%] w-[45%] h-[45%] rounded-full bg-gradient-to-tr from-stone-900/10 via-amber-950/3 to-transparent blur-[120px] opacity-80" />
                 </div>
                 <Navbar />
                 <main className="flex-1">

@@ -4,32 +4,32 @@
 
 @layer base {
   :root {
-    --background: 240 10% 3.9%; /* Charcoal dark background (#09090b) */
-    --foreground: 0 0% 98%; /* Warm off-white */
+    --background: hsl(240 10% 4%); /* Warm obsidian black (#0A0A0C) */
+    --foreground: hsl(35 15% 92%); /* Elegant warm cream text */
 
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
+    --primary: hsl(35 15% 92%);
+    --primary-foreground: hsl(20 10% 5%);
 
-    --secondary: 240 3.7% 12%; /* Darker gray background */
-    --secondary-foreground: 0 0% 98%;
+    --secondary: hsl(35 6% 9%); /* Soft warm charcoal */
+    --secondary-foreground: hsl(35 15% 92%);
 
-    --muted: 240 3.7% 10%; /* Muted base card */
-    --muted-foreground: 240 5% 64.9%; /* Muted text */
+    --muted: hsl(35 5% 7%);
+    --muted-foreground: hsl(35 10% 78%); /* Highly readable warm text */
 
-    --accent: 199 89% 48%; /* Neon blue-cyan details */
-    --accent-foreground: 0 0% 98%;
+    --accent: hsl(39 58% 66%); /* Champagne Gold accent (#DFBA73) */
+    --accent-foreground: hsl(20 10% 5%);
 
-    --card: 240 10% 5.5%; /* Cards */
-    --card-foreground: 0 0% 98%;
+    --card: hsl(35 5% 8%); /* Elegant rounded cards */
+    --card-foreground: hsl(35 15% 92%);
 
-    --border: 240 5.9% 12%; /* Elegant thin gray line */
-    --input: 240 5.9% 12%;
-    --ring: 240 5% 64.9%;
+    --border: hsl(35 8% 12%); /* Elegant thin warm border */
+    --input: hsl(35 8% 12%);
+    --ring: hsl(39 58% 66%);
     
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --font-inter: 'Inter', sans-serif;
-    --font-poppins: 'Poppins', sans-serif;
+    --font-cormorant: 'Cormorant Garamond', serif;
   }
 }
 
@@ -41,11 +41,11 @@
     @apply bg-background text-foreground font-sans antialiased;
     /* Grid background pattern reminiscent of high-end editorial portfolios */
     background-image: 
-      radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.05) 0%, transparent 60%),
-      linear-gradient(rgba(255, 255, 255, 0.005) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.005) 1px, transparent 1px);
+      radial-gradient(circle at 50% 0%, rgba(223, 186, 115, 0.04) 0%, transparent 60%),
+      linear-gradient(rgba(255, 255, 255, 0.004) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.004) 1px, transparent 1px);
     background-size: 100% 100%, 64px 64px, 64px 64px;
-    background-color: #09090f;
+    background-color: #0A0A0C;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading tracking-tight text-white;

@@ -3,13 +3,24 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import ProjectCard from "@/components/ui/ProjectCard";
-import { DATA } from "@/lib/data";
+import ProjectDrawer from "@/components/projects/ProjectDrawer";
+import { DATA, Project } from "@/lib/data";
 import { Button } from "@/components/ui/Button";
 
 const categories = ["All", ...Array.from(new Set(DATA.projects.map((p) => p.category)))];
 
 export default function ProjectsPage() {
     const [activeCategory, setActiveCategory] = useState("All");
+    const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+    const handleOpenDrawer = (id: string) => {
+        const proj = DATA.projects.find((p) => p.id === id);
+        if (proj) {
+            setSelectedProject(proj);
+            setIsDrawerOpen(true);
+        }
+    };
 
     const filteredProjects =
         activeCategory === "All"
@@ -56,7 +67,7 @@ export default function ProjectsPage() {
                             exit={{ opacity: 0, scale: 0.9 }}
                             transition={{ duration: 0.3 }}
                         >
-                            <ProjectCard {...project} />
+                            <ProjectCard {...project} onOpenDrawer={handleOpenDrawer} />
                         </motion.div>
                     ))}
                 </motion.div>
@@ -67,6 +78,13 @@ export default function ProjectsPage() {
                     </div>
                 )}
             </div>
+
+            {/* Sidebar drawer details */}
+            <ProjectDrawer
+                project={selectedProject}
+                isOpen={isDrawerOpen}
+                onClose={() => setIsDrawerOpen(false)}
+            />
         </div>
     );
 }
