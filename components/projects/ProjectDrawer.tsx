@@ -261,7 +261,7 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                                             <div className="space-y-2">
                                                 <h4 className="text-[10px] font-mono font-bold text-white uppercase tracking-wider text-amber-400/80">Developer Retrospective</h4>
                                                 <p className="text-xs text-zinc-400 italic leading-relaxed font-light">
-                                                    "{project.extended.learnings}"
+                                                    &ldquo;{project.extended.learnings}&rdquo;
                                                 </p>
                                             </div>
                                             <div className="pt-3 border-t border-white/5 flex items-center justify-between">

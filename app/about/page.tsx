@@ -1,7 +1,6 @@
 "use client";
 
 import { DATA } from "@/lib/data";
-import { motion } from "framer-motion";
 import { Briefcase, GraduationCap, Code2, Award, Heart } from "lucide-react";
 
 export default function AboutPage() {

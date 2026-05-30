@@ -118,7 +118,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                                     <div>
                                         <h3 className="font-bold mb-2">Key Takeways</h3>
                                         <p className="text-muted-foreground italic">
-                                            "{project.extended.learnings}"
+                                            &quot;{project.extended.learnings}&quot;
                                         </p>
                                     </div>
                                 </div>

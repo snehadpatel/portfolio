@@ -2,9 +2,8 @@
 
 import { DATA } from "@/lib/data";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/Button";
 import Link from "next/link";
-import { Eye, Brain, Cpu, Database, Check, ArrowRight } from "lucide-react";
+import { Eye, Brain, Cpu, Database, ArrowRight } from "lucide-react";
 
 const getIcon = (iconName: string) => {
     switch (iconName) {
@@ -113,7 +112,7 @@ export default function ServicesPage() {
                 >
                     <h3 className="text-2xl font-bold font-heading mb-4 text-white uppercase">Custom Requirements?</h3>
                     <p className="text-zinc-400 text-sm max-w-lg mx-auto mb-8 leading-relaxed font-light">
-                        If your project spans multiple domains or requires specialized architectural design, let's schedule an engineering consultation call.
+                        If your project spans multiple domains or requires specialized architectural design, let&apos;s schedule an engineering consultation call.
                     </p>
                     <Link 
                         href="/contact"

@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { DATA } from "@/lib/data";
 import { ArrowRight, Download } from "lucide-react";
@@ -34,7 +33,7 @@ export default function Hero() {
 
                     <div className="border-t border-white/10 pt-6 max-w-xl">
                         <p className="text-xs text-muted-foreground uppercase tracking-widest font-mono mb-3">
-                            // B.TECH COMPUTER SCIENCE & ENGINEERING
+                            {"// B.TECH COMPUTER SCIENCE & ENGINEERING"}
                         </p>
                         <p className="text-xl text-zinc-300 font-light leading-relaxed mb-8">
                             {DATA.profile.tagline}

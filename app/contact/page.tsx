@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/Button";
 import { DATA } from "@/lib/data";
 import { Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
@@ -37,7 +36,7 @@ function ContactForm() {
             <div>
                 <h1 className="text-4xl md:text-5xl font-bold font-heading mb-6">Let's Connect</h1>
                 <p className="text-xl text-muted-foreground mb-12">
-                    I'm currently looking for internship opportunities and open to discussing new projects.
+                    I&apos;m currently looking for internship opportunities and open to discussing new projects.
                 </p>
 
                 <div className="space-y-6">
@@ -85,7 +84,7 @@ function ContactForm() {
                             <Mail className="w-6 h-6" />
                         </div>
                         <h3 className="text-xl font-bold mb-2 text-white">Message Sent</h3>
-                        <p className="text-zinc-400 text-xs mb-6 max-w-xs">Thanks for reaching out. I'll get back to you as soon as possible.</p>
+                        <p className="text-zinc-400 text-xs mb-6 max-w-xs">Thanks for reaching out. I&apos;ll get back to you as soon as possible.</p>
                         <button 
                             onClick={() => setSubmitted(false)} 
                             className="px-6 py-2.5 bg-white hover:bg-slate-200 text-slate-950 text-xs font-bold uppercase tracking-wider rounded-lg transition-colors"
@@ -123,7 +122,7 @@ function ContactForm() {
                                 rows={4}
                                 defaultValue={getInitialMessage()}
                                 className="w-full px-0 pb-2 border-b border-white/10 bg-transparent text-white focus:border-white focus:ring-0 transition-all outline-none rounded-none text-sm resize-none placeholder:text-zinc-700 leading-relaxed"
-                                placeholder="Hi Sneha, I'd like to discuss..."
+                                placeholder="Hi Sneha, I&apos;d like to discuss..."
                             />
                         </div>
                         <button 
