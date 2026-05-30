@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -18,6 +18,18 @@ const navLinks = [
 export default function Navbar() {
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
+    const [scrollProgress, setScrollProgress] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+            if (totalScroll > 0) {
+                setScrollProgress(window.scrollY / totalScroll);
+            }
+        };
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     return (
         <motion.header 
@@ -27,7 +39,14 @@ export default function Navbar() {
             className="fixed top-6 left-1/2 w-[calc(100%-2rem)] max-w-2xl z-50"
         >
             {/* Pill Container */}
-            <div className="rounded-full border border-white/10 bg-slate-950/65 backdrop-blur-xl px-4 py-2 flex items-center justify-between shadow-[0_12px_40px_rgba(0,0,0,0.6)] hover:border-white/15 transition-all duration-300">
+            <div className="relative rounded-full border border-white/10 bg-slate-950/65 backdrop-blur-xl px-4 py-2 flex items-center justify-between shadow-[0_12px_40px_rgba(0,0,0,0.6)] hover:border-white/15 transition-all duration-300">
+                {/* Gold scroll progress bar */}
+                <div className="absolute top-0 left-6 right-6 h-[1px] bg-white/[0.03] overflow-hidden rounded-full">
+                    <motion.div 
+                        className="h-full bg-amber-400/80"
+                        style={{ scaleX: scrollProgress, transformOrigin: "left" }}
+                    />
+                </div>
                 <Link href="/" className="group text-base font-bold font-heading tracking-tighter pl-3 flex items-center gap-0.5">
                     <span className="text-white hover:text-accent transition-colors">Sneha Patel</span>
                 </Link>

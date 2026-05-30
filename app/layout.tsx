@@ -4,6 +4,8 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import InteractiveBackground from "@/components/ui/InteractiveBackground";
+import CustomCursor from "@/components/ui/CustomCursor";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const cormorant = Cormorant_Garamond({
@@ -26,6 +28,10 @@ export default function RootLayout({
     return (
         <html lang="en" className="scroll-smooth">
             <body className={cn(inter.variable, cormorant.variable, "min-h-screen flex flex-col relative overflow-x-hidden bg-[#0A0A0C]")}>
+                {/* Custom Interactive Elements */}
+                <InteractiveBackground />
+                <CustomCursor />
+
                 {/* Quiet Luxury Ambient Lights */}
                 <div className="fixed inset-0 pointer-events-none -z-30 overflow-hidden">
                     {/* Warm Champagne Gold glow in top-left */}

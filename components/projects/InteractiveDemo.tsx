@@ -670,42 +670,46 @@ export default function InteractiveDemo({ projectId }: InteractiveDemoProps) {
                                             </div>
 
                                             <div className="relative h-32 w-full flex items-center justify-center p-4 bg-black/40 overflow-hidden">
+                                                {/* Scanning horizontal line */}
+                                                <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(223,186,115,0.015)_1px,transparent_1px)] bg-[size:100%_6px] pointer-events-none" />
+                                                <div className="absolute left-0 right-0 h-0.5 bg-amber-400/40 shadow-[0_0_8px_rgba(223,186,115,0.6)] animate-[scan_3s_linear_infinite] z-20 pointer-events-none" />
+
                                                 {activeTab === "normal" && (
-                                                    <div className={`w-20 h-20 rounded-full border-2 border-dashed border-white/20 flex items-center justify-center relative overflow-hidden ${deepshieldProtected ? "contrast-125 saturate-50" : ""}`}>
+                                                    <div className={`w-20 h-20 rounded-full border border-white/10 flex items-center justify-center relative overflow-hidden ${deepshieldProtected ? "contrast-125 saturate-50" : ""}`}>
                                                         <span className="text-3xl">{deepshieldImage === "fake" ? "🤖" : "👤"}</span>
                                                         {deepshieldProtected && (
-                                                            <div className="absolute inset-0 bg-accent/20 flex items-center justify-center border border-accent">
-                                                                <ShieldCheck className="w-5 h-5 text-accent animate-pulse" />
+                                                            <div className="absolute inset-0 bg-amber-500/10 flex items-center justify-center border border-amber-500/30">
+                                                                <ShieldCheck className="w-5 h-5 text-amber-400 animate-pulse" />
                                                             </div>
                                                         )}
                                                     </div>
                                                 )}
 
                                                 {activeTab === "ela" && (
-                                                    <div className="w-full h-full bg-slate-950 font-mono text-[9px] text-purple-400 p-2 flex flex-col justify-center gap-1 select-none">
-                                                        <div className="flex justify-between border-b border-purple-950 pb-1">
+                                                    <div className="w-full h-full bg-slate-950 font-mono text-[9px] text-amber-500 p-2.5 flex flex-col justify-center gap-1.5 select-none border border-amber-950/20">
+                                                        <div className="flex justify-between border-b border-amber-950/40 pb-1">
                                                             <span>Rescale Offset: 0.95</span>
-                                                            <span>Noise: {deepshieldResult.forensicScore}%</span>
+                                                            <span>Forensic Score: {deepshieldResult.forensicScore}%</span>
                                                         </div>
-                                                        <div className="text-[7px] text-purple-600/80 leading-tight truncate">
+                                                        <div className="text-[7.5px] text-amber-400/70 leading-tight truncate">
                                                             {deepshieldImage === "fake" 
                                                                 ? "|||||||||| GAN ARTIFACT DETECTED AT COORD C0-E4 ||||||||||" 
                                                                 : deepshieldImage === "compressed"
                                                                 ? "|||||| Compression boundaries flagged (Resave artifacts) ||||||"
                                                                 : "|||||| Minimal compression loss (Organic pixel map) ||||||"}
                                                         </div>
-                                                        <div className="w-full h-8 border border-purple-950 flex items-center justify-around">
-                                                            <div className={`w-2 h-6 bg-purple-500/20 rounded ${deepshieldResult.forensicScore > 50 ? "animate-pulse bg-purple-500/80" : ""}`} />
-                                                            <div className={`w-4 h-4 bg-purple-500/25 rounded ${deepshieldResult.forensicScore > 30 ? "animate-pulse bg-purple-500/70" : ""}`} />
-                                                            <div className={`w-3 h-5 bg-purple-500/10 rounded ${deepshieldResult.forensicScore > 70 ? "animate-pulse bg-purple-500/90" : ""}`} />
+                                                        <div className="w-full h-8 border border-amber-950/30 flex items-center justify-around">
+                                                            <div className={`w-2 h-6 bg-amber-400/20 rounded ${deepshieldResult.forensicScore > 50 ? "animate-pulse bg-amber-400/60" : ""}`} />
+                                                            <div className={`w-4 h-4 bg-amber-400/25 rounded ${deepshieldResult.forensicScore > 30 ? "animate-pulse bg-amber-400/50" : ""}`} />
+                                                            <div className={`w-3 h-5 bg-amber-400/10 rounded ${deepshieldResult.forensicScore > 70 ? "animate-pulse bg-amber-400/80" : ""}`} />
                                                         </div>
                                                     </div>
                                                 )}
 
                                                 {activeTab === "heatmap" && (
-                                                    <div className="relative w-20 h-20 rounded-full bg-slate-800 flex items-center justify-center text-3xl">
+                                                    <div className="relative w-20 h-20 rounded-full bg-slate-900 border border-white/5 flex items-center justify-center text-3xl">
                                                         <span>{deepshieldImage === "fake" ? "🤖" : "👤"}</span>
-                                                        <div className={`absolute inset-0 rounded-full mix-blend-color-dodge opacity-60 bg-gradient-to-tr ${deepshieldImage === "fake" ? "from-red-500 via-yellow-400 to-transparent" : "from-blue-500/30 to-transparent"}`} />
+                                                        <div className={`absolute inset-0 rounded-full mix-blend-color-dodge opacity-60 bg-gradient-to-tr ${deepshieldImage === "fake" ? "from-red-500 via-yellow-400 to-transparent" : "from-amber-500/20 to-transparent"}`} />
                                                     </div>
                                                 )}
                                             </div>
@@ -732,6 +736,74 @@ export default function InteractiveDemo({ projectId }: InteractiveDemoProps) {
                                             <div className="text-right">
                                                 <div className="text-sm font-extrabold text-white">{vegResult.confidence}%</div>
                                                 <div className="text-[9px] text-zinc-500 font-mono">confidence</div>
+                                            </div>
+                                        </div>
+
+                                        {/* Animated Neural Network Propagation Schema */}
+                                        <div className="border border-white/5 bg-black/20 p-4 rounded-xl relative overflow-hidden">
+                                            <div className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest mb-3 flex items-center justify-between">
+                                                <span>CNN Layer Convolutions & Activations</span>
+                                                <span className="text-amber-400 font-bold animate-pulse">Active State Feedforward</span>
+                                            </div>
+                                            <div className="h-24 w-full flex items-center justify-center">
+                                                <svg className="w-full h-full max-w-[280px]" viewBox="0 0 280 100">
+                                                    <g className="stroke-white/[0.04] stroke-[0.75]">
+                                                        <line x1="20" y1="20" x2="100" y2="20" className="animate-[pulse_1.5s_infinite]" />
+                                                        <line x1="20" y1="20" x2="100" y2="50" />
+                                                        <line x1="20" y1="20" x2="100" y2="80" />
+                                                        <line x1="20" y1="50" x2="100" y2="20" />
+                                                        <line x1="20" y1="50" x2="100" y2="50" className="animate-[pulse_1.8s_infinite]" style={{ animationDelay: "0.2s" }} />
+                                                        <line x1="20" y1="50" x2="100" y2="80" />
+                                                        <line x1="20" y1="80" x2="100" y2="20" />
+                                                        <line x1="20" y1="80" x2="100" y2="50" />
+                                                        <line x1="20" y1="80" x2="100" y2="80" className="animate-[pulse_1.2s_infinite]" style={{ animationDelay: "0.4s" }} />
+
+                                                        <line x1="100" y1="20" x2="180" y2="20" />
+                                                        <line x1="100" y1="20" x2="180" y2="50" />
+                                                        <line x1="100" y1="20" x2="180" y2="80" />
+                                                        <line x1="100" y1="50" x2="180" y2="20" />
+                                                        <line x1="100" y1="50" x2="180" y2="50" />
+                                                        <line x1="100" y1="50" x2="180" y2="80" />
+                                                        <line x1="100" y1="80" x2="180" y2="20" />
+                                                        <line x1="100" y1="80" x2="180" y2="50" />
+                                                        <line x1="100" y1="80" x2="180" y2="80" />
+
+                                                        <line x1="180" y1="20" x2="260" y2="35" stroke="rgba(223, 186, 115, 0.15)" />
+                                                        <line x1="180" y1="20" x2="260" y2="65" stroke="rgba(223, 186, 115, 0.15)" />
+                                                        <line x1="180" y1="50" x2="260" y2="35" stroke="rgba(223, 186, 115, 0.15)" />
+                                                        <line x1="180" y1="50" x2="260" y2="65" stroke="rgba(223, 186, 115, 0.15)" />
+                                                        <line x1="180" y1="80" x2="260" y2="35" stroke="rgba(223, 186, 115, 0.15)" />
+                                                        <line x1="180" y1="80" x2="260" y2="65" stroke="rgba(223, 186, 115, 0.15)" />
+                                                    </g>
+
+                                                    <circle cx="20" cy="50" r="2" fill="#DFBA73" className="animate-[ping_2s_infinite]" />
+                                                    <circle cx="100" cy="20" r="2.5" fill="#DFBA73" className="animate-[ping_2.5s_infinite]" style={{ animationDelay: "0.5s" }} />
+                                                    <circle cx="180" cy="80" r="2.5" fill="#DFBA73" className="animate-[ping_2.2s_infinite]" style={{ animationDelay: "0.8s" }} />
+
+                                                    <g className="fill-zinc-950 stroke-[1.25]">
+                                                        <circle cx="20" cy="20" r="4.5" stroke="rgba(255,255,255,0.4)" />
+                                                        <circle cx="20" cy="50" r="4.5" stroke="rgba(255,255,255,0.4)" />
+                                                        <circle cx="20" cy="80" r="4.5" stroke="rgba(255,255,255,0.4)" />
+
+                                                        <circle cx="100" cy="20" r="5" stroke="rgba(255,255,255,0.6)" />
+                                                        <circle cx="100" cy="50" r="5" stroke="rgba(255,255,255,0.6)" />
+                                                        <circle cx="100" cy="80" r="5" stroke="rgba(255,255,255,0.6)" />
+
+                                                        <circle cx="180" cy="20" r="5" stroke="rgba(255,255,255,0.6)" />
+                                                        <circle cx="180" cy="50" r="5" stroke="rgba(255,255,255,0.6)" />
+                                                        <circle cx="180" cy="80" r="5" stroke="rgba(255,255,255,0.6)" />
+
+                                                        <circle cx="260" cy="35" r="6" stroke="#DFBA73" className="fill-amber-500/10" />
+                                                        <circle cx="260" cy="65" r="6" stroke="rgba(255,255,255,0.4)" />
+                                                    </g>
+
+                                                    <g className="fill-zinc-500 font-mono text-[5.5px] select-none text-center" textAnchor="middle">
+                                                        <text x="20" y="93">INPUT</text>
+                                                        <text x="100" y="93">CONV2D</text>
+                                                        <text x="180" y="93">FLATTEN</text>
+                                                        <text x="260" y="93">DENSE</text>
+                                                    </g>
+                                                </svg>
                                             </div>
                                         </div>
 
@@ -774,6 +846,32 @@ export default function InteractiveDemo({ projectId }: InteractiveDemoProps) {
                                             <div className="text-right">
                                                 <div className="text-xs font-bold font-mono text-zinc-500">Servo Motor</div>
                                                 <div className="text-sm font-extrabold text-white">{greensortResult.servoAngle}° Angle</div>
+                                            </div>
+                                        </div>
+
+                                        {/* Oscilloscope hardware telemetry wave */}
+                                        <div className="p-3 border border-white/5 bg-black/20 rounded-xl space-y-2">
+                                            <div className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest flex items-center justify-between">
+                                                <span>Edge TPU Hardware Telemetry</span>
+                                                <span className="text-amber-400 font-semibold font-mono animate-pulse">SPI Buffer: OK</span>
+                                            </div>
+                                            <div className="h-10 w-full bg-slate-950 border border-zinc-900 rounded-lg relative overflow-hidden flex items-center">
+                                                <div className="absolute inset-0 bg-[linear-gradient(rgba(223,186,115,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(223,186,115,0.015)_1px,transparent_1px)] bg-[size:10px_10px]" />
+                                                <svg className="w-full h-full text-amber-500/40 opacity-70" viewBox="0 0 200 40">
+                                                    <path 
+                                                        d="M 0,20 Q 25,5 50,20 T 100,20 T 150,20 T 200,20" 
+                                                        fill="none" 
+                                                        stroke="currentColor" 
+                                                        strokeWidth="0.75"
+                                                        strokeDasharray="4 2"
+                                                    />
+                                                    <path 
+                                                        d="M 0,20 L 20,20 L 30,5 L 40,35 L 50,20 L 100,20 L 110,10 L 120,30 L 130,20 L 200,20" 
+                                                        fill="none" 
+                                                        stroke="currentColor" 
+                                                        strokeWidth="1"
+                                                    />
+                                                </svg>
                                             </div>
                                         </div>
 
@@ -862,33 +960,35 @@ export default function InteractiveDemo({ projectId }: InteractiveDemoProps) {
                                         {/* Graph Visualizer simulation */}
                                         <div>
                                             <span className="block text-[9px] font-semibold text-zinc-500 uppercase font-mono mb-2">Neo4j Active Subgraph (Trace Nodes)</span>
-                                            <div className="h-28 w-full border border-white/5 bg-black/20 rounded-xl p-3 relative flex items-center justify-center gap-4 overflow-hidden">
+                                            <div className="h-32 w-full border border-white/5 bg-black/20 rounded-xl p-3 relative flex items-center justify-center gap-4 overflow-hidden">
                                                 
                                                 {/* Center Node (User) */}
-                                                <div className="w-10 h-10 rounded-full border border-accent/60 bg-accent/5 flex items-center justify-center text-xs font-bold relative z-10 animate-pulse hover:scale-105 transition-transform cursor-pointer">
-                                                    User
+                                                <div className="w-12 h-12 rounded-full border border-amber-400/40 bg-amber-500/5 flex items-center justify-center text-[10px] font-bold relative z-10 animate-pulse hover:scale-105 transition-transform cursor-pointer">
+                                                    Patient
                                                 </div>
 
                                                 <div className="absolute inset-0 flex items-center justify-center">
-                                                    <svg className="w-full h-full opacity-35" viewBox="0 0 300 120">
-                                                        <line x1="150" y1="60" x2="80" y2="30" stroke="currentColor" strokeWidth="1" />
-                                                        <line x1="150" y1="60" x2="220" y2="30" stroke="currentColor" strokeWidth="1" />
-                                                        <line x1="150" y1="60" x2="80" y2="90" stroke="currentColor" strokeWidth="1" strokeDasharray="3" />
-                                                        <line x1="150" y1="60" x2="220" y2="90" stroke="currentColor" strokeWidth="1" strokeDasharray="3" />
+                                                    <svg className="w-full h-full opacity-30 text-amber-500" viewBox="0 0 300 120">
+                                                        <line x1="150" y1="60" x2="80" y2="30" stroke="currentColor" strokeWidth="0.75" />
+                                                        <line x1="150" y1="60" x2="220" y2="30" stroke="currentColor" strokeWidth="0.75" />
+                                                        <line x1="150" y1="60" x2="80" y2="90" stroke="currentColor" strokeWidth="0.75" strokeDasharray="3" />
+                                                        <line x1="150" y1="60" x2="220" y2="90" stroke="currentColor" strokeWidth="0.75" strokeDasharray="3" />
+                                                        {/* Glowing pulse along node edges */}
+                                                        <circle cx="150" cy="60" r="2" fill="currentColor" className="animate-[ping_3s_infinite]" />
                                                     </svg>
                                                 </div>
 
                                                 {/* Peripheral nodes */}
-                                                <div className="absolute top-2 left-6 px-2 py-1 rounded border border-white/10 bg-black/40 text-[9px] font-mono text-zinc-400 hover:border-white cursor-pointer transition-colors">
+                                                <div className="absolute top-2 left-6 px-2.5 py-1 rounded border border-white/10 bg-zinc-950 text-[8.5px] font-mono text-zinc-300 hover:border-amber-400/50 cursor-pointer transition-colors shadow-sm">
                                                     {crisisResult.graphNodes[1]?.label || "Sentiment: Pending"}
                                                 </div>
-                                                <div className="absolute top-2 right-6 px-2 py-1 rounded border border-white/10 bg-black/40 text-[9px] font-mono text-zinc-400 hover:border-white cursor-pointer transition-colors">
+                                                <div className="absolute top-2 right-6 px-2.5 py-1 rounded border border-white/10 bg-zinc-950 text-[8.5px] font-mono text-zinc-300 hover:border-amber-400/50 cursor-pointer transition-colors shadow-sm">
                                                     {crisisResult.graphNodes[2]?.label || "Risk: Pending"}
                                                 </div>
-                                                <div className="absolute bottom-2 left-4 px-2 py-1 rounded border border-white/10 bg-black/40 text-[9px] font-mono text-zinc-400 hover:border-white cursor-pointer transition-colors">
+                                                <div className="absolute bottom-2 left-4 px-2.5 py-1 rounded border border-white/10 bg-zinc-950 text-[8.5px] font-mono text-zinc-300 hover:border-amber-400/50 cursor-pointer transition-colors shadow-sm">
                                                     {crisisResult.graphNodes[3]?.label || "Pattern: Pending"}
                                                 </div>
-                                                <div className="absolute bottom-2 right-4 px-2 py-1 rounded border border-white/10 bg-black/40 text-[9px] font-mono text-zinc-400 hover:border-white cursor-pointer transition-colors">
+                                                <div className="absolute bottom-2 right-4 px-2.5 py-1 rounded border border-white/10 bg-zinc-950 text-[8.5px] font-mono text-zinc-300 hover:border-amber-400/50 cursor-pointer transition-colors shadow-sm">
                                                     {crisisResult.graphNodes[4]?.label || "Context: Pending"}
                                                 </div>
                                             </div>
@@ -899,12 +999,12 @@ export default function InteractiveDemo({ projectId }: InteractiveDemoProps) {
                                             <span className="text-[9px] font-semibold text-zinc-500 uppercase font-mono mr-1">Flagged NLP Tokens:</span>
                                             {crisisResult.keyTokens.length > 0 ? (
                                                 crisisResult.keyTokens.map((t, i) => (
-                                                    <span key={i} className="px-2 py-0.5 rounded bg-red-100 dark:bg-red-950/40 text-red-800 dark:text-red-400 text-[10px] font-mono border border-red-200/50">
+                                                    <span key={i} className="px-2.5 py-0.5 rounded bg-red-950/20 text-red-400 text-[9.5px] font-mono border border-red-200/50">
                                                         &quot;{t}&quot;
                                                     </span>
                                                 ))
                                             ) : (
-                                                <span className="text-[10px] text-muted-foreground italic font-mono">None Flagged</span>
+                                                <span className="text-[9.5px] text-zinc-500 italic font-mono">None Flagged</span>
                                             )}
                                         </div>
                                     </div>

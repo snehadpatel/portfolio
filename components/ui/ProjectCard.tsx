@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { ArrowUpRight, Shield, Activity, BarChart3, Database } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { useRef, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 
 interface ProjectCardProps {
     id: string;
@@ -94,62 +94,111 @@ export default function ProjectCard({
     category,
     onOpenDrawer,
 }: ProjectCardProps & { onOpenDrawer?: (id: string) => void }) {
+    const cardRef = useRef<HTMLDivElement | null>(null);
+    const [tiltStyle, setTiltStyle] = useState("");
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        const card = cardRef.current;
+        if (!card) return;
+
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        card.style.setProperty("--mouse-x", `${x}px`);
+        card.style.setProperty("--mouse-y", `${y}px`);
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((centerY - y) / centerY) * 4; // Max 4 deg tilt for subtlety
+        const rotateY = ((x - centerX) / centerX) * 4;
+
+        setTiltStyle(`rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.015, 1.015, 1.015)`);
+    };
+
+    const handleMouseLeave = () => {
+        const card = cardRef.current;
+        if (!card) return;
+        card.style.setProperty("--mouse-x", `-999px`);
+        card.style.setProperty("--mouse-y", `-999px`);
+        setTiltStyle("rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)");
+    };
+
     return (
-        <Link
-            href={`/projects/${id}`}
-            onClick={(e) => {
-                if (onOpenDrawer) {
-                    e.preventDefault();
-                    onOpenDrawer(id);
-                }
+        <div
+            ref={cardRef}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            className="perspective-1000 spotlight-border-container transition-all duration-300"
+            style={{
+                transformStyle: "preserve-3d",
             }}
-            className="group block rounded-xl overflow-hidden border border-white/5 bg-zinc-950/35 hover:bg-zinc-900/40 hover:border-white/15 hover:shadow-[0_12px_30px_rgba(0,0,0,0.4)] transition-all duration-500"
         >
-            <div className="relative h-44 w-full overflow-hidden bg-black/40 border-b border-white/5 flex items-center justify-center transition-colors group-hover:bg-black/50">
-                <ProjectVisual id={id} />
-                
-                {/* Labels overlay */}
-                <div className="absolute top-3 left-4">
-                    <span className="text-[8px] font-mono text-zinc-500 uppercase tracking-wider bg-black/40 border border-white/5 px-2 py-0.5 rounded-full">
-                        {category}
-                    </span>
-                </div>
-                
-                <div className="absolute top-3 right-4">
-                    <span className="text-[8px] font-mono text-zinc-600 group-hover:text-zinc-400 transition-colors">
-                        {id}.bin
-                    </span>
-                </div>
+            <div
+                className="spotlight-border-content"
+                style={{
+                    transform: tiltStyle,
+                    transition: "transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s ease",
+                    transformStyle: "preserve-3d",
+                }}
+            >
+                <Link
+                    href={`/projects/${id}`}
+                    onClick={(e) => {
+                        if (onOpenDrawer) {
+                            e.preventDefault();
+                            onOpenDrawer(id);
+                        }
+                    }}
+                    className="group block rounded-xl overflow-hidden bg-[#0A0A0C]/90 hover:bg-zinc-950/80 transition-all duration-500"
+                >
+                    <div className="relative h-44 w-full overflow-hidden bg-black/40 border-b border-white/5 flex items-center justify-center transition-colors group-hover:bg-black/50">
+                        <ProjectVisual id={id} />
+                        
+                        {/* Labels overlay */}
+                        <div className="absolute top-3 left-4">
+                            <span className="text-[8px] font-mono text-zinc-500 uppercase tracking-wider bg-black/40 border border-white/5 px-2.5 py-0.5 rounded-full">
+                                {category}
+                            </span>
+                        </div>
+                        
+                        <div className="absolute top-3 right-4">
+                            <span className="text-[8px] font-mono text-zinc-600 group-hover:text-zinc-400 transition-colors">
+                                {id}.bin
+                            </span>
+                        </div>
+                    </div>
+
+                    <div className="p-6">
+                        <div className="flex items-center justify-between gap-4 mb-2">
+                            <h3 className="text-base font-bold font-heading text-white group-hover:text-zinc-200 transition-colors line-clamp-1">
+                                {title}
+                            </h3>
+                            <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+                        </div>
+
+                        <p className="text-zinc-400 mb-6 line-clamp-2 text-xs leading-relaxed font-light">
+                            {description}
+                        </p>
+
+                        <div className="flex flex-wrap gap-1.5">
+                            {techStack.slice(0, 3).map((tech) => (
+                                <span
+                                    key={tech}
+                                    className="px-2 py-0.5 text-[9px] text-zinc-500 border border-white/5 bg-white/[0.01] rounded font-mono"
+                                >
+                                    {tech}
+                                </span>
+                            ))}
+                            {techStack.length > 3 && (
+                                <span className="px-2 py-0.5 text-[9px] text-zinc-500 border border-white/5 bg-white/[0.01] rounded font-mono">
+                                    +{techStack.length - 3}
+                                </span>
+                            )}
+                        </div>
+                    </div>
+                </Link>
             </div>
-
-            <div className="p-6">
-                <div className="flex items-center justify-between gap-4 mb-2">
-                    <h3 className="text-base font-bold font-heading text-white group-hover:text-zinc-200 transition-colors line-clamp-1">
-                        {title}
-                    </h3>
-                    <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
-                </div>
-
-                <p className="text-zinc-400 mb-6 line-clamp-2 text-xs leading-relaxed font-light">
-                    {description}
-                </p>
-
-                <div className="flex flex-wrap gap-1.5">
-                    {techStack.slice(0, 3).map((tech) => (
-                        <span
-                            key={tech}
-                            className="px-2 py-0.5 text-[9px] text-zinc-500 border border-white/5 bg-white/[0.01] rounded font-mono"
-                        >
-                            {tech}
-                        </span>
-                    ))}
-                    {techStack.length > 3 && (
-                        <span className="px-2 py-0.5 text-[9px] text-zinc-500 border border-white/5 bg-white/[0.01] rounded font-mono">
-                            +{techStack.length - 3}
-                        </span>
-                    )}
-                </div>
-            </div>
-        </Link>
+        </div>
     );
 }
