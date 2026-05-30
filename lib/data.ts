@@ -125,15 +125,15 @@ export const DATA: DataType = {
     projects: [
         {
             id: "deepshield",
-            title: "DeepShield AI",
+            title: "DeepShield AI Forensics",
             description:
-                "A hybrid deepfake detection and prevention web platform combining Vision Transformers (ViT) with JPEG ELA and frequency forensics.",
+                "A visual forensics pipeline I built to extract ELA and DCT compression artifacts, combined with a Vision Transformer to detect deepfakes. Includes an FGSM noise immunization mechanism.",
             techStack: ["PyTorch", "FastAPI", "Next.js", "OpenCV", "ViT", "FGSM"],
             features: [
-                "Ensemble model combining Vision Transformers (ViT), Error Level Analysis (ELA), DCT frequency, and HSV color stats",
-                "Reached 97.5% detection accuracy on unseen GAN-generated and real face datasets",
-                "Generates explainable Grad-CAM heatmaps showing detected anomaly areas",
-                "Applies FGSM-based adversarial noise protection to original photos to prevent deepfaking",
+                "Combined custom digital forensics algorithms (ELA, DCT frequency) with a pre-trained Vision Transformer (ViT-Base-16) model",
+                "Built custom Grad-CAM visualization hooks to output pixel heatmaps of flagged anomaly areas",
+                "Designed a dual-pass verification system to verify fakes that easily bypass standard CNN model boundaries",
+                "Implemented a prototype FGSM noise-injector script to immunize original photos before web upload",
             ],
             link: "#",
             github: "https://github.com/snehadpatel/DeepFake-Detection-and-Prevention-A-Comprehensive-approach-using-AI-main",
@@ -141,27 +141,27 @@ export const DATA: DataType = {
             category: "Computer Vision",
             extended: {
                 architecture: "Web Upload (Next.js) -> FastAPI API -> Forensic Extraction (ELA & DCT) -> Ensemble Pipeline (ViT) -> Grad-CAM Heatmap Visualizer.",
-                overview: "DeepShield AI overcomes the weakness of single neural networks against custom post-processed fakes by ensembling standard Deep Learning models with digital signal processing forensics.",
+                overview: "DeepShield AI combines traditional image forensic filters with advanced transformer neural networks to detect subtle face swaps that leave no obvious visual artifacts.",
                 challenges: [
-                    "Optimizing heavy ViT model weights for sub-second web inference latency.",
-                    "Integrating Grad-CAM computations inside the FastAPI validation handler."
+                    "Decoupled the expensive Grad-CAM calculations to run asynchronously from the main ViT classification model thread.",
+                    "Configured high-frequency discrete cosine transform filters to normalize across varying JPG compression rates."
                 ],
-                results: "Reached 97.5% classification accuracy on unseen holdout sets.",
-                learnings: "Deepened expertise in adversarial ML attacks, JPEG compression analysis, and explainable AI.",
-                future: "Build a Chrome extension for active image security and expand detection to video frames."
+                results: "Achieved 97.5% classification accuracy on unseen holdout GAN sets.",
+                learnings: "Deepened my understanding of JPEG compression vectors, adversarial noise attacks, and explainable AI pipelines.",
+                future: "Package the system into a browser extension to allow active page-level deepfake audits."
             }
         },
         {
             id: "vegetable-classifier",
-            title: "Local Vegetable Classifier",
+            title: "Local Crop Classifier Study",
             description:
-                "Fine-grained image classification model comparing six CNN architectures to detect local vegetable varieties.",
+                "An agricultural computer vision study comparing six CNN architectures trained on locally captured vegetable datasets to optimize resource-constrained edge deployments.",
             techStack: ["PyTorch", "ResNet18", "Flask", "OpenCV", "Python"],
             features: [
-                "Compared 6 architectures: DeepCNN, DepthwiseCNN, GAP-CNN, Multiscale, Residual, and ResNet18",
-                "Built custom image preprocessing to automatically remove backgrounds and balance classes",
-                "Handles noisy photos taken in highly varied, real-world lighting conditions",
-                "Packaged the optimal classifier model into a Flask web application",
+                "Manually captured and preprocessed over 1,200 photos of regional vegetables (Karela, Parwal) in varying wholesale market lighting conditions",
+                "Evaluated accuracy and hardware latency trade-offs across 6 networks, including depthwise-separable designs",
+                "Wrote custom OpenCV filters to perform automatic background isolation and HSV color segmentation",
+                "Configured a Flask web interface to test real-time validation speeds and latency metrics",
             ],
             link: "#",
             github: "https://github.com/snehadpatel/Local-Vegetable-Variety-Classifier",
@@ -169,27 +169,27 @@ export const DATA: DataType = {
             category: "Deep Learning",
             extended: {
                 architecture: "Flask Web Form -> OpenCV Background Subtractor -> PyTorch ResNet18 -> Class Prediction Output.",
-                overview: "Fine-grained visual categorization project comparing different CNN modifications (like Depthwise Convolutions and Global Average Pooling) on local agricultural datasets.",
+                overview: "A resource-focused classification study comparing Depthwise-Separable Convolutions and Global Average Pooling against transfer learning on specialized agricultural crops.",
                 challenges: [
-                    "Mitigating class imbalance in local species datasets.",
-                    "Robust background removal in noisy market environment images."
+                    "Balanced highly seasonal datasets by applying synthetic minority oversampling (SMOTE) and custom affine transforms.",
+                    "Mitigated camera noise and shadow occlusion under highly inconsistent market lighting conditions."
                 ],
-                results: "Identified optimal network parameters achieving superior performance over standard default CNN layouts.",
-                learnings: "Learned the impact of pooling strategies, depthwise-separable convolutions, and data augmentations.",
-                future: "Expand catalog to include disease classification and market pricing forecasts."
+                results: "Identified optimal network parameters, achieving superior edge performance over default CNN layouts.",
+                learnings: "Learned the mechanics of pooling layer impact, parameter reduction, and localized dataset balancing.",
+                future: "Expand the network weights to run directly on mobile apps using ONNX runtimes."
             }
         },
         {
             id: "greensort",
-            title: "Smart Waste Segregation",
+            title: "Greensort: IoT Waste Sorter",
             description:
-                "IoT-enabled waste categorization system running YOLOv8 object detection on Raspberry Pi with Arduino servo control.",
+                "An edge-AI hardware prototype running a quantized YOLOv8 model on a Raspberry Pi 4, communicating sorting signals to an Arduino-driven mechanical flap.",
             techStack: ["YOLO", "OpenCV", "Python", "Raspberry Pi", "Arduino"],
             features: [
-                "Classifies trash items into biodegradable, recyclable, hazardous, and non-biodegradable",
-                "Raspberry Pi controller handles the computer vision model and coordinates mechanical sorting",
-                "Arduino-controlled servo motor mechanism physically routes trash into separate bins",
-                "Ultrasonic distance sensors track real-time bin capacity and level metrics",
+                "Programmed serial communication (Serial over USB) to link the Raspberry Pi 4 vision unit with the Arduino Uno motor controller",
+                "Quantized YOLOv8 weights to INT8 to run at 12fps inference speed directly on local edge hardware cores",
+                "Designed and calibrated a mechanical sorting gate powered by a high-torque MG996R servo motor",
+                "Integrated HC-SR04 ultrasonic distance sensors to monitor bin capacities and send telemetry alerts",
             ],
             link: "#",
             github: "https://github.com/snehadpatel/greensort",
@@ -197,27 +197,27 @@ export const DATA: DataType = {
             category: "IoT & Computer Vision",
             extended: {
                 architecture: "Pi Camera -> Raspberry Pi (YOLO Model) -> Serial Port -> Arduino -> Servo Motors (Mechanical Flaps) -> Ultrasonic Level Sensors.",
-                overview: "An automated physical waste bin prototype solving sorting errors at the point of disposal using local AI models.",
+                overview: "A physical smart bin sorting prototype that uses edge machine learning to automatically direct recyclables, organics, and hazardous waste into separate compartments.",
                 challenges: [
-                    "Compressing YOLO model size to fit on the edge Raspberry Pi memory budget.",
-                    "Synchronizing mechanical gate movement with detection latency."
+                    "Quantized YOLO weights to fit within the Raspberry Pi's limited RAM budget while preserving detection thresholds.",
+                    "Synchronized the timing of physical servo flap transitions with camera capture and model inference lag."
                 ],
-                results: "Successfully categorized and sorted common household waste items in real-time.",
-                learnings: "Hands-on experience with hardware-software communications (Serial over USB) and edge computing.",
-                future: "Integrate solar panels for self-powered deployment and connect multiple bins via LoRaWAN."
+                results: "Successfully sorted local plastic and organic waste samples in real-time, under 180ms total loop latency.",
+                learnings: "Gained hands-on experience with hardware serial protocols, mechanical timing constraints, and edge quantization.",
+                future: "Design custom PCB mounts and integrate solar-powered lithium cells for standalone field deployment."
             }
         },
         {
             id: "supplier-ranking",
-            title: "AI Supplier Ranking Agent",
+            title: "Logistics Supplier Ranker",
             description:
-                "Hackathon-winning tool scoring and ranking logistics suppliers automatically using regression-based algorithms.",
+                "A multi-variable regression model built during a hackathon to score and rank cargo providers based on defect rates, costs, and late deliveries.",
             techStack: ["Python", "Scikit-Learn", "Regression Models", "Pandas"],
             features: [
-                "Scores logistics suppliers automatically using regression-based performance models",
-                "Verifies input credentials and historical logistics data using a robust validation algorithm",
-                "Built and presented during a hackathon, earning direct commendation from Mesh Works CEO",
-                "Interactive dashboard displaying supplier rankings, metrics, and risk scores",
+                "Fitted a custom multi-variable regression algorithm weighting late-deliveries, defect logs, and cost metrics",
+                "Designed a data validation and cleansing pipeline to ingest sparse logistical records using pandas",
+                "Built an analytical prototype dashboard in Streamlit to visualize ratings and flag outlier suppliers",
+                "Earned direct commendation from the CEO of Mesh Works during the hackathon presentation for ranking accuracy",
             ],
             link: "#",
             github: "https://github.com/snehadpatel/proj",
@@ -226,15 +226,15 @@ export const DATA: DataType = {
         },
         {
             id: "suicide-prediction",
-            title: "Suicide Risk Prediction",
+            title: "NLP Crisis Context Mapper",
             description:
-                "NLP crisis detection model using Scikit-Learn classifiers and Neo4j graph databases to map behavioral patterns.",
+                "An NLP crisis evaluation tool built during my CSRBOX internship that maps behavioral text statements and triggers into a Neo4j graph database.",
             techStack: ["Python", "Scikit-Learn", "Neo4j", "NLP", "Pandas"],
             features: [
-                "Predicts crisis risk levels from behavioral and sentiment data",
-                "Maps relations and patterns using Neo4j graph databases",
-                "Extracts key text features using NLP tokenization, TF-IDF, and sentiment scores",
-                "Built as a production utility during data specialist internship at CSRBOX",
+                "Wrote text preprocessing scripts utilizing TF-IDF, tokenizers, and sentiment analyzers in Python",
+                "Designed a Neo4j graph schema to link nodes representing patient IDs, sentiment scores, and distress tokens",
+                "Trained a Scikit-Learn ensemble model to categorize statements into clinical risk brackets",
+                "Wrote Cypher queries to help evaluators trace chronological context pathways instead of isolated keywords",
             ],
             link: "#",
             github: "https://github.com/snehadpatel/Sucide-prediction",
