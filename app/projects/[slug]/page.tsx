@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { DATA } from "@/lib/data";
 import { Button } from "@/components/ui/Button";
 import { ArrowLeft, ExternalLink, Github, CheckCircle2, Layers, Lightbulb, Trophy } from "lucide-react";
-import InteractiveDemo from "@/components/projects/InteractiveDemo";
+import PipelineVisualizer from "@/components/projects/PipelineVisualizer";
 
 export default function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = use(params);
@@ -91,8 +91,6 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                         </div>
                     </section>
 
-                    {/* Live Working Demo Sandbox */}
-                    <InteractiveDemo projectId={project.id} />
 
                     {/* Extended Details (Architecture, Challenges, etc) */}
                     {project.extended && (
@@ -101,10 +99,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                                 <h2 className="text-2xl font-bold font-heading flex items-center gap-2">
                                     <Layers className="w-6 h-6 text-primary" /> System Architecture
                                 </h2>
-                                <div className="p-6 bg-slate-900 text-slate-100 rounded-xl font-mono text-sm leading-relaxed overflow-x-auto shadow-inner">
-                                    {/* Visual representation in text for now */}
-                                    {project.extended.architecture}
-                                </div>
+                                <PipelineVisualizer projectId={project.id} />
                             </section>
 
                             <section>

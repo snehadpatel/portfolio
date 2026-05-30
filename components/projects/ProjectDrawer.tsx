@@ -5,8 +5,8 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Github, ExternalLink } from "lucide-react";
 import { Project } from "@/lib/data";
-import InteractiveDemo from "./InteractiveDemo";
 import { Button } from "@/components/ui/Button";
+import PipelineVisualizer from "./PipelineVisualizer";
 
 interface ProjectDrawerProps {
     project: Project | null;
@@ -234,36 +234,24 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                             {PROJECT_PIPELINES[project.id] && (
                                 <section className="relative space-y-4">
                                     <SectionHeader num="04" title="System Pipeline Architecture" />
-                                    <div className="relative border border-white/5 rounded-xl bg-black/60 p-5 overflow-x-auto shadow-inner">
-                                        <div className="absolute top-2 right-3 text-[8px] font-mono text-zinc-600 uppercase tracking-wider">
-                                            Telemetry Path
-                                        </div>
-                                        <pre className="font-mono text-[9.5px] md:text-[10px] text-amber-400/90 leading-relaxed font-semibold">
-                                            {PROJECT_PIPELINES[project.id]}
-                                        </pre>
-                                    </div>
+                                    <PipelineVisualizer projectId={project.id} />
                                 </section>
                             )}
 
-                            {/* Live Working Simulator (Interactive Sandbox) */}
-                            <section className="relative">
-                                <SectionHeader num="05" title="Interactive Sandbox Simulation" />
-                                <InteractiveDemo projectId={project.id} />
-                            </section>
 
                             {/* Extended Tech details */}
                             {project.extended && (
                                 <section className="relative space-y-6 border-t border-white/5 pt-8">
-                                    <SectionHeader num="06" title="Engineering Insights & Retro" />
+                                    <SectionHeader num="05" title="Engineering Insights & Retro" />
                                     
                                     <div className="grid md:grid-cols-2 gap-4">
                                         <div className="bg-white/[0.01] p-5 rounded-xl border border-white/5 space-y-3 hover:border-amber-400/10 transition-all">
-                                            <h4 className="text-[10px] font-mono font-bold text-white uppercase tracking-wider text-amber-400/80">// Core Engineering Obstacles</h4>
-                                            <ul className="space-y-2 text-xs text-zinc-400 font-light">
+                                            <h4 className="text-[10px] font-mono font-bold text-white uppercase tracking-wider text-amber-400/80">Core Engineering Obstacles</h4>
+                                            <ul className="space-y-3 text-xs text-zinc-400 font-light">
                                                 {project.extended.challenges.map((c, i) => (
-                                                    <li key={i} className="flex gap-2">
-                                                        <span className="text-amber-400/60 font-mono">›</span>
-                                                        <span>{c}</span>
+                                                    <li key={i} className="flex items-start gap-2">
+                                                        <span className="text-amber-400/60 font-mono mt-0.5 select-none">›</span>
+                                                        <span className="leading-relaxed">{c}</span>
                                                     </li>
                                                 ))}
                                             </ul>
@@ -271,13 +259,13 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                                         
                                         <div className="bg-white/[0.01] p-5 rounded-xl border border-white/5 flex flex-col justify-between space-y-4 hover:border-amber-400/10 transition-all">
                                             <div className="space-y-2">
-                                                <h4 className="text-[10px] font-mono font-bold text-white uppercase tracking-wider text-amber-400/80">// Developer Retrospective</h4>
+                                                <h4 className="text-[10px] font-mono font-bold text-white uppercase tracking-wider text-amber-400/80">Developer Retrospective</h4>
                                                 <p className="text-xs text-zinc-400 italic leading-relaxed font-light">
                                                     "{project.extended.learnings}"
                                                 </p>
                                             </div>
                                             <div className="pt-3 border-t border-white/5 flex items-center justify-between">
-                                                <span className="text-[9px] font-mono text-zinc-500 uppercase">Impact Metric</span>
+                                                <span className="text-[9px] font-mono text-zinc-500 uppercase tracking-wider">Quantifiable Result</span>
                                                 <span className="text-xs text-emerald-400 font-mono font-semibold">{project.extended.results}</span>
                                             </div>
                                         </div>
