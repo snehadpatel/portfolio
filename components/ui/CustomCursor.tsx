@@ -98,7 +98,7 @@ export default function CustomCursor() {
         <>
             {/* Custom glowing tracking ring */}
             <motion.div
-                className="fixed top-0 left-0 pointer-events-none z-50 mix-blend-difference hidden md:block"
+                className="fixed top-0 left-0 pointer-events-none z-50"
                 style={{
                     x: cursorX,
                     y: cursorY,
@@ -110,7 +110,7 @@ export default function CustomCursor() {
             {/* Fine pinpoint helper dot inside cursor */}
             {cursorType !== "magnetic" && (
                 <motion.div
-                    className="fixed top-0 left-0 w-2 h-2 bg-amber-400 rounded-full pointer-events-none z-50 mix-blend-difference hidden md:block"
+                    className="fixed top-0 left-0 w-2 h-2 bg-amber-400 rounded-full pointer-events-none z-50"
                     style={{
                         x: cursorX,
                         y: cursorY,
