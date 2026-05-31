@@ -48,7 +48,7 @@ export default function Hero() {
                             View Work <ArrowRight className="w-3.5 h-3.5" />
                         </Link>
                         <Link
-                            href={DATA.profile.resumeUrl || "#"}
+                            href="/assets/resume.pdf"
                             target="_blank"
                             className="px-6 py-3 bg-white/[0.03] hover:bg-white/[0.08] text-white text-xs font-bold uppercase tracking-wider rounded-full border border-white/10 transition-all duration-300 flex items-center gap-2"
                         >
