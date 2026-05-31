@@ -77,7 +77,7 @@ export const DATA: DataType = {
         email: "sneha.dpatel@outlook.com",
         linkedin: "https://www.linkedin.com/in/sneha-patel-a0ba14212/",
         github: "https://github.com/snehadpatel",
-        resumeUrl: "/Sneha_Patel_Resume_v3.pdf",
+        resumeUrl: "/assets/resume.pdf",
     },
     education: [
         {

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import { DATA } from "@/lib/data";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -79,7 +80,7 @@ export default function Navbar() {
 
                 <div className="hidden md:flex pr-1">
                     <Link
-                        href="/assets/resume.pdf"
+                        href={DATA.profile.resumeUrl || "#"}
                         target="_blank"
                         className="px-4 py-1.5 bg-white hover:bg-slate-200 hover:scale-[1.04] active:scale-[0.98] text-slate-950 text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-300 shadow-sm hover:shadow-[0_0_15px_rgba(255,255,255,0.45)]"
                     >
@@ -130,7 +131,7 @@ export default function Navbar() {
                                 );
                             })}
                             <Link
-                                href="/assets/resume.pdf"
+                                href={DATA.profile.resumeUrl || "#"}
                                 target="_blank"
                                 onClick={() => setIsOpen(false)}
                                 className="mt-2 w-full px-4 py-3 bg-white text-slate-950 text-center text-sm font-bold uppercase tracking-wider rounded-xl hover:bg-slate-200 transition-colors"
