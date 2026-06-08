@@ -34,7 +34,7 @@ function ContactForm() {
         <div className="grid md:grid-cols-2 gap-16">
             {/* Contact Info */}
             <div>
-                <h1 className="text-4xl md:text-5xl font-bold font-heading mb-6">Let's Connect</h1>
+                <h1 className="text-4xl md:text-5xl font-bold font-heading mb-6">Let&apos;s Connect</h1>
                 <p className="text-xl text-muted-foreground mb-12">
                     I&apos;m currently looking for internship opportunities and open to discussing new projects.
                 </p>

@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
     }))
 
-    const routes = ['', '/about', '/projects', '/contact'].map((route) => ({
+    const routes = ['', '/about', '/projects', '/services', '/contact'].map((route) => ({
         url: `https://snehadpatel-portfolio.vercel.app${route}`,
         lastModified: new Date(),
         changeFrequency: 'monthly' as const,

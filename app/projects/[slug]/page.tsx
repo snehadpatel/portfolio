@@ -8,6 +8,14 @@ import { Button } from "@/components/ui/Button";
 import { ArrowLeft, ExternalLink, Github, CheckCircle2, Layers, Lightbulb, Trophy } from "lucide-react";
 import PipelineVisualizer from "@/components/projects/PipelineVisualizer";
 
+const PROJECT_IMAGES: Record<string, string> = {
+    deepshield: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80",
+    "vegetable-classifier": "https://images.unsplash.com/photo-1574316071802-0d684efa7bf5?auto=format&fit=crop&w=1000&q=80",
+    greensort: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1000&q=80",
+    "supplier-ranking": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=80",
+    "suicide-prediction": "https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=1000&q=80"
+};
+
 export default function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = use(params);
     const project = DATA.projects.find((p) => p.id === slug);
@@ -16,46 +24,62 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
         notFound();
     }
 
+    const imageUrl = PROJECT_IMAGES[project.id] || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80";
+
     return (
-        <article className="min-h-screen pt-24 pb-20">
-            {/* Header */}
-            <div className="bg-secondary/30 border-b border-border pb-12 mb-12">
-                <div className="container mx-auto px-6">
-                    <Link href="/projects" className="inline-flex items-center text-muted-foreground hover:text-primary mb-8 transition-colors">
-                        <ArrowLeft className="w-4 h-4 mr-2" /> Back to Projects
+        <article className="min-h-screen pb-20">
+            {/* Cinematic Hero Banner */}
+            <div className="relative w-full h-[320px] md:h-[450px] overflow-hidden border-b border-white/10 shrink-0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                    src={imageUrl}
+                    alt={project.title}
+                    className="w-full h-full object-cover animate-[pulse_4s_ease-in-out_infinite]"
+                />
+                {/* Gradient vignette overlays */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C] via-[#0A0A0C]/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0C]/30 via-transparent to-[#0A0A0C]/20" />
+                
+                {/* Back Link Overlay */}
+                <div className="absolute top-28 left-6 md:left-12 z-20">
+                    <Link href="/projects" className="inline-flex items-center text-xs font-mono uppercase tracking-wider text-zinc-300 hover:text-white px-4 py-2 rounded-full bg-black/60 border border-white/10 backdrop-blur-md transition-all duration-300 hover:scale-[1.03]">
+                        <ArrowLeft className="w-3.5 h-3.5 mr-2" /> Back to Projects
                     </Link>
+                </div>
+            </div>
 
-                    <div className="grid lg:grid-cols-3 gap-12">
-                        <div className="lg:col-span-2">
-                            <div className="flex items-center gap-3 mb-4">
-                                <span className="px-3 py-1 text-xs font-semibold bg-primary/10 text-primary rounded-full">
-                                    {project.category}
-                                </span>
-                            </div>
-                            <h1 className="text-4xl md:text-5xl font-bold font-heading mb-6">{project.title}</h1>
-                            <p className="text-xl text-muted-foreground leading-relaxed">
-                                {project.extended?.overview || project.description}
-                            </p>
+            {/* Project Quick Facts Header */}
+            <div className="container mx-auto px-6 pt-12 mb-12">
+                <div className="grid lg:grid-cols-3 gap-12 items-end">
+                    <div className="lg:col-span-2 space-y-4">
+                        <div className="flex items-center gap-3">
+                            <span className="px-3 py-1 text-[10px] font-semibold bg-white/5 border border-white/10 text-white rounded-full font-mono uppercase tracking-wider">
+                                {project.category}
+                            </span>
                         </div>
+                        <h1 className="text-4xl md:text-5xl font-extrabold font-heading text-white tracking-tight uppercase leading-[0.9]">
+                            {project.title}
+                        </h1>
+                        <p className="text-lg md:text-xl text-zinc-300 font-light leading-relaxed">
+                            {project.extended?.overview || project.description}
+                        </p>
+                    </div>
 
-                        <div className="space-y-6">
-                            <div className="flex flex-col gap-3">
-                                {project.link && project.link !== "#" && (
-                                    <Button size="lg" className="w-full" asChild>
-                                        <Link href={project.link} target="_blank">
-                                            <ExternalLink className="w-4 h-4 mr-2" /> Live Demo
-                                        </Link>
-                                    </Button>
-                                )}
-                                {project.github && project.github !== "#" && (
-                                    <Button variant="outline" size="lg" className="w-full" asChild>
-                                        <Link href={project.github} target="_blank">
-                                            <Github className="w-4 h-4 mr-2" /> View Code
-                                        </Link>
-                                    </Button>
-                                )}
-                            </div>
-                        </div>
+                    <div className="flex flex-col sm:flex-row lg:flex-col gap-3 justify-end pt-4 lg:pt-0">
+                        {project.link && project.link !== "#" && (
+                            <Button size="lg" className="w-full font-bold uppercase tracking-wider text-xs rounded-xl" asChild>
+                                <Link href={project.link} target="_blank">
+                                    <ExternalLink className="w-4 h-4 mr-2" /> Live Demo
+                                </Link>
+                            </Button>
+                        )}
+                        {project.github && project.github !== "#" && (
+                            <Button variant="outline" size="lg" className="w-full font-bold uppercase tracking-wider text-xs rounded-xl bg-zinc-900/40 border-white/10 text-white hover:bg-zinc-800" asChild>
+                                <Link href={project.github} target="_blank">
+                                    <Github className="w-4 h-4 mr-2" /> View Code
+                                </Link>
+                            </Button>
+                        )}
                     </div>
                 </div>
             </div>

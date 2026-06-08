@@ -16,8 +16,8 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-    title: "Sneha Patel | AI & Full-Stack Engineer",
-    description: "Portfolio of Sneha Patel, an AI-driven systems engineer specializing in Java, Python, and scalable web solutions.",
+    title: "Sneha Patel | AI & Systems Engineer",
+    description: "Portfolio of Sneha Patel, an AI-driven systems engineer specializing in Computer Vision, Machine Learning, and IoT Systems.",
 };
 
 export default function RootLayout({
