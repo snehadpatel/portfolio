@@ -191,14 +191,14 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                             <div className="grid grid-cols-2 gap-3 pb-2 relative">
                                 {project.link && project.link !== "#" && (
                                     <Button variant="default" className="w-full text-xs font-bold" asChild>
-                                        <Link href={project.link} target="_blank">
+                                        <Link href={project.link} target="_blank" rel="noopener noreferrer">
                                             <ExternalLink className="w-3.5 h-3.5 mr-2" /> Live Demo
                                         </Link>
                                     </Button>
                                 )}
                                 {project.github && project.github !== "#" && (
                                     <Button variant="outline" className="w-full text-xs font-bold" asChild>
-                                        <Link href={project.github} target="_blank">
+                                        <Link href={project.github} target="_blank" rel="noopener noreferrer">
                                             <Github className="w-3.5 h-3.5 mr-2" /> Source Code
                                         </Link>
                                     </Button>

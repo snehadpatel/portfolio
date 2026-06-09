@@ -9,10 +9,10 @@ export default function Footer() {
                     © {new Date().getFullYear()} {DATA.profile.name}. All rights reserved.
                 </div>
                 <div className="flex items-center gap-6">
-                    <Link href={DATA.profile.github} target="_blank" className="text-muted-foreground hover:text-foreground transition-colors">
+                    <Link href={DATA.profile.github} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
                         GitHub
                     </Link>
-                    <Link href={DATA.profile.linkedin} target="_blank" className="text-muted-foreground hover:text-foreground transition-colors">
+                    <Link href={DATA.profile.linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
                         LinkedIn
                     </Link>
                     <Link href={`mailto:${DATA.profile.email}`} className="text-muted-foreground hover:text-foreground transition-colors">

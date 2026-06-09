@@ -68,14 +68,14 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                     <div className="flex flex-col sm:flex-row lg:flex-col gap-3 justify-end pt-4 lg:pt-0">
                         {project.link && project.link !== "#" && (
                             <Button size="lg" className="w-full font-bold uppercase tracking-wider text-xs rounded-xl" asChild>
-                                <Link href={project.link} target="_blank">
+                                <Link href={project.link} target="_blank" rel="noopener noreferrer">
                                     <ExternalLink className="w-4 h-4 mr-2" /> Live Demo
                                 </Link>
                             </Button>
                         )}
                         {project.github && project.github !== "#" && (
                             <Button variant="outline" size="lg" className="w-full font-bold uppercase tracking-wider text-xs rounded-xl bg-zinc-900/40 border-white/10 text-white hover:bg-zinc-800" asChild>
-                                <Link href={project.github} target="_blank">
+                                <Link href={project.github} target="_blank" rel="noopener noreferrer">
                                     <Github className="w-4 h-4 mr-2" /> View Code
                                 </Link>
                             </Button>

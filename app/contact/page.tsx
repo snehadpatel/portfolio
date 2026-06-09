@@ -50,7 +50,7 @@ function ContactForm() {
                         </div>
                     </Link>
 
-                    <Link href={DATA.profile.linkedin} target="_blank" className="flex items-center gap-4 group p-4 rounded-xl border border-white/5 bg-white/[0.01] hover:border-white/20 transition-all duration-300">
+                    <Link href={DATA.profile.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group p-4 rounded-xl border border-white/5 bg-white/[0.01] hover:border-white/20 transition-all duration-300">
                         <div className="w-10 h-10 border border-white/10 bg-white/[0.02] rounded-lg flex items-center justify-center text-white group-hover:scale-105 transition-transform">
                             <Linkedin className="w-5 h-5" />
                         </div>
@@ -62,7 +62,7 @@ function ContactForm() {
                         </div>
                     </Link>
 
-                    <Link href={DATA.profile.github} target="_blank" className="flex items-center gap-4 group p-4 rounded-xl border border-white/5 bg-white/[0.01] hover:border-white/20 transition-all duration-300">
+                    <Link href={DATA.profile.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group p-4 rounded-xl border border-white/5 bg-white/[0.01] hover:border-white/20 transition-all duration-300">
                         <div className="w-10 h-10 border border-white/10 bg-white/[0.02] rounded-lg flex items-center justify-center text-white group-hover:scale-105 transition-transform">
                             <Github className="w-5 h-5" />
                         </div>
