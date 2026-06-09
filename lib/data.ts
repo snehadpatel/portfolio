@@ -42,6 +42,7 @@ export interface Profile {
     linkedin: string;
     github: string;
     resumeUrl?: string;
+    certificationsUrl?: string;
 }
 
 export interface Education {
@@ -78,6 +79,7 @@ export const DATA: DataType = {
         linkedin: "https://www.linkedin.com/in/sneha-patel-a0ba14212/",
         github: "https://github.com/snehadpatel",
         resumeUrl: "/assets/resume.pdf",
+        certificationsUrl: "https://1drv.ms/f/c/03287c4bb4d61c65/IgBVZXa0HMbGQIVjxTOM8w3HAU2GLdZMWoUmkxXOEklYTmA?e=0zaAY6",
     },
     education: [
         {

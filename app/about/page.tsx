@@ -67,9 +67,21 @@ export default function AboutPage() {
 
                         {/* Achievements */}
                         <section>
-                            <h2 className="text-2xl font-bold font-heading mb-8 flex items-center gap-3 text-white uppercase">
-                                <Award className="w-5 h-5 text-white" /> Achievements & Certifications
-                            </h2>
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                                <h2 className="text-2xl font-bold font-heading flex items-center gap-3 text-white uppercase">
+                                    <Award className="w-5 h-5 text-white" /> Achievements & Certifications
+                                </h2>
+                                {DATA.profile.certificationsUrl && (
+                                    <a
+                                        href={DATA.profile.certificationsUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-white/[0.02] hover:bg-white/[0.06] border border-white/5 hover:border-white/10 rounded-lg text-xs font-semibold text-zinc-300 hover:text-white transition-all uppercase tracking-wider font-mono self-start sm:self-auto"
+                                    >
+                                        Verify Certificates →
+                                    </a>
+                                )}
+                            </div>
                             <div className="grid sm:grid-cols-2 gap-4">
                                 <div className="p-4 bg-white/[0.01] rounded-xl border border-white/5 hover:border-white/20 transition-colors">
                                     <h4 className="font-bold text-sm text-white mb-1">WSRO Nationals</h4>
