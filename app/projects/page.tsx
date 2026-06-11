@@ -6,6 +6,7 @@ import ProjectCard from "@/components/ui/ProjectCard";
 import ProjectDrawer from "@/components/projects/ProjectDrawer";
 import { DATA, Project } from "@/lib/data";
 import { Button } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
 
 const categories = ["All", ...Array.from(new Set(DATA.projects.map((p) => p.category)))];
 
@@ -31,10 +32,10 @@ export default function ProjectsPage() {
         <div className="min-h-screen pt-24 pb-12">
             <div className="container mx-auto px-6">
                 <div className="mb-12 text-center max-w-2xl mx-auto">
-                    <h1 className="text-4xl md:text-5xl font-bold font-heading mb-6">
+                    <h1 className="text-4xl md:text-5xl font-bold font-heading mb-6 text-slate-900">
                         Featured Projects
                     </h1>
-                    <p className="text-muted-foreground text-lg">
+                    <p className="text-slate-500 text-lg font-light">
                         A deep dive into my technical journey. From full-stack applications to AI models, each project represents a unique problem solved.
                     </p>
                 </div>
@@ -46,7 +47,12 @@ export default function ProjectsPage() {
                             key={category}
                             variant={activeCategory === category ? "default" : "outline"}
                             onClick={() => setActiveCategory(category)}
-                            className="rounded-full"
+                            className={cn(
+                                "rounded-full text-xs uppercase tracking-wider font-semibold px-5 py-2 h-9",
+                                activeCategory === category 
+                                    ? "bg-slate-900 text-white hover:bg-slate-800 border-none" 
+                                    : "border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                            )}
                         >
                             {category}
                         </Button>

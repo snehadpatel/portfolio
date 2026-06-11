@@ -2,20 +2,22 @@
 
 import { useEffect, useRef } from "react";
 
-interface Particle {
+interface Blob {
     x: number;
     y: number;
+    radius: number;
+    color: string;
     vx: number;
     vy: number;
-    radius: number;
+    targetRadius: number;
 }
 
 export default function InteractiveBackground() {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const mouseRef = useRef<{ x: number | null; y: number | null }>({ x: null, y: null });
+    const currentMouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
     useEffect(() => {
-        // Disable background animation if user prefers reduced motion
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         if (prefersReducedMotion) return;
 
@@ -26,96 +28,118 @@ export default function InteractiveBackground() {
         if (!ctx) return;
 
         let animationFrameId: number;
-        let particles: Particle[] = [];
-        const maxParticles = 60;
-        const connectionDist = 120;
-        const mouseRadius = 180;
+        let blobs: Blob[] = [];
 
         const resizeCanvas = () => {
             if (!canvas) return;
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            initParticles();
+            initBlobs();
         };
 
-        const initParticles = () => {
-            particles = [];
-            const count = Math.min(maxParticles, Math.floor((window.innerWidth * window.innerHeight) / 22000));
-            for (let i = 0; i < count; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    vx: (Math.random() - 0.5) * 0.4,
-                    vy: (Math.random() - 0.5) * 0.4,
-                    radius: Math.random() * 1.5 + 0.8,
-                });
-            }
+        const initBlobs = () => {
+            const w = canvas.width;
+            const h = canvas.height;
+            const minDim = Math.min(w, h);
+            
+            blobs = [
+                {
+                    x: w * 0.2,
+                    y: h * 0.3,
+                    radius: minDim * 0.35,
+                    targetRadius: minDim * 0.35,
+                    color: "rgba(94, 96, 231, 0.05)", // Soft Periwinkle
+                    vx: 0.15,
+                    vy: 0.12,
+                },
+                {
+                    x: w * 0.7,
+                    y: h * 0.25,
+                    radius: minDim * 0.4,
+                    targetRadius: minDim * 0.4,
+                    color: "rgba(16, 185, 129, 0.035)", // Soft Mint Green
+                    vx: -0.12,
+                    vy: 0.15,
+                },
+                {
+                    x: w * 0.45,
+                    y: h * 0.75,
+                    radius: minDim * 0.38,
+                    targetRadius: minDim * 0.38,
+                    color: "rgba(251, 113, 133, 0.045)", // Soft Rose Peach
+                    vx: 0.1,
+                    vy: -0.1,
+                },
+            ];
         };
 
         const draw = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            const mouseX = mouseRef.current.x;
-            const mouseY = mouseRef.current.y;
-
-            // Draw connections first
-            ctx.lineWidth = 0.5;
-            for (let i = 0; i < particles.length; i++) {
-                const p1 = particles[i];
-
-                for (let j = i + 1; j < particles.length; j++) {
-                    const p2 = particles[j];
-                    const dx = p1.x - p2.x;
-                    const dy = p1.y - p2.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < connectionDist) {
-                        const alpha = (1 - dist / connectionDist) * 0.08;
-                        ctx.strokeStyle = `rgba(223, 186, 115, ${alpha})`; // Soft Gold
-                        ctx.beginPath();
-                        ctx.moveTo(p1.x, p1.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.stroke();
-                    }
-                }
+            // Smoothly interpolate mouse coordinates for parallax
+            if (mouseRef.current.x !== null && mouseRef.current.y !== null) {
+                currentMouse.current.x += (mouseRef.current.x - currentMouse.current.x) * 0.05;
+                currentMouse.current.y += (mouseRef.current.y - currentMouse.current.y) * 0.05;
+            } else {
+                // Drift back to center
+                currentMouse.current.x += (canvas.width / 2 - currentMouse.current.x) * 0.02;
+                currentMouse.current.y += (canvas.height / 2 - currentMouse.current.y) * 0.02;
             }
 
-            // Draw and update particles
-            for (let i = 0; i < particles.length; i++) {
-                const p = particles[i];
+            // Draw blobs
+            for (let i = 0; i < blobs.length; i++) {
+                const b = blobs[i];
 
-                // Mouse interaction: push away from mouse
-                if (mouseX !== null && mouseY !== null) {
-                    const dx = p.x - mouseX;
-                    const dy = p.y - mouseY;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
+                // Slowly move blobs
+                b.x += b.vx;
+                b.y += b.vy;
 
-                    if (dist < mouseRadius) {
-                        const force = (mouseRadius - dist) / mouseRadius;
-                        const angle = Math.atan2(dy, dx);
-                        const targetX = p.x + Math.cos(angle) * force * 15;
-                        const targetY = p.y + Math.sin(angle) * force * 15;
+                // Bounce off canvas bounds (with padding)
+                const pad = b.radius * 0.2;
+                if (b.x < -pad || b.x > canvas.width + pad) b.vx *= -1;
+                if (b.y < -pad || b.y > canvas.height + pad) b.vy *= -1;
 
-                        // Smooth interpolation to target pushed position
-                        p.x += (targetX - p.x) * 0.08;
-                        p.y += (targetY - p.y) * 0.08;
-                    }
-                }
+                // Add mouse parallax offset (blobs drift towards mouse direction slightly, 4% weight)
+                const offsetX = (currentMouse.current.x - canvas.width / 2) * 0.04 * (i + 1);
+                const offsetY = (currentMouse.current.y - canvas.height / 2) * 0.04 * (i + 1);
+                
+                const drawX = b.x + offsetX;
+                const drawY = b.y + offsetY;
 
-                // Regular movement
-                p.x += p.vx;
-                p.y += p.vy;
+                // Draw soft gradient sphere
+                const gradient = ctx.createRadialGradient(
+                    drawX,
+                    drawY,
+                    0,
+                    drawX,
+                    drawY,
+                    b.radius
+                );
+                gradient.addColorStop(0, b.color);
+                gradient.addColorStop(1, "rgba(248, 249, 252, 0)");
 
-                // Border wrap/bounce
-                if (p.x < 0) p.x = canvas.width;
-                if (p.x > canvas.width) p.x = 0;
-                if (p.y < 0) p.y = canvas.height;
-                if (p.y > canvas.height) p.y = 0;
-
-                ctx.fillStyle = "rgba(223, 186, 115, 0.22)"; // Warm gold tint
+                ctx.fillStyle = gradient;
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.arc(drawX, drawY, b.radius, 0, Math.PI * 2);
                 ctx.fill();
+            }
+
+            // Draw faint grid alignment markers for clean developer aesthetic
+            ctx.strokeStyle = "rgba(15, 23, 42, 0.012)";
+            ctx.lineWidth = 0.8;
+            const gridSpacing = 80;
+            
+            for (let x = gridSpacing; x < canvas.width; x += gridSpacing) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+            for (let y = gridSpacing; y < canvas.height; y += gridSpacing) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
             }
 
             animationFrameId = requestAnimationFrame(draw);
@@ -136,6 +160,8 @@ export default function InteractiveBackground() {
         document.addEventListener("mouseleave", handleMouseLeave);
 
         resizeCanvas();
+        currentMouse.current.x = canvas.width / 2;
+        currentMouse.current.y = canvas.height / 2;
         draw();
 
         return () => {
@@ -149,8 +175,8 @@ export default function InteractiveBackground() {
     return (
         <canvas
             ref={canvasRef}
-            className="fixed inset-0 pointer-events-none -z-20 opacity-80"
-            style={{ mixBlendMode: "screen" }}
+            className="fixed inset-0 pointer-events-none -z-20 opacity-90"
+            style={{ mixBlendMode: "multiply" }}
         />
     );
 }

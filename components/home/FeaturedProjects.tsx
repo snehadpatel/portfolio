@@ -23,18 +23,18 @@ export default function FeaturedProjects() {
     };
 
     return (
-        <section className="py-24 bg-secondary/35 border-y border-white/5 relative">
+        <section className="py-24 bg-slate-50/45 border-y border-slate-200/40 relative">
             <div className="container mx-auto px-6">
                 <div className="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
                     <div className="max-w-2xl">
-                        <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4">
+                        <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4 text-slate-900">
                             Featured Work
                         </h2>
-                        <p className="text-muted-foreground text-lg">
+                        <p className="text-slate-500 text-lg font-light">
                             A selection of projects that showcase my passion for building scalable, AI-driven solutions.
                         </p>
                     </div>
-                    <Button variant="ghost" asChild className="group">
+                    <Button variant="ghost" asChild className="group text-slate-700 hover:text-slate-900 hover:bg-slate-100">
                         <Link href="/projects">
                             View All Projects
                             <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />

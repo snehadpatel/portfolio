@@ -22,19 +22,19 @@ export default function AboutPage() {
                     <div className="md:col-span-2 space-y-16">
                         {/* Experience */}
                         <section>
-                            <h2 className="text-2xl font-bold font-heading mb-8 flex items-center gap-3 text-white uppercase">
-                                <Briefcase className="w-5 h-5 text-white" /> Experience
+                            <h2 className="text-2xl font-bold font-heading mb-8 flex items-center gap-3 text-slate-800 uppercase">
+                                <Briefcase className="w-5 h-5 text-indigo-600" /> Experience
                             </h2>
                             <div className="space-y-8">
                                 {DATA.experience.map((exp, i) => (
-                                    <div key={i} className="relative pl-8 border-l border-white/5 pb-8 last:pb-0">
-                                        <div className="absolute -left-[4.5px] top-2 w-2 h-2 rounded-full bg-white" />
+                                    <div key={i} className="relative pl-8 border-l border-slate-200 pb-8 last:pb-0">
+                                        <div className="absolute -left-[4.5px] top-2 w-2 h-2 rounded-full bg-indigo-600" />
                                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                                            <h3 className="text-lg font-bold text-white">{exp.role}</h3>
-                                            <span className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest bg-white/[0.02] border border-white/5 px-2.5 py-0.5 rounded-full">{exp.period}</span>
+                                            <h3 className="text-lg font-bold text-slate-800">{exp.role}</h3>
+                                            <span className="text-[9px] font-mono text-slate-500 uppercase tracking-widest bg-slate-100 border border-slate-200 px-2.5 py-0.5 rounded-full">{exp.period}</span>
                                         </div>
-                                        <div className="text-zinc-400 font-mono text-xs mb-3">{exp.company}</div>
-                                        <p className="text-zinc-400 text-sm leading-relaxed font-light">{exp.description}</p>
+                                        <div className="text-indigo-600 font-mono text-xs mb-3">{exp.company}</div>
+                                        <p className="text-slate-600 text-sm leading-relaxed font-light">{exp.description}</p>
                                     </div>
                                 ))}
                             </div>
@@ -42,23 +42,23 @@ export default function AboutPage() {
 
                         {/* Education */}
                         <section>
-                            <h2 className="text-2xl font-bold font-heading mb-8 flex items-center gap-3 text-white uppercase">
-                                <GraduationCap className="w-5 h-5 text-white" /> Education
+                            <h2 className="text-2xl font-bold font-heading mb-8 flex items-center gap-3 text-slate-800 uppercase">
+                                <GraduationCap className="w-5 h-5 text-indigo-600" /> Education
                             </h2>
                             <div className="space-y-4">
                                 {DATA.education.map((edu, i) => (
-                                    <div key={i} className="bg-white/[0.01] border border-white/5 p-6 rounded-xl">
+                                    <div key={i} className="bg-white/60 border border-slate-200/50 p-6 rounded-2xl shadow-sm">
                                         <div className="flex flex-col sm:flex-row justify-between items-start mb-4 gap-2">
                                             <div>
-                                                <h3 className="text-lg font-bold text-white">{edu.degree}</h3>
-                                                <div className="text-zinc-500 font-mono text-xs mt-0.5">{edu.institution}</div>
+                                                <h3 className="text-lg font-bold text-slate-800">{edu.degree}</h3>
+                                                <div className="text-indigo-600/90 font-mono text-xs mt-0.5">{edu.institution}</div>
                                             </div>
-                                            <span className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest bg-white/[0.02] border border-white/5 px-2.5 py-0.5 rounded-full whitespace-nowrap">
+                                            <span className="text-[9px] font-mono text-slate-500 uppercase tracking-widest bg-slate-100 border border-slate-200 px-2.5 py-0.5 rounded-full whitespace-nowrap">
                                                 {edu.period}
                                             </span>
                                         </div>
-                                        <p className="text-zinc-400 text-xs leading-relaxed font-light">
-                                            <span className="font-semibold text-white">Relevant Coursework:</span> {edu.coursework}
+                                        <p className="text-slate-600 text-xs leading-relaxed font-light">
+                                            <span className="font-semibold text-slate-800">Relevant Coursework:</span> {edu.coursework}
                                         </p>
                                     </div>
                                 ))}
@@ -68,48 +68,48 @@ export default function AboutPage() {
                         {/* Achievements */}
                         <section>
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-                                <h2 className="text-2xl font-bold font-heading flex items-center gap-3 text-white uppercase">
-                                    <Award className="w-5 h-5 text-white" /> Achievements & Certifications
+                                <h2 className="text-2xl font-bold font-heading flex items-center gap-3 text-slate-800 uppercase">
+                                    <Award className="w-5 h-5 text-indigo-600" /> Achievements & Certifications
                                 </h2>
                                 {DATA.profile.certificationsUrl && (
                                     <a
                                         href={DATA.profile.certificationsUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-white/[0.02] hover:bg-white/[0.06] border border-white/5 hover:border-white/10 rounded-lg text-xs font-semibold text-zinc-300 hover:text-white transition-all uppercase tracking-wider font-mono self-start sm:self-auto"
+                                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-white hover:bg-slate-50 border border-slate-200 text-slate-600 hover:text-slate-900 shadow-sm rounded-lg text-xs font-semibold transition-all uppercase tracking-wider font-mono self-start sm:self-auto"
                                     >
                                         Verify Certificates →
                                     </a>
                                 )}
                             </div>
                             <div className="grid sm:grid-cols-2 gap-4">
-                                <div className="p-4 bg-white/[0.01] rounded-xl border border-white/5 hover:border-white/20 transition-colors">
-                                    <h4 className="font-bold text-sm text-white mb-1">WSRO Nationals</h4>
-                                    <p className="text-xs text-zinc-500">Robot Race Competitor (Hardware & Programming)</p>
+                                <div className="p-4 bg-white/60 rounded-2xl border border-slate-200/50 hover:border-indigo-200 shadow-sm transition-colors">
+                                    <h4 className="font-bold text-sm text-slate-800 mb-1">WSRO Nationals</h4>
+                                    <p className="text-xs text-slate-500">Robot Race Competitor (Hardware & Programming)</p>
                                 </div>
-                                <div className="p-4 bg-white/[0.01] rounded-xl border border-white/5 hover:border-white/20 transition-colors">
-                                    <h4 className="font-bold text-sm text-white mb-1">Hackathon Commendation</h4>
-                                    <p className="text-xs text-zinc-500">AI Supplier Ranking Agent (Appreciated by CEO of Mesh Works)</p>
+                                <div className="p-4 bg-white/60 rounded-2xl border border-slate-200/50 hover:border-indigo-200 shadow-sm transition-colors">
+                                    <h4 className="font-bold text-sm text-slate-800 mb-1">Hackathon Commendation</h4>
+                                    <p className="text-xs text-slate-500">AI Supplier Ranking Agent (Appreciated by CEO of Mesh Works)</p>
                                 </div>
-                                <div className="p-4 bg-white/[0.01] rounded-xl border border-white/5 hover:border-white/20 transition-colors">
-                                    <h4 className="font-bold text-sm text-white mb-1">AWS Academy</h4>
-                                    <p className="text-xs text-zinc-500">Machine Learning Foundations Certificate</p>
+                                <div className="p-4 bg-white/60 rounded-2xl border border-slate-200/50 hover:border-indigo-200 shadow-sm transition-colors">
+                                    <h4 className="font-bold text-sm text-slate-800 mb-1">AWS Academy</h4>
+                                    <p className="text-xs text-slate-500">Machine Learning Foundations Certificate</p>
                                 </div>
-                                <div className="p-4 bg-white/[0.01] rounded-xl border border-white/5 hover:border-white/20 transition-colors">
-                                    <h4 className="font-bold text-sm text-white mb-1">GCP Data Engineer Pro</h4>
-                                    <p className="text-xs text-zinc-500">Becoming a Google Cloud Data Engineer Certificate</p>
+                                <div className="p-4 bg-white/60 rounded-2xl border border-slate-200/50 hover:border-indigo-200 shadow-sm transition-colors">
+                                    <h4 className="font-bold text-sm text-slate-800 mb-1">GCP Data Engineer Pro</h4>
+                                    <p className="text-xs text-slate-500">Becoming a Google Cloud Data Engineer Certificate</p>
                                 </div>
-                                <div className="p-4 bg-white/[0.01] rounded-xl border border-white/5 hover:border-white/20 transition-colors">
-                                    <h4 className="font-bold text-sm text-white mb-1">Neo4j Certified Professional</h4>
-                                    <p className="text-xs text-zinc-500">Certified Professional in Graph Database Systems</p>
+                                <div className="p-4 bg-white/60 rounded-2xl border border-slate-200/50 hover:border-indigo-200 shadow-sm transition-colors">
+                                    <h4 className="font-bold text-sm text-slate-800 mb-1">Neo4j Certified Professional</h4>
+                                    <p className="text-xs text-slate-500">Certified Professional in Graph Database Systems</p>
                                 </div>
-                                <div className="p-4 bg-white/[0.01] rounded-xl border border-white/5 hover:border-white/20 transition-colors">
-                                    <h4 className="font-bold text-sm text-white mb-1">IBM Professional Analytics</h4>
-                                    <p className="text-xs text-zinc-500">Data Analysis Using Python & IBM Analytics Program (2024-2025)</p>
+                                <div className="p-4 bg-white/60 rounded-2xl border border-slate-200/50 hover:border-indigo-200 shadow-sm transition-colors">
+                                    <h4 className="font-bold text-sm text-slate-800 mb-1">IBM Professional Analytics</h4>
+                                    <p className="text-xs text-slate-500">Data Analysis Using Python & IBM Analytics Program (2024-2025)</p>
                                 </div>
-                                <div className="p-4 bg-white/[0.01] rounded-xl border border-white/5 hover:border-white/20 transition-colors">
-                                    <h4 className="font-bold text-sm text-white mb-1">Cisco Certification</h4>
-                                    <p className="text-xs text-zinc-500">Introduction to IoT & Cybersecurity Professional Certificates</p>
+                                <div className="p-4 bg-white/60 rounded-2xl border border-slate-200/50 hover:border-indigo-200 shadow-sm transition-colors">
+                                    <h4 className="font-bold text-sm text-slate-800 mb-1">Cisco Certification</h4>
+                                    <p className="text-xs text-slate-500">Introduction to IoT & Cybersecurity Professional Certificates</p>
                                 </div>
                             </div>
                         </section>
@@ -118,44 +118,44 @@ export default function AboutPage() {
                     {/* Sidebar Column */}
                     <div className="space-y-6">
                         {/* Skills */}
-                        <section className="bg-white/[0.01] p-6 rounded-xl border border-white/5">
-                            <h2 className="text-base font-bold font-heading mb-6 flex items-center gap-2 text-white uppercase">
-                                <Code2 className="w-4 h-4 text-white" /> Technical Skills
+                        <section className="bg-white/60 p-6 rounded-2xl border border-slate-200/50 shadow-sm">
+                            <h2 className="text-base font-bold font-heading mb-6 flex items-center gap-2 text-slate-800 uppercase">
+                                <Code2 className="w-4 h-4 text-indigo-600" /> Technical Skills
                             </h2>
 
                             <div className="space-y-6">
                                 <div>
-                                    <h3 className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mb-3">Languages</h3>
+                                    <h3 className="text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-3">Languages</h3>
                                     <div className="flex flex-wrap gap-1.5">
                                         {DATA.skills.languages.map(skill => (
-                                            <span key={skill} className="px-2.5 py-1 bg-white/[0.01] border border-white/5 rounded text-xs font-mono text-zinc-300">{skill}</span>
+                                            <span key={skill} className="px-2.5 py-1 bg-slate-50 border border-slate-200/40 rounded text-xs font-mono text-slate-600">{skill}</span>
                                         ))}
                                     </div>
                                 </div>
                                 <div>
-                                    <h3 className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mb-3">Frameworks</h3>
+                                    <h3 className="text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-3">Frameworks</h3>
                                     <div className="flex flex-wrap gap-1.5">
                                         {DATA.skills.frameworks.map(skill => (
-                                            <span key={skill} className="px-2.5 py-1 bg-white/[0.01] border border-white/5 rounded text-xs font-mono text-zinc-300">{skill}</span>
+                                            <span key={skill} className="px-2.5 py-1 bg-slate-50 border border-slate-200/40 rounded text-xs font-mono text-slate-600">{skill}</span>
                                         ))}
                                     </div>
                                 </div>
                                 <div>
-                                    <h3 className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mb-3">Tools</h3>
+                                    <h3 className="text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-3">Tools</h3>
                                     <div className="flex flex-wrap gap-1.5">
                                         {DATA.skills.tools.map(skill => (
-                                            <span key={skill} className="px-2.5 py-1 bg-white/[0.01] border border-white/5 rounded text-xs font-mono text-zinc-300">{skill}</span>
+                                            <span key={skill} className="px-2.5 py-1 bg-slate-50 border border-slate-200/40 rounded text-xs font-mono text-slate-600">{skill}</span>
                                         ))}
                                     </div>
                                 </div>
                             </div>
                         </section>
 
-                        <section className="bg-white/[0.02] border border-white/10 p-6 rounded-xl">
-                            <h2 className="text-base font-bold font-heading mb-4 flex items-center gap-2 text-white uppercase">
-                                <Heart className="w-4 h-4 text-zinc-400 animate-pulse" /> Philosophy
+                        <section className="bg-indigo-50/50 border border-indigo-100/50 p-6 rounded-2xl shadow-sm">
+                            <h2 className="text-base font-bold font-heading mb-4 flex items-center gap-2 text-indigo-950 uppercase">
+                                <Heart className="w-4 h-4 text-indigo-500 animate-pulse" /> Philosophy
                             </h2>
-                            <p className="text-zinc-400 text-xs leading-relaxed font-light">
+                            <p className="text-indigo-950/80 text-xs leading-relaxed font-light">
                                 I believe that AI should be accessible, ethical, and designed to augment human potential. My engineering approach focuses on writing clean, maintainable code that stands the test of time.
                             </p>
                         </section>

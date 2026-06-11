@@ -47,29 +47,29 @@ export default function PipelineVisualizer({ projectId }: { projectId: string })
     if (!steps) return null;
 
     return (
-        <div className="relative border border-white/5 rounded-2xl bg-white/[0.01] p-5 overflow-hidden">
+        <div className="relative border border-slate-200/50 rounded-2xl bg-white/40 p-5 overflow-hidden shadow-sm">
             {/* Glowing background accent sphere */}
-            <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-48 h-24 rounded-full bg-amber-400/[0.03] blur-[40px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-48 h-24 rounded-full bg-indigo-400/[0.03] blur-[40px] pointer-events-none" />
 
             {/* Horizontally scrollable container to prevent card squishing inside restricted sidebars/drawers */}
-            <div className="flex flex-row items-stretch gap-3 overflow-x-auto pb-2 relative z-10 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/10">
+            <div className="flex flex-row items-stretch gap-3 overflow-x-auto pb-2 relative z-10 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-200">
                 {steps.map((step, idx) => (
                     <div key={idx} className="flex flex-row items-center gap-3 shrink-0">
                         {/* Fixed-width step card */}
-                        <div className="w-[190px] sm:w-[210px] bg-black/40 border border-white/5 p-4 rounded-xl space-y-3 hover:border-amber-400/20 transition-all duration-300 flex flex-col justify-between min-h-[110px] group">
+                        <div className="w-[190px] sm:w-[210px] bg-white border border-slate-200/60 p-4 rounded-xl space-y-3 hover:border-indigo-300 hover:shadow-sm transition-all duration-300 flex flex-col justify-between min-h-[110px] group">
                             <div className="flex items-center justify-between">
-                                <span className="font-mono text-[9px] text-zinc-500 uppercase tracking-widest">Step 0{idx + 1}</span>
-                                <span className="w-1.5 h-1.5 rounded-full bg-amber-400/30 group-hover:bg-amber-400 transition-colors duration-300" />
+                                <span className="font-mono text-[9px] text-slate-400 uppercase tracking-widest">Step 0{idx + 1}</span>
+                                <span className="w-1.5 h-1.5 rounded-full bg-indigo-300/40 group-hover:bg-indigo-500 transition-colors duration-300" />
                             </div>
                             <div>
-                                <h4 className="text-xs font-bold text-white tracking-wide">{step.title}</h4>
-                                <p className="text-[10px] text-zinc-400 font-light mt-1 leading-relaxed">{step.desc}</p>
+                                <h4 className="text-xs font-bold text-slate-800 tracking-wide">{step.title}</h4>
+                                <p className="text-[10px] text-slate-500 font-light mt-1 leading-relaxed">{step.desc}</p>
                             </div>
                         </div>
 
                         {/* Connection Arrow */}
                         {idx < steps.length - 1 && (
-                            <div className="text-zinc-700 font-mono text-xs select-none">
+                            <div className="text-slate-450 font-mono text-xs select-none">
                                 →
                             </div>
                         )}
