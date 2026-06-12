@@ -22,7 +22,7 @@ export default function Home() {
                                 <strong className="font-semibold text-slate-900">machine learning</strong>, and{" "}
                                 <strong className="font-semibold text-slate-900">embedded hardware</strong>.
                                 From building a deepfake detection engine that hits 97.5% accuracy, to wiring up
-                                a Raspberry Pi waste sorter that classifies trash in real-time —
+                                a Raspberry Pi waste sorter that classifies trash in real-time -
                                 I like working where code meets the physical world.
                             </p>
                         </div>

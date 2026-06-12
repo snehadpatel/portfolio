@@ -30,7 +30,7 @@ export default function AboutPage() {
                     <motion.div {...fadeIn} className="grid md:grid-cols-2 gap-12 md:gap-20 mb-20 md:mb-28">
                         <div>
                             <p className="text-lg md:text-xl text-slate-700 leading-relaxed font-light mb-6">
-                                I&apos;m Sneha — a computer science student who gets genuinely excited about
+                                I&apos;m Sneha - a computer science student who gets genuinely excited about
                                 making machines understand the world. Whether it&apos;s training a Vision Transformer
                                 to catch deepfakes or wiring up an Arduino to sort waste automatically,
                                 I&apos;m happiest when code does something real.
@@ -152,7 +152,7 @@ export default function AboutPage() {
                         <div className="grid sm:grid-cols-2 gap-0">
                             {[
                                 { title: "WSRO Nationals", desc: "Robot Race Competitor (Hardware & Programming)" },
-                                { title: "Hackathon Commendation", desc: "AI Supplier Ranking Agent — Appreciated by CEO of Mesh Works" },
+                                { title: "Hackathon Commendation", desc: "AI Supplier Ranking Agent - Appreciated by CEO of Mesh Works" },
                                 { title: "AWS Academy", desc: "Machine Learning Foundations Certificate" },
                                 { title: "GCP Data Engineer Pro", desc: "Becoming a Google Cloud Data Engineer Certificate" },
                                 { title: "Neo4j Certified Professional", desc: "Certified Professional in Graph Database Systems" },
@@ -176,7 +176,7 @@ export default function AboutPage() {
                     <motion.section {...fadeIn} className="max-w-2xl">
                         <span className="txt-cursive text-base text-slate-400 block mb-1">my philosophy</span>
                         <p className="text-lg md:text-xl text-slate-700 leading-relaxed font-light">
-                            I believe AI should be accessible, ethical, and built to amplify what people can do — not replace them.
+                            I believe AI should be accessible, ethical, and built to amplify what people can do - not replace them.
                             My approach is simple: write clean code, understand the problem deeply, and never stop learning.
                             The best engineering happens when curiosity meets discipline.
                         </p>

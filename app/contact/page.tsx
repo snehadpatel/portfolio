@@ -53,7 +53,7 @@ function ContactForm() {
                     <p className="text-lg md:text-xl text-slate-700 leading-relaxed font-light mb-10">
                         I&apos;m currently looking for internship opportunities and always open to
                         discussing projects that push what&apos;s possible with AI, vision, and hardware.
-                        Drop me a message — I&apos;d love to hear what you&apos;re building.
+                        Drop me a message - I&apos;d love to hear what you&apos;re building.
                     </p>
 
                     <div className="space-y-0">

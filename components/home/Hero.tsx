@@ -99,7 +99,7 @@ export default function Hero() {
                     >
                         <div className="max-w-lg">
                             <p className="text-sm md:text-base text-slate-500 leading-relaxed font-light">
-                                Sneha Patel — B.Tech Computer Science student at Navrachana University.
+                                Sneha Patel - B.Tech Computer Science student at Navrachana University.
                                 I design computer vision pipelines, train ML models from scratch,
                                 and wire up IoT hardware that makes decisions at the edge.
                             </p>

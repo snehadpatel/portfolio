@@ -19,8 +19,8 @@ const notoSerif = Noto_Serif_Display({
 });
 
 export const metadata: Metadata = {
-    title: "Sneha Patel — AI & Systems Engineer",
-    description: "Portfolio of Sneha Patel — building intelligent systems at the intersection of Computer Vision, Machine Learning, and IoT hardware.",
+    title: "Sneha Patel | AI & Systems Engineer",
+    description: "Portfolio of Sneha Patel, building intelligent systems at the intersection of Computer Vision, Machine Learning, and IoT hardware.",
 };
 
 export default function RootLayout({

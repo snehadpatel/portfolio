@@ -38,7 +38,7 @@ export default function ServicesPage() {
                         className="text-base md:text-lg text-slate-500 font-light leading-relaxed max-w-2xl mb-16 md:mb-20"
                     >
                         I collaborate with startups, labs, and teams to design, architect, and
-                        deploy intelligent solutions — from trained ML models to edge hardware prototypes
+                        deploy intelligent solutions, from trained ML models to edge hardware prototypes
                         that actually work in the field.
                     </motion.p>
 
@@ -99,8 +99,8 @@ export default function ServicesPage() {
                             Custom Requirements
                         </h2>
                         <p className="text-sm text-slate-500 leading-relaxed font-light mb-8">
-                            If your project spans multiple domains or needs a specialized architecture —
-                            edge ML, custom training pipelines, full-stack dashboards — let&apos;s figure it out together.
+                            If your project spans multiple domains or needs a specialized architecture,
+                            like edge ML, custom training pipelines, or full-stack dashboards, let&apos;s figure it out together.
                         </p>
                         <Link
                             href="/contact"

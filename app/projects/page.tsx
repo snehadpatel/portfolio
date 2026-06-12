@@ -51,7 +51,7 @@ export default function ProjectsPage() {
                         transition={{ duration: 0.5, delay: 0.15 }}
                         className="text-base text-slate-500 font-light leading-relaxed max-w-xl mb-10 md:mb-14"
                     >
-                        From deepfake detection to IoT waste sorting — each project represents a
+                        From deepfake detection to IoT waste sorting - each project represents a
                         different problem I cared about solving.
                     </motion.p>
 
