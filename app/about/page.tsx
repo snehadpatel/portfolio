@@ -1,167 +1,188 @@
 "use client";
 
 import { DATA } from "@/lib/data";
-import { Briefcase, GraduationCap, Code2, Award, Heart } from "lucide-react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
+const fadeIn = {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.6 },
+};
 
 export default function AboutPage() {
     return (
-        <div className="min-h-screen pt-24 pb-20">
-            <div className="container mx-auto px-6">
+        <div className="min-h-screen pt-28 md:pt-36 pb-20">
+            <div className="w-full px-6 md:px-10">
+                <div className="max-w-[1200px] mx-auto">
 
-                {/* Header */}
-                <div className="max-w-3xl mx-auto mb-16 text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold font-heading mb-6">About Me</h1>
-                    <p className="text-xl text-muted-foreground leading-relaxed">
-                        I am a passionate developer and AI enthusiast, driven by the potential of technology to solve complex human problems.
-                    </p>
-                </div>
+                    {/* Page Header */}
+                    <motion.div {...fadeIn} className="mb-16 md:mb-24">
+                        <span className="txt-cursive text-lg text-slate-400 block mb-2">a little bit</span>
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold font-heading tracking-tighter uppercase text-slate-900 leading-[0.9]">
+                            About Me
+                        </h1>
+                    </motion.div>
 
-                <div className="grid md:grid-cols-3 gap-12">
-
-                    {/* Main Content Column */}
-                    <div className="md:col-span-2 space-y-16">
-                        {/* Experience */}
-                        <section>
-                            <h2 className="text-2xl font-bold font-heading mb-8 flex items-center gap-3 text-slate-800 uppercase">
-                                <Briefcase className="w-5 h-5 text-indigo-600" /> Experience
-                            </h2>
-                            <div className="space-y-8">
-                                {DATA.experience.map((exp, i) => (
-                                    <div key={i} className="relative pl-8 border-l border-slate-200 pb-8 last:pb-0">
-                                        <div className="absolute -left-[4.5px] top-2 w-2 h-2 rounded-full bg-indigo-600" />
-                                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                                            <h3 className="text-lg font-bold text-slate-800">{exp.role}</h3>
-                                            <span className="text-[9px] font-mono text-slate-500 uppercase tracking-widest bg-slate-100 border border-slate-200 px-2.5 py-0.5 rounded-full">{exp.period}</span>
-                                        </div>
-                                        <div className="text-indigo-600 font-mono text-xs mb-3">{exp.company}</div>
-                                        <p className="text-slate-600 text-sm leading-relaxed font-light">{exp.description}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </section>
-
-                        {/* Education */}
-                        <section>
-                            <h2 className="text-2xl font-bold font-heading mb-8 flex items-center gap-3 text-slate-800 uppercase">
-                                <GraduationCap className="w-5 h-5 text-indigo-600" /> Education
-                            </h2>
-                            <div className="space-y-4">
-                                {DATA.education.map((edu, i) => (
-                                    <div key={i} className="bg-white/60 border border-slate-200/50 p-6 rounded-2xl shadow-sm">
-                                        <div className="flex flex-col sm:flex-row justify-between items-start mb-4 gap-2">
-                                            <div>
-                                                <h3 className="text-lg font-bold text-slate-800">{edu.degree}</h3>
-                                                <div className="text-indigo-600/90 font-mono text-xs mt-0.5">{edu.institution}</div>
-                                            </div>
-                                            <span className="text-[9px] font-mono text-slate-500 uppercase tracking-widest bg-slate-100 border border-slate-200 px-2.5 py-0.5 rounded-full whitespace-nowrap">
-                                                {edu.period}
-                                            </span>
-                                        </div>
-                                        <p className="text-slate-600 text-xs leading-relaxed font-light">
-                                            <span className="font-semibold text-slate-800">Relevant Coursework:</span> {edu.coursework}
-                                        </p>
-                                    </div>
-                                ))}
-                            </div>
-                        </section>
-
-                        {/* Achievements */}
-                        <section>
-                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-                                <h2 className="text-2xl font-bold font-heading flex items-center gap-3 text-slate-800 uppercase">
-                                    <Award className="w-5 h-5 text-indigo-600" /> Achievements & Certifications
-                                </h2>
-                                {DATA.profile.certificationsUrl && (
-                                    <a
-                                        href={DATA.profile.certificationsUrl}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-white hover:bg-slate-50 border border-slate-200 text-slate-600 hover:text-slate-900 shadow-sm rounded-lg text-xs font-semibold transition-all uppercase tracking-wider font-mono self-start sm:self-auto"
-                                    >
-                                        Verify Certificates →
-                                    </a>
-                                )}
-                            </div>
-                            <div className="grid sm:grid-cols-2 gap-4">
-                                <div className="p-4 bg-white/60 rounded-2xl border border-slate-200/50 hover:border-indigo-200 shadow-sm transition-colors">
-                                    <h4 className="font-bold text-sm text-slate-800 mb-1">WSRO Nationals</h4>
-                                    <p className="text-xs text-slate-500">Robot Race Competitor (Hardware & Programming)</p>
-                                </div>
-                                <div className="p-4 bg-white/60 rounded-2xl border border-slate-200/50 hover:border-indigo-200 shadow-sm transition-colors">
-                                    <h4 className="font-bold text-sm text-slate-800 mb-1">Hackathon Commendation</h4>
-                                    <p className="text-xs text-slate-500">AI Supplier Ranking Agent (Appreciated by CEO of Mesh Works)</p>
-                                </div>
-                                <div className="p-4 bg-white/60 rounded-2xl border border-slate-200/50 hover:border-indigo-200 shadow-sm transition-colors">
-                                    <h4 className="font-bold text-sm text-slate-800 mb-1">AWS Academy</h4>
-                                    <p className="text-xs text-slate-500">Machine Learning Foundations Certificate</p>
-                                </div>
-                                <div className="p-4 bg-white/60 rounded-2xl border border-slate-200/50 hover:border-indigo-200 shadow-sm transition-colors">
-                                    <h4 className="font-bold text-sm text-slate-800 mb-1">GCP Data Engineer Pro</h4>
-                                    <p className="text-xs text-slate-500">Becoming a Google Cloud Data Engineer Certificate</p>
-                                </div>
-                                <div className="p-4 bg-white/60 rounded-2xl border border-slate-200/50 hover:border-indigo-200 shadow-sm transition-colors">
-                                    <h4 className="font-bold text-sm text-slate-800 mb-1">Neo4j Certified Professional</h4>
-                                    <p className="text-xs text-slate-500">Certified Professional in Graph Database Systems</p>
-                                </div>
-                                <div className="p-4 bg-white/60 rounded-2xl border border-slate-200/50 hover:border-indigo-200 shadow-sm transition-colors">
-                                    <h4 className="font-bold text-sm text-slate-800 mb-1">IBM Professional Analytics</h4>
-                                    <p className="text-xs text-slate-500">Data Analysis Using Python & IBM Analytics Program (2024-2025)</p>
-                                </div>
-                                <div className="p-4 bg-white/60 rounded-2xl border border-slate-200/50 hover:border-indigo-200 shadow-sm transition-colors">
-                                    <h4 className="font-bold text-sm text-slate-800 mb-1">Cisco Certification</h4>
-                                    <p className="text-xs text-slate-500">Introduction to IoT & Cybersecurity Professional Certificates</p>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-
-                    {/* Sidebar Column */}
-                    <div className="space-y-6">
-                        {/* Skills */}
-                        <section className="bg-white/60 p-6 rounded-2xl border border-slate-200/50 shadow-sm">
-                            <h2 className="text-base font-bold font-heading mb-6 flex items-center gap-2 text-slate-800 uppercase">
-                                <Code2 className="w-4 h-4 text-indigo-600" /> Technical Skills
-                            </h2>
-
-                            <div className="space-y-6">
-                                <div>
-                                    <h3 className="text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-3">Languages</h3>
-                                    <div className="flex flex-wrap gap-1.5">
-                                        {DATA.skills.languages.map(skill => (
-                                            <span key={skill} className="px-2.5 py-1 bg-slate-50 border border-slate-200/40 rounded text-xs font-mono text-slate-600">{skill}</span>
-                                        ))}
-                                    </div>
-                                </div>
-                                <div>
-                                    <h3 className="text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-3">Frameworks</h3>
-                                    <div className="flex flex-wrap gap-1.5">
-                                        {DATA.skills.frameworks.map(skill => (
-                                            <span key={skill} className="px-2.5 py-1 bg-slate-50 border border-slate-200/40 rounded text-xs font-mono text-slate-600">{skill}</span>
-                                        ))}
-                                    </div>
-                                </div>
-                                <div>
-                                    <h3 className="text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-3">Tools</h3>
-                                    <div className="flex flex-wrap gap-1.5">
-                                        {DATA.skills.tools.map(skill => (
-                                            <span key={skill} className="px-2.5 py-1 bg-slate-50 border border-slate-200/40 rounded text-xs font-mono text-slate-600">{skill}</span>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        <section className="bg-indigo-50/50 border border-indigo-100/50 p-6 rounded-2xl shadow-sm">
-                            <h2 className="text-base font-bold font-heading mb-4 flex items-center gap-2 text-indigo-950 uppercase">
-                                <Heart className="w-4 h-4 text-indigo-500 animate-pulse" /> Philosophy
-                            </h2>
-                            <p className="text-indigo-950/80 text-xs leading-relaxed font-light">
-                                I believe that AI should be accessible, ethical, and designed to augment human potential. My engineering approach focuses on writing clean, maintainable code that stands the test of time.
+                    {/* Bio Section */}
+                    <motion.div {...fadeIn} className="grid md:grid-cols-2 gap-12 md:gap-20 mb-20 md:mb-28">
+                        <div>
+                            <p className="text-lg md:text-xl text-slate-700 leading-relaxed font-light mb-6">
+                                I&apos;m Sneha — a computer science student who gets genuinely excited about
+                                making machines understand the world. Whether it&apos;s training a Vision Transformer
+                                to catch deepfakes or wiring up an Arduino to sort waste automatically,
+                                I&apos;m happiest when code does something real.
                             </p>
-                        </section>
-                    </div>
-                </div>
+                            <p className="text-sm text-slate-500 leading-relaxed font-light">
+                                {DATA.profile.summary}
+                            </p>
+                        </div>
+                        <div className="space-y-6">
+                            <div className="py-4 border-b border-slate-200/60">
+                                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block mb-1">Location</span>
+                                <span className="text-sm font-semibold text-slate-800">Vadodara, Gujarat, India</span>
+                            </div>
+                            <div className="py-4 border-b border-slate-200/60">
+                                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block mb-1">Currently</span>
+                                <span className="text-sm font-semibold text-slate-800">B.Tech CSE @ Navrachana University</span>
+                            </div>
+                            <div className="py-4 border-b border-slate-200/60">
+                                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block mb-1">Focus Areas</span>
+                                <span className="text-sm font-semibold text-slate-800">Computer Vision · ML · IoT · Edge AI</span>
+                            </div>
+                            <div className="pt-4">
+                                <Link
+                                    href={DATA.profile.resumeUrl || "#"}
+                                    target="_blank"
+                                    className="group inline-flex items-center gap-2.5 px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-bold uppercase tracking-[0.12em] rounded-full transition-all duration-300 shadow-sm"
+                                >
+                                    Download Resume
+                                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                                </Link>
+                            </div>
+                        </div>
+                    </motion.div>
 
+                    {/* Experience Section */}
+                    <section className="mb-20 md:mb-28">
+                        <motion.div {...fadeIn} className="mb-12">
+                            <span className="txt-cursive text-base text-slate-400 block mb-1">professional</span>
+                            <h2 className="text-3xl md:text-4xl font-extrabold font-heading tracking-tighter uppercase text-slate-900">
+                                Experience
+                            </h2>
+                        </motion.div>
+
+                        <div>
+                            {DATA.experience.map((exp, i) => (
+                                <motion.div key={i} {...fadeIn}>
+                                    <div className="py-8 md:py-10 grid md:grid-cols-3 gap-4 md:gap-12 items-start">
+                                        <div className="md:col-span-1">
+                                            <h3 className="text-base md:text-lg font-bold text-slate-900 mb-1">{exp.role}</h3>
+                                            <span className="text-xs font-mono text-indigo-600">{exp.company}</span>
+                                        </div>
+                                        <div className="md:col-span-1">
+                                            <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">{exp.period}</span>
+                                        </div>
+                                        <div className="md:col-span-1">
+                                            <p className="text-sm text-slate-500 leading-relaxed font-light">{exp.description}</p>
+                                        </div>
+                                    </div>
+                                    <div className="divider-line" />
+                                </motion.div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Education Section */}
+                    <section className="mb-20 md:mb-28">
+                        <motion.div {...fadeIn} className="mb-12">
+                            <span className="txt-cursive text-base text-slate-400 block mb-1">academic</span>
+                            <h2 className="text-3xl md:text-4xl font-extrabold font-heading tracking-tighter uppercase text-slate-900">
+                                Education
+                            </h2>
+                        </motion.div>
+
+                        <div>
+                            {DATA.education.map((edu, i) => (
+                                <motion.div key={i} {...fadeIn}>
+                                    <div className="py-8 md:py-10 grid md:grid-cols-3 gap-4 md:gap-12 items-start">
+                                        <div className="md:col-span-1">
+                                            <h3 className="text-base md:text-lg font-bold text-slate-900 mb-1">{edu.degree}</h3>
+                                            <span className="text-xs font-mono text-indigo-600">{edu.institution}</span>
+                                        </div>
+                                        <div className="md:col-span-1">
+                                            <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">{edu.period}</span>
+                                        </div>
+                                        <div className="md:col-span-1">
+                                            <p className="text-sm text-slate-500 leading-relaxed font-light">
+                                                <span className="font-medium text-slate-700">Relevant Coursework:</span> {edu.coursework}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="divider-line" />
+                                </motion.div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Certifications & Achievements */}
+                    <section className="mb-20 md:mb-28">
+                        <motion.div {...fadeIn} className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                            <div>
+                                <span className="txt-cursive text-base text-slate-400 block mb-1">recognition</span>
+                                <h2 className="text-3xl md:text-4xl font-extrabold font-heading tracking-tighter uppercase text-slate-900">
+                                    Achievements
+                                </h2>
+                            </div>
+                            {DATA.profile.certificationsUrl && (
+                                <Link
+                                    href={DATA.profile.certificationsUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.12em] text-slate-600 hover:text-slate-900 transition-colors"
+                                >
+                                    Verify Certificates
+                                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                                </Link>
+                            )}
+                        </motion.div>
+
+                        <div className="grid sm:grid-cols-2 gap-0">
+                            {[
+                                { title: "WSRO Nationals", desc: "Robot Race Competitor (Hardware & Programming)" },
+                                { title: "Hackathon Commendation", desc: "AI Supplier Ranking Agent — Appreciated by CEO of Mesh Works" },
+                                { title: "AWS Academy", desc: "Machine Learning Foundations Certificate" },
+                                { title: "GCP Data Engineer Pro", desc: "Becoming a Google Cloud Data Engineer Certificate" },
+                                { title: "Neo4j Certified Professional", desc: "Certified Professional in Graph Database Systems" },
+                                { title: "IBM Professional Analytics", desc: "Data Analysis Using Python & IBM Analytics Program" },
+                                { title: "Cisco Certification", desc: "Introduction to IoT & Cybersecurity Professional Certificates" },
+                            ].map((item, i) => (
+                                <motion.div key={i} {...fadeIn} className="py-6 border-b border-slate-200/60">
+                                    <div className="flex items-start gap-3">
+                                        <span className="text-[10px] font-mono text-slate-400 mt-0.5">({String(i + 1).padStart(2, "0")})</span>
+                                        <div>
+                                            <h4 className="text-sm font-bold text-slate-800 mb-0.5">{item.title}</h4>
+                                            <p className="text-xs text-slate-500 font-light">{item.desc}</p>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Philosophy */}
+                    <motion.section {...fadeIn} className="max-w-2xl">
+                        <span className="txt-cursive text-base text-slate-400 block mb-1">my philosophy</span>
+                        <p className="text-lg md:text-xl text-slate-700 leading-relaxed font-light">
+                            I believe AI should be accessible, ethical, and built to amplify what people can do — not replace them.
+                            My approach is simple: write clean code, understand the problem deeply, and never stop learning.
+                            The best engineering happens when curiosity meets discipline.
+                        </p>
+                    </motion.section>
+
+                </div>
             </div>
         </div>
     );

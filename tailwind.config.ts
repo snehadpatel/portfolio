@@ -36,6 +36,7 @@ const config: Config = {
             fontFamily: {
                 sans: ["var(--font-inter)", "sans-serif"],
                 heading: ["var(--font-plus-jakarta)", "sans-serif"],
+                serif: ["var(--font-serif)", "Georgia", "serif"],
             },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

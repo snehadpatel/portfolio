@@ -3,124 +3,115 @@
 import { DATA } from "@/lib/data";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Eye, Brain, Cpu, Database, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
-const getIcon = (iconName: string) => {
-    switch (iconName) {
-        case "Eye":
-            return <Eye className="w-5 h-5 text-indigo-600" />;
-        case "Brain":
-            return <Brain className="w-5 h-5 text-indigo-600" />;
-        case "Cpu":
-            return <Cpu className="w-5 h-5 text-indigo-600" />;
-        case "Database":
-            return <Database className="w-5 h-5 text-indigo-600" />;
-        default:
-            return <Brain className="w-5 h-5 text-indigo-600" />;
-    }
+const fadeIn = {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.6 },
 };
 
 export default function ServicesPage() {
     return (
-        <div className="min-h-screen pt-32 pb-20 relative overflow-hidden bg-[#F8F9FC]">
-            {/* Structural Background Accents */}
-            <div className="absolute inset-0 -z-10 overflow-hidden">
-                <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[1px] h-1/2 bg-slate-900/[0.01]" />
-            </div>
+        <div className="min-h-screen pt-28 md:pt-36 pb-20">
+            <div className="w-full px-6 md:px-10">
+                <div className="max-w-[1200px] mx-auto">
 
-            <div className="container mx-auto px-6 max-w-5xl">
-                {/* Header */}
-                <div className="max-w-2xl mx-auto mb-20 text-center">
-                    <motion.h1
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="text-4xl md:text-6xl font-bold font-heading mb-6 tracking-tight text-slate-900 uppercase"
-                    >
-                        Services
-                    </motion.h1>
+                    {/* Page Header */}
+                    <motion.div {...fadeIn} className="mb-16 md:mb-24">
+                        <div className="flex items-baseline gap-3 md:gap-5 flex-wrap mb-2">
+                            <span className="txt-cursive text-lg md:text-xl text-slate-400">list of</span>
+                        </div>
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold font-heading tracking-tighter uppercase text-slate-900 leading-[0.9]">
+                            Services
+                        </h1>
+                        <div className="overflow-hidden mt-1">
+                            <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold font-heading tracking-tighter uppercase text-indigo-600/15 leading-[0.9]">
+                                I offer
+                            </h1>
+                        </div>
+                    </motion.div>
+
                     <motion.p
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.15 }}
-                        className="text-base text-slate-500 font-light leading-relaxed"
+                        {...fadeIn}
+                        className="text-base md:text-lg text-slate-500 font-light leading-relaxed max-w-2xl mb-16 md:mb-20"
                     >
-                        I collaborate with startups, labs, and teams to design, architect, and deploy intelligent edge hardware and software solutions.
+                        I collaborate with startups, labs, and teams to design, architect, and
+                        deploy intelligent solutions — from trained ML models to edge hardware prototypes
+                        that actually work in the field.
                     </motion.p>
-                </div>
 
-                {/* Service Cards Grid */}
-                <div className="grid md:grid-cols-2 gap-6">
-                    {DATA.services.map((service, index) => (
-                        <motion.div
-                            key={service.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="group relative flex flex-col justify-between p-8 bg-white/70 border border-slate-200/50 rounded-2xl hover:border-indigo-200 hover:shadow-md transition-all duration-500 overflow-hidden"
-                        >
-                            <div>
-                                {/* Icon Header */}
-                                <div className="flex items-center justify-between mb-8">
-                                    <div className="w-10 h-10 rounded-xl flex items-center justify-center border border-slate-200/50 bg-slate-50/50">
-                                        {getIcon(service.icon)}
+                    {/* Services — Numbered Ruled List */}
+                    <div className="mb-20 md:mb-28">
+                        {DATA.services.map((service, index) => (
+                            <motion.div key={service.id} {...fadeIn}>
+                                <div className="py-8 md:py-12 grid md:grid-cols-12 gap-6 md:gap-10 items-start">
+                                    {/* Number */}
+                                    <div className="md:col-span-1">
+                                        <span className="text-sm font-mono text-slate-400">
+                                            ({String(index + 1).padStart(2, "0")})
+                                        </span>
                                     </div>
-                                    <span className="text-[9px] font-mono text-slate-500 uppercase tracking-widest bg-slate-100 border border-slate-200/50 px-3 py-1 rounded-full">
-                                        Contractual
-                                    </span>
+
+                                    {/* Title */}
+                                    <div className="md:col-span-4">
+                                        <h3 className="text-xl md:text-2xl font-bold font-heading text-slate-900 leading-tight">
+                                            {service.title}
+                                        </h3>
+                                    </div>
+
+                                    {/* Description + Details */}
+                                    <div className="md:col-span-5">
+                                        <p className="text-sm text-slate-500 leading-relaxed font-light mb-4">
+                                            {service.description}
+                                        </p>
+                                        <ul className="space-y-2">
+                                            {service.details.map((detail, i) => (
+                                                <li key={i} className="flex items-start gap-2.5">
+                                                    <span className="w-1 h-1 rounded-full bg-indigo-400 mt-1.5 shrink-0" />
+                                                    <span className="text-xs text-slate-500 font-light leading-relaxed">{detail}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+
+                                    {/* CTA */}
+                                    <div className="md:col-span-2 flex md:justify-end">
+                                        <Link
+                                            href={`/contact?service=${service.id}`}
+                                            className="group inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.12em] text-slate-600 hover:text-slate-900 transition-colors"
+                                        >
+                                            Inquire
+                                            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                                        </Link>
+                                    </div>
                                 </div>
+                                <div className="divider-line" />
+                            </motion.div>
+                        ))}
+                    </div>
 
-                                <h3 className="text-xl font-bold font-heading mb-3 text-slate-800">
-                                    {service.title}
-                                </h3>
-                                
-                                <p className="text-slate-550 text-xs mb-8 leading-relaxed font-light">
-                                    {service.description}
-                                </p>
+                    {/* Custom Requirements CTA */}
+                    <motion.div {...fadeIn} className="max-w-2xl">
+                        <span className="txt-cursive text-base text-slate-400 block mb-2">something else?</span>
+                        <h2 className="text-2xl md:text-3xl font-extrabold font-heading tracking-tighter uppercase text-slate-900 mb-4">
+                            Custom Requirements
+                        </h2>
+                        <p className="text-sm text-slate-500 leading-relaxed font-light mb-8">
+                            If your project spans multiple domains or needs a specialized architecture —
+                            edge ML, custom training pipelines, full-stack dashboards — let&apos;s figure it out together.
+                        </p>
+                        <Link
+                            href="/contact"
+                            className="group inline-flex items-center gap-2.5 px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-bold uppercase tracking-[0.12em] rounded-full transition-all duration-300 shadow-sm"
+                        >
+                            Book Consultation
+                            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                    </motion.div>
 
-                                {/* Offerings Bullet List */}
-                                <ul className="space-y-3.5 mb-8">
-                                    {service.details.map((detail, i) => (
-                                        <li key={i} className="flex items-start gap-3">
-                                            <div className="w-4 h-4 rounded border border-slate-200/80 bg-slate-50/50 flex items-center justify-center text-slate-500 shrink-0 mt-0.5 font-mono text-[9px]">
-                                                {i + 1}
-                                            </div>
-                                            <span className="text-xs text-slate-600 font-light leading-snug">{detail}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-
-                            {/* CTA Action */}
-                            <Link 
-                                href={`/contact?service=${service.id}`}
-                                className="w-full mt-auto py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-sm"
-                            >
-                                Inquire Service <ArrowRight className="w-3.5 h-3.5" />
-                            </Link>
-                        </motion.div>
-                    ))}
                 </div>
-
-                {/* Footer Section */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    className="mt-20 p-8 md:p-12 border border-slate-200/60 bg-white/70 shadow-sm rounded-2xl text-center relative overflow-hidden"
-                >
-                    <h3 className="text-2xl font-bold font-heading mb-4 text-slate-900 uppercase">Custom Requirements?</h3>
-                    <p className="text-slate-500 text-sm max-w-lg mx-auto mb-8 leading-relaxed font-light">
-                        If your project spans multiple domains or requires specialized architectural design, let&apos;s schedule an engineering consultation call.
-                    </p>
-                    <Link 
-                        href="/contact"
-                        className="inline-block px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-300 shadow-sm"
-                    >
-                        Book Consultation
-                    </Link>
-                </motion.div>
             </div>
         </div>
     );
