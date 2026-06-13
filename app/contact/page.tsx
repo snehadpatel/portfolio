@@ -28,13 +28,35 @@ function ContactForm() {
             : "";
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || "https://formspree.io/f/YOUR_ENDPOINT_HERE";
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsSubmitting(true);
-        setTimeout(() => {
+        
+        const form = e.currentTarget;
+        const data = new FormData(form);
+
+        try {
+            const response = await fetch(FORMSPREE_ENDPOINT, {
+                method: "POST",
+                body: data,
+                headers: {
+                    Accept: "application/json",
+                },
+            });
+
+            if (response.ok) {
+                setSubmitted(true);
+                form.reset();
+            } else {
+                alert("Oops! There was a problem submitting your form. Did you set your Formspree ID?");
+            }
+        } catch (error) {
+            alert("Oops! There was a network error submitting your form.");
+        } finally {
             setIsSubmitting(false);
-            setSubmitted(true);
-        }, 1500);
+        }
     };
 
     return (
@@ -124,6 +146,7 @@ function ContactForm() {
                                 <label htmlFor="name" className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block mb-3">Your Name</label>
                                 <input
                                     id="name"
+                                    name="name"
                                     type="text"
                                     required
                                     className="w-full px-0 pb-3 border-b border-slate-200 bg-transparent text-slate-800 focus:border-indigo-500 transition-colors outline-none text-sm placeholder:text-slate-300 font-light"
@@ -134,6 +157,7 @@ function ContactForm() {
                                 <label htmlFor="email" className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block mb-3">Your Email</label>
                                 <input
                                     id="email"
+                                    name="email"
                                     type="email"
                                     required
                                     className="w-full px-0 pb-3 border-b border-slate-200 bg-transparent text-slate-800 focus:border-indigo-500 transition-colors outline-none text-sm placeholder:text-slate-300 font-light"
@@ -144,6 +168,7 @@ function ContactForm() {
                                 <label htmlFor="message" className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block mb-3">Message</label>
                                 <textarea
                                     id="message"
+                                    name="message"
                                     required
                                     rows={4}
                                     defaultValue={getInitialMessage()}
