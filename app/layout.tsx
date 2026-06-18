@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import AICoreSandbox from "@/components/ui/AICoreSandbox";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const plusJakarta = Plus_Jakarta_Sans({
@@ -42,6 +43,7 @@ export default function RootLayout({
                     {children}
                 </main>
                 <Footer />
+                <AICoreSandbox />
             </body>
         </html>
     );
