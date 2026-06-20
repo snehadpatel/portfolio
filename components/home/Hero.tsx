@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import HeroCanvas from "@/components/ui/HeroCanvas";
 
 export default function Hero() {
     // Staggered reveal animation
@@ -35,11 +34,6 @@ export default function Hero() {
 
     return (
         <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-            {/* Interactive neural CV watermark in background */}
-            <div className="absolute right-0 top-[15%] w-full md:w-[45vw] h-[65vh] pointer-events-none -z-10 opacity-80 overflow-hidden">
-                <HeroCanvas />
-            </div>
-
             <div className="w-full px-6 md:px-10 pt-28 pb-20 md:pt-32 md:pb-24">
                 <motion.div
                     variants={container}
