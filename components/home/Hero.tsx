@@ -4,6 +4,143 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
+// 1. Underline Highlight for "Intelligent"
+function UnderlineDoodle() {
+    return (
+        <svg
+            className="absolute left-0 -bottom-2 md:-bottom-3 w-full h-[12px] text-indigo-500/60 pointer-events-none"
+            viewBox="0 0 100 10"
+            preserveAspectRatio="none"
+        >
+            <motion.path
+                d="M 2 6 C 30 9, 70 3, 98 5"
+                fill="transparent"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 0.8, delay: 0.9, ease: "easeOut" }}
+            />
+            <motion.path
+                d="M 12 8 C 45 10, 75 6, 88 7"
+                fill="transparent"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 0.6, delay: 1.2, ease: "easeOut" }}
+            />
+        </svg>
+    );
+}
+
+// 2. Bounding Box for "learn"
+function BoundingBoxDoodle() {
+    return (
+        <span className="absolute -inset-1.5 md:-inset-2 pointer-events-none block">
+            <svg
+                className="w-full h-full text-indigo-400/80"
+                viewBox="0 0 100 100"
+                preserveAspectRatio="none"
+            >
+                {/* Hand-drawn box with organic bezier lines */}
+                <motion.path
+                    d="M -1 2 Q 50 0, 102 3"
+                    fill="transparent"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 0.4, delay: 1.4, ease: "easeOut" }}
+                />
+                <motion.path
+                    d="M 98 -1 Q 100 50, 97 102"
+                    fill="transparent"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 0.4, delay: 1.7, ease: "easeOut" }}
+                />
+                <motion.path
+                    d="M 101 98 Q 50 100, -2 97"
+                    fill="transparent"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 0.4, delay: 2.0, ease: "easeOut" }}
+                />
+                <motion.path
+                    d="M 2 101 Q 0 50, 3 -2"
+                    fill="transparent"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 0.4, delay: 2.3, ease: "easeOut" }}
+                />
+            </svg>
+            <motion.span
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 2.6, duration: 0.3 }}
+                className="absolute -top-3 md:-top-4 -left-1 px-1 bg-indigo-500/80 text-white font-mono text-[7px] md:text-[8px] uppercase tracking-wider rounded-sm leading-none py-0.5"
+            >
+                learn [99%]
+            </motion.span>
+        </span>
+    );
+}
+
+// 3. Arrow pointing to "View Work"
+function ArrowDoodle() {
+    return (
+        <div className="absolute right-full mr-6 bottom-4 w-24 h-16 pointer-events-none hidden lg:block text-indigo-400/80">
+            {/* Cursive Label */}
+            <motion.span
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 3.1, duration: 0.4 }}
+                className="absolute -top-4 left-1 txt-cursive text-xs text-indigo-500/80 select-none whitespace-nowrap"
+            >
+                my work
+            </motion.span>
+            
+            <svg
+                className="w-full h-full"
+                viewBox="0 0 100 60"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            >
+                {/* Curved Arrow Path */}
+                <motion.path
+                    d="M 10 10 Q 40 12, 80 42"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 0.6, delay: 2.6, ease: "easeOut" }}
+                />
+                {/* Arrow Head */}
+                <motion.path
+                    d="M 68 40 L 81 43 L 78 30"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 0.3, delay: 3.1, ease: "easeOut" }}
+                />
+            </svg>
+        </div>
+    );
+}
+
 export default function Hero() {
     // Staggered reveal animation
     const container = {
@@ -59,8 +196,9 @@ export default function Hero() {
                                 <span className="txt-cursive text-[clamp(1.8rem,3.5vw,3.5rem)] text-slate-500 leading-none">
                                     I build
                                 </span>
-                                <h1 className="text-[clamp(3rem,7.5vw,7rem)] font-extrabold font-heading tracking-tighter leading-[0.9] uppercase text-slate-900">
+                                <h1 className="relative inline-block text-[clamp(3rem,7.5vw,7rem)] font-extrabold font-heading tracking-tighter leading-[0.9] uppercase text-slate-900">
                                     Intelligent
+                                    <UnderlineDoodle />
                                 </h1>
                             </motion.div>
                         </div>
@@ -79,8 +217,9 @@ export default function Hero() {
                                 <span className="txt-cursive text-[clamp(1.4rem,3vw,3rem)] text-slate-400 leading-none">
                                     that see,
                                 </span>
-                                <h1 className="text-[clamp(2.5rem,6vw,5.5rem)] font-extrabold font-heading tracking-tighter leading-[0.9] uppercase text-indigo-600/30">
+                                <h1 className="relative inline-block text-[clamp(2.5rem,6vw,5.5rem)] font-extrabold font-heading tracking-tighter leading-[0.9] uppercase text-indigo-600/30 px-2">
                                     learn
+                                    <BoundingBoxDoodle />
                                 </h1>
                                 <span className="txt-cursive text-[clamp(1.4rem,3vw,3rem)] text-slate-400 leading-none">
                                     &
@@ -105,7 +244,8 @@ export default function Hero() {
                             </p>
                         </div>
 
-                        <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-4 relative">
+                            <ArrowDoodle />
                             <Link
                                 href="/projects"
                                 className="group inline-flex items-center gap-2.5 px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-bold uppercase tracking-[0.12em] rounded-full transition-all duration-300 shadow-sm"
