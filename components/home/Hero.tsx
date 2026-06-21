@@ -3,38 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-
-// 1. Underline Highlight for "Intelligent"
-function UnderlineDoodle() {
-    return (
-        <svg
-            className="absolute left-0 -bottom-2 md:-bottom-3 w-full h-[12px] text-indigo-500/60 pointer-events-none"
-            viewBox="0 0 100 10"
-            preserveAspectRatio="none"
-        >
-            <motion.path
-                d="M 2 6 C 30 9, 70 3, 98 5"
-                fill="transparent"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 0.8, delay: 0.9, ease: "easeOut" }}
-            />
-            <motion.path
-                d="M 12 8 C 45 10, 75 6, 88 7"
-                fill="transparent"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 0.6, delay: 1.2, ease: "easeOut" }}
-            />
-        </svg>
-    );
-}
+import { UnderlineDoodle } from "@/components/ui/Doodles";
 
 // 2. Bounding Box for "learn"
 function BoundingBoxDoodle() {

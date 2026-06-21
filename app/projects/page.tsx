@@ -8,6 +8,7 @@ import { DATA, Project } from "@/lib/data";
 import ProjectDrawer from "@/components/projects/ProjectDrawer";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { UnderlineDoodle } from "@/components/ui/Doodles";
 
 const categories = ["All", ...Array.from(new Set(DATA.projects.map((p) => p.category)))];
 
@@ -40,8 +41,9 @@ export default function ProjectsPage() {
                         className="mb-12 md:mb-16"
                     >
                         <span className="txt-cursive text-lg text-slate-400 block mb-2">all my</span>
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold font-heading tracking-tighter uppercase text-slate-900 leading-[0.9]">
+                        <h1 className="relative inline-block text-5xl md:text-7xl lg:text-8xl font-extrabold font-heading tracking-tighter uppercase text-slate-900 leading-[0.9]">
                             Projects
+                            <UnderlineDoodle />
                         </h1>
                     </motion.div>
 

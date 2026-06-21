@@ -4,6 +4,8 @@ import { DATA } from "@/lib/data";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { UnderlineDoodle, CircleDoodle } from "@/components/ui/Doodles";
 
 const fadeIn = {
     initial: { opacity: 0, y: 20 },
@@ -13,6 +15,8 @@ const fadeIn = {
 };
 
 export default function ServicesPage() {
+    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
     return (
         <div className="min-h-screen pt-28 md:pt-36 pb-20">
             <div className="w-full px-6 md:px-10">
@@ -23,8 +27,9 @@ export default function ServicesPage() {
                         <div className="flex items-baseline gap-3 md:gap-5 flex-wrap mb-2">
                             <span className="txt-cursive text-lg md:text-xl text-slate-400">list of</span>
                         </div>
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold font-heading tracking-tighter uppercase text-slate-900 leading-[0.9]">
+                        <h1 className="relative inline-block text-5xl md:text-7xl lg:text-8xl font-extrabold font-heading tracking-tighter uppercase text-slate-900 leading-[0.9]">
                             Services
+                            <UnderlineDoodle />
                         </h1>
                         <div className="overflow-hidden mt-1">
                             <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold font-heading tracking-tighter uppercase text-indigo-600/15 leading-[0.9]">
@@ -45,12 +50,18 @@ export default function ServicesPage() {
                     {/* Services — Numbered Ruled List */}
                     <div className="mb-20 md:mb-28">
                         {DATA.services.map((service, index) => (
-                            <motion.div key={service.id} {...fadeIn}>
+                            <motion.div 
+                                key={service.id} 
+                                {...fadeIn}
+                                onMouseEnter={() => setHoveredIndex(index)}
+                                onMouseLeave={() => setHoveredIndex(null)}
+                            >
                                 <div className="py-8 md:py-12 grid md:grid-cols-12 gap-6 md:gap-10 items-start">
                                     {/* Number */}
                                     <div className="md:col-span-1">
-                                        <span className="text-sm font-mono text-slate-400">
+                                        <span className="relative inline-block text-sm font-mono text-slate-400 px-1">
                                             ({String(index + 1).padStart(2, "0")})
+                                            <CircleDoodle isActive={hoveredIndex === index} className="text-indigo-400/80" />
                                         </span>
                                     </div>
 

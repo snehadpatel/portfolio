@@ -6,6 +6,7 @@ import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { UnderlineDoodle, PaperPlaneDoodle } from "@/components/ui/Doodles";
 
 const fadeIn = {
     initial: { opacity: 0, y: 20 },
@@ -64,15 +65,19 @@ function ContactForm() {
             {/* Page Header */}
             <motion.div {...fadeIn} className="mb-16 md:mb-24">
                 <span className="txt-cursive text-lg text-slate-400 block mb-2">say</span>
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold font-heading tracking-tighter uppercase text-slate-900 leading-[0.9]">
+                <h1 className="relative inline-block text-5xl md:text-7xl lg:text-8xl font-extrabold font-heading tracking-tighter uppercase text-slate-900 leading-[0.9]">
                     Hello
+                    <UnderlineDoodle />
                 </h1>
             </motion.div>
 
             <div className="grid md:grid-cols-2 gap-12 md:gap-20">
                 {/* Left — Info */}
-                <motion.div {...fadeIn}>
-                    <p className="text-lg md:text-xl text-slate-700 leading-relaxed font-light mb-10">
+                <motion.div {...fadeIn} className="relative">
+                    {/* Paper Plane Doodle */}
+                    <PaperPlaneDoodle className="absolute -right-4 -top-24 hidden md:block text-indigo-500" />
+                    
+                    <p className="relative z-10 text-lg md:text-xl text-slate-700 leading-relaxed font-light mb-10">
                         I&apos;m currently looking for internship opportunities and always open to
                         discussing projects that push what&apos;s possible with AI, vision, and hardware.
                         Drop me a message - I&apos;d love to hear what you&apos;re building.

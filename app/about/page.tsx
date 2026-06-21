@@ -4,6 +4,7 @@ import { DATA } from "@/lib/data";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { UnderlineDoodle, StarDoodle, CircuitTraceDoodle } from "@/components/ui/Doodles";
 
 const fadeIn = {
     initial: { opacity: 0, y: 20 },
@@ -21,8 +22,9 @@ export default function AboutPage() {
                     {/* Page Header */}
                     <motion.div {...fadeIn} className="mb-16 md:mb-24">
                         <span className="txt-cursive text-lg text-slate-400 block mb-2">a little bit</span>
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold font-heading tracking-tighter uppercase text-slate-900 leading-[0.9]">
+                        <h1 className="relative inline-block text-5xl md:text-7xl lg:text-8xl font-extrabold font-heading tracking-tighter uppercase text-slate-900 leading-[0.9]">
                             About Me
+                            <UnderlineDoodle />
                         </h1>
                     </motion.div>
 
@@ -39,20 +41,23 @@ export default function AboutPage() {
                                 {DATA.profile.summary}
                             </p>
                         </div>
-                        <div className="space-y-6">
-                            <div className="py-4 border-b border-slate-200/60">
+                        <div className="space-y-6 relative">
+                            {/* IoT Circuit watermark doodle */}
+                            <CircuitTraceDoodle className="absolute -right-8 -bottom-12 opacity-30 pointer-events-none hidden lg:block text-indigo-500" />
+                            
+                            <div className="py-4 border-b border-slate-200/60 relative z-10">
                                 <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block mb-1">Location</span>
                                 <span className="text-sm font-semibold text-slate-800">Vadodara, Gujarat, India</span>
                             </div>
-                            <div className="py-4 border-b border-slate-200/60">
+                            <div className="py-4 border-b border-slate-200/60 relative z-10">
                                 <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block mb-1">Currently</span>
                                 <span className="text-sm font-semibold text-slate-800">B.Tech CSE @ Navrachana University</span>
                             </div>
-                            <div className="py-4 border-b border-slate-200/60">
+                            <div className="py-4 border-b border-slate-200/60 relative z-10">
                                 <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block mb-1">Focus Areas</span>
                                 <span className="text-sm font-semibold text-slate-800">Computer Vision · ML · IoT · Edge AI</span>
                             </div>
-                            <div className="pt-4">
+                            <div className="pt-4 relative z-10">
                                 <Link
                                     href={DATA.profile.resumeUrl || "#"}
                                     target="_blank"
@@ -161,7 +166,7 @@ export default function AboutPage() {
                             ].map((item, i) => (
                                 <motion.div key={i} {...fadeIn} className="py-6 border-b border-slate-200/60">
                                     <div className="flex items-start gap-3">
-                                        <span className="text-[10px] font-mono text-slate-400 mt-0.5">({String(i + 1).padStart(2, "0")})</span>
+                                        <StarDoodle className="mt-0.5 text-amber-500" />
                                         <div>
                                             <h4 className="text-sm font-bold text-slate-800 mb-0.5">{item.title}</h4>
                                             <p className="text-xs text-slate-500 font-light">{item.desc}</p>
