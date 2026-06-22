@@ -3,10 +3,11 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Github, ExternalLink, Clock, Users, Wrench } from "lucide-react";
+import { X, Github, ExternalLink, Clock, Users, Wrench, FileText } from "lucide-react";
 import { Project } from "@/lib/data";
 import { Button } from "@/components/ui/Button";
 import PipelineVisualizer from "./PipelineVisualizer";
+import { cn } from "@/lib/utils";
 
 interface ProjectDrawerProps {
     project: Project | null;
@@ -167,7 +168,10 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                             </div>
 
                             {/* Links */}
-                            <div className="grid grid-cols-2 gap-3 pb-2 relative">
+                            <div className={cn(
+                                "grid gap-3 pb-2 relative",
+                                project.publication ? "grid-cols-3" : "grid-cols-2"
+                            )}>
                                 {project.link && project.link !== "#" && (
                                     <Button variant="default" className="w-full text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white shadow-sm" asChild>
                                         <Link href={project.link} target="_blank" rel="noopener noreferrer">
@@ -179,6 +183,13 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                                     <Button variant="outline" className="w-full text-xs font-bold bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-sm" asChild>
                                         <Link href={project.github} target="_blank" rel="noopener noreferrer">
                                             <Github className="w-3.5 h-3.5 mr-2" /> Source Code
+                                        </Link>
+                                    </Button>
+                                )}
+                                {project.publication && (
+                                    <Button variant="outline" className="w-full text-xs font-bold bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-sm" asChild>
+                                        <Link href={project.publication.paperUrl} download>
+                                            <FileText className="w-3.5 h-3.5 mr-2" /> Research Paper
                                         </Link>
                                     </Button>
                                 )}
@@ -278,6 +289,38 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                                         <p className="text-indigo-50 text-sm md:text-base leading-relaxed font-medium relative z-10">
                                             {project.extended.impact}
                                         </p>
+                                    </div>
+                                </section>
+                            )}
+
+                            {/* 6. Academic Publication */}
+                            {project.publication && (
+                                <section className="relative">
+                                    <SectionHeader num="06" title="Academic Publication" />
+                                    <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                                        <div>
+                                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-1">Conference</span>
+                                            <span className="text-sm font-semibold text-slate-800">{project.publication.conference}</span>
+                                        </div>
+                                        <div>
+                                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-1">Paper Title</span>
+                                            <h3 className="text-sm font-bold text-slate-900 leading-snug">{project.publication.title}</h3>
+                                        </div>
+                                        <div>
+                                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-1">Authors</span>
+                                            <span className="text-xs text-slate-600">{project.publication.authors.join(", ")}</span>
+                                        </div>
+                                        <div>
+                                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-1">Abstract</span>
+                                            <p className="text-xs text-slate-500 leading-relaxed font-light">{project.publication.abstract}</p>
+                                        </div>
+                                        <div className="pt-2">
+                                            <Button variant="outline" className="w-full text-xs font-bold bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-sm" asChild>
+                                                <Link href={project.publication.paperUrl} download>
+                                                    <FileText className="w-3.5 h-3.5 mr-2" /> Download Research Paper (.docx)
+                                                </Link>
+                                            </Button>
+                                        </div>
                                     </div>
                                 </section>
                             )}

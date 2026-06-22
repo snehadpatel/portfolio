@@ -10,6 +10,14 @@ export interface ExtendedDetails {
     impact: string;
 }
 
+export interface PublicationDetails {
+    title: string;
+    authors: string[];
+    conference: string;
+    abstract: string;
+    paperUrl: string;
+}
+
 export interface Project {
     id: string;
     title: string;
@@ -21,6 +29,7 @@ export interface Project {
     image: string;
     category: string;
     extended?: ExtendedDetails;
+    publication?: PublicationDetails;
 }
 
 export interface SkillSet {
@@ -210,6 +219,13 @@ export const DATA: DataType = {
                 solution: "I engineered a self-coordinating hardware and AI prototype designed to classify and sort garbage at the point of disposal completely offline. A Raspberry Pi runs a highly quantized YOLOv8 model, processing frames in <80ms. It communicates sorting decisions to an Arduino Uno over a USB Serial link, driving physical servo flaps to segregate recyclables, organic matter, and hazardous items.",
                 tradeoffs: "I heavily quantized the YOLOv8 weights to INT8. This caused a ~4% drop in absolute precision but was the only way to achieve the required 12fps inference speed directly on the local Raspberry Pi cores without thermal throttling.",
                 impact: "Successfully sorted local plastic and organic waste samples in real-time with a total loop latency (camera capture to physical flap movement) of under 180ms."
+            },
+            publication: {
+                title: "GreenSort: An Integrated IoT and Deep Learning System for Real-Time Municipal Solid Waste Segregation, Hazard Detection, and Route Optimization",
+                authors: ["Hetvi Sheth", "Parisha Parmar", "Sneha Patel"],
+                conference: "SustainX 2026",
+                abstract: "Municipal solid waste (MSW) generation is projected to reach 3.4 billion tones annually by 2050, with Indian cities disproportionately affected due to rapid urbanization and infrastructure gaps. Existing smart bin deployments focus almost exclusively on fill-level monitoring using ultrasonic sensors, leaving waste classification, weight-based density anomaly detection, and hazardous gas monitoring largely unaddressed. Academic deep learning classifiers, while achieving high accuracy on benchmark datasets, have rarely been integrated into live IoT pipelines capable of edge inference on commodity hardware. This paper presents GreenSort, a prototype Smart Waste Management System (SWMS) designed for the Vadodara Municipal Corporation (VMC) that addresses all three gaps. A multi-sensor Arduino Uno-controlled smart bin feeds data to a Raspberry Pi running a custom-trained ResNet classifier fine-tuned via transfer learning on a four-class waste dataset achieving 90 mean Average Precision (mAP) at under 2 seconds inference latency. Sensor telemetry and classification outputs are transmitted via MQTT to a Supabase cloud backend, driving a VMC Web Dashboard with dynamic route optimisation and a Citizen Reporting Android application. All eight end-to-end test cases have passed. Total prototype cost: approximately ₹5,000, making this a financially viable model for smart city MSW infrastructure aligned with SDG 11 and SDG 12.",
+                paperUrl: "/assets/GreenSort_ResearchPaper_SustainX2026.docx"
             }
         },
         {

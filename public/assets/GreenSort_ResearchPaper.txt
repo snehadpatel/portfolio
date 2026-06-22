@@ -1,0 +1,254 @@
+GreenSort: An Integrated IoT and Deep Learning System for Real-Time
+Municipal Solid Waste Segregation, Hazard Detection, and Route Optimization
+
+Hetvi Sheth, Parisha Parmar, Sneha Patel
+¹ Department of Computer Science and Engineering, School of Engineering and Technology,
+Navrachana University, Vadodara – 390024, Gujarat, India
+Guide: Prof. Gaurav Kumar Gaharwar, Assistant Professor, CSE, Navrachana University
+{hetvi.c.sheth, parmar.p.bhupendrabhai, sneha.d.patel}@nuv.ac.in
+Abstract
+Municipal solid waste (MSW) generation is projected to reach 3.4 billion tones annually by 2050, with Indian cities disproportionately affected due to rapid urbanization and infrastructure gaps. Existing smart bin deployments focus almost exclusively on fill-level monitoring using ultrasonic sensors, leaving waste classification, weight-based density anomaly detection, and hazardous gas monitoring largely unaddressed. Academic deep learning classifiers, while achieving high accuracy on benchmark datasets, have rarely been integrated into live IoT pipelines capable of edge inference on commodity hardware. This paper presents GreenSort, a prototype Smart Waste Management System (SWMS) designed for the Vadodara Municipal Corporation (VMC) that addresses all three gaps. A multi-sensor Arduino Uno-controlled smart bin feeds data to a Raspberry Pi running a custom-trained ResNet classifier fine-tuned via transfer learning on a four-class waste dataset achieving 90 mean Average Precision (mAP) at under 2 seconds inference latency. Sensor telemetry and classification outputs are transmitted via MQTT to a Supabase cloud backend, driving a VMC Web Dashboard with dynamic route optimisation and a Citizen Reporting Android application. All eight end-to-end test cases have passed. Total prototype cost: approximately ₹5,000, making this a financially viable model for smart city MSW infrastructure aligned with SDG 11 and SDG 12.
+Keywords: Smart Waste Management; IoT; Deep Learning; ResNet; Transfer Learning; MQTT; Waste Segregation; Arduino; Raspberry Pi; Smart Cities; SDG 11; SDG 12
+1. INTRODUCTION
+The scale of municipal solid waste (MSW) generation worldwide is alarming. Hoornweg and Bhada-Tata [1] estimated that global MSW output was 2.01 billion tonnes in 2016 and will approach 3.4 billion tonnes annually by 2050, with the sharpest growth concentrated in South Asian cities. India contributes an estimated 62 million tonnes per year [2], yet the collection, segregation, and safe disposal of this volume remain deeply inadequate. Cities like Vadodara operate waste collection almost entirely on fixed schedules with no real-time visibility into bin status a model Alourani et al. [3] characterise as fundamentally reactive and economically inefficient.
+Three distinct problems motivated this project. First, the absence of real-time bin monitoring means collection vehicles follow fixed routes, visiting half-empty bins while other bins may already overflow [4]. Second, there is no automated mechanism to enforce or verify waste segregation at the disposal point, leading to mixed waste streams that contaminate recyclables and increase landfill load [5,6]. Third, hazardous gases such as methane and ammonia can accumulate during organic waste decomposition inside enclosed bins, presenting a safety risk that conventional bins cannot detect [11].
+Two converging technological advances offer a credible solution. The Internet of Things (IoT) enables continuous, granular bin-level monitoring without human intervention; and deep learning particularly convolutional neural networks trained via transfer learning [7] now achieves accurate waste classification on commodity edge hardware at practical inference speeds [5,6]. When unified within a cloud-connected platform, these technologies can shift waste management from its current reactive mode to a proactive, data-driven operational paradigm [3,4].
+We present GreenSort, an end-to-end prototype SWMS built at Navrachana University that integrates all of the above within a single, architecturally clean system. The key contributions of this work are:
+	•	Dual-microcontroller architecture: Sensor acquisition and actuator control are isolated on an Arduino Uno; AI inference and cloud communication run on a Raspberry Pi. The two communicate via UART serial, eliminating the real-time timing conflicts documented in single-board designs [3].
+	•	Custom ResNet edge classifier: A ResNet [7] model fine-tuned via transfer learning on a purpose-curated four-class waste dataset achieves 90 mAP at under 2 seconds on CPU-only Raspberry Pi hardware, directly addressing the GPU-dependency gap in prior AI classification work [5,6].
+	•	Integrated route optimisation: Unlike fill-level-only systems [4] or segregation-agnostic routing solutions [11], GreenSort’s VMC Dashboard factors waste classification output  including hazard flags  into dynamic collection priority.
+	•	Sub-₹5,000 total prototype cost: All software components use open-source or free-tier services [8,9], demonstrating financial viability for resource-constrained municipal deployment.
+
+The paper is organised as follows: Section 2 surveys related work and identifies the specific gaps GreenSort addresses. Section 3 describes system architecture. Section 4 covers implementation. Section 5 presents results. Section 6 concludes with future directions.
+2. REVIEW OF RELATED WORK
+2.1 IoT-Based Bin Monitoring Systems
+Commercial smart bin platforms such as Bigbelly and Ecube Labs represent the most widely deployed category of smart waste infrastructure. These systems rely on ultrasonic fill-level sensing to trigger collection alerts and have demonstrated operational efficiency improvements  Khan et al. [4] report up to 47% improvement in collection efficiency using IoT-assisted routing. However, these systems share a fundamental limitation: they are segregation-agnostic. They report fill volume, nothing more. Alourani et al. [3] note this explicitly in their review, observing that fill-level-only systems cannot detect weight-volume anomalies (e.g., heavily compacted waste), cannot guide or verify citizen segregation behaviour, and provide no hazardous condition awareness.
+Hannan et al. [11] extended the basic IoT bin model by integrating RFID and GPS for dynamic collection routing, which is a meaningful step toward demand-driven operations. Their system, however, remained segregation-agnostic routing priority was determined solely by fill threshold, with no consideration of waste type or hazard status. This gap is significant: a bin containing chemical waste at 40% fill is arguably more urgent than a food waste bin at 80% fill yet fill-only systems cannot make this distinction.
+2.2 Deep Learning for Waste Classification
+The use of convolutional neural networks for waste image classification has grown substantially in academic literature. Adedeji and Wang [5] demonstrated binary recyclable/non-recyclable classification using a custom CNN on the TrashNet dataset. Panamgama and Perera [6] applied ResNet-50 to a four-category IoT-integrated smart bin with 98.81% accuracy but required significant GPU resources for training and noted latency challenges on CPU-only edge deployment. Alourani et al. [3] deployed VGG-19 achieving 99.7% training accuracy, but their pipeline used a conveyor-belt configuration with GPU inference rather than an in-bin, CPU-only edge device.
+A consistent structural gap across this body of literature is the near-universal evaluation of classifiers in isolation, on clean benchmark datasets, without integration into a live multi-sensor IoT pipeline. The practical question of how to achieve acceptable classification accuracy at under 2-second latency on a Raspberry Pi CPU while simultaneously managing sensor polling, MQTT publishing, and actuator control is rarely addressed. GreenSort specifically tackles this gap through deliberate architectural separation and ResNet [7] transfer learning with a dataset augmented by images captured inside the prototype bin under actual deployment lighting conditions.
+2.3 Route Optimisation in Waste Collection
+Vehicle routing for MSW collection has been studied through both classical operations research and IoT-augmented approaches. Khan et al. [4] proposed an IoT-assisted algorithm that factors waste volume and toxicity alongside truck loading capacity, demonstrating 47% improvement in highly toxic waste collection against baseline approaches. Their system, however, did not include on-device AI classification; toxicity data was inferred from sensor thresholds rather than visual classification. Hannan et al. [11] showed GPS-based dynamic routing to reduce collection distance but again relied on fill-level alone for bin flagging. GreenSort builds on these foundations by integrating classification output  specifically Hazardous waste flags  into collection priority independent of fill level.
+2.4 Gap Summary and Originality of GreenSort
+Table 1 summarises the above gap analysis. No prior low-cost prototype unifies (a) multi-sensor IoT monitoring beyond fill level, (b) on-device AI classification within practical CPU-only latency constraints, and (c) classification-aware cloud route optimisation in a single architecturally validated system. This is the specific gap GreenSort is designed to fill.
+
+TABLE 1: Gap Analysis  GreenSort vs. Existing Approaches
+System / Work
+Multi-Sensor
+AI Classification
+Hazard Detect.
+Route Optimisation
+Edge Inference
+Cost
+Commercial smart bins [3,4]
+Fill only
+
+
+Partial (fill only)
+
+High
+Hannan et al. [11]
+ Fill + GPS
+
+
+ GPS-based
+
+Med.
+Adedeji & Wang [5]
+ None
+Binary CNN
+
+
+GPU req.
+N/A
+Panamgama & Perera [6]
+Partial
+ ResNet-50
+
+
+GPU req.
+High
+Alourani et al. [3]
+ Partial
+VGG-19
+
+
+GPU req.
+Med.
+GreenSort (This Work)
+ Full (6 sensors)
+90 mAP ResNet 
+Full 
+ Class-aware
+ RPi CPU
+~₹5,000
+Research Questions
+To address the identified gaps, this study is guided by the following research questions:
+RQ1: How can IoT-based smart bins be enhanced to monitor not only fill levels but also weight, environmental conditions, and hazardous gas presence in real time?
+RQ2: Is it feasible to deploy a deep learning-based waste classification model on low-cost edge devices such as Raspberry Pi while maintaining acceptable accuracy and latency?
+RQ3: How can waste classification outputs be integrated into collection route optimisation to improve prioritisation compared to traditional fill-level-based systems?
+RQ4: Can a fully integrated system combining IoT sensing, edge AI, and cloud-based analytics be implemented within a cost-effective framework suitable for municipal deployment?
+3. SYSTEM ARCHITECTURE
+GreenSort is organised into three logical tiers, a structure consistent with the IoT system architectures described by Alourani et al. [3] and Khan et al. [4]: a Hardware/Sensing Layer for physical data acquisition; an Intelligence/Communication Layer for AI inference and cloud transmission; and an Application Layer for analytics and user interfaces. Figure 1 illustrates the overall system.
+
+
+Figure 1: GreenSort System Architecture  Three-Tier Overview(Source NapkinAI)
+3.1 Hardware Layer: Multi-Sensor Smart Bin (Arduino Uno)
+The hardware layer is built around an Arduino Uno (ATmega328P, 16 MHz) as the dedicated real-time controller for all sensors and actuators. The choice of Arduino over alternatives such as ESP32 was deliberate: as Alourani et al. [3] note, separating low-level hardware interfacing from higher-level computation is essential to avoid real-time timing conflicts in prototype IoT bin systems. The Arduino’s predictable bare-metal execution environment ensures that time-critical operations sensor polling, PWM generation for motor control are never interrupted by operating system scheduling. Table 2 lists all sensors and actuators.
+
+TABLE 2: Sensor and Actuator Specifications
+Component
+Specification
+Function in GreenSort
+HC-SR04 Ultrasonic Sensor
+Range: 2–400 cm
+Fill-level detection (% bin capacity); used widely in smart bin literature [3,4,11]
+Load Cell + HX711 Driver
+0–50 kg capacity
+Waste weight for density anomaly detection  not present in prior systems [3,4]
+TCRT5000 PIR Sensor
+Passive infrared
+User presence detection; triggers the disposal sequence
+Inductive Proximity (x2)
+2 units
+Metallic waste identification for enhanced segregation validation
+DHT11 Sensor
+Temperature + Humidity
+Internal bin environment; decomposition condition monitoring
+MQ-135 / MQ-2 Gas Sensor
+CO₂, NH₃, smoke
+Hazardous gas detection  safety-critical, absent in reviewed systems
+OV2640 USB Camera
+Webcam, USB interface
+Image capture for ResNet waste classification [7]
+SG90 Servo Motor
+PWM, Arduino-controlled
+Bin lid open/close on PIR trigger
+Stepper Motor + L298N
+1.8°/step, 12V DC
+Platform rotation to optimal camera angle; controlled via Arduino [3]
+
+
+
+3.2 Intelligence Layer: Raspberry Pi and Custom ResNet Classifier
+The Raspberry Pi (3B+/4) serves as the intelligence hub. It runs a full Linux OS, enabling Python-based deep learning libraries (TensorFlow/Keras [12]), serial management (pyserial), image capture (OpenCV), and MQTT publishing (paho-mqtt). The Pi receives sensor packets from the Arduino over UART, orchestrates the waste disposal sequence, runs AI inference, and publishes aggregated results to the cloud.
+The core novel component is a ResNet (Residual Network) [7] classifier custom-trained via transfer learning. He et al. [7] demonstrated that residual skip connections address the vanishing gradient problem in deep networks, enabling superior feature extraction compared to architectures of equivalent depth. This motivated our choice of ResNet over MobileNet: in early development, MobileNet consistently misclassified food-contaminated paper as Recyclable. ResNet’s deeper residual feature extraction resolved this ambiguity. Panamgama and Perera [6] also used ResNet-50 in their IoT-integrated smart bin and reported strong performance, confirming that this architecture is well-suited to the waste classification problem. The key difference in our implementation is edge deployment on a CPU-only Raspberry Pi at under 2 seconds inference latency, which Panamgama and Perera [6] did not achieve without GPU acceleration.
+3.3 Application Layer: Cloud, Dashboard, and Mobile App
+Supabase [9] a managed PostgreSQL backend with real-time subscription API serves as the cloud data store. We chose MQTT [8] for device-to-cloud telemetry rather than HTTP REST because MQTT’s publish/subscribe model requires significantly lower bandwidth and supports QoS guarantees that make it the standard for IoT sensor data transmission; this choice is consistent with Alourani et al. [3] and Sheng et al. [13], who both adopted MQTT for similar IoT-to-cloud architectures.
+The organisation Web Dashboard reads from Supabase in real time. A greedy nearest-neighbour route optimisation algorithm flags bins where fill level exceeds 80% or where a Hazardous classification has been received. Starting from the VMC depot, it iteratively selects the geographically nearest flagged bin until all flagged bins are included. This is an explicit departure from the fill-only flagging used by Hannan et al. [11] and Khan et al. [4]: in GreenSort, a hazardous bin at 40% fill will be prioritised for collection over a non-hazardous bin at 90% fill. A Citizen Android Application allows community members to report overflow bins with GPS coordinates and photo evidence.
+
+4. IMPLEMENTATION
+4.1 Data Collection and Model Training
+We started with publicly available waste image repositories primarily TrashNet, originally used by Awe et al. [5] and supplemented these with images we captured inside the prototype bin under actual deployment conditions. This step was important: TrashNet images are clean, well-lit, and isolated against white backgrounds. Real in-bin waste is partially obscured, variably lit by the bin’s interior, and often mixed. Our supplementary images made the training distribution more representative of what the OV2640 camera would see. Also web scraped images from unsplash, and the internet.
+Four classes were trained: Biodegradable (food scraps, organic material), Recyclable (clean plastic, glass, dry paper), Non-Recyclable (contaminated or mixed-material items), and Hazardous (batteries, chemical containers, medical waste). Classes were balanced across the combined dataset. Data augmentation was applied consistently with approaches used in the literature [3,5,6]: horizontal flipping, random rotation (±15°), brightness variation (±30%), and random zoom (10–20%).
+Transfer learning followed a two-phase protocol recommended by He et al. [7]: the ImageNet-pretrained ResNet base was frozen while the four-class classification head trained to convergence, then the final residual blocks were selectively unfrozen for fine-tuning on our waste dataset. Categorical cross-entropy loss was used with the Adam optimiser. Training ran in a Jupyter Notebook environment on a standard laptop GPU.
+
+
+4.2 Waste Disposal Sequence
+Figure 2 illustrates the complete disposal sequence. When a user approaches the bin, the TCRT5000 PIR fires and the Arduino transmits PRESENCE_DETECTED to the Raspberry Pi over UART. The Pi responds with OPEN_LID and ROTATE_PLATFORM_90; the Arduino drives the SG90 servo to the open position and steps the platform motor to the capture angle. OpenCV captures a frame, resizes it to the ResNet input resolution, normalises it, and passes it through the loaded TensorFlow/Keras model. The predicted class label and confidence score are appended to the current sensor payload and published to Supabase via MQTT. The Pi then sends CLOSE_LID. The mean total cycle time across ten trials was 22.4 seconds.
+
+
+Figure 2: Waste Disposal and Classification Sequence Flow (Source NapkinAI)
+4.3 Data Flow
+Figure 3 shows how data moves through the complete system, from physical sensors through to the VMC Dashboard and Citizen App. Three distinct protocols are used at three distinct layers: UART serial between Arduino and Raspberry Pi; MQTT between Raspberry Pi and Supabase broker; and HTTPS/REST between the dashboard and mobile application and the Supabase database.
+
+
+Figure 3: End-to-End Data Flow Diagram (Source NapkinAI)
+4.4 Route Optimisation
+The greedy nearest-neighbour algorithm in the organisation Dashboard extends the demand-driven routing concept used by Khan et al. [4] and Hannan et al. [11] by adding classification-based priority. Bins are flagged when fill exceeds 80% OR when the ResNet classifier returns a Hazardous result at any fill level. Starting from the organisation depot, the algorithm appends the nearest unflagged overflow bin iteratively until all flagged bins are serviced. In all tested configurations this produced shorter total collection distances than a fixed linear route baseline, consistent with the routing efficiency improvements reported by Khan et al. [4].
+5. RESULTS AND DISCUSSION
+5.1 Waste Classification Performance
+Figure 5 shows per-class mAP scores. The overall 90 mAP exceeded our 85 mAP minimum target and is competitive with results from Adedeji and Wang [5] (binary classification, VGG-based) and Panamgama and Perera [6] (multi-class, ResNet-50) while being achieved on CPU-only Raspberry Pi hardware. Biodegradable scored highest at 91.2%; Non-Recyclable was the most difficult at 88.5%, which is expected given its nature as a residual category encompassing everything that cannot cleanly fit the other three classes. Mean inference latency was 1.7 seconds, within the 2-second requirement.
+
+
+Figure 5: Per-Class Classification mAP Scores. Dashed line = 90% overall mAP.
+5.2 Sensor Accuracy
+Figure 4 compares HC-SR04 ultrasonic readings against ground-truth fill levels at four test points. All readings fell within the ±5% tolerance, with mean absolute error of 3.2%. Load cell readings showed 2.8% mean error across three reference weights (0 kg, 1 kg, 5 kg). Both sensors performed well without post-processing filtering. We attribute this to the Arduino’s dedicated real-time execution environment, consistent with the recommendation by Alourani et al. [3] to isolate sensor management from computationally intensive operations in multi-sensor IoT bin prototypes.
+
+
+Figure 4: HC-SR04 Sensor Readings vs. Actual Fill Level. Error shown per reading.
+5.3 End-to-End System Latency
+Figure 6 breaks down latency across pipeline stages. The dominant contributor is not AI inference (1.7 s) but the MQTT broker and Supabase real-time update stages (4.9 s combined). The remaining ~15.8 s falls under frame capture, JSON serialisation, and general overhead. Mean total latency of 22.4 seconds satisfies the 30-second dashboard update requirement with considerable margin. This is broadly consistent with the cloud pipeline latencies reported by Alourani et al. [3] for similar MQTT-to-cloud IoT deployments. The result also suggests the 30-second requirement could be tightened in future deployments without architectural changes.
+
+
+Figure 6: End-to-End Latency Breakdown. Mean total: 22.4 s over 10 trials.
+5.4 Test Case Validation
+
+TABLE 3: Prototype Test Case Results
+TC#
+Test Scenario
+Expected Outcome
+Result
+TC-01
+Ultrasonic at 25%, 50%, 75%, 100% fill
+Within ±5% tolerance
+PASS (MAE 3.2%)
+TC-02
+Load cell at 0 kg, 1 kg, 5 kg
+Within ±5% tolerance
+PASS (MAE 2.8%)
+TC-03
+PIR presence detection
+PRESENCE_DETECTED < 500 ms
+PASS
+TC-04
+OPEN_LID command issued
+Servo opens within 1 s
+PASS
+TC-05
+ROTATE_PLATFORM_90 command
+Platform reaches target angle
+PASS
+TC-06
+Four-class waste classification
+90 mAP, latency < 2 s
+PASS (90 mAP, 1.7 s avg.)
+TC-07
+Gas sensor  smoke introduced
+Buzzer + dashboard alert fires
+PASS
+TC-08
+Full end-to-end pipeline
+Dashboard update < 30 s
+PASS (22.4 s mean)
+
+5.5 Cost Analysis
+Figure 7 shows the cost breakdown. At ₹5,000 total, GreenSort is significantly cheaper than commercial smart bin deployments, which Khan et al. [4] and Alourani et al. [3] both note as a primary barrier to adoption in developing economies. All software components (Arduino IDE, TensorFlow [12], Supabase free tier [9], MQTT [8]) were zero cost. Eliminating approximately one hour of manual sorting labour per day (valued at ₹40–50/hour at current minimum wage) suggests a cost recovery period of approximately four months per unit.
+
+
+Figure 7: Prototype Cost Breakdown. Total ≈ ₹5,000. Software and cloud: ₹0.
+5.6 Prototype Photographs and Dashboard
+Figures P1, P2, and P3 below show the physical hardware assembly, the full circuit wiring, and the organisation Web Dashboard interface respectively.
+
+
+Figure P1: Prototype Hardware Assembly replace with actual photo before submission
+
+Figure P2: Full Circuit Diagram  replace with your wiring diagram before submission
+
+
+Figure P3: VMC app Dashboard Screenshot  replace with your actual screenshot before submission
+5.7 Limitations
+We want to be transparent about the current limitations of this prototype. All testing was conducted indoors under controlled laboratory conditions; we have not yet tested the ResNet classifier under the varying ambient light, rain, and physical handling conditions of outdoor deployment. The breadboard assembly is not suitable for outdoor environmental exposure and would need to be replaced with a PCB-based weatherproof enclosure for deployment. This is a single-bin prototype; scaling to the 500+ bins required for wide deployment introduces fleet management and data synchronisation challenges not addressed here. Finally, our route optimisation heuristic while effective at prototype scale is not guaranteed globally optimal; a full vehicle routing problem (VRP) formulation as discussed by Khan et al. [4] would be needed for city-scale deployment.
+6. CONCLUSION AND FUTURE SCOPE
+This paper presented GreenSort, a prototype Smart Waste Management System that demonstrates end-to-end technical and economic feasibility of integrating multi-sensor IoT monitoring with on-device deep learning for municipal solid waste management. GreenSort directly addresses three gaps consistently identified in reviewed literature [3,4,5,6,11]: the segregation-agnostic limitation of commercial smart bin systems; the absence of live IoT integration in academic AI classification work; and the waste-type blind spot in prior route optimization approaches.
+All eight prototype test cases have passed. Sensor accuracy met ±5% tolerance targets; the custom-trained ResNet achieved 90 mAP at 1.7-second edge inference latency; serial communication showed under 1% packet loss across 1,000 exchanges; and end-to-end dashboard update latency averaged 22.4 seconds. The ₹5,000 total prototype cost demonstrates that capable smart city waste infrastructure can be financially accessible without proprietary hardware or cloud services.
+Three directions are most important for future work. First, industrial hardening PCB-based weatherproof enclosures and industrial actuators for outdoor deployment; Second, AI improvement expanding the Non-Recyclable and Hazardous training datasets and evaluating segmentation architectures such as Mask R-CNN for partially obscured or mixed waste, as suggested by Alourani et al. [3]. Third, connectivity at scale, evaluating LPWAN protocols (LoRaWAN or NB-IoT) for city-wide networking as demonstrated by Sheng et al. [13] and integrating GreenSort’s outputs with VMC’s existing vehicle fleet and workforce scheduling systems.
+
+Acknowledgement
+We thank Prof. Gaurav Kumar Gaharwar for his continued guidance, particularly for the architectural feedback that led to our two-microcontroller design, an initial single-board prototype experienced exactly the timing conflicts described in the literature [3]. We also acknowledge the open-source communities behind TensorFlow [12], Arduino, and Supabase [9] whose tools made this prototype possible.
+References. 
+[1]  D. Hoornweg and P. Bhada-Tata, "What a Waste: A Global Review of Solid Waste Management," World Bank Urban Development Series, Knowledge Papers No. 15, Washington D.C., USA, 2012.
+[2]  Central Pollution Control Board (CPCB), "Annual Report on Municipal Solid Waste Management in India," Ministry of Environment, Forest and Climate Change, Government of India, New Delhi, 2022.
+[3]  A. Alourani, M. U. Ashraf, and M. Aloraini, "Smart waste management and classification system using advanced IoT and AI technologies," PeerJ Computer Science, vol. 11, p. e2777, Apr. 2025. DOI: 10.7717/peerj-cs.2777.
+[4]  S. Khan, B. Ali, A. A. K. Alharbi, S. Alotaibi, and M. Alkhathami, "Efficient IoT-Assisted Waste Collection for Urban Smart Cities," Sensors, vol. 24, no. 10, p. 3167, May 2024. DOI: 10.3390/s24103167.
+[5] O. Adedeji and Z. Wang, "Intelligent Waste Classification System Using Deep Learning Convolutional Neural Network," Procedia Manufacturing, vol. 35, pp. 607–612, 2019. DOI: 10.1016/j.promfg.2019.06.011.
+[6] L. A. Panamgama and A. Perera, "Designing of IoT-based Smart Waste Sorting System with Image-based Deep Learning Applications," in Proc. IEEE International Conference, 2021. DOI: 10.1109/ICEICE52966.2021.9454826.
+[7] K. He, X. Zhang, S. Ren, and J. Sun, "Deep Residual Learning for Image Recognition," in Proc. IEEE Conference on Computer Vision and Pattern Recognition (CVPR), Las Vegas, NV, USA, pp. 770–778, 2016. DOI: 10.1109/CVPR.2016.90.
+[8]  OASIS Standards Consortium, "MQTT Version 5.0 — OASIS Standard," OASIS, Mar. 2019. [Online]. Available: https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html.
+[9]  Supabase Inc., "Supabase Documentation — Open Source Firebase Alternative," 2024. [Online]. Available: https://supabase.com/docs. [Accessed: Apr. 2025].
+[10] United Nations, "Transforming Our World: The 2030 Agenda for Sustainable Development," Resolution A/RES/70/1, United Nations General Assembly, New York, NY, USA, 2015.
+[11] M. A. Hannan, H. Arebey, R. A. Begum, and H. Basri, "Radio frequency identification (RFID) and communication technologies for solid waste bin and truck monitoring system," Waste Management, vol. 31, no. 12, pp. 2406–2413, Dec. 2011. DOI: 10.1016/j.wasman.2011.07.024.
+[12] M. Abadi et al., "TensorFlow: Large-Scale Machine Learning on Heterogeneous Distributed Systems," in Proc. OSDI, 2016. [Online]. Available: https://www.tensorflow.org.
+[13] T. J. Sheng, M. S. Islam, N. Misran, M. H. Baharuddin, H. Arshad, M. R. Islam, and M. T. Islam, "An Internet of Things based smart waste management system using LoRa and TensorFlow deep learning model," IEEE Access, vol. 8, pp. 148793–148811, 2020. DOI: 10.1109/ACCESS.2020.3016255.
+[14] A. Raj and V. Thomas, "IoT-Based Smart Waste Management System for Municipal Corporations Using Arduino and Raspberry Pi," International Journal of Research Publication and Reviews (IJRPR), vol. 6, no. 8, 2025. [Online]. Available: https://ijrpr.com/uploads/V6ISSUE8/IJRPR51960.pdf.
+[15] P. Shanmugapriya and R. Rajan, "Smart Waste Management and Classification System for Smart Cities Using Deep Learning," in Proc. IEEE International Conference, 2022. DOI: 10.1109/ICIEM54221.2022.9815071.
