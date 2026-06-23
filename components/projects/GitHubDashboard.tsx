@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Github, Star, GitFork, Clock, ExternalLink, BookOpen, Users } from "lucide-react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface CacheEntry<T> {
@@ -75,9 +76,31 @@ const timeAgo = (dateString: string) => {
     return `${months} months ago`;
 };
 
+export interface GitHubProfile {
+    avatar_url: string;
+    name: string | null;
+    login: string;
+    bio: string | null;
+    followers: number;
+    public_repos: number;
+    html_url: string;
+}
+
+export interface GitHubRepo {
+    id: number;
+    name: string;
+    description: string | null;
+    html_url: string;
+    stargazers_count: number;
+    forks_count: number;
+    language: string | null;
+    pushed_at: string;
+    topics: string[];
+}
+
 export default function GitHubDashboard() {
-    const [profile, setProfile] = useState<any>(null);
-    const [repos, setRepos] = useState<any[]>([]);
+    const [profile, setProfile] = useState<GitHubProfile | null>(null);
+    const [repos, setRepos] = useState<GitHubRepo[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -87,8 +110,8 @@ export default function GitHubDashboard() {
         const username = "snehadpatel";
         
         try {
-            const cachedProfile = getCache<any>("github-profile");
-            const cachedRepos = getCache<any[]>("github-repos");
+            const cachedProfile = getCache<GitHubProfile>("github-profile");
+            const cachedRepos = getCache<GitHubRepo[]>("github-repos");
             
             if (cachedProfile && cachedRepos) {
                 setProfile(cachedProfile);
@@ -101,13 +124,13 @@ export default function GitHubDashboard() {
             if (!profileRes.ok) {
                 throw new Error(`Profile fetch failed: ${profileRes.status}`);
             }
-            const profileData = await profileRes.json();
+            const profileData = (await profileRes.json()) as GitHubProfile;
             
             const reposRes = await fetch(`https://api.github.com/users/${username}/repos?sort=pushed&per_page=30`);
             if (!reposRes.ok) {
                 throw new Error(`Repos fetch failed: ${reposRes.status}`);
             }
-            const reposData = (await reposRes.json()) as any[];
+            const reposData = (await reposRes.json()) as GitHubRepo[];
             
             // Sort by pushed date just in case API sorting isn't perfect
             const sortedRepos = [...reposData].sort(
@@ -119,9 +142,10 @@ export default function GitHubDashboard() {
             
             setProfile(profileData);
             setRepos(sortedRepos);
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error("GitHub API fetch error:", err);
-            setError(err.message || "Failed to load GitHub workspace data");
+            const errorMessage = err instanceof Error ? err.message : "Failed to load GitHub workspace data";
+            setError(errorMessage);
         } finally {
             setLoading(false);
         }
@@ -209,7 +233,13 @@ export default function GitHubDashboard() {
                 <div className="bg-white/60 backdrop-blur-md border border-slate-200/50 p-6 rounded-2xl shadow-sm flex flex-col justify-between">
                     <div>
                         <div className="flex items-center gap-4 mb-4">
-                            <img src={profile.avatar_url} alt={profile.name} className="w-14 h-14 rounded-full border border-slate-200/80 shadow-sm" />
+                            <Image
+                                src={profile.avatar_url}
+                                alt={profile.name || "GitHub Avatar"}
+                                width={56}
+                                height={56}
+                                className="w-14 h-14 rounded-full border border-slate-200/80 shadow-sm"
+                            />
                             <div>
                                 <h3 className="text-base font-bold text-slate-900 flex flex-col leading-tight">
                                     {profile.name}
