@@ -241,7 +241,7 @@ export const DATA: DataType = {
                 "Earned direct commendation from the CEO of Mesh Works during the hackathon presentation for ranking accuracy",
             ],
             link: "#",
-            github: "https://github.com/snehadpatel/proj",
+            github: "",
             image: "/assets/projects/supplier.jpg",
             category: "Data Analytics",
             extended: {

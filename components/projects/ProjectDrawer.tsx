@@ -168,32 +168,43 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                             </div>
 
                             {/* Links */}
-                            <div className={cn(
-                                "grid gap-3 pb-2 relative",
-                                project.publication ? "grid-cols-3" : "grid-cols-2"
-                            )}>
-                                {project.link && project.link !== "#" && (
-                                    <Button variant="default" className="w-full text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white shadow-sm" asChild>
-                                        <Link href={project.link} target="_blank" rel="noopener noreferrer">
-                                            <ExternalLink className="w-3.5 h-3.5 mr-2" /> Live Demo
-                                        </Link>
-                                    </Button>
-                                )}
-                                {project.github && project.github !== "#" && (
-                                    <Button variant="outline" className="w-full text-xs font-bold bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-sm" asChild>
-                                        <Link href={project.github} target="_blank" rel="noopener noreferrer">
-                                            <Github className="w-3.5 h-3.5 mr-2" /> Source Code
-                                        </Link>
-                                    </Button>
-                                )}
-                                {project.publication && (
-                                    <Button variant="outline" className="w-full text-xs font-bold bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-sm" asChild>
-                                        <Link href={project.publication.paperUrl} download>
-                                            <FileText className="w-3.5 h-3.5 mr-2" /> Research Paper
-                                        </Link>
-                                    </Button>
-                                )}
-                            </div>
+                            {(() => {
+                                const hasLiveDemo = project.link && project.link !== "#";
+                                const hasSourceCode = project.github && project.github !== "#";
+                                const hasPublication = !!project.publication;
+                                const buttonCount = [hasLiveDemo, hasSourceCode, hasPublication].filter(Boolean).length;
+                                
+                                if (buttonCount === 0) return null;
+                                
+                                return (
+                                    <div className={cn(
+                                        "grid gap-3 pb-2 relative",
+                                        buttonCount === 3 ? "grid-cols-3" : buttonCount === 2 ? "grid-cols-2" : "grid-cols-1"
+                                    )}>
+                                        {hasLiveDemo && (
+                                            <Button variant="default" className="w-full text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white shadow-sm" asChild>
+                                                <Link href={project.link} target="_blank" rel="noopener noreferrer">
+                                                    <ExternalLink className="w-3.5 h-3.5 mr-2" /> Live Demo
+                                                </Link>
+                                            </Button>
+                                        )}
+                                        {hasSourceCode && (
+                                            <Button variant="outline" className="w-full text-xs font-bold bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-sm" asChild>
+                                                <Link href={project.github} target="_blank" rel="noopener noreferrer">
+                                                    <Github className="w-3.5 h-3.5 mr-2" /> Source Code
+                                                </Link>
+                                            </Button>
+                                        )}
+                                        {project.publication && (
+                                            <Button variant="outline" className="w-full text-xs font-bold bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-sm" asChild>
+                                                <Link href={project.publication.paperUrl} download>
+                                                    <FileText className="w-3.5 h-3.5 mr-2" /> Research Paper
+                                                </Link>
+                                            </Button>
+                                        )}
+                                    </div>
+                                );
+                            })()}
 
                             {/* 1. The Problem */}
                             {project.extended?.problemStatement && (

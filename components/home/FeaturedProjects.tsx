@@ -36,9 +36,10 @@ export default function FeaturedProjects() {
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.08 }}
                         >
-                            <Link
-                                href={project.github}
-                                target="_blank"
+                             <Link
+                                href={project.github && project.github !== "#" ? project.github : `/projects/${project.id}`}
+                                target={project.github && project.github !== "#" ? "_blank" : undefined}
+                                rel={project.github && project.github !== "#" ? "noopener noreferrer" : undefined}
                                 className="group block"
                                 onMouseEnter={() => setHoveredId(project.id)}
                                 onMouseLeave={() => setHoveredId(null)}
