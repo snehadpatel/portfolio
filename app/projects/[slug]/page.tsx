@@ -1,7 +1,7 @@
 import { DATA } from "@/lib/data";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink, Github, Layers, Target, CheckCircle2, AlertTriangle, Trophy, Clock, Users, Wrench } from "lucide-react";
+import { ArrowLeft, ExternalLink, Github, Layers, Target, CheckCircle2, AlertTriangle, Trophy, Clock, Users, Wrench, FileText } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import PipelineVisualizer from "@/components/projects/PipelineVisualizer";
@@ -86,6 +86,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 </Link>
                             </Button>
                         )}
+                        {project.publication && (
+                            <Button variant="outline" size="lg" className="w-full font-bold uppercase tracking-wider text-xs rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-950 shadow-sm" asChild>
+                                <Link href={project.publication.paperUrl} download>
+                                    <FileText className="w-4 h-4 mr-2" /> Research Paper
+                                </Link>
+                            </Button>
+                        )}
                     </div>
                 </div>
             </div>
@@ -150,6 +157,43 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                         <p className="text-indigo-50 text-lg leading-relaxed font-medium relative z-10">
                                             {project.extended.impact}
                                         </p>
+                                    </div>
+                                </section>
+                            )}
+
+                            {project.publication && (
+                                <section className="space-y-6">
+                                    <h2 className="text-2xl font-bold font-heading mb-6 flex items-center gap-2 text-slate-900 uppercase">
+                                        <FileText className="w-6 h-6 text-indigo-500" /> Academic Publication
+                                    </h2>
+                                    <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-5">
+                                        <div className="grid sm:grid-cols-2 gap-4">
+                                            <div>
+                                                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-1">Conference</span>
+                                                <span className="text-sm font-semibold text-slate-800">{project.publication.conference}</span>
+                                            </div>
+                                            <div>
+                                                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-1">Authors</span>
+                                                <span className="text-sm font-semibold text-slate-800">{project.publication.authors.join(", ")}</span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-1">Paper Title</span>
+                                            <h3 className="text-base font-bold text-slate-900 leading-snug">{project.publication.title}</h3>
+                                        </div>
+                                        <div>
+                                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-1">Abstract</span>
+                                            <p className="text-sm text-slate-500 leading-relaxed font-light bg-slate-50/50 p-4 rounded-lg border border-slate-100 italic">
+                                                &ldquo;{project.publication.abstract}&rdquo;
+                                            </p>
+                                        </div>
+                                        <div className="pt-2">
+                                            <Button variant="outline" className="w-full text-xs font-bold bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-sm" asChild>
+                                                <Link href={project.publication.paperUrl} download>
+                                                    <FileText className="w-4 h-4 mr-2" /> Download Research Paper (.docx)
+                                                </Link>
+                                            </Button>
+                                        </div>
                                     </div>
                                 </section>
                             )}

@@ -87,8 +87,8 @@ export default function FeaturedProjects() {
 
                                                     {/* Overlay info */}
                                                     <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
-                                                        <p className="text-white/90 text-xs md:text-sm max-w-md leading-relaxed font-light">
-                                                            {project.description.slice(0, 120)}...
+                                                        <p className="text-white/90 text-xs md:text-sm max-w-2xl leading-relaxed font-light">
+                                                            {project.description}
                                                         </p>
                                                         <div className="flex gap-1.5 shrink-0 ml-4">
                                                             {project.techStack.slice(0, 3).map((tech) => (
