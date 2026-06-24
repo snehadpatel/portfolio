@@ -1,6 +1,8 @@
 import { MetadataRoute } from 'next'
 import { DATA } from '@/lib/data'
 
+export const dynamic = 'force-static';
+
 export default function sitemap(): MetadataRoute.Sitemap {
     const projects = DATA.projects.map((project) => ({
         url: `https://snehadpatel-portfolio.vercel.app/projects/${project.id}`,
