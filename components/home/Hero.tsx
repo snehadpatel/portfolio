@@ -4,9 +4,14 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { UnderlineDoodle } from "@/components/ui/Doodles";
+import { useRecruiterMode } from "@/lib/hooks/useRecruiterMode";
 
-// 2. Bounding Box for "learn"
-function BoundingBoxDoodle() {
+// 2. Bounding Box for dynamic label
+interface BoundingBoxProps {
+    label: string;
+}
+
+function BoundingBoxDoodle({ label }: BoundingBoxProps) {
     return (
         <span className="absolute -inset-1.5 md:-inset-2 pointer-events-none block">
             <svg
@@ -62,7 +67,7 @@ function BoundingBoxDoodle() {
                 transition={{ delay: 2.6, duration: 0.3 }}
                 className="absolute -top-3 md:-top-4 -left-1 px-1 bg-indigo-500/80 text-white font-mono text-[7px] md:text-[8px] uppercase tracking-wider rounded-sm leading-none py-0.5"
             >
-                learn [99%]
+                {label}
             </motion.span>
         </span>
     );
@@ -111,6 +116,57 @@ function ArrowDoodle() {
 }
 
 export default function Hero() {
+    const { role } = useRecruiterMode();
+
+    // Dynamic config based on role
+    const getHeroConfig = () => {
+        if (role === "ml") {
+            return {
+                word1: "that see,",
+                word2: "train",
+                word3: "& act.",
+                boxLabel: "train [99%]",
+                subtitle: "I am Sneha Patel, a CS student specializing in Machine Learning & Computer Vision. I build deep neural networks (like a 97.5% accuracy Deepfake ViT pipeline) and optimize edge architectures for visual forensics and crop classification."
+            };
+        }
+        if (role === "data") {
+            return {
+                word1: "that ingest,",
+                word2: "learn",
+                word3: "& query.",
+                boxLabel: "query [99%]",
+                subtitle: "I am Sneha Patel, a CS student specializing in Data Engineering & Analytics. I design relational and Neo4j graph databases to map distress sentiment patterns and construct decision intelligence ranking algorithms."
+            };
+        }
+        if (role === "iot") {
+            return {
+                word1: "that see,",
+                word2: "wire",
+                word3: "& act.",
+                boxLabel: "wire [99%]",
+                subtitle: "I am Sneha Patel, a CS student specializing in IoT & Embedded Hardware. I engineer offline edge intelligence linking Raspberry Pi YOLOv8 vision units to Arduino-controlled servo flap controllers."
+            };
+        }
+        if (role === "fullstack") {
+            return {
+                word1: "that see,",
+                word2: "code",
+                word3: "& act.",
+                boxLabel: "code [99%]",
+                subtitle: "I am Sneha Patel, a CS student specializing in Full-Stack development. I build high-fidelity Next.js web applications, client-side localStorage caching mechanisms, and robust FastAPI microservices."
+            };
+        }
+        return {
+            word1: "that see,",
+            word2: "learn",
+            word3: "& act.",
+            boxLabel: "learn [99%]",
+            subtitle: "I am Sneha Patel, a CS student at Navrachana University. I build computer vision pipelines and edge ML systems because I believe AI should solve real, physical-world problems and amplify human capabilities."
+        };
+    };
+
+    const config = getHeroConfig();
+
     // Staggered reveal animation
     const container = {
         hidden: { opacity: 0 },
@@ -148,7 +204,7 @@ export default function Hero() {
                     className="max-w-[1200px] mx-auto"
                 >
                     {/* Availability tag */}
-                    <motion.div variants={fadeIn} className="mb-10 md:mb-14">
+                    <motion.div variants={fadeIn} className="mb-10 md:mb-14 print:hidden">
                         <span className="inline-flex items-center gap-2.5 text-[11px] font-semibold uppercase tracking-[0.15em] text-slate-500">
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -184,17 +240,14 @@ export default function Hero() {
                         <div className="overflow-hidden">
                             <motion.div variants={slideUp} className="flex items-baseline gap-3 md:gap-5 flex-wrap">
                                 <span className="txt-cursive text-[clamp(1.4rem,3vw,3rem)] text-slate-400 leading-none">
-                                    that see,
+                                    {config.word1}
                                 </span>
                                 <h1 className="relative inline-block text-[clamp(2.5rem,6vw,5.5rem)] font-extrabold font-heading tracking-tighter leading-[0.9] uppercase text-indigo-600/30 px-2">
-                                    learn
-                                    <BoundingBoxDoodle />
+                                    {config.word2}
+                                    <BoundingBoxDoodle label={config.boxLabel} />
                                 </h1>
-                                <span className="txt-cursive text-[clamp(1.4rem,3vw,3rem)] text-slate-400 leading-none">
-                                    &
-                                </span>
                                 <h1 className="text-[clamp(2.5rem,6vw,5.5rem)] font-extrabold font-heading tracking-tighter leading-[0.9] uppercase text-indigo-600/30">
-                                    act.
+                                    {config.word3}
                                 </h1>
                             </motion.div>
                         </div>
@@ -207,13 +260,11 @@ export default function Hero() {
                     >
                         <div className="max-w-lg">
                             <p className="text-sm md:text-base text-slate-500 leading-relaxed font-light">
-                                I am Sneha Patel, a CS student at Navrachana University.
-                                I build computer vision pipelines and edge ML systems because
-                                I believe AI should solve real, physical-world problems and amplify human capabilities.
+                                {config.subtitle}
                             </p>
                         </div>
 
-                        <div className="flex items-center gap-4 relative">
+                        <div className="flex items-center gap-4 relative print:hidden">
                             <ArrowDoodle />
                             <Link
                                 href="/projects"

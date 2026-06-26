@@ -4,38 +4,60 @@ import { DATA } from "@/lib/data";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { UnderlineDoodle, StarDoodle, CircuitTraceDoodle } from "@/components/ui/Doodles";
-
-const fadeIn = {
-    initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    transition: { duration: 0.6 },
-};
+import { UnderlineDoodle, CircuitTraceDoodle } from "@/components/ui/Doodles";
+import { useRecruiterMode } from "@/lib/hooks/useRecruiterMode";
+import CertificationsDashboard from "@/components/about/CertificationsDashboard";
 
 export default function AboutPage() {
+    const { role } = useRecruiterMode();
+
+    const getBioText = () => {
+        if (role === "ml") {
+            return "I'm Sneha - a computer science student specializing in Machine Learning and Computer Vision, building high-accuracy neural network models (like a 97.5% accuracy Deepfake ViT pipeline) and local edge inference architectures.";
+        }
+        if (role === "data") {
+            return "I'm Sneha - a computer science student specializing in Data Engineering and Graph Databases, building analytics classifiers, optimizing supplier-ranking systems, and query parsing with Neo4j graph databases.";
+        }
+        if (role === "iot") {
+            return "I'm Sneha - a computer science student specializing in IoT and Embedded Systems, linking edge vision cores (Raspberry Pi 4 running YOLOv8) with mechanical microcontrollers and autonomous tracking systems.";
+        }
+        if (role === "fullstack") {
+            return "I'm Sneha - a computer science student specializing in Full-Stack development, building responsive Next.js/React frontend dashboards, local caching systems, and robust FastAPI backend microservices.";
+        }
+        return "I'm Sneha - a computer science student who gets genuinely excited about making machines understand the world. Whether it's training a Vision Transformer to catch deepfakes or wiring up an Arduino to sort waste automatically, I'm happiest when code does something real.";
+    };
+
     return (
         <div className="min-h-screen pt-28 md:pt-36 pb-20">
             <div className="w-full px-6 md:px-10">
                 <div className="max-w-[1200px] mx-auto">
 
-                    {/* Page Header */}
-                    <motion.div {...fadeIn} className="mb-16 md:mb-24">
+                    {/* Resume Header (Print Only) */}
+                    <div className="hidden print:block mb-8 border-b-2 border-slate-900 pb-4">
+                        <h1 className="text-3xl font-extrabold uppercase tracking-tight mb-1">{DATA.profile.name}</h1>
+                        <p className="text-sm font-mono text-indigo-600 mb-2">{role ? `${role.toUpperCase()} Engineer Profile` : DATA.profile.tagline}</p>
+                        <div className="flex flex-wrap gap-x-6 gap-y-1 text-xs text-slate-600 font-mono">
+                            <span>Email: {DATA.profile.email}</span>
+                            <span>GitHub: github.com/snehadpatel</span>
+                            <span>LinkedIn: linkedin.com/in/sneha-patel-a0ba14212</span>
+                            <span>Location: Vadodara, Gujarat, India</span>
+                        </div>
+                    </div>
+
+                    {/* Page Header (Web Only) */}
+                    <div className="mb-16 md:mb-24 print:hidden">
                         <span className="txt-cursive text-lg text-slate-400 block mb-2">a little bit</span>
                         <h1 className="relative inline-block text-5xl md:text-7xl lg:text-8xl font-extrabold font-heading tracking-tighter uppercase text-slate-900 leading-[0.9]">
                             About Me
                             <UnderlineDoodle />
                         </h1>
-                    </motion.div>
+                    </div>
 
                     {/* Bio Section */}
-                    <motion.div {...fadeIn} className="grid md:grid-cols-2 gap-12 md:gap-20 mb-20 md:mb-28">
+                    <div className="grid md:grid-cols-2 gap-12 md:gap-20 mb-20 md:mb-28">
                         <div>
                             <p className="text-lg md:text-xl text-slate-700 leading-relaxed font-light mb-6">
-                                I&apos;m Sneha - a computer science student who gets genuinely excited about
-                                making machines understand the world. Whether it&apos;s training a Vision Transformer
-                                to catch deepfakes or wiring up an Arduino to sort waste automatically,
-                                I&apos;m happiest when code does something real.
+                                {getBioText()}
                             </p>
                             <p className="text-sm text-slate-500 leading-relaxed font-light">
                                 {DATA.profile.summary}
@@ -43,7 +65,7 @@ export default function AboutPage() {
                         </div>
                         <div className="space-y-6 relative">
                             {/* IoT Circuit watermark doodle */}
-                            <CircuitTraceDoodle className="absolute -right-8 -bottom-12 opacity-30 pointer-events-none hidden lg:block text-indigo-500" />
+                            <CircuitTraceDoodle className="absolute -right-8 -bottom-12 opacity-30 pointer-events-none hidden lg:block text-indigo-500 print:hidden" />
                             
                             <div className="py-4 border-b border-slate-200/60 relative z-10">
                                 <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block mb-1">Location</span>
@@ -57,7 +79,7 @@ export default function AboutPage() {
                                 <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block mb-1">Focus Areas</span>
                                 <span className="text-sm font-semibold text-slate-800">Computer Vision · ML · IoT · Edge AI</span>
                             </div>
-                            <div className="pt-4 relative z-10">
+                            <div className="pt-4 relative z-10 print:hidden">
                                 <Link
                                     href={DATA.profile.resumeUrl || "#"}
                                     target="_blank"
@@ -68,20 +90,20 @@ export default function AboutPage() {
                                 </Link>
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* Experience Section */}
                     <section className="mb-20 md:mb-28">
-                        <motion.div {...fadeIn} className="mb-12">
-                            <span className="txt-cursive text-base text-slate-400 block mb-1">professional</span>
+                        <div className="mb-12">
+                            <span className="txt-cursive text-base text-slate-400 block mb-1 print:hidden">professional</span>
                             <h2 className="text-3xl md:text-4xl font-extrabold font-heading tracking-tighter uppercase text-slate-900">
                                 Experience
                             </h2>
-                        </motion.div>
+                        </div>
 
                         <div>
                             {DATA.experience.map((exp, i) => (
-                                <motion.div key={i} {...fadeIn}>
+                                <div key={i} className="page-break-avoid">
                                     <div className="py-8 md:py-10 grid md:grid-cols-3 gap-4 md:gap-12 items-start">
                                         <div className="md:col-span-1">
                                             <h3 className="text-base md:text-lg font-bold text-slate-900 mb-1">{exp.role}</h3>
@@ -94,24 +116,24 @@ export default function AboutPage() {
                                             <p className="text-sm text-slate-500 leading-relaxed font-light">{exp.description}</p>
                                         </div>
                                     </div>
-                                    <div className="divider-line" />
-                                </motion.div>
+                                    <div className="divider-line print:hidden" />
+                                </div>
                             ))}
                         </div>
                     </section>
 
                     {/* Education Section */}
                     <section className="mb-20 md:mb-28">
-                        <motion.div {...fadeIn} className="mb-12">
-                            <span className="txt-cursive text-base text-slate-400 block mb-1">academic</span>
+                        <div className="mb-12">
+                            <span className="txt-cursive text-base text-slate-400 block mb-1 print:hidden">academic</span>
                             <h2 className="text-3xl md:text-4xl font-extrabold font-heading tracking-tighter uppercase text-slate-900">
                                 Education
                             </h2>
-                        </motion.div>
+                        </div>
 
                         <div>
                             {DATA.education.map((edu, i) => (
-                                <motion.div key={i} {...fadeIn}>
+                                <div key={i} className="page-break-avoid">
                                     <div className="py-8 md:py-10 grid md:grid-cols-3 gap-4 md:gap-12 items-start">
                                         <div className="md:col-span-1">
                                             <h3 className="text-base md:text-lg font-bold text-slate-900 mb-1">{edu.degree}</h3>
@@ -126,19 +148,19 @@ export default function AboutPage() {
                                             </p>
                                         </div>
                                     </div>
-                                    <div className="divider-line" />
-                                </motion.div>
+                                    <div className="divider-line print:hidden" />
+                                </div>
                             ))}
                         </div>
                     </section>
 
                     {/* Certifications & Achievements */}
                     <section className="mb-20 md:mb-28">
-                        <motion.div {...fadeIn} className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                        <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4 print:hidden">
                             <div>
                                 <span className="txt-cursive text-base text-slate-400 block mb-1">recognition</span>
                                 <h2 className="text-3xl md:text-4xl font-extrabold font-heading tracking-tighter uppercase text-slate-900">
-                                    Achievements
+                                    Achievements & Certifications
                                 </h2>
                             </div>
                             {DATA.profile.certificationsUrl && (
@@ -152,40 +174,26 @@ export default function AboutPage() {
                                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                                 </Link>
                             )}
-                        </motion.div>
-
-                        <div className="grid sm:grid-cols-2 gap-0">
-                            {[
-                                { title: "WSRO Nationals", desc: "Robot Race Competitor (Hardware & Programming)" },
-                                { title: "Hackathon Commendation", desc: "AI Supplier Ranking Agent - Appreciated by CEO of Mesh Works" },
-                                { title: "AWS Academy", desc: "Machine Learning Foundations Certificate" },
-                                { title: "GCP Data Engineer Pro", desc: "Becoming a Google Cloud Data Engineer Certificate" },
-                                { title: "Neo4j Certified Professional", desc: "Certified Professional in Graph Database Systems" },
-                                { title: "IBM Professional Analytics", desc: "Data Analysis Using Python & IBM Analytics Program" },
-                                { title: "Cisco Certification", desc: "Introduction to IoT & Cybersecurity Professional Certificates" },
-                            ].map((item, i) => (
-                                <motion.div key={i} {...fadeIn} className="py-6 border-b border-slate-200/60">
-                                    <div className="flex items-start gap-3">
-                                        <StarDoodle className="mt-0.5 text-amber-500" />
-                                        <div>
-                                            <h4 className="text-sm font-bold text-slate-800 mb-0.5">{item.title}</h4>
-                                            <p className="text-xs text-slate-500 font-light">{item.desc}</p>
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            ))}
                         </div>
+
+                        <div className="hidden print:block">
+                            <h2 className="text-3xl font-extrabold font-heading tracking-tighter uppercase text-slate-900 mb-6">
+                                Credentials & Achievements
+                            </h2>
+                        </div>
+
+                        <CertificationsDashboard />
                     </section>
 
                     {/* Philosophy */}
-                    <motion.section {...fadeIn} className="max-w-2xl">
+                    <section className="max-w-2xl print:hidden">
                         <span className="txt-cursive text-base text-slate-400 block mb-1">my philosophy</span>
                         <p className="text-lg md:text-xl text-slate-700 leading-relaxed font-light">
                             I believe AI should be accessible, ethical, and built to amplify what people can do - not replace them.
                             My approach is simple: write clean code, understand the problem deeply, and never stop learning.
                             The best engineering happens when curiosity meets discipline.
                         </p>
-                    </motion.section>
+                    </section>
 
                 </div>
             </div>
