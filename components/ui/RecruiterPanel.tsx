@@ -516,7 +516,7 @@ export default function RecruiterPanel() {
                                                     </div>
                                                 </div>
                                             )}
-                                        </div>
+                                        </motion.div>
                                     )}
 
                                     {/* Tab 3: Q&A Chat Agent */}
