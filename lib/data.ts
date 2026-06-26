@@ -28,6 +28,7 @@ export interface Project {
     github: string;
     image: string;
     category: string;
+    roles: ("ml" | "data" | "iot" | "fullstack")[];
     extended?: ExtendedDetails;
     publication?: PublicationDetails;
 }
@@ -72,6 +73,25 @@ export interface Service {
     icon: string;
 }
 
+export interface Certification {
+    id: string;
+    title: string;
+    issuer: string;
+    date: string;
+    credentialId?: string;
+    verificationUrl?: string;
+    skills: string[];
+    category: "cloud" | "ml" | "graph" | "iot" | "analytics" | "networking";
+}
+
+export interface Achievement {
+    id: string;
+    title: string;
+    desc: string;
+    category: "hackathon" | "robotics" | "academic" | "general";
+    date?: string;
+}
+
 export interface DataType {
     profile: Profile;
     skills: SkillSet;
@@ -79,6 +99,8 @@ export interface DataType {
     education: Education[];
     projects: Project[];
     services: Service[];
+    certifications: Certification[];
+    achievements: Achievement[];
 }
 
 export const DATA: DataType = {
@@ -153,6 +175,7 @@ export const DATA: DataType = {
             github: "https://github.com/snehadpatel/DeepFake-Detection-and-Prevention-A-Comprehensive-approach-using-AI-main",
             image: "/assets/projects/deepshield.jpg",
             category: "Computer Vision",
+            roles: ["ml", "fullstack"],
             extended: {
                 problemStatement: "Current deepfake detectors rely heavily on spatial convolutions, making them highly vulnerable to simple post-processing attacks like JPEG compression, resizing, or minor noise additions. I needed a system that could detect fakes even after they'd been laundered through social media compressions.",
                 constraints: {
@@ -181,6 +204,7 @@ export const DATA: DataType = {
             github: "https://github.com/snehadpatel/Local-Vegetable-Variety-Classifier",
             image: "/assets/projects/veg.jpg",
             category: "Deep Learning",
+            roles: ["ml"],
             extended: {
                 problemStatement: "Agricultural deep learning models trained on perfect, uniform datasets fail catastrophically in real-world farm conditions where lighting, shadows, and occlusions are highly unpredictable.",
                 constraints: {
@@ -209,6 +233,7 @@ export const DATA: DataType = {
             github: "https://github.com/snehadpatel/greensort",
             image: "/assets/projects/waste.jpg",
             category: "IoT & Computer Vision",
+            roles: ["iot", "ml"],
             extended: {
                 problemStatement: "Traditional waste sorting is manual, slow, and unhygienic. Existing smart bins often rely on cloud APIs, making them useless in areas with poor connectivity and introducing unacceptable latency for physical sorting.",
                 constraints: {
@@ -244,6 +269,7 @@ export const DATA: DataType = {
             github: "",
             image: "/assets/projects/supplier.jpg",
             category: "Data Analytics",
+            roles: ["data", "ml"],
             extended: {
                 problemStatement: "Logistics networks struggle to dynamically evaluate and rank cargo providers, often relying on static, outdated spreadsheets that fail to capture real-time risks like defect ratios and late deliveries.",
                 constraints: {
@@ -272,6 +298,7 @@ export const DATA: DataType = {
             github: "https://github.com/snehadpatel/Sucide-prediction",
             image: "/assets/projects/suicide.jpg",
             category: "Machine Learning & NLP",
+            roles: ["ml", "data"],
             extended: {
                 problemStatement: "Traditional text classification models evaluate crisis statements in a vacuum, focusing on isolated keywords rather than the temporal behavioral changes and context paths critical for clinical risk assessment.",
                 constraints: {
@@ -334,5 +361,81 @@ export const DATA: DataType = {
             ],
             icon: "Database"
         }
+    ],
+    certifications: [
+        {
+            id: "aws-ml",
+            title: "AWS Academy Graduate - AWS Academy Machine Learning Foundations",
+            issuer: "Amazon Web Services (AWS)",
+            date: "2024",
+            credentialId: "AWS-ML-FOUNDATIONS",
+            verificationUrl: "https://1drv.ms/f/c/03287c4bb4d61c65/IgBVZXa0HMbGQIVjxTOM8w3HAU2GLdZMWoUmkxXOEklYTmA?e=0zaAY6",
+            skills: ["Machine Learning", "Python", "Cloud Computing", "AWS"],
+            category: "cloud"
+        },
+        {
+            id: "gcp-data",
+            title: "Google Cloud Academy - Becoming a Google Cloud Data Engineer",
+            issuer: "Google Cloud (GCP)",
+            date: "2024",
+            credentialId: "GCP-DATA-ENGINEER",
+            verificationUrl: "https://1drv.ms/f/c/03287c4bb4d61c65/IgBVZXa0HMbGQIVjxTOM8w3HAU2GLdZMWoUmkxXOEklYTmA?e=0zaAY6",
+            skills: ["Data Engineering", "BigQuery", "GCP", "SQL"],
+            category: "cloud"
+        },
+        {
+            id: "neo4j-pro",
+            title: "Neo4j Certified Professional",
+            issuer: "Neo4j Graph Academy",
+            date: "2024",
+            credentialId: "NEO4J-CERTIFIED-PRO",
+            verificationUrl: "https://1drv.ms/f/c/03287c4bb4d61c65/IgBVZXa0HMbGQIVjxTOM8w3HAU2GLdZMWoUmkxXOEklYTmA?e=0zaAY6",
+            skills: ["Graph Databases", "Neo4j", "Cypher", "NoSQL"],
+            category: "graph"
+        },
+        {
+            id: "ibm-analytics",
+            title: "Data Analysis using Python & IBM Analytics",
+            issuer: "IBM",
+            date: "2023",
+            credentialId: "IBM-DATA-ANALYTICS",
+            verificationUrl: "https://1drv.ms/f/c/03287c4bb4d61c65/IgBVZXa0HMbGQIVjxTOM8w3HAU2GLdZMWoUmkxXOEklYTmA?e=0zaAY6",
+            skills: ["Data Analysis", "Python", "Pandas", "Data Visualization"],
+            category: "analytics"
+        },
+        {
+            id: "cisco-iot",
+            title: "Introduction to IoT & Cybersecurity Professional",
+            issuer: "Cisco Networking Academy",
+            date: "2023",
+            credentialId: "CISCO-IOT-CYBER",
+            verificationUrl: "https://1drv.ms/f/c/03287c4bb4d61c65/IgBVZXa0HMbGQIVjxTOM8w3HAU2GLdZMWoUmkxXOEklYTmA?e=0zaAY6",
+            skills: ["IoT", "Cybersecurity", "Networking", "Hardware"],
+            category: "iot"
+        }
+    ],
+    achievements: [
+        {
+            id: "wsro-nationals",
+            title: "WSRO Nationals Robot Race Competitor",
+            desc: "Represented the institution in national-level robotics championship, designing and programming an autonomous high-speed tracking robot using C++ and Arduino.",
+            category: "robotics",
+            date: "2023"
+        },
+        {
+            id: "hackathon-commendation",
+            title: "CEO Hackathon Commendation (Mesh Works)",
+            desc: "Designed and built an AI Supplier Ranking Agent that analyzes defect rates, late deliveries, and cost metrics. Received a personal commendation from the CEO of Mesh Works.",
+            category: "hackathon",
+            date: "2024"
+        },
+        {
+            id: "diploma-topper",
+            title: "Academic Distinction - 9.42 CGPA Topper",
+            desc: "Graduated Diploma in Computer Engineering with academic distinction, securing a perfect SPI 10.0 in the final semester at Govt. Polytechnic for Girls, Ahmedabad.",
+            category: "academic",
+            date: "2024"
+        }
     ]
 };
+
