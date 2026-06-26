@@ -1,7 +1,7 @@
 import { DATA } from "@/lib/data";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink, Github, Layers, Target, CheckCircle2, AlertTriangle, Trophy, Clock, Users, Wrench, FileText } from "lucide-react";
+import { ArrowLeft, ExternalLink, Github, Layers, CheckCircle2, AlertTriangle, Trophy, Clock, Users, Wrench, FileText } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import PipelineVisualizer from "@/components/projects/PipelineVisualizer";

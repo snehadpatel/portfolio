@@ -53,7 +53,7 @@ function ContactForm() {
             } else {
                 alert("Oops! There was a problem submitting your form. Did you set your Formspree ID?");
             }
-        } catch (error) {
+        } catch {
             alert("Oops! There was a network error submitting your form.");
         } finally {
             setIsSubmitting(false);

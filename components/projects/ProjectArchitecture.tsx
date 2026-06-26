@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 import { Cpu, Camera, Terminal, ShieldCheck, Heart, Database, AlertCircle } from "lucide-react";
 
 interface ProjectArchitectureProps {

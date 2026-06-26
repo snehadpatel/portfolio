@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Briefcase, X, Check, Printer, Sparkles, Sliders, Send, HelpCircle, FileText } from "lucide-react";
+import { Briefcase, X, Check, Sparkles, Sliders, Send, HelpCircle, FileText } from "lucide-react";
 import { useRecruiterMode, RecruiterRole } from "@/lib/hooks/useRecruiterMode";
 import { cn } from "@/lib/utils";
 import { answerQuestion, scanJobDescription, ATSAnalysis } from "@/lib/agent/recruiterAgent";
