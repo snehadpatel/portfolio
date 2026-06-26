@@ -6,6 +6,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import AICoreSandbox from "@/components/ui/AICoreSandbox";
 import InteractiveBackground from "@/components/ui/InteractiveBackground";
+import RecruiterPanel from "@/components/ui/RecruiterPanel";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const plusJakarta = Plus_Jakarta_Sans({
@@ -53,6 +54,7 @@ export default function RootLayout({
                 </main>
                 <Footer />
                 <AICoreSandbox />
+                <RecruiterPanel />
             </body>
         </html>
     );
