@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Briefcase, X, Check, Printer, Sparkles, Sliders, Eye } from "lucide-react";
+import { Briefcase, X, Check, Printer, Sparkles, Sliders } from "lucide-react";
 import { useRecruiterMode, RecruiterRole } from "@/lib/hooks/useRecruiterMode";
 import { cn } from "@/lib/utils";
 

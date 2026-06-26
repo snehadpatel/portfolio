@@ -7,7 +7,7 @@ import { useRecruiterMode } from "@/lib/hooks/useRecruiterMode";
 import { Search, ExternalLink, Award, Sparkles, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const CATEGORIES = [
+const CATEGORIES: { id: "all" | "cloud" | "graph" | "iot" | "analytics"; label: string }[] = [
     { id: "all", label: "All Credentials" },
     { id: "cloud", label: "Cloud & ML" },
     { id: "graph", label: "Graph Databases" },
@@ -106,7 +106,7 @@ export default function CertificationsDashboard() {
                     {CATEGORIES.map((cat) => (
                         <button
                             key={cat.id}
-                            onClick={() => setActiveTab(cat.id as any)}
+                            onClick={() => setActiveTab(cat.id)}
                             className={cn(
                                 "px-4 py-2 text-[10px] font-bold uppercase tracking-wider rounded-lg transition-all duration-300",
                                 activeTab === cat.id
