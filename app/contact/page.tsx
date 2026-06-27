@@ -7,7 +7,6 @@ import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { UnderlineDoodle, PaperPlaneDoodle } from "@/components/ui/Doodles";
-import Script from "next/script";
 
 const fadeIn = {
     initial: { opacity: 0, y: 20 },
@@ -123,25 +122,6 @@ function ContactForm() {
                             </div>
                             <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-slate-900 group-hover:translate-x-1 transition-all" />
                         </Link>
-                    </div>
-
-                    <div className="mt-8 pt-6 border-t border-slate-200/60 print:hidden">
-                        <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block mb-4">Support My Work</span>
-                        <div className="inline-flex min-h-[40px]">
-                            <Script
-                                src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
-                                data-name="bmc-button"
-                                data-slug="snehadipana"
-                                data-color="#BD5FFF"
-                                data-emoji="🍕"
-                                data-font="Lato"
-                                data-text="Buy me a pizza"
-                                data-outline-color="#000000"
-                                data-font-color="#ffffff"
-                                data-coffee-color="#FFDD00"
-                                strategy="afterInteractive"
-                            />
-                        </div>
                     </div>
                 </motion.div>
 

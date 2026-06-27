@@ -6,7 +6,6 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import InteractiveBackground from "@/components/ui/InteractiveBackground";
 import RecruiterPanel from "@/components/ui/RecruiterPanel";
-import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const plusJakarta = Plus_Jakarta_Sans({
@@ -54,20 +53,6 @@ export default function RootLayout({
                 </main>
                 <Footer />
                 <RecruiterPanel />
-                
-                <Script
-                    src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
-                    data-name="BMC-Widget"
-                    data-cfasync="false"
-                    data-id="snehadipana"
-                    data-description="Support me on Buy me a coffee!"
-                    data-message=""
-                    data-color="#FF813F"
-                    data-position="Right"
-                    data-x_margin="18"
-                    data-y_margin="18"
-                    strategy="afterInteractive"
-                />
             </body>
         </html>
     );
