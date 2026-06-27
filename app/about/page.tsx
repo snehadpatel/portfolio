@@ -101,14 +101,14 @@ export default function AboutPage() {
                                 </span>
                             </div>
                             <div className="pt-4 relative z-10 print:hidden flex items-center">
-                                <Link
-                                    href={DATA.profile.resumeUrl || "#"}
-                                    target="_blank"
-                                    className="group relative inline-flex items-center gap-2.5 px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-bold uppercase tracking-[0.12em] rounded-full transition-all duration-300 shadow-sm z-10"
+                                <a
+                                    href={DATA.profile.resumeUrl || "/assets/resume.pdf"}
+                                    download="Sneha_Patel_Resume.pdf"
+                                    className="group relative inline-flex items-center gap-2.5 px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-bold uppercase tracking-[0.12em] rounded-full transition-all duration-300 shadow-sm z-10 cursor-pointer"
                                 >
                                     Download Resume
                                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                                </Link>
+                                </a>
                                 <CurlyArrowDoodle className="absolute left-[190px] -top-6 w-16 h-12 text-indigo-400/80 -rotate-[140deg] hidden sm:block pointer-events-none" />
                             </div>
                         </div>
