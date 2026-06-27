@@ -4,7 +4,6 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import AICoreSandbox from "@/components/ui/AICoreSandbox";
 import InteractiveBackground from "@/components/ui/InteractiveBackground";
 import RecruiterPanel from "@/components/ui/RecruiterPanel";
 
@@ -53,7 +52,6 @@ export default function RootLayout({
                     {children}
                 </main>
                 <Footer />
-                <AICoreSandbox />
                 <RecruiterPanel />
             </body>
         </html>
