@@ -6,9 +6,9 @@ import Image from "next/image";
 
 import { DATA, Project } from "@/lib/data";
 import ProjectDrawer from "@/components/projects/ProjectDrawer";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { UnderlineDoodle } from "@/components/ui/Doodles";
+import { UnderlineDoodle, BulbDoodle, SparkleDoodle } from "@/components/ui/Doodles";
 import { useRecruiterMode } from "@/lib/hooks/useRecruiterMode";
 import InteractiveSkillsMatrix from "@/components/projects/InteractiveSkillsMatrix";
 
@@ -68,10 +68,13 @@ export default function ProjectsPage() {
                         <p className="text-xs font-mono text-slate-600">Dynamic Curated Case Studies Tailored for Placements</p>
                     </div>
 
-                    <p className="text-base text-slate-500 font-light leading-relaxed max-w-xl mb-10 print:hidden">
-                        From deepfake detection to IoT waste sorting - each project represents a
-                        different problem I cared about solving.
-                    </p>
+                    <div className="relative max-w-xl mb-10 print:hidden">
+                        <p className="text-base text-slate-500 font-light leading-relaxed pr-16">
+                            From deepfake detection to IoT waste sorting - each project represents a
+                            different problem I cared about solving.
+                        </p>
+                        <BulbDoodle className="absolute -top-6 -right-12 text-yellow-500/20 hidden md:block w-16 h-16" />
+                    </div>
 
                     {/* Skills Mapping Component */}
                     <div className="mb-10 print:hidden">
@@ -129,13 +132,13 @@ export default function ProjectsPage() {
                                                     ({String(index + 1).padStart(2, "0")})
                                                 </span>
                                                 <h3 className="text-xl md:text-3xl lg:text-4xl font-extrabold font-heading tracking-tight text-slate-900 group-hover:text-indigo-600 transition-colors duration-300 truncate leading-tight uppercase flex items-center gap-2">
-                                                    {project.title}
-                                                    {isRoleMatch && (
-                                                        <span className="inline-flex items-center gap-1 text-[9px] bg-indigo-100 text-indigo-700 font-bold tracking-wider px-2 py-0.5 rounded-full uppercase scale-90 origin-left print:hidden">
-                                                            <Sparkles className="w-2.5 h-2.5 text-indigo-500 shrink-0" />
-                                                            Top Match
-                                                        </span>
-                                                    )}
+                                                     {project.title}
+                                                     {isRoleMatch && (
+                                                         <span className="inline-flex items-center gap-1 text-[9px] bg-indigo-100/80 text-indigo-700 font-bold tracking-wider px-2.5 py-0.5 rounded-full uppercase scale-90 origin-left print:hidden border border-indigo-200/50">
+                                                             <SparkleDoodle className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
+                                                             Top Match
+                                                         </span>
+                                                     )}
                                                 </h3>
                                             </div>
 

@@ -3,12 +3,31 @@
 import { DATA } from "@/lib/data";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { UnderlineDoodle, CircuitTraceDoodle } from "@/components/ui/Doodles";
+import { UnderlineDoodle, CircuitTraceDoodle, CurlyArrowDoodle, ScribbleHighlightDoodle, SparkleDoodle, BulbDoodle } from "@/components/ui/Doodles";
 import { useRecruiterMode } from "@/lib/hooks/useRecruiterMode";
 import CertificationsDashboard from "@/components/about/CertificationsDashboard";
 
 export default function AboutPage() {
     const { role } = useRecruiterMode();
+
+    const highlightGrades = (text: string) => {
+        const target = "Graduated with 9.42 CGPA and SPI 10 in the final semester.";
+        if (text.includes(target)) {
+            const parts = text.split(target);
+            return (
+                <>
+                    {parts[0]}
+                    <span className="relative inline-flex items-center gap-1 font-semibold text-indigo-700 bg-indigo-50/50 rounded px-2 py-0.5 border border-indigo-100/50">
+                        Graduated with 9.42 CGPA and SPI 10
+                        <SparkleDoodle className="w-3.5 h-3.5 text-amber-500 shrink-0 inline" />
+                        <ScribbleHighlightDoodle className="text-indigo-500/20" />
+                    </span>
+                    {text.substring(text.indexOf(target) + "Graduated with 9.42 CGPA and SPI 10".length)}
+                </>
+            );
+        }
+        return text;
+    };
 
     const getBioText = () => {
         if (role === "ml") {
@@ -76,17 +95,21 @@ export default function AboutPage() {
                             </div>
                             <div className="py-4 border-b border-slate-200/60 relative z-10">
                                 <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block mb-1">Focus Areas</span>
-                                <span className="text-sm font-semibold text-slate-800">Computer Vision · ML · IoT · Edge AI</span>
+                                <span className="text-sm font-semibold text-slate-800 relative inline-block px-2 py-0.5">
+                                    Computer Vision · ML · IoT · Edge AI
+                                    <ScribbleHighlightDoodle className="text-indigo-500/25" />
+                                </span>
                             </div>
-                            <div className="pt-4 relative z-10 print:hidden">
+                            <div className="pt-4 relative z-10 print:hidden flex items-center">
                                 <Link
                                     href={DATA.profile.resumeUrl || "#"}
                                     target="_blank"
-                                    className="group inline-flex items-center gap-2.5 px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-bold uppercase tracking-[0.12em] rounded-full transition-all duration-300 shadow-sm"
+                                    className="group relative inline-flex items-center gap-2.5 px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-bold uppercase tracking-[0.12em] rounded-full transition-all duration-300 shadow-sm z-10"
                                 >
                                     Download Resume
                                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                                 </Link>
+                                <CurlyArrowDoodle className="absolute left-[190px] -top-6 w-16 h-12 text-indigo-400/80 -rotate-[140deg] hidden sm:block pointer-events-none" />
                             </div>
                         </div>
                     </div>
@@ -143,7 +166,7 @@ export default function AboutPage() {
                                         </div>
                                         <div className="md:col-span-1">
                                             <p className="text-sm text-slate-500 leading-relaxed font-light">
-                                                <span className="font-medium text-slate-700">Relevant Coursework:</span> {edu.coursework}
+                                                <span className="font-medium text-slate-700">Relevant Coursework:</span> {highlightGrades(edu.coursework)}
                                             </p>
                                         </div>
                                     </div>
@@ -156,11 +179,12 @@ export default function AboutPage() {
                     {/* Certifications & Achievements */}
                     <section className="mb-20 md:mb-28">
                         <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4 print:hidden">
-                            <div>
+                            <div className="relative">
                                 <span className="txt-cursive text-base text-slate-400 block mb-1">recognition</span>
                                 <h2 className="text-3xl md:text-4xl font-extrabold font-heading tracking-tighter uppercase text-slate-900">
                                     Achievements & Certifications
                                 </h2>
+                                <BulbDoodle className="absolute -top-10 -right-8 text-yellow-500/20 w-12 h-12 hidden md:block" />
                             </div>
                             {DATA.profile.certificationsUrl && (
                                 <Link

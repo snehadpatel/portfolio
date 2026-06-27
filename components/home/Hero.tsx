@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { UnderlineDoodle } from "@/components/ui/Doodles";
+import { UnderlineDoodle, SparkleDoodle, SignatureDoodle } from "@/components/ui/Doodles";
 import { useRecruiterMode } from "@/lib/hooks/useRecruiterMode";
 
 // 2. Bounding Box for dynamic label
@@ -224,6 +224,7 @@ export default function Hero() {
                                 <h1 className="relative inline-block text-[clamp(3rem,7.5vw,7rem)] font-extrabold font-heading tracking-tighter leading-[0.9] uppercase text-slate-900">
                                     Intelligent
                                     <UnderlineDoodle />
+                                    <SparkleDoodle className="absolute -top-7 -right-7 w-7 h-7 text-amber-400/90 hidden sm:block" />
                                 </h1>
                             </motion.div>
                         </div>
@@ -258,10 +259,11 @@ export default function Hero() {
                         variants={fadeIn}
                         className="mt-12 md:mt-16 flex flex-col md:flex-row md:items-end md:justify-between gap-8 border-t border-slate-200/60 pt-8"
                     >
-                        <div className="max-w-lg">
+                        <div className="max-w-lg relative pb-6 md:pb-0">
                             <p className="text-sm md:text-base text-slate-500 leading-relaxed font-light">
                                 {config.subtitle}
                             </p>
+                            <SignatureDoodle className="absolute -bottom-10 right-4 text-indigo-500/40 hidden md:block" />
                         </div>
 
                         <div className="flex items-center gap-4 relative print:hidden">
