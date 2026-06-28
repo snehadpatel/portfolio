@@ -54,8 +54,8 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className="scroll-smooth dark">
-            <body className={cn(inter.variable, plusJakarta.variable, notoSerif.variable, "min-h-screen flex flex-col relative overflow-x-hidden bg-[#090B11]")}>
+        <html lang="en" className="scroll-smooth">
+            <body className={cn(inter.variable, plusJakarta.variable, notoSerif.variable, "min-h-screen flex flex-col relative overflow-x-hidden bg-[#F8F9FC]")}>
                 <InteractiveBackground />
                 <Navbar />
                 <main className="flex-1 flex flex-col">
