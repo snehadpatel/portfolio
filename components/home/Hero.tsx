@@ -203,19 +203,14 @@ export default function Hero() {
                     animate="show"
                     className="max-w-[1200px] mx-auto"
                 >
-                    {/* Availability tag & Currently Building badge */}
-                    <motion.div variants={fadeIn} className="mb-10 md:mb-14 print:hidden flex flex-wrap items-center gap-x-6 gap-y-3">
+                    {/* Availability tag */}
+                    <motion.div variants={fadeIn} className="mb-10 md:mb-14 print:hidden">
                         <span className="inline-flex items-center gap-2.5 text-[11px] font-semibold uppercase tracking-[0.15em] text-slate-500">
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                             </span>
                             Open to Internships & Collaborations
-                        </span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-slate-300 hidden sm:block" />
-                        <span className="inline-flex items-center gap-2 text-[10px] font-mono text-indigo-600 bg-indigo-50 border border-indigo-100/60 px-3 py-1 rounded-full uppercase tracking-wider">
-                            <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
-                            Currently Building: Greensort IoT Waste Sorter
                         </span>
                     </motion.div>
 

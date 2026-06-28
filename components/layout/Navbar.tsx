@@ -5,8 +5,6 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { useTheme } from "@/components/ui/ThemeProvider";
-import { Sun, Moon } from "lucide-react";
 
 const navLinks = [
     { href: "/projects", label: "Work" },
@@ -20,7 +18,6 @@ export default function Navbar() {
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
     const [hasScrolled, setHasScrolled] = useState(false);
-    const { theme, toggleTheme } = useTheme();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -52,7 +49,7 @@ export default function Navbar() {
                     </span>
                 </Link>
 
-                {/* Right Area (Desktop Nav + Theme Switcher) */}
+                {/* Right Area (Desktop Nav) */}
                 <div className="hidden md:flex items-center gap-8">
                     <nav className="flex items-center gap-8">
                         {navLinks.map((link) => {
@@ -80,36 +77,10 @@ export default function Navbar() {
                             );
                         })}
                     </nav>
-
-                    <div className="w-px h-4 bg-slate-200 dark:bg-slate-800" />
-
-                    <button
-                        onClick={toggleTheme}
-                        className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800/50 text-slate-500 hover:text-slate-900 transition-colors"
-                        aria-label="Toggle dark mode"
-                    >
-                        {theme === "light" ? (
-                            <Moon className="w-4 h-4" />
-                        ) : (
-                            <Sun className="w-4 h-4 text-amber-400" />
-                        )}
-                    </button>
                 </div>
 
                 {/* Mobile Header Controls */}
                 <div className="flex md:hidden items-center gap-3">
-                    <button
-                        onClick={toggleTheme}
-                        className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800/50 text-slate-500 hover:text-slate-900 transition-colors"
-                        aria-label="Toggle dark mode"
-                    >
-                        {theme === "light" ? (
-                            <Moon className="w-4 h-4" />
-                        ) : (
-                            <Sun className="w-4 h-4 text-amber-400" />
-                        )}
-                    </button>
-
                     {/* Mobile Menu Toggle */}
                     <button
                         onClick={() => setIsOpen(!isOpen)}

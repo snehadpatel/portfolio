@@ -85,18 +85,6 @@ function ContactForm() {
 
                     <div className="space-y-0">
                         <Link
-                            href="https://cal.com/snehadpatel"
-                            target="_blank"
-                            className="group flex items-center justify-between py-5 border-b border-slate-200/60 hover:border-slate-400 transition-colors"
-                        >
-                            <div>
-                                <span className="text-[10px] font-mono text-indigo-500 uppercase tracking-widest block mb-1">Calendar</span>
-                                <span className="text-sm font-semibold text-slate-800 group-hover:text-indigo-600 transition-colors">Book a 15-Min Chat</span>
-                            </div>
-                            <ArrowRight className="w-4 h-4 text-indigo-400 group-hover:text-slate-900 group-hover:translate-x-1 transition-all" />
-                        </Link>
-
-                        <Link
                             href={`mailto:${DATA.profile.email}`}
                             className="group flex items-center justify-between py-5 border-b border-slate-200/60 hover:border-slate-400 transition-colors"
                         >
