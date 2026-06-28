@@ -6,6 +6,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import InteractiveBackground from "@/components/ui/InteractiveBackground";
 import RecruiterPanel from "@/components/ui/RecruiterPanel";
+import CustomCursor from "@/components/ui/CustomCursor";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const plusJakarta = Plus_Jakarta_Sans({
@@ -30,11 +31,20 @@ export const metadata: Metadata = {
         siteName: "Sneha Patel Portfolio",
         locale: "en_US",
         type: "website",
+        images: [
+            {
+                url: "/og-image.png",
+                width: 1200,
+                height: 630,
+                alt: "Sneha Patel — AI & Systems Engineer Portfolio",
+            },
+        ],
     },
     twitter: {
         card: "summary_large_image",
         title: "Sneha Patel | AI & Systems Engineer",
         description: "Portfolio of Sneha Patel, building intelligent systems at the intersection of Computer Vision, Machine Learning, and IoT hardware.",
+        images: ["/og-image.png"],
     },
 };
 
@@ -53,6 +63,7 @@ export default function RootLayout({
                 </main>
                 <Footer />
                 <RecruiterPanel />
+                <CustomCursor />
             </body>
         </html>
     );
