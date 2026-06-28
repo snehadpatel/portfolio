@@ -14,7 +14,7 @@ interface Testimonial {
 
 const testimonials: Testimonial[] = [
     {
-        quote: "Sneha's supplier ranking model was immediately applicable to our logistics chain. The regression coefficients highlighted anomalous suppliers we'd missed for months.",
+        quote: "We were genuinely impressed by the team's presentation and analytical logic. The supplier ranking agent showcased impressive depth, earning our high commendation and appreciation.",
         name: "CEO, Mesh Works",
         role: "Hackathon Judge",
         context: "AI Supplier Ranking Agent — Hackathon Commendation",
