@@ -417,8 +417,8 @@ export const DATA: DataType = {
     achievements: [
         {
             id: "greensort-publication",
-            title: "Published Research Paper — SustainX 2026",
-            desc: "Co-authored and published 'GreenSort: An Integrated IoT and Deep Learning System for Real-Time Municipal Solid Waste Segregation' presenting a prototype end-to-end edge-AI waste classifier.",
+            title: "Research Paper (Written) — SustainX 2026",
+            desc: "Co-authored 'GreenSort: An Integrated IoT and Deep Learning System for Real-Time Municipal Solid Waste Segregation' presenting a prototype end-to-end edge-AI waste classifier.",
             category: "academic",
             date: "2026"
         },

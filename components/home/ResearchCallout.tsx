@@ -30,13 +30,13 @@ export default function ResearchCallout() {
                         {/* Content */}
                         <div className="flex-1 space-y-2">
                             <span className="text-[10px] font-mono text-indigo-200/80 uppercase tracking-widest">
-                                Published Research
+                                Research Paper (Written)
                             </span>
                             <h3 className="text-xl md:text-2xl font-bold font-heading text-white leading-tight">
                                 GreenSort: Integrated IoT &amp; Deep Learning for Real-Time Municipal Solid Waste Segregation
                             </h3>
                             <p className="text-sm text-indigo-100/70 font-light leading-relaxed max-w-2xl">
-                                Accepted at <span className="font-semibold text-white/90">SustainX 2026</span> — a multi-sensor IoT pipeline
+                                Written for <span className="font-semibold text-white/90">SustainX 2026</span> — a multi-sensor IoT pipeline
                                 with edge-deployed ResNet achieving 90% mAP, ultrasonic telemetry, and dynamic route optimization
                                 for the Vadodara Municipal Corporation.
                             </p>
