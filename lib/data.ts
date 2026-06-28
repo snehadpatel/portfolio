@@ -416,6 +416,13 @@ export const DATA: DataType = {
     ],
     achievements: [
         {
+            id: "greensort-publication",
+            title: "Published Research Paper — SustainX 2026",
+            desc: "Co-authored and published 'GreenSort: An Integrated IoT and Deep Learning System for Real-Time Municipal Solid Waste Segregation' presenting a prototype end-to-end edge-AI waste classifier.",
+            category: "academic",
+            date: "2026"
+        },
+        {
             id: "wsro-nationals",
             title: "WSRO Nationals Robot Race Competitor",
             desc: "Represented the institution in national-level robotics championship, designing and programming an autonomous high-speed tracking robot using C++ and Arduino.",

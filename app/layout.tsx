@@ -7,6 +7,8 @@ import Footer from "@/components/layout/Footer";
 import InteractiveBackground from "@/components/ui/InteractiveBackground";
 import RecruiterPanel from "@/components/ui/RecruiterPanel";
 import CustomCursor from "@/components/ui/CustomCursor";
+import { ThemeProvider } from "@/components/ui/ThemeProvider";
+import PageTransition from "@/components/ui/PageTransition";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const plusJakarta = Plus_Jakarta_Sans({
@@ -56,14 +58,18 @@ export default function RootLayout({
     return (
         <html lang="en" className="scroll-smooth">
             <body className={cn(inter.variable, plusJakarta.variable, notoSerif.variable, "min-h-screen flex flex-col relative overflow-x-hidden bg-[#F8F9FC]")}>
-                <InteractiveBackground />
-                <Navbar />
-                <main className="flex-1">
-                    {children}
-                </main>
-                <Footer />
-                <RecruiterPanel />
-                <CustomCursor />
+                <ThemeProvider>
+                    <InteractiveBackground />
+                    <Navbar />
+                    <main className="flex-1 flex flex-col">
+                        <PageTransition>
+                            {children}
+                        </PageTransition>
+                    </main>
+                    <Footer />
+                    <RecruiterPanel />
+                    <CustomCursor />
+                </ThemeProvider>
             </body>
         </html>
     );

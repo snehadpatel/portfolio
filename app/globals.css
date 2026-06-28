@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: hsl(220 25% 97%);
+    --background: #F8F9FC;
     --foreground: hsl(222 47% 11%);
 
     --primary: hsl(238 85% 68%);
@@ -37,6 +37,30 @@
     --spacing-xl: 8rem;
     --spacing-xxl: 10rem;
   }
+
+  .dark {
+    --background: #090B11;
+    --foreground: hsl(210 40% 98%);
+
+    --primary: hsl(238 85% 68%);
+    --primary-foreground: hsl(0 0% 100%);
+
+    --secondary: hsl(217 32% 12%);
+    --secondary-foreground: hsl(210 40% 98%);
+
+    --muted: hsl(217 32% 10%);
+    --muted-foreground: hsl(215 20.2% 65.1%);
+
+    --accent: hsl(263 70% 15%);
+    --accent-foreground: hsl(210 40% 98%);
+
+    --card: #11141E;
+    --card-foreground: hsl(210 40% 98%);
+
+    --border: hsl(217 32% 15%);
+    --input: hsl(217 32% 15%);
+    --ring: hsl(238 85% 68%);
+  }
 }
 
 @layer base {
@@ -45,11 +69,11 @@
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    background-color: #F8F9FC;
     position: relative;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -259,3 +283,47 @@
     border-bottom: 1px solid #eaeaea !important;
   }
 }
+
+/* Dark mode semantic overrides for light utility classes */
+.dark .text-slate-900 {
+  color: #F8FAFC !important;
+}
+.dark .text-slate-800 {
+  color: #F1F5F9 !important;
+}
+.dark .text-slate-700 {
+  color: #E2E8F0 !important;
+}
+.dark .text-slate-600 {
+  color: #CBD5E1 !important;
+}
+.dark .text-slate-500 {
+  color: #94A3B8 !important;
+}
+.dark .text-slate-400 {
+  color: #64748B !important;
+}
+.dark .bg-white {
+  background-color: #11141E !important;
+}
+.dark .bg-slate-50\/30 {
+  background-color: rgba(17, 20, 30, 0.4) !important;
+}
+.dark .border-slate-200, 
+.dark .border-slate-200\/60, 
+.dark .border-slate-200\/50, 
+.dark .border-slate-300,
+.dark .border-slate-250 {
+  border-color: #1F2937 !important;
+}
+.dark .divider-line {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+.dark input, .dark textarea {
+  border-color: #1F2937 !important;
+  color: #F1F5F9 !important;
+}
+.dark input::placeholder, .dark textarea::placeholder {
+  color: #475569 !important;
+}
+

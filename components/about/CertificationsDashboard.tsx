@@ -29,7 +29,7 @@ export default function CertificationsDashboard() {
             if ("issuer" in cred) { // Certification
                 return ["aws-ml", "gcp-data", "neo4j-pro"].includes(cred.id);
             } else { // Achievement
-                return ["wsro-nationals", "hackathon-commendation"].includes(cred.id);
+                return ["greensort-publication", "wsro-nationals", "hackathon-commendation"].includes(cred.id);
             }
         }
         
@@ -38,7 +38,7 @@ export default function CertificationsDashboard() {
             if ("issuer" in cred) {
                 return ["gcp-data", "neo4j-pro", "ibm-analytics"].includes(cred.id);
             } else {
-                return ["hackathon-commendation", "diploma-topper"].includes(cred.id);
+                return ["greensort-publication", "hackathon-commendation", "diploma-topper"].includes(cred.id);
             }
         }
 
@@ -47,7 +47,7 @@ export default function CertificationsDashboard() {
             if ("issuer" in cred) {
                 return ["cisco-iot", "aws-ml"].includes(cred.id);
             } else {
-                return ["wsro-nationals"].includes(cred.id);
+                return ["greensort-publication", "wsro-nationals"].includes(cred.id);
             }
         }
 
@@ -56,7 +56,7 @@ export default function CertificationsDashboard() {
             if ("issuer" in cred) {
                 return ["aws-ml", "gcp-data"].includes(cred.id);
             } else {
-                return ["hackathon-commendation"].includes(cred.id);
+                return ["greensort-publication", "hackathon-commendation"].includes(cred.id);
             }
         }
 

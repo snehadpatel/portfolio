@@ -4,6 +4,9 @@ import ScrollingMarquee from "@/components/home/ScrollingMarquee";
 import Link from "next/link";
 import { DATA } from "@/lib/data";
 import { ArrowRight } from "lucide-react";
+import StatsCounter from "@/components/home/StatsCounter";
+import ResearchCallout from "@/components/home/ResearchCallout";
+import Testimonials from "@/components/home/Testimonials";
 
 export default function Home() {
     return (
@@ -49,6 +52,9 @@ export default function Home() {
                     </div>
                 </div>
             </section>
+
+            {/* Stats Counter Strip */}
+            <StatsCounter />
 
             {/* Services / Expertise Section */}
             <section className="section-padding-lg">
@@ -100,6 +106,12 @@ export default function Home() {
 
             {/* Featured Projects */}
             <FeaturedProjects />
+
+            {/* Published Research Callout */}
+            <ResearchCallout />
+
+            {/* Testimonials */}
+            <Testimonials />
 
             {/* Skills / Tech Stack — compact */}
             <section className="section-padding border-t border-slate-200/40">

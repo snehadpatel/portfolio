@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/components/ui/ThemeProvider";
+import { Sun, Moon } from "lucide-react";
 
 const navLinks = [
     { href: "/projects", label: "Work" },
@@ -18,6 +20,7 @@ export default function Navbar() {
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
     const [hasScrolled, setHasScrolled] = useState(false);
+    const { theme, toggleTheme } = useTheme();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -37,7 +40,7 @@ export default function Navbar() {
             className={cn(
                 "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
                 hasScrolled
-                    ? "bg-white/90 backdrop-blur-xl border-b border-slate-200/50 shadow-[0_1px_8px_rgba(0,0,0,0.04)]"
+                    ? "bg-white/90 dark:bg-[#090B11]/90 backdrop-blur-xl border-b border-slate-200/50 dark:border-slate-800/50 shadow-[0_1px_8px_rgba(0,0,0,0.04)]"
                     : "bg-transparent"
             )}
         >
@@ -49,53 +52,84 @@ export default function Navbar() {
                     </span>
                 </Link>
 
-                {/* Desktop Nav */}
-                <nav className="hidden md:flex items-center gap-8">
-                    {navLinks.map((link) => {
-                        const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
-                        return (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                className={cn(
-                                    "relative text-[11px] font-semibold uppercase tracking-[0.15em] transition-colors duration-300 py-1",
-                                    isActive
-                                        ? "text-slate-900"
-                                        : "text-slate-500 hover:text-slate-900"
-                                )}
-                            >
-                                {link.label}
-                                {isActive && (
-                                    <motion.span
-                                        layoutId="navUnderline"
-                                        className="absolute -bottom-0.5 left-0 right-0 h-[1.5px] bg-slate-900"
-                                        transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                                    />
-                                )}
-                            </Link>
-                        );
-                    })}
-                </nav>
+                {/* Right Area (Desktop Nav + Theme Switcher) */}
+                <div className="hidden md:flex items-center gap-8">
+                    <nav className="flex items-center gap-8">
+                        {navLinks.map((link) => {
+                            const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
+                            return (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    className={cn(
+                                        "relative text-[11px] font-semibold uppercase tracking-[0.15em] transition-colors duration-300 py-1",
+                                        isActive
+                                            ? "text-slate-900"
+                                            : "text-slate-500 hover:text-slate-900"
+                                    )}
+                                >
+                                    {link.label}
+                                    {isActive && (
+                                        <motion.span
+                                            layoutId="navUnderline"
+                                            className="absolute -bottom-0.5 left-0 right-0 h-[1.5px] bg-slate-900 dark:bg-white"
+                                            transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                                        />
+                                    )}
+                                </Link>
+                            );
+                        })}
+                    </nav>
 
-                {/* Mobile Menu Toggle */}
-                <button
-                    onClick={() => setIsOpen(!isOpen)}
-                    className="md:hidden relative w-8 h-8 flex flex-col items-center justify-center gap-1.5"
-                    aria-label="Toggle navigation"
-                >
-                    <motion.span
-                        animate={isOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
-                        className="block w-5 h-[1.5px] bg-slate-900 origin-center"
-                    />
-                    <motion.span
-                        animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-                        className="block w-5 h-[1.5px] bg-slate-900"
-                    />
-                    <motion.span
-                        animate={isOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }}
-                        className="block w-5 h-[1.5px] bg-slate-900 origin-center"
-                    />
-                </button>
+                    <div className="w-px h-4 bg-slate-200 dark:bg-slate-800" />
+
+                    <button
+                        onClick={toggleTheme}
+                        className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800/50 text-slate-500 hover:text-slate-900 transition-colors"
+                        aria-label="Toggle dark mode"
+                    >
+                        {theme === "light" ? (
+                            <Moon className="w-4 h-4" />
+                        ) : (
+                            <Sun className="w-4 h-4 text-amber-400" />
+                        )}
+                    </button>
+                </div>
+
+                {/* Mobile Header Controls */}
+                <div className="flex md:hidden items-center gap-3">
+                    <button
+                        onClick={toggleTheme}
+                        className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800/50 text-slate-500 hover:text-slate-900 transition-colors"
+                        aria-label="Toggle dark mode"
+                    >
+                        {theme === "light" ? (
+                            <Moon className="w-4 h-4" />
+                        ) : (
+                            <Sun className="w-4 h-4 text-amber-400" />
+                        )}
+                    </button>
+
+                    {/* Mobile Menu Toggle */}
+                    <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="relative w-8 h-8 flex flex-col items-center justify-center gap-1.5"
+                        aria-label="Toggle navigation"
+                    >
+                        <motion.span
+                            animate={isOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
+                            className="block w-5 h-[1.5px] bg-slate-900 origin-center dark:bg-white"
+                        />
+                        <motion.span
+                            animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
+                            className="block w-5 h-[1.5px] bg-slate-900 dark:bg-white"
+                        />
+                        <motion.span
+                            animate={isOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }}
+                            className="block w-5 h-[1.5px] bg-slate-900 origin-center dark:bg-white"
+                        />
+                    </button>
+                </div>
             </div>
 
             {/* Mobile Nav Overlay */}
@@ -106,14 +140,14 @@ export default function Navbar() {
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                        className="md:hidden overflow-hidden border-t border-slate-100 bg-white/95 backdrop-blur-xl"
+                        className="md:hidden overflow-hidden border-t border-slate-100 dark:border-slate-800 bg-white/95 dark:bg-[#090B11]/95 backdrop-blur-xl"
                     >
                         <nav className="flex flex-col px-6 py-6 gap-1">
                             <Link
                                 href="/"
                                 className={cn(
                                     "px-4 py-3 text-sm font-semibold uppercase tracking-wider rounded-xl transition-all",
-                                    pathname === "/" ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-50"
+                                    pathname === "/" ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800/30"
                                 )}
                             >
                                 Home
@@ -126,7 +160,7 @@ export default function Navbar() {
                                         href={link.href}
                                         className={cn(
                                             "px-4 py-3 text-sm font-semibold uppercase tracking-wider rounded-xl transition-all",
-                                            isActive ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-50"
+                                            isActive ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800/30"
                                         )}
                                     >
                                         {link.label}
