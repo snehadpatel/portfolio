@@ -7,6 +7,7 @@ import Footer from "@/components/layout/Footer";
 import InteractiveBackground from "@/components/ui/InteractiveBackground";
 import RecruiterPanel from "@/components/ui/RecruiterPanel";
 import PageTransition from "@/components/ui/PageTransition";
+import { ThemeProvider } from "@/components/ui/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const plusJakarta = Plus_Jakarta_Sans({
@@ -22,6 +23,7 @@ const notoSerif = Noto_Serif_Display({
 });
 
 export const metadata: Metadata = {
+    metadataBase: new URL("https://snehapatel.vercel.app"),
     title: "Sneha Patel | AI & Systems Engineer",
     description: "Portfolio of Sneha Patel, building intelligent systems at the intersection of Computer Vision, Machine Learning, and IoT hardware.",
     openGraph: {
@@ -55,16 +57,18 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className="scroll-smooth">
-            <body className={cn(inter.variable, plusJakarta.variable, notoSerif.variable, "min-h-screen flex flex-col relative overflow-x-hidden bg-[#F8F9FC]")}>
-                <InteractiveBackground />
-                <Navbar />
-                <main className="flex-1 flex flex-col">
-                    <PageTransition>
-                        {children}
-                    </PageTransition>
-                </main>
-                <Footer />
-                <RecruiterPanel />
+            <body className={cn(inter.variable, plusJakarta.variable, notoSerif.variable, "min-h-screen flex flex-col relative overflow-x-hidden bg-[#F8F9FC] dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300")}>
+                <ThemeProvider>
+                    <InteractiveBackground />
+                    <Navbar />
+                    <main className="flex-1 flex flex-col">
+                        <PageTransition>
+                            {children}
+                        </PageTransition>
+                    </main>
+                    <Footer />
+                    <RecruiterPanel />
+                </ThemeProvider>
             </body>
         </html>
     );

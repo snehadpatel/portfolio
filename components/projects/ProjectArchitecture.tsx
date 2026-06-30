@@ -235,6 +235,160 @@ export default function ProjectArchitecture({ projectId }: ProjectArchitecturePr
         );
     }
 
+    // 4. Render Vegetable Classifier Flow Diagram
+    if (projectId === "vegetable-classifier") {
+        return (
+            <div className="bg-slate-950 p-6 rounded-2xl border border-slate-800 text-slate-300 space-y-4">
+                <div className="flex items-center gap-2 text-indigo-400 font-mono text-[10px] uppercase tracking-wider">
+                    <Camera className="w-4 h-4" />
+                    <span>System Architecture: Local Crop Classifier</span>
+                </div>
+                <div className="relative w-full aspect-[16/6] bg-slate-900/60 rounded-xl overflow-hidden p-2 flex items-center justify-center">
+                    <svg viewBox="0 0 800 240" className="w-full h-full font-mono text-[10px]">
+                        <defs>
+                            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="3" result="blur" />
+                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                            </filter>
+                        </defs>
+
+                        {/* Signals flowing lines */}
+                        <path d="M 120 120 L 220 120" stroke="#6366f1" strokeWidth="2" strokeDasharray="5,5" className="animate-[dash_2s_linear_infinite]" />
+                        <path d="M 340 120 L 440 120" stroke="#10b981" strokeWidth="2" strokeDasharray="5,5" className="animate-[dash_2s_linear_infinite]" />
+                        <path d="M 560 120 L 660 120" stroke="#f59e0b" strokeWidth="2" strokeDasharray="5,5" className="animate-[dash_2s_linear_infinite]" />
+
+                        {/* Node 1: Camera Crop Input */}
+                        <g transform="translate(40, 70)">
+                            <rect width="80" height="100" rx="12" fill="#1e293b" stroke="#475569" strokeWidth="1.5" />
+                            <foreignObject x="0" y="15" width="80" height="35">
+                                <div className="flex justify-center text-indigo-400"><Camera className="w-6 h-6" /></div>
+                            </foreignObject>
+                            <text x="40" y="65" textAnchor="middle" fill="#94a3b8" fontSize="8">Crop Camera</text>
+                            <text x="40" y="80" textAnchor="middle" fill="#cbd5e1" fontWeight="bold">1,200+ Photos</text>
+                        </g>
+
+                        {/* Node 2: OpenCV Preprocessing */}
+                        <g transform="translate(220, 65)">
+                            <rect width="120" height="110" rx="16" fill="#064e3b" stroke="#10b981" strokeWidth="1.5" />
+                            <foreignObject x="0" y="15" width="120" height="35">
+                                <div className="flex justify-center text-emerald-400"><Terminal className="w-7 h-7" /></div>
+                            </foreignObject>
+                            <text x="60" y="65" textAnchor="middle" fill="#6ee7b7" fontWeight="bold">OpenCV Filter</text>
+                            <text x="60" y="80" textAnchor="middle" fill="#a7f3d0" fontSize="8">Background Sub</text>
+                            <text x="60" y="95" textAnchor="middle" fill="#a7f3d0" fontSize="8">HSV Segmenter</text>
+                        </g>
+
+                        {/* Node 3: PyTorch Model Evaluator */}
+                        <g transform="translate(440, 50)">
+                            <rect width="120" height="140" rx="16" fill="#1e1b4b" stroke="#6366f1" strokeWidth="2" filter="url(#glow)" />
+                            <foreignObject x="0" y="20" width="120" height="35">
+                                <div className="flex justify-center text-indigo-400"><Cpu className="w-8 h-8 animate-pulse" /></div>
+                            </foreignObject>
+                            <text x="60" y="75" textAnchor="middle" fill="#a5b4fc" fontWeight="bold">PyTorch Model</text>
+                            <text x="60" y="95" textAnchor="middle" fill="#818cf8" fontSize="8">CNN Comparison</text>
+                            <rect x="20" y="105" width="80" height="20" rx="4" fill="#312e81" stroke="#4f46e5" />
+                            <text x="60" y="118" textAnchor="middle" fill="#e0e7ff" fontSize="8" fontWeight="bold">MobileNet/ResNet</text>
+                        </g>
+
+                        {/* Node 4: Flask Server Output */}
+                        <g transform="translate(660, 70)">
+                            <rect width="100" height="100" rx="16" fill="#78350f" stroke="#f59e0b" strokeWidth="1.5" />
+                            <foreignObject x="0" y="15" width="100" height="35">
+                                <div className="flex justify-center text-amber-400"><AlertCircle className="w-7 h-7" /></div>
+                            </foreignObject>
+                            <text x="50" y="65" textAnchor="middle" fill="#fcd34d" fontWeight="bold">Flask Server</text>
+                            <text x="50" y="80" textAnchor="middle" fill="#fef3c7" fontSize="8">92% Accuracy</text>
+                        </g>
+                    </svg>
+                    <style jsx>{`
+                        @keyframes dash {
+                            to {
+                                stroke-dashoffset: -20;
+                            }
+                        }
+                    `}</style>
+                </div>
+            </div>
+        );
+    }
+
+    // 5. Render Supplier Ranking Flow Diagram
+    if (projectId === "supplier-ranking") {
+        return (
+            <div className="bg-slate-950 p-6 rounded-2xl border border-slate-800 text-slate-300 space-y-4">
+                <div className="flex items-center gap-2 text-indigo-400 font-mono text-[10px] uppercase tracking-wider">
+                    <Database className="w-4.5 h-4.5" />
+                    <span>System Architecture: Logistics Supplier Ranker</span>
+                </div>
+                <div className="relative w-full aspect-[16/6] bg-slate-900/60 rounded-xl overflow-hidden p-2 flex items-center justify-center">
+                    <svg viewBox="0 0 800 240" className="w-full h-full font-mono text-[10px]">
+                        <defs>
+                            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="3" result="blur" />
+                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                            </filter>
+                        </defs>
+
+                        {/* Signals flowing lines */}
+                        <path d="M 120 120 L 220 120" stroke="#818cf8" strokeWidth="2" strokeDasharray="5,5" className="animate-[dash_2s_linear_infinite]" />
+                        <path d="M 340 120 L 440 120" stroke="#a855f7" strokeWidth="2" strokeDasharray="5,5" className="animate-[dash_2s_linear_infinite]" />
+                        <path d="M 560 120 L 660 120" stroke="#10b981" strokeWidth="2" strokeDasharray="5,5" className="animate-[dash_2s_linear_infinite]" />
+
+                        {/* Node 1: Logistics CSV Data */}
+                        <g transform="translate(40, 70)">
+                            <rect width="80" height="100" rx="12" fill="#1e293b" stroke="#475569" strokeWidth="1.5" />
+                            <foreignObject x="0" y="15" width="80" height="35">
+                                <div className="flex justify-center text-indigo-400"><Database className="w-6 h-6" /></div>
+                            </foreignObject>
+                            <text x="40" y="65" textAnchor="middle" fill="#94a3b8" fontSize="8">Logistics CSV</text>
+                            <text x="40" y="80" textAnchor="middle" fill="#cbd5e1" fontWeight="bold">Carrier Logs</text>
+                        </g>
+
+                        {/* Node 2: Pandas Data Cleaning */}
+                        <g transform="translate(220, 65)">
+                            <rect width="120" height="110" rx="16" fill="#3b0764" stroke="#a855f7" strokeWidth="1.5" />
+                            <foreignObject x="0" y="15" width="120" height="35">
+                                <div className="flex justify-center text-purple-400"><Terminal className="w-7 h-7" /></div>
+                            </foreignObject>
+                            <text x="60" y="65" textAnchor="middle" fill="#d8b4fe" fontWeight="bold">Pandas Cleaner</text>
+                            <text x="60" y="80" textAnchor="middle" fill="#e9d5ff" fontSize="8">Impute Missing</text>
+                            <text x="60" y="95" textAnchor="middle" fill="#e9d5ff" fontSize="8">Delay/Defect Rates</text>
+                        </g>
+
+                        {/* Node 3: Regression Engine */}
+                        <g transform="translate(440, 50)">
+                            <rect width="120" height="140" rx="16" fill="#1e1b4b" stroke="#6366f1" strokeWidth="2" filter="url(#glow)" />
+                            <foreignObject x="0" y="20" width="120" height="35">
+                                <div className="flex justify-center text-indigo-400"><Cpu className="w-8 h-8 animate-pulse" /></div>
+                            </foreignObject>
+                            <text x="60" y="75" textAnchor="middle" fill="#a5b4fc" fontWeight="bold">Regression Engine</text>
+                            <text x="60" y="95" textAnchor="middle" fill="#818cf8" fontSize="8">Scikit-Learn</text>
+                            <rect x="25" y="105" width="70" height="20" rx="4" fill="#312e81" stroke="#4f46e5" />
+                            <text x="60" y="118" textAnchor="middle" fill="#e0e7ff" fontSize="8" fontWeight="bold">Weighted Rank</text>
+                        </g>
+
+                        {/* Node 4: Streamlit Scorecard Dashboard */}
+                        <g transform="translate(660, 70)">
+                            <rect width="100" height="100" rx="16" fill="#064e3b" stroke="#10b981" strokeWidth="2" />
+                            <foreignObject x="0" y="15" width="100" height="35">
+                                <div className="flex justify-center text-emerald-400"><AlertCircle className="w-7 h-7" /></div>
+                            </foreignObject>
+                            <text x="50" y="65" textAnchor="middle" fill="#6ee7b7" fontWeight="bold">Streamlit Dashboard</text>
+                            <text x="50" y="80" textAnchor="middle" fill="#a7f3d0" fontSize="8">CEO Commended</text>
+                        </g>
+                    </svg>
+                    <style jsx>{`
+                        @keyframes dash {
+                            to {
+                                stroke-dashoffset: -20;
+                            }
+                        }
+                    `}</style>
+                </div>
+            </div>
+        );
+    }
+
     // Default return empty or simple placeholder
     return null;
 }
