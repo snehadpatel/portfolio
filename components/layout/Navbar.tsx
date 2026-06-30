@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/components/ui/ThemeProvider";
+import { Sun, Moon } from "lucide-react";
 
 const navLinks = [
     { href: "/projects", label: "Work" },
@@ -18,6 +20,7 @@ export default function Navbar() {
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
     const [hasScrolled, setHasScrolled] = useState(false);
+    const { theme, toggleTheme } = useTheme();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -44,7 +47,7 @@ export default function Navbar() {
             <div className="w-full px-6 md:px-10 py-4 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="group">
-                    <span className="text-sm font-bold font-heading tracking-tight text-slate-900 uppercase">
+                    <span className="text-sm font-bold font-heading tracking-tight text-slate-900 dark:text-slate-100 uppercase">
                         Sneha Patel
                     </span>
                 </Link>
@@ -61,8 +64,8 @@ export default function Navbar() {
                                     className={cn(
                                         "relative text-[11px] font-semibold uppercase tracking-[0.15em] transition-colors duration-300 py-1",
                                         isActive
-                                            ? "text-slate-900"
-                                            : "text-slate-500 hover:text-slate-900"
+                                            ? "text-slate-900 dark:text-slate-100"
+                                            : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
                                     )}
                                 >
                                     {link.label}
@@ -77,10 +80,28 @@ export default function Navbar() {
                             );
                         })}
                     </nav>
+
+                    {/* Theme Toggle Button */}
+                    <button
+                        onClick={toggleTheme}
+                        className="p-2 rounded-full border border-slate-200/60 dark:border-slate-800/60 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-slate-150 dark:hover:bg-slate-800/60 transition-all duration-300"
+                        aria-label="Toggle dark mode"
+                    >
+                        {theme === "dark" ? <Sun size={14} className="text-amber-400" /> : <Moon size={14} />}
+                    </button>
                 </div>
 
                 {/* Mobile Header Controls */}
                 <div className="flex md:hidden items-center gap-3">
+                    {/* Theme Toggle Button */}
+                    <button
+                        onClick={toggleTheme}
+                        className="p-2 rounded-full border border-slate-200/60 dark:border-slate-800/60 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-slate-150 dark:hover:bg-slate-800/60 transition-all duration-300"
+                        aria-label="Toggle dark mode"
+                    >
+                        {theme === "dark" ? <Sun size={14} className="text-amber-400" /> : <Moon size={14} />}
+                    </button>
+
                     {/* Mobile Menu Toggle */}
                     <button
                         onClick={() => setIsOpen(!isOpen)}
@@ -118,7 +139,7 @@ export default function Navbar() {
                                 href="/"
                                 className={cn(
                                     "px-4 py-3 text-sm font-semibold uppercase tracking-wider rounded-xl transition-all",
-                                    pathname === "/" ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800/30"
+                                    pathname === "/" ? "bg-slate-900 text-white dark:bg-slate-800 dark:text-slate-100" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/30"
                                 )}
                             >
                                 Home
@@ -131,7 +152,7 @@ export default function Navbar() {
                                         href={link.href}
                                         className={cn(
                                             "px-4 py-3 text-sm font-semibold uppercase tracking-wider rounded-xl transition-all",
-                                            isActive ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800/30"
+                                            isActive ? "bg-slate-900 text-white dark:bg-slate-800 dark:text-slate-100" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/30"
                                         )}
                                     >
                                         {link.label}
