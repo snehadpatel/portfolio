@@ -34,6 +34,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         setTheme(newTheme);
         localStorage.setItem("theme", newTheme);
         document.documentElement.classList.toggle("dark", newTheme === "dark");
+        window.location.reload();
     };
 
     // Prevent hydration layout mismatch by rendering children directly with a default light theme style until client mount
