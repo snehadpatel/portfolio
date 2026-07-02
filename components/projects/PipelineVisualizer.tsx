@@ -58,12 +58,12 @@ export default function PipelineVisualizer({ projectId }: { projectId: string })
                         {/* Fixed-width step card */}
                         <div className="w-[190px] sm:w-[210px] bg-white border border-slate-200/60 p-4 rounded-xl space-y-3 hover:border-indigo-300 hover:shadow-sm transition-all duration-300 flex flex-col justify-between min-h-[110px] group">
                             <div className="flex items-center justify-between">
-                                <span className="font-mono text-[9px] text-slate-400 uppercase tracking-widest">Step 0{idx + 1}</span>
+                                <span className="font-mono text-xs text-slate-450 uppercase tracking-wider">Step 0{idx + 1}</span>
                                 <span className="w-1.5 h-1.5 rounded-full bg-indigo-300/40 group-hover:bg-indigo-500 transition-colors duration-300" />
                             </div>
                             <div>
                                 <h4 className="text-xs font-bold text-slate-800 tracking-wide">{step.title}</h4>
-                                <p className="text-[10px] text-slate-500 font-light mt-1 leading-relaxed">{step.desc}</p>
+                                <p className="text-xs text-slate-650 font-normal mt-1 leading-relaxed">{step.desc}</p>
                             </div>
                         </div>
 

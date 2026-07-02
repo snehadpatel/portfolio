@@ -62,7 +62,7 @@ const PROJECT_PIPELINES: Record<string, string> = {
 
 const SectionHeader = ({ num, title }: { num: string; title: string }) => (
     <div className="flex items-center gap-3 mb-6 relative">
-        <span className="font-mono text-[9px] text-indigo-500 uppercase tracking-widest">{num} .</span>
+        <span className="font-mono text-xs text-indigo-500 uppercase tracking-wider">{num} .</span>
         <h2 className="text-xl font-heading font-normal italic text-slate-800 tracking-wide">{title}</h2>
         <div className="h-[1px] flex-1 bg-gradient-to-r from-slate-200 to-transparent ml-2" />
     </div>
@@ -148,7 +148,7 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                             </div>
 
                             <div className="absolute bottom-6 left-6 right-6">
-                                <span className="px-2.5 py-1 text-[9px] font-semibold bg-white/90 backdrop-blur-md text-slate-600 border border-slate-200 shadow-sm rounded-full font-mono uppercase tracking-wider">
+                                <span className="px-2.5 py-1 text-[11px] font-bold bg-white/90 backdrop-blur-md text-slate-700 border border-slate-200 shadow-sm rounded-full font-mono uppercase tracking-wider">
                                     {project.category}
                                 </span>
                                 <h1 
@@ -224,23 +224,23 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                                         <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-1">
                                             <div className="flex items-center gap-2 text-indigo-500 mb-1">
                                                 <Clock size={14} />
-                                                <span className="text-[10px] font-mono font-bold uppercase tracking-wider">Timeline</span>
+                                                <span className="text-xs font-mono font-bold uppercase tracking-wider">Timeline</span>
                                             </div>
-                                            <span className="text-xs text-slate-600 font-medium">{project.extended.constraints.timeline}</span>
+                                            <span className="text-sm text-slate-700 font-semibold">{project.extended.constraints.timeline}</span>
                                         </div>
                                         <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-1">
                                             <div className="flex items-center gap-2 text-indigo-500 mb-1">
                                                 <Users size={14} />
-                                                <span className="text-[10px] font-mono font-bold uppercase tracking-wider">Team</span>
+                                                <span className="text-xs font-mono font-bold uppercase tracking-wider">Team</span>
                                             </div>
-                                            <span className="text-xs text-slate-600 font-medium">{project.extended.constraints.team}</span>
+                                            <span className="text-sm text-slate-700 font-semibold">{project.extended.constraints.team}</span>
                                         </div>
                                         <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-1">
                                             <div className="flex items-center gap-2 text-indigo-500 mb-1">
                                                 <Wrench size={14} />
-                                                <span className="text-[10px] font-mono font-bold uppercase tracking-wider">Core Tech</span>
+                                                <span className="text-xs font-mono font-bold uppercase tracking-wider">Core Tech</span>
                                             </div>
-                                            <span className="text-xs text-slate-600 font-medium">{project.extended.constraints.techStack}</span>
+                                            <span className="text-sm text-slate-700 font-semibold">{project.extended.constraints.techStack}</span>
                                         </div>
                                     </div>
                                 </section>
@@ -257,7 +257,7 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                                     {/* System Pipeline Schema */}
                                     {PROJECT_PIPELINES[project.id] && (
                                         <div className="mt-6">
-                                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500 mb-3 block">System Architecture</span>
+                                            <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 mb-3 block">System Architecture</span>
                                             <PipelineVisualizer projectId={project.id} />
                                         </div>
                                     )}
@@ -266,8 +266,8 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                                     <div className="grid sm:grid-cols-2 gap-3 mt-6">
                                         {project.features.map((feature, i) => (
                                             <div key={i} className="flex items-start gap-3 p-4 rounded-xl border border-slate-200/50 bg-white shadow-sm">
-                                                <span className="font-mono text-[9px] text-indigo-500/80 mt-0.5">[{i + 1}]</span>
-                                                <span className="text-[11px] text-slate-600 leading-relaxed font-light">{feature}</span>
+                                                <span className="font-mono text-xs text-indigo-500/80 mt-0.5">[{i + 1}]</span>
+                                                <span className="text-xs text-slate-700 leading-relaxed font-normal">{feature}</span>
                                             </div>
                                         ))}
                                     </div>
@@ -310,20 +310,20 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                                     <SectionHeader num="06" title="Academic Publication" />
                                     <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
                                         <div>
-                                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-1">Conference</span>
+                                            <span className="text-xs font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-1">Conference</span>
                                             <span className="text-sm font-semibold text-slate-800">{project.publication.conference}</span>
                                         </div>
                                         <div>
-                                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-1">Paper Title</span>
+                                            <span className="text-xs font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-1">Paper Title</span>
                                             <h3 className="text-sm font-bold text-slate-900 leading-snug">{project.publication.title}</h3>
                                         </div>
                                         <div>
-                                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-1">Authors</span>
-                                            <span className="text-xs text-slate-600">{project.publication.authors.join(", ")}</span>
+                                            <span className="text-xs font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-1">Authors</span>
+                                            <span className="text-sm text-slate-700 font-normal">{project.publication.authors.join(", ")}</span>
                                         </div>
                                         <div>
-                                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-1">Abstract</span>
-                                            <p className="text-xs text-slate-500 leading-relaxed font-light">{project.publication.abstract}</p>
+                                            <span className="text-xs font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-1">Abstract</span>
+                                            <p className="text-sm text-slate-600 leading-relaxed font-normal">{project.publication.abstract}</p>
                                         </div>
                                         <div className="pt-2">
                                             <Button variant="outline" className="w-full text-xs font-bold bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-sm" asChild>

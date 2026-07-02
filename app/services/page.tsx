@@ -91,7 +91,7 @@ export default function ServicesPage() {
                                     <div className="md:col-span-2 flex md:justify-end">
                                         <Link
                                             href={`/contact?service=${service.id}`}
-                                            className="group inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.12em] text-slate-600 hover:text-slate-900 transition-colors"
+                                            className="group inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-slate-650 hover:text-slate-900 transition-colors"
                                         >
                                             Inquire
                                             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -115,7 +115,7 @@ export default function ServicesPage() {
                         </p>
                         <Link
                             href="/contact"
-                            className="group inline-flex items-center gap-2.5 px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-bold uppercase tracking-[0.12em] rounded-full transition-all duration-300 shadow-sm"
+                            className="group inline-flex items-center gap-2.5 px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-[0.12em] rounded-full transition-all duration-300 shadow-sm"
                         >
                             Book Consultation
                             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />

@@ -25,7 +25,7 @@ export default function ResumePage() {
                             <a
                                 href="/assets/resume.pdf"
                                 download="Sneha_Patel_Resume.pdf"
-                                className="group relative inline-flex items-center gap-2.5 px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-bold uppercase tracking-[0.12em] rounded-full transition-all duration-300 shadow-sm"
+                                className="group relative inline-flex items-center gap-2.5 px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-[0.12em] rounded-full transition-all duration-300 shadow-sm"
                             >
                                 <Download className="w-3.5 h-3.5" />
                                 Download PDF
@@ -34,7 +34,7 @@ export default function ResumePage() {
                                 href="/assets/resume.pdf"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group inline-flex items-center gap-2.5 px-6 py-3 border border-slate-300 hover:border-slate-400 text-slate-700 text-[11px] font-bold uppercase tracking-[0.12em] rounded-full transition-all duration-300 bg-white"
+                                className="group inline-flex items-center gap-2.5 px-6 py-3 border border-slate-300 hover:border-slate-400 text-slate-700 text-xs font-bold uppercase tracking-[0.12em] rounded-full transition-all duration-300 bg-white"
                             >
                                 <ExternalLink className="w-3.5 h-3.5" />
                                 Open Fullscreen
@@ -83,7 +83,7 @@ export default function ResumePage() {
                                 <a
                                     href="/assets/resume.pdf"
                                     download="Sneha_Patel_Resume.pdf"
-                                    className="w-full inline-flex items-center justify-center gap-2.5 py-3.5 bg-slate-900 text-white text-[10px] font-bold uppercase tracking-wider rounded-xl shadow-sm"
+                                    className="w-full inline-flex items-center justify-center gap-2.5 py-3.5 bg-slate-900 text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-sm"
                                 >
                                     <Download className="w-3.5 h-3.5" />
                                     Download PDF Resume
@@ -92,7 +92,7 @@ export default function ResumePage() {
                                     href="/assets/resume.pdf"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-full inline-flex items-center justify-center gap-2.5 py-3.5 border border-slate-200 text-slate-700 text-[10px] font-bold uppercase tracking-wider rounded-xl bg-slate-50"
+                                    className="w-full inline-flex items-center justify-center gap-2.5 py-3.5 border border-slate-200 text-slate-700 text-xs font-bold uppercase tracking-wider rounded-xl bg-slate-50"
                                 >
                                     <ExternalLink className="w-3.5 h-3.5" />
                                     Open Fullscreen PDF
@@ -102,14 +102,14 @@ export default function ResumePage() {
 
                         {/* Resume Highlights Summary for Mobile */}
                         <div className="bg-white border border-slate-200/80 rounded-2xl p-6 shadow-sm space-y-6">
-                            <h4 className="text-[10px] font-mono text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">
+                            <h4 className="text-xs font-mono text-slate-550 uppercase tracking-wider border-b border-slate-100 pb-2">
                                 Summary Highlights
                             </h4>
 
                             <div className="space-y-4">
                                 <div>
                                     <h5 className="text-xs font-semibold text-slate-800">Education</h5>
-                                    <p className="text-[11px] text-slate-500 font-light mt-1">
+                                    <p className="text-xs text-slate-650 font-normal mt-1 leading-relaxed">
                                         B.Tech Computer Science Engineering @ Navrachana University<br />
                                         Diploma Computer Engineering (9.42 CGPA, SPI 10)
                                     </p>
@@ -117,14 +117,14 @@ export default function ResumePage() {
 
                                 <div>
                                     <h5 className="text-xs font-semibold text-slate-800">Certifications</h5>
-                                    <p className="text-[11px] text-slate-500 font-light mt-1">
+                                    <p className="text-xs text-slate-650 font-normal mt-1 leading-relaxed">
                                         AWS Academy Cloud Foundations · Google Cloud Ingestion & Analytics · Neo4j Certified Professional
                                     </p>
                                 </div>
 
                                 <div>
                                     <h5 className="text-xs font-semibold text-slate-800">Key Projects</h5>
-                                    <p className="text-[11px] text-slate-500 font-light mt-1">
+                                    <p className="text-xs text-slate-650 font-normal mt-1 leading-relaxed">
                                         • DeepShield AI (97.5% Acc Deepfake classification)<br />
                                         • Greensort (IoT Edge Waste Sorting System)<br />
                                         • NLP Suicide Sentiment Graph Context Mapper

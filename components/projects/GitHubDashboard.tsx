@@ -243,7 +243,7 @@ export default function GitHubDashboard() {
                             <div>
                                 <h3 className="text-base font-bold text-slate-900 flex flex-col leading-tight">
                                     {profile.name}
-                                    <span className="text-[11px] font-mono text-slate-400 font-normal">@{profile.login}</span>
+                                    <span className="text-xs font-mono text-slate-400 font-normal">@{profile.login}</span>
                                 </h3>
                             </div>
                         </div>
@@ -259,11 +259,11 @@ export default function GitHubDashboard() {
 
                 {/* 2. Currently Working On */}
                 <div className="bg-gradient-to-br from-indigo-50/40 to-indigo-100/20 backdrop-blur-md border border-indigo-150/40 p-6 rounded-2xl shadow-sm relative overflow-hidden group flex flex-col justify-between">
-                    <div className="absolute top-4 right-4 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 text-[9px] font-mono font-semibold uppercase tracking-wider animate-pulse">
+                    <div className="absolute top-4 right-4 flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 text-[10px] font-mono font-semibold uppercase tracking-wider animate-pulse">
                         <span className="w-1.5 h-1.5 rounded-full bg-indigo-600" /> Active Focus
                     </div>
                     <div>
-                        <span className="text-[10px] font-mono text-indigo-500 uppercase tracking-widest block mb-1">Currently working on</span>
+                        <span className="text-xs font-mono text-indigo-500 uppercase tracking-wider block mb-1">Currently working on</span>
                         <h3 className="text-lg font-bold font-heading text-indigo-950 group-hover:text-indigo-600 transition-colors flex items-center gap-1.5">
                             <a href={activeProject.html_url} target="_blank" rel="noopener noreferrer" className="hover:underline inline-flex items-center gap-1">
                                 {activeProject.name} <ExternalLink className="w-3.5 h-3.5 opacity-50" />
@@ -274,7 +274,7 @@ export default function GitHubDashboard() {
                         </p>
                     </div>
                     
-                    <div className="flex items-center gap-4 text-[10px] font-mono text-slate-550 border-t border-indigo-200/20 pt-3 mt-4">
+                    <div className="flex items-center gap-4 text-xs font-mono text-slate-550 border-t border-indigo-200/20 pt-3 mt-4">
                         {activeProject.language && (
                             <span className="flex items-center gap-1">
                                 <span className={cn("w-1.5 h-1.5 rounded-full", LANGUAGE_COLORS[activeProject.language] || "bg-slate-400")} />
@@ -288,16 +288,16 @@ export default function GitHubDashboard() {
                 {/* 3. Stats card */}
                 <div className="bg-white/60 backdrop-blur-md border border-slate-200/50 p-6 rounded-2xl shadow-sm flex flex-col justify-between">
                     <div>
-                        <h3 className="text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-3">Workspace Analytics</h3>
+                        <h3 className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-3">Workspace Analytics</h3>
                         
                         <div className="flex gap-3 mb-4">
                             <div className="text-center bg-slate-50/80 border border-slate-200/30 rounded-xl py-1.5 flex-1">
-                                <span className="text-[9px] font-mono text-slate-400 block">Total Stars</span>
-                                <span className="text-sm font-bold text-slate-800 flex items-center justify-center gap-0.5 mt-0.5"><Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" /> {totalStars}</span>
+                                <span className="text-xs font-mono text-slate-500 block">Total Stars</span>
+                                <span className="text-base font-bold text-slate-800 flex items-center justify-center gap-0.5 mt-0.5"><Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" /> {totalStars}</span>
                             </div>
                             <div className="text-center bg-slate-50/80 border border-slate-200/30 rounded-xl py-1.5 flex-1">
-                                <span className="text-[9px] font-mono text-slate-400 block">Total Forks</span>
-                                <span className="text-sm font-bold text-slate-800 flex items-center justify-center gap-0.5 mt-0.5"><GitFork className="w-3.5 h-3.5 text-slate-500" /> {totalForks}</span>
+                                <span className="text-xs font-mono text-slate-500 block">Total Forks</span>
+                                <span className="text-base font-bold text-slate-800 flex items-center justify-center gap-0.5 mt-0.5"><GitFork className="w-3.5 h-3.5 text-slate-500" /> {totalForks}</span>
                             </div>
                         </div>
 
@@ -318,7 +318,7 @@ export default function GitHubDashboard() {
                     </div>
 
                     {/* Language legend */}
-                    <div className="flex flex-wrap gap-x-3 gap-y-1 text-[9px] font-mono text-slate-400 border-t border-slate-100 pt-3">
+                    <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs font-mono text-slate-500 border-t border-slate-100 pt-3">
                         {langEntries.map(([lang, count]) => {
                             const pct = (count / totalWithLang) * 100;
                             return (
@@ -353,7 +353,7 @@ export default function GitHubDashboard() {
                                             {repo.name} <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                                         </a>
                                     </h4>
-                                    <span className="text-[8px] font-mono text-slate-400 bg-slate-100 border border-slate-200/30 px-1.5 py-0.5 rounded uppercase">
+                                    <span className="text-[10px] font-mono text-slate-500 bg-slate-100 border border-slate-200/30 px-1.5 py-0.5 rounded uppercase">
                                         public
                                     </span>
                                 </div>
@@ -363,7 +363,7 @@ export default function GitHubDashboard() {
                                 </p>
                             </div>
                             
-                            <div className="flex items-center justify-between text-[9px] font-mono text-slate-400 border-t border-slate-100 pt-3 mt-auto">
+                            <div className="flex items-center justify-between text-xs font-mono text-slate-550 border-t border-slate-100 pt-3 mt-auto">
                                 <div className="flex items-center gap-3">
                                     {repo.language && (
                                         <span className="flex items-center gap-1">

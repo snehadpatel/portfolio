@@ -73,7 +73,7 @@ export default function InteractiveSkillsMatrix({
                 <span>{skill}</span>
                 {count > 0 && (
                     <span className={cn(
-                        "text-[9px] px-1 rounded font-sans shrink-0",
+                        "text-[10px] px-1.5 py-0.5 rounded font-sans shrink-0 font-bold",
                         isActive ? "bg-white/20 text-white" : "bg-slate-100 text-slate-500 group-hover:bg-indigo-50 group-hover:text-indigo-600"
                     )}>
                         {count}
@@ -96,13 +96,13 @@ export default function InteractiveSkillsMatrix({
                     {selectedSkill && (
                         <button 
                             onClick={() => onSelectSkill(null)}
-                            className="text-[10px] font-mono text-indigo-600 hover:underline"
+                            className="text-xs font-mono text-indigo-600 hover:underline"
                         >
                             Reset Filter [x]
                         </button>
                     )}
                 </div>
-                <p className="text-[11px] text-slate-500 font-light leading-relaxed">
+                <p className="text-xs text-slate-650 font-normal leading-relaxed">
                     {role 
                         ? `Recruiter Mode is active: matching skills for ${role.toUpperCase()} are highlighted. Click any highlighted skill to filter the associated projects.`
                         : "Click any skill to instantly filter and showcase projects that use it."
@@ -113,7 +113,7 @@ export default function InteractiveSkillsMatrix({
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {/* Languages */}
                 <div className="space-y-3">
-                    <h4 className="text-[10px] font-mono text-slate-400 uppercase tracking-widest border-b border-slate-200/50 pb-1">
+                    <h4 className="text-xs font-mono text-slate-500 uppercase tracking-wider border-b border-slate-200/50 pb-1">
                         Languages
                     </h4>
                     <div className="flex flex-wrap gap-1.5">
@@ -123,7 +123,7 @@ export default function InteractiveSkillsMatrix({
 
                 {/* Frameworks */}
                 <div className="space-y-3">
-                    <h4 className="text-[10px] font-mono text-slate-400 uppercase tracking-widest border-b border-slate-200/50 pb-1">
+                    <h4 className="text-xs font-mono text-slate-500 uppercase tracking-wider border-b border-slate-200/50 pb-1">
                         Frameworks
                     </h4>
                     <div className="flex flex-wrap gap-1.5">
@@ -133,7 +133,7 @@ export default function InteractiveSkillsMatrix({
 
                 {/* Tools & Hardwares */}
                 <div className="space-y-3 sm:col-span-2 md:col-span-1">
-                    <h4 className="text-[10px] font-mono text-slate-400 uppercase tracking-widest border-b border-slate-200/50 pb-1">
+                    <h4 className="text-xs font-mono text-slate-500 uppercase tracking-wider border-b border-slate-200/50 pb-1">
                         Tools & Hardware
                     </h4>
                     <div className="flex flex-wrap gap-1.5">

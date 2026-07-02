@@ -108,7 +108,7 @@ export default function CertificationsDashboard() {
                             key={cat.id}
                             onClick={() => setActiveTab(cat.id)}
                             className={cn(
-                                "px-4 py-2 text-[10px] font-bold uppercase tracking-wider rounded-lg transition-all duration-300",
+                                "px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg transition-all duration-300",
                                 activeTab === cat.id
                                     ? "bg-white text-slate-900 shadow-sm"
                                     : "text-slate-500 hover:text-slate-800"
@@ -151,7 +151,7 @@ export default function CertificationsDashboard() {
                                     >
                                         {/* Match Badge */}
                                         {highlight && (
-                                            <span className="absolute top-4 right-4 bg-indigo-600 text-white text-[8px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full flex items-center gap-1">
+                                            <span className="absolute top-4 right-4 bg-indigo-600 text-white text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full flex items-center gap-1">
                                                 <Sparkles className="w-2 h-2 text-indigo-200" />
                                                 Matching Skill
                                             </span>
@@ -170,7 +170,7 @@ export default function CertificationsDashboard() {
                                                     <h4 className="text-sm font-bold text-slate-800 leading-tight group-hover:text-indigo-600 transition-colors">
                                                         {cert.title}
                                                     </h4>
-                                                    <span className="text-[10px] text-slate-500 font-light block mt-0.5">
+                                                    <span className="text-xs text-slate-650 font-normal block mt-0.5">
                                                         Issued by {cert.issuer} · {cert.date}
                                                     </span>
                                                 </div>
@@ -180,7 +180,7 @@ export default function CertificationsDashboard() {
                                                         <span 
                                                             key={skill} 
                                                             className={cn(
-                                                                "text-[8px] font-mono px-2 py-0.5 rounded",
+                                                                "text-[10px] font-mono px-2 py-0.5 rounded",
                                                                 highlight 
                                                                     ? "bg-indigo-100/30 text-indigo-700 border border-indigo-100/40" 
                                                                     : "bg-slate-50 text-slate-500 border border-slate-100"
@@ -241,7 +241,7 @@ export default function CertificationsDashboard() {
                                     >
                                         {/* Match Badge */}
                                         {highlight && (
-                                            <span className="absolute top-4 right-4 bg-indigo-600 text-white text-[8px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full flex items-center gap-1">
+                                            <span className="absolute top-4 right-4 bg-indigo-600 text-white text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full flex items-center gap-1">
                                                 <Sparkles className="w-2 h-2 text-indigo-200" />
                                                 Matching Highlight
                                             </span>
@@ -261,12 +261,12 @@ export default function CertificationsDashboard() {
                                                         {ach.title}
                                                     </h4>
                                                     {ach.date && (
-                                                        <span className="text-[10px] text-slate-400 font-light block mt-0.5">
+                                                        <span className="text-xs text-slate-500 font-normal block mt-0.5">
                                                             {ach.date}
                                                         </span>
                                                     )}
                                                 </div>
-                                                <p className="text-xs text-slate-500 font-light leading-relaxed">
+                                                <p className="text-sm text-slate-600 font-normal leading-relaxed">
                                                     {ach.desc}
                                                 </p>
                                             </div>

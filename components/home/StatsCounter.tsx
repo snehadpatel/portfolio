@@ -72,7 +72,7 @@ export default function StatsCounter() {
                             <div className="text-3xl md:text-4xl lg:text-5xl font-extrabold font-heading tracking-tighter text-slate-900 leading-none mb-2">
                                 <AnimatedCounter value={stat.value} suffix={stat.suffix} prefix={stat.prefix} />
                             </div>
-                            <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">
+                            <span className="text-xs font-mono text-slate-550 uppercase tracking-wider">
                                 {stat.label}
                             </span>
                         </motion.div>

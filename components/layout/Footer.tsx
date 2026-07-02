@@ -28,7 +28,7 @@ export default function Footer() {
                             <Link href="/" className="text-lg font-bold font-heading tracking-tight uppercase block">
                                 Sneha Patel
                             </Link>
-                            <p className="text-[11px] text-slate-400 uppercase tracking-[0.15em] leading-relaxed">
+                            <p className="text-xs text-slate-400 uppercase tracking-[0.15em] leading-relaxed">
                                 AI & Systems Engineer<br />
                                 Computer Vision · ML · IoT
                             </p>
@@ -36,13 +36,13 @@ export default function Footer() {
 
                         {/* Column 2: Site Links */}
                         <div>
-                            <h4 className="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-6">Navigation</h4>
+                            <h4 className="text-xs font-mono text-slate-500 uppercase tracking-wider mb-6">Navigation</h4>
                             <ul className="space-y-3">
                                 {siteLinks.map((link) => (
                                     <li key={link.href}>
                                         <Link
                                             href={link.href}
-                                            className="text-[11px] text-slate-400 hover:text-white uppercase tracking-[0.12em] transition-colors duration-300"
+                                            className="text-xs text-slate-400 hover:text-white uppercase tracking-[0.12em] transition-colors duration-300"
                                         >
                                             {link.label}
                                         </Link>
@@ -53,7 +53,7 @@ export default function Footer() {
 
                         {/* Column 3: Social & Contact */}
                         <div>
-                            <h4 className="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-6">Connect</h4>
+                            <h4 className="text-xs font-mono text-slate-500 uppercase tracking-wider mb-6">Connect</h4>
                             <ul className="space-y-3">
                                 {socialLinks.map((link) => (
                                     <li key={link.label}>
@@ -61,7 +61,7 @@ export default function Footer() {
                                             href={link.href}
                                             target={link.href.startsWith("mailto") ? undefined : "_blank"}
                                             rel={link.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-                                            className="text-[11px] text-slate-400 hover:text-white uppercase tracking-[0.12em] transition-colors duration-300"
+                                            className="text-xs text-slate-400 hover:text-white uppercase tracking-[0.12em] transition-colors duration-300"
                                         >
                                             {link.label}
                                         </Link>
@@ -73,10 +73,10 @@ export default function Footer() {
 
                     {/* Bottom Bar */}
                     <div className="border-t border-slate-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
-                        <p className="text-[10px] text-slate-500 tracking-wider">
+                        <p className="text-xs text-slate-550 tracking-wider">
                             © {new Date().getFullYear()} Sneha Patel. All rights reserved.
                         </p>
-                        <p className="text-[10px] text-slate-600 tracking-wider">
+                        <p className="text-xs text-slate-550 tracking-wider">
                             Crafted with curiosity & caffeine.
                         </p>
                     </div>
