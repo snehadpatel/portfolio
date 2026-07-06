@@ -29,7 +29,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     }
 
     return (
-        <article className="min-h-screen pt-28 pb-20 bg-[#F8F9FC]">
+        <article className="min-h-screen pt-28 pb-20 bg-[#F8F9FC] dark:bg-transparent">
             {/* Header / Back Link */}
             <div className="container mx-auto px-6 mb-8">
                 <Link

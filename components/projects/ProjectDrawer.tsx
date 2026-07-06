@@ -161,7 +161,7 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                         </div>
 
                         {/* Scrollable Body Content */}
-                        <div className="p-6 md:p-8 space-y-12 flex-1 overflow-y-auto relative bg-[#F8F9FC]">
+                        <div className="p-6 md:p-8 space-y-12 flex-1 overflow-y-auto relative bg-[#F8F9FC] dark:bg-[#151926]">
                             <div className="absolute inset-0 pointer-events-none opacity-[0.01] overflow-hidden">
                                 <div className="absolute inset-y-0 left-12 w-[1px] bg-slate-900" />
                                 <div className="absolute inset-y-0 right-12 w-[1px] bg-slate-900" />

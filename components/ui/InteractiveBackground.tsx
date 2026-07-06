@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useTheme } from "@/components/ui/ThemeProvider";
 
 interface Blob {
     x: number;
@@ -25,6 +26,7 @@ interface BgNode {
 }
 
 export default function InteractiveBackground() {
+    const { theme } = useTheme();
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const mouseRef = useRef<{ x: number | null; y: number | null }>({ x: null, y: null });
     const currentMouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -42,6 +44,7 @@ export default function InteractiveBackground() {
         let animationFrameId: number;
         let blobs: Blob[] = [];
         let bgNodes: BgNode[] = [];
+        const isDark = theme === "dark";
 
         const resizeCanvas = () => {
             if (!canvas) return;
@@ -62,7 +65,7 @@ export default function InteractiveBackground() {
                     y: h * 0.3,
                     radius: minDim * 0.35,
                     targetRadius: minDim * 0.35,
-                    color: "rgba(94, 96, 231, 0.045)", // Soft Periwinkle
+                    color: isDark ? "rgba(99, 102, 241, 0.08)" : "rgba(94, 96, 231, 0.045)", // Soft Indigo / Periwinkle
                     vx: 0.15,
                     vy: 0.12,
                 },
@@ -71,7 +74,7 @@ export default function InteractiveBackground() {
                     y: h * 0.25,
                     radius: minDim * 0.4,
                     targetRadius: minDim * 0.4,
-                    color: "rgba(16, 185, 129, 0.03)", // Soft Mint Green
+                    color: isDark ? "rgba(16, 185, 129, 0.06)" : "rgba(16, 185, 129, 0.03)", // Soft Mint Green
                     vx: -0.12,
                     vy: 0.15,
                 },
@@ -80,7 +83,7 @@ export default function InteractiveBackground() {
                     y: h * 0.75,
                     radius: minDim * 0.38,
                     targetRadius: minDim * 0.38,
-                    color: "rgba(251, 113, 133, 0.04)", // Soft Rose Peach
+                    color: isDark ? "rgba(251, 113, 133, 0.07)" : "rgba(251, 113, 133, 0.04)", // Soft Rose Peach
                     vx: 0.1,
                     vy: -0.1,
                 },
@@ -127,6 +130,7 @@ export default function InteractiveBackground() {
             }
 
             // 2. Draw ambient color blobs
+            const stopColor = isDark ? "rgba(2, 6, 23, 0)" : "rgba(248, 249, 252, 0)";
             for (let i = 0; i < blobs.length; i++) {
                 const b = blobs[i];
 
@@ -152,7 +156,7 @@ export default function InteractiveBackground() {
                     b.radius
                 );
                 gradient.addColorStop(0, b.color);
-                gradient.addColorStop(1, "rgba(248, 249, 252, 0)");
+                gradient.addColorStop(1, stopColor);
 
                 ctx.fillStyle = gradient;
                 ctx.beginPath();
@@ -161,7 +165,7 @@ export default function InteractiveBackground() {
             }
 
             // 3. Draw faint developer grid alignment lines
-            ctx.strokeStyle = "rgba(15, 23, 42, 0.008)";
+            ctx.strokeStyle = isDark ? "rgba(255, 255, 255, 0.015)" : "rgba(15, 23, 42, 0.008)";
             ctx.lineWidth = 0.8;
             const gridSpacing = 80;
             
@@ -233,8 +237,8 @@ export default function InteractiveBackground() {
                     const dist = Math.sqrt(dx * dx + dy * dy);
 
                     if (dist < maxConnectDist) {
-                        const alpha = (1 - dist / maxConnectDist) * 0.06; // extremely subtle watermark opacity
-                        ctx.strokeStyle = `rgba(99, 102, 241, ${alpha})`;
+                        const alpha = (1 - dist / maxConnectDist) * (isDark ? 0.09 : 0.06); // slightly higher connection visibility in dark mode
+                        ctx.strokeStyle = isDark ? `rgba(129, 140, 248, ${alpha})` : `rgba(99, 102, 241, ${alpha})`;
                         ctx.lineWidth = 0.6;
                         ctx.beginPath();
                         ctx.moveTo(n1.x, n1.y);
@@ -246,12 +250,14 @@ export default function InteractiveBackground() {
 
             // Draw node points
             bgNodes.forEach(n => {
-                ctx.fillStyle = `rgba(99, 102, 241, ${0.08 + n.pulse * 0.08})`;
+                ctx.fillStyle = isDark
+                    ? `rgba(129, 140, 248, ${0.12 + n.pulse * 0.12})`
+                    : `rgba(99, 102, 241, ${0.08 + n.pulse * 0.08})`;
                 ctx.beginPath();
                 ctx.arc(n.x, n.y, n.radius + n.pulse * 0.8, 0, Math.PI * 2);
                 ctx.fill();
 
-                ctx.fillStyle = `rgba(99, 102, 241, 0.25)`;
+                ctx.fillStyle = isDark ? "rgba(129, 140, 248, 0.35)" : "rgba(99, 102, 241, 0.25)";
                 ctx.beginPath();
                 ctx.arc(n.x, n.y, 0.8, 0, Math.PI * 2);
                 ctx.fill();
@@ -285,13 +291,13 @@ export default function InteractiveBackground() {
             document.removeEventListener("mouseleave", handleMouseLeave);
             cancelAnimationFrame(animationFrameId);
         };
-    }, []);
+    }, [theme]);
 
     return (
         <canvas
             ref={canvasRef}
             className="fixed inset-0 pointer-events-none -z-20 opacity-90"
-            style={{ mixBlendMode: "multiply" }}
+            style={{ mixBlendMode: theme === "dark" ? "screen" : "multiply" }}
         />
     );
 }
