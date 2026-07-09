@@ -1,6 +1,7 @@
 import Hero from "@/components/home/Hero";
 import FeaturedProjects from "@/components/home/FeaturedProjects";
 import ScrollingMarquee from "@/components/home/ScrollingMarquee";
+import StatsCounter from "@/components/home/StatsCounter";
 import Link from "next/link";
 import { DATA } from "@/lib/data";
 import { ArrowRight } from "lucide-react";
@@ -10,6 +11,11 @@ import Testimonials from "@/components/home/Testimonials";
 export default function Home() {
     return (
         <>
+            {/* SEO-safe h1: always server-rendered for crawlers, visually hidden since Hero renders the display heading */}
+            <h1 className="sr-only">
+                Sneha Patel — AI &amp; Systems Engineer | Computer Vision, Machine Learning &amp; IoT Developer Portfolio
+            </h1>
+
             <Hero />
 
             {/* Intro / Bio Section */}
@@ -52,7 +58,8 @@ export default function Home() {
                 </div>
             </section>
 
-
+            {/* Social Proof — Animated Stats */}
+            <StatsCounter />
 
             {/* Services / Expertise Section */}
             <section className="section-padding-lg">
@@ -162,6 +169,41 @@ export default function Home() {
 
             {/* Scrolling Marquee */}
             <ScrollingMarquee />
+
+            {/* Hire Me CTA — Primary conversion section */}
+            <section className="py-20 md:py-28 px-6 md:px-10 bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-950 text-white relative overflow-hidden">
+                <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }} />
+                <div className="max-w-[1200px] mx-auto text-center relative z-10">
+                    <span className="txt-cursive text-base md:text-lg text-indigo-300/70 block mb-3">ready to build?</span>
+                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold font-heading tracking-tighter uppercase leading-[0.95] mb-6">
+                        Let&apos;s Engineer<br />
+                        <span className="text-indigo-400/60">Something Intelligent</span>
+                    </h2>
+                    <p className="text-sm md:text-base text-slate-400 font-light leading-relaxed max-w-xl mx-auto mb-10">
+                        Whether you need a deepfake detection pipeline, an edge-AI hardware prototype,
+                        or a custom ML model — I bring research-grade precision to every project.
+                        Currently open to freelance, internships, and technical collaborations.
+                    </p>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <Link
+                            href="/services"
+                            className="group inline-flex items-center gap-2.5 px-8 py-3.5 bg-white text-slate-900 text-xs font-bold uppercase tracking-[0.12em] rounded-full hover:bg-indigo-50 transition-all duration-300 shadow-lg shadow-white/10"
+                        >
+                            View Services
+                            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                        <Link
+                            href="/contact"
+                            className="group inline-flex items-center gap-2.5 px-8 py-3.5 border border-white/20 text-white text-xs font-bold uppercase tracking-[0.12em] rounded-full hover:border-white/40 hover:bg-white/5 transition-all duration-300"
+                        >
+                            Start a Conversation
+                            <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M1.5 22.0833L22.0833 1.5M22.0833 1.5V21.26M22.0833 1.5H2.32333" />
+                            </svg>
+                        </Link>
+                    </div>
+                </div>
+            </section>
 
             {/* Contact Block */}
             <section className="section-padding-lg">

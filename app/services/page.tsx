@@ -3,9 +3,11 @@
 import { DATA } from "@/lib/data";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { UnderlineDoodle, CircleDoodle } from "@/components/ui/Doodles";
+import { FAQJsonLd, SERVICE_FAQS } from "@/components/seo/FAQSchema";
+import { ServicesJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 const fadeIn = {
     initial: { opacity: 0, y: 20 },
@@ -17,8 +19,17 @@ const fadeIn = {
 export default function ServicesPage() {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
+    const [openFAQ, setOpenFAQ] = useState<number | null>(null);
+
     return (
         <div className="min-h-screen pt-28 md:pt-36 pb-20">
+            {/* Structured Data for Services & FAQ */}
+            <ServicesJsonLd />
+            <BreadcrumbJsonLd items={[
+                { name: "Home", path: "/" },
+                { name: "Services", path: "/services" },
+            ]} />
+            <FAQJsonLd faqs={SERVICE_FAQS} />
             <div className="w-full px-6 md:px-10">
                 <div className="max-w-[1200px] mx-auto">
 
@@ -120,6 +131,44 @@ export default function ServicesPage() {
                             Book Consultation
                             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                         </Link>
+                    </motion.div>
+
+                    {/* FAQ Section — Targets Google Featured Snippets */}
+                    <motion.div {...fadeIn} className="mt-20 md:mt-28">
+                        <span className="txt-cursive text-base text-slate-400 block mb-2">common questions</span>
+                        <h2 className="text-2xl md:text-3xl font-extrabold font-heading tracking-tighter uppercase text-slate-900 mb-8 md:mb-12">
+                            Frequently Asked
+                        </h2>
+                        <div className="space-y-0">
+                            {SERVICE_FAQS.map((faq, index) => (
+                                <div key={index}>
+                                    <button
+                                        onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
+                                        className="w-full py-5 md:py-6 flex items-start justify-between gap-4 text-left group"
+                                        aria-expanded={openFAQ === index}
+                                    >
+                                        <h3 className="text-sm md:text-base font-semibold text-slate-800 group-hover:text-slate-900 transition-colors pr-4 leading-relaxed">
+                                            {faq.question}
+                                        </h3>
+                                        <ChevronDown
+                                            className={`w-4 h-4 text-slate-400 shrink-0 mt-1 transition-transform duration-300 ${
+                                                openFAQ === index ? "rotate-180" : ""
+                                            }`}
+                                        />
+                                    </button>
+                                    <div
+                                        className={`overflow-hidden transition-all duration-300 ${
+                                            openFAQ === index ? "max-h-96 opacity-100 pb-6" : "max-h-0 opacity-0"
+                                        }`}
+                                    >
+                                        <p className="text-sm text-slate-500 font-light leading-relaxed pr-10">
+                                            {faq.answer}
+                                        </p>
+                                    </div>
+                                    <div className="divider-line" />
+                                </div>
+                            ))}
+                        </div>
                     </motion.div>
 
                 </div>
