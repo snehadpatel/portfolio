@@ -183,8 +183,12 @@ export function scanJobDescription(jobDescription: string): ATSAnalysis {
         if (matches) {
             matchedSkills.push(skillName);
         } else {
-            // Check if job description requests it (e.g. mention of skill name)
-            if (jdTokens.includes(skillName.toLowerCase().replace(/[^a-z0-9]/g, ""))) {
+            // Check if job description requests it (e.g. mention of skill name, case-insensitive, normalized)
+            const normalizedSkill = skillName.toLowerCase().replace(/[^a-z0-9]/g, "");
+            const jdNormalizedText = jobDescription.toLowerCase().replace(/[^a-z0-9]/g, "");
+            
+            const isSkillInJd = jdTokens.includes(normalizedSkill) || jdNormalizedText.includes(normalizedSkill);
+            if (isSkillInJd) {
                 missingSkills.push(skillName);
             }
         }

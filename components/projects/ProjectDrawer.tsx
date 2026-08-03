@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Github, ExternalLink, Clock, Users, Wrench, FileText } from "lucide-react";
@@ -69,6 +69,8 @@ const SectionHeader = ({ num, title }: { num: string; title: string }) => (
 );
 
 export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawerProps) {
+    const drawerRef = useRef<HTMLDivElement | null>(null);
+
     // Escape key handler
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -79,6 +81,63 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, [onClose]);
+
+    // Trap focus inside the drawer for keyboard accessibility (WCAG AA)
+    useEffect(() => {
+        if (!isOpen) return;
+
+        // Small timeout to allow the drawer DOM nodes to render and be selectable
+        const timer = setTimeout(() => {
+            const drawer = drawerRef.current;
+            if (!drawer) return;
+
+            // Find all focusable elements inside the drawer
+            const focusableElements = drawer.querySelectorAll<HTMLElement>(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+
+            if (focusableElements.length === 0) return;
+
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            // Store the previously focused element to restore it upon close
+            const originalFocusedElement = document.activeElement as HTMLElement | null;
+
+            // Focus the close button or first element inside the drawer
+            firstElement.focus();
+
+            const handleTabKey = (e: KeyboardEvent) => {
+                if (e.key !== "Tab") return;
+
+                if (e.shiftKey) {
+                    // Shift + Tab: wrap from first back to last
+                    if (document.activeElement === firstElement) {
+                        lastElement.focus();
+                        e.preventDefault();
+                    }
+                } else {
+                    // Tab: wrap from last forward to first
+                    if (document.activeElement === lastElement) {
+                        firstElement.focus();
+                        e.preventDefault();
+                    }
+                }
+            };
+
+            window.addEventListener("keydown", handleTabKey);
+
+            // Cleanup function to restore focus and remove event listener
+            return () => {
+                window.removeEventListener("keydown", handleTabKey);
+                if (originalFocusedElement) {
+                    originalFocusedElement.focus();
+                }
+            };
+        }, 50);
+
+        return () => clearTimeout(timer);
+    }, [isOpen]);
 
     // Prevent body scroll when drawer is open
     useEffect(() => {
@@ -110,6 +169,7 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
 
                     {/* Sidebar Drawer Container */}
                     <motion.div
+                        ref={drawerRef}
                         role="dialog"
                         aria-modal="true"
                         aria-labelledby="drawer-title"

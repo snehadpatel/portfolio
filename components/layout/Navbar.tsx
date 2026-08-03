@@ -35,6 +35,18 @@ export default function Navbar() {
         setIsOpen(false);
     }, [pathname]);
 
+    // Close mobile menu on Escape key press
+    useEffect(() => {
+        if (!isOpen) return;
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") {
+                setIsOpen(false);
+            }
+        };
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [isOpen]);
+
     return (
         <header
             className={cn(
@@ -107,6 +119,8 @@ export default function Navbar() {
                         onClick={() => setIsOpen(!isOpen)}
                         className="relative w-8 h-8 flex flex-col items-center justify-center gap-1.5"
                         aria-label="Toggle navigation"
+                        aria-expanded={isOpen}
+                        aria-controls="mobile-navigation"
                     >
                         <motion.span
                             animate={isOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
@@ -128,6 +142,9 @@ export default function Navbar() {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
+                        id="mobile-navigation"
+                        role="navigation"
+                        aria-label="Mobile Navigation"
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}

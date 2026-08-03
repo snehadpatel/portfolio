@@ -221,21 +221,21 @@ export default function Hero() {
                                 <span className="txt-cursive text-[clamp(1.8rem,3.5vw,3.5rem)] text-slate-500 leading-none">
                                     I build
                                 </span>
-                                <h1 className="relative inline-block text-[clamp(3rem,7.5vw,7rem)] font-extrabold font-heading tracking-tighter leading-[0.9] uppercase text-slate-900">
+                                <span className="relative inline-block text-[clamp(3rem,7.5vw,7rem)] font-extrabold font-heading tracking-tighter leading-[0.9] uppercase text-slate-900">
                                     Intelligent
                                     <UnderlineDoodle />
                                     <SparkleDoodle className="absolute -top-7 -right-7 w-7 h-7 text-amber-400/90 hidden sm:block" />
-                                </h1>
+                                </span>
                             </motion.div>
                         </div>
 
                         <div className="overflow-hidden">
-                            <motion.h1
+                            <motion.span
                                 variants={slideUp}
-                                className="text-[clamp(3rem,7.5vw,7rem)] font-extrabold font-heading tracking-tighter leading-[0.85] uppercase text-slate-900"
+                                className="block text-[clamp(3rem,7.5vw,7rem)] font-extrabold font-heading tracking-tighter leading-[0.85] uppercase text-slate-900"
                             >
                                 Systems
-                            </motion.h1>
+                            </motion.span>
                         </div>
 
                         <div className="overflow-hidden">
@@ -243,13 +243,13 @@ export default function Hero() {
                                 <span className="txt-cursive text-[clamp(1.4rem,3vw,3rem)] text-slate-400 leading-none">
                                     {config.word1}
                                 </span>
-                                <h1 className="relative inline-block text-[clamp(2.5rem,6vw,5.5rem)] font-extrabold font-heading tracking-tighter leading-[0.9] uppercase text-indigo-600/30 px-2">
+                                <span className="relative inline-block text-[clamp(2.5rem,6vw,5.5rem)] font-extrabold font-heading tracking-tighter leading-[0.9] uppercase text-indigo-600/30 px-2">
                                     {config.word2}
                                     <BoundingBoxDoodle label={config.boxLabel} />
-                                </h1>
-                                <h1 className="text-[clamp(2.5rem,6vw,5.5rem)] font-extrabold font-heading tracking-tighter leading-[0.9] uppercase text-indigo-600/30">
+                                </span>
+                                <span className="text-[clamp(2.5rem,6vw,5.5rem)] font-extrabold font-heading tracking-tighter leading-[0.9] uppercase text-indigo-600/30">
                                     {config.word3}
-                                </h1>
+                                </span>
                             </motion.div>
                         </div>
                     </div>

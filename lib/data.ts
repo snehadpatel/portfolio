@@ -173,7 +173,7 @@ export const DATA: DataType = {
             ],
             link: "#",
             github: "https://github.com/snehadpatel/DeepFake-Detection-and-Prevention-A-Comprehensive-approach-using-AI-main",
-            image: "/assets/projects/deepshield.jpg",
+            image: "/assets/projects/deepshield.webp",
             category: "Computer Vision",
             roles: ["ml", "fullstack"],
             extended: {
@@ -202,7 +202,7 @@ export const DATA: DataType = {
             ],
             link: "#",
             github: "https://github.com/snehadpatel/Local-Vegetable-Variety-Classifier",
-            image: "/assets/projects/veg.jpg",
+            image: "/assets/projects/veg.webp",
             category: "Deep Learning",
             roles: ["ml"],
             extended: {
@@ -231,7 +231,7 @@ export const DATA: DataType = {
             ],
             link: "#",
             github: "https://github.com/snehadpatel/greensort",
-            image: "/assets/projects/waste.jpg",
+            image: "/assets/projects/waste.webp",
             category: "IoT & Computer Vision",
             roles: ["iot", "ml"],
             extended: {
@@ -267,7 +267,7 @@ export const DATA: DataType = {
             ],
             link: "#",
             github: "",
-            image: "/assets/projects/supplier.jpg",
+            image: "/assets/projects/supplier.webp",
             category: "Data Analytics",
             roles: ["data", "ml"],
             extended: {
@@ -296,7 +296,7 @@ export const DATA: DataType = {
             ],
             link: "#",
             github: "https://github.com/snehadpatel/Sucide-prediction",
-            image: "/assets/projects/suicide.jpg",
+            image: "/assets/projects/suicide.webp",
             category: "Machine Learning & NLP",
             roles: ["ml", "data"],
             extended: {
