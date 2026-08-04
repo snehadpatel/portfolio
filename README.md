@@ -75,12 +75,34 @@ The portfolio showcases several advanced machine learning and hardware integrati
 
 ---
 
-## 🧬 Pipeline Visualizer Component
+## 🧬 Premium Interactive Features
 
-The portfolio features a custom React client component, [`PipelineVisualizer.tsx`](file:///Users/snehapatel/Library/CloudStorage/OneDrive-Personal/portfolio/components/projects/PipelineVisualizer.tsx), which interactively illustrates the multi-step pipeline for each project. It displays:
-1.  **Fixed-width step cards** with hover highlights.
-2.  **Step-by-step progress arrows** detailing signal transition.
-3.  **Horizontal scroll overlays** optimized for both mobile and desktop screens.
+The portfolio features several advanced interactive elements designed to engage visitors, demonstrate technical expertise, and streamline the hiring process:
+
+### 1. 🤖 Recruiter AI Agent & ATS Scanner
+*   **Location**: [`RecruiterPanel.tsx`](file:///Users/snehapatel/Library/CloudStorage/OneDrive-Personal/portfolio/components/ui/RecruiterPanel.tsx) & [`recruiterAgent.ts`](file:///Users/snehapatel/Library/CloudStorage/OneDrive-Personal/portfolio/lib/agent/recruiterAgent.ts)
+*   **AI Chat**: Interactive assistant that tokenizes and parses recruiter questions, instantly returning matching projects, cloud certifications, and B.Tech academic details.
+*   **ATS Compatibility Engine**: Recruiters can paste a job description (JD) to compute a matching score, extract strengths, identify missing skills, and get personalized interview recommendations.
+
+### 2. ⚡ Interactive Skills Matrix
+*   **Location**: [`InteractiveSkillsMatrix.tsx`](file:///Users/snehapatel/Library/CloudStorage/OneDrive-Personal/portfolio/components/projects/InteractiveSkillsMatrix.tsx)
+*   **Description**: A hexagonal matrix visualizing skills categorized by domains (ML, Computer Vision, Frontend, IoT, Databases) displaying confidence scores, specific tool knowledge, and corresponding case study links on hover.
+
+### 3. 📊 Live GitHub Dashboard
+*   **Location**: [`GitHubDashboard.tsx`](file:///Users/snehapatel/Library/CloudStorage/OneDrive-Personal/portfolio/components/projects/GitHubDashboard.tsx)
+*   **Description**: Custom dashboard visualizing code contributions, repository statistics, and language distributions using responsive SVG components.
+
+### 4. 📐 Project Architecture Visualizer
+*   **Location**: [`ProjectArchitecture.tsx`](file:///Users/snehapatel/Library/CloudStorage/OneDrive-Personal/portfolio/components/projects/ProjectArchitecture.tsx) & [`PipelineVisualizer.tsx`](file:///Users/snehapatel/Library/CloudStorage/OneDrive-Personal/portfolio/components/projects/PipelineVisualizer.tsx)
+*   **Description**: Interactive directed-graph nodes visualizing high-level data pipelines (e.g. `User Upload` ➔ `FastAPI Preprocessing` ➔ `ViT-Base-16 Inference` ➔ `Grad-CAM Visualizer Output`) with animated directional signal flow arrows.
+
+### 5. 🔍 Accessible Project Drawer
+*   **Location**: [`ProjectDrawer.tsx`](file:///Users/snehapatel/Library/CloudStorage/OneDrive-Personal/portfolio/components/projects/ProjectDrawer.tsx)
+*   **Description**: Sliding sidebar drawer with comprehensive case details, challenges, outcomes, and future updates. Designed following WCAG AA guidelines with keyboard accessibility (focus trapping and `Escape` key close handlers).
+
+### 🏷️ Optimized SEO & PWA Framework
+*   **FAQ & Rich Snippets**: Schema markup generator ([`FAQSchema.tsx`](file:///Users/snehapatel/Library/CloudStorage/OneDrive-Personal/portfolio/components/seo/FAQSchema.tsx)) and JSON-LD profile injection ([`JsonLd.tsx`](file:///Users/snehapatel/Library/CloudStorage/OneDrive-Personal/portfolio/components/seo/JsonLd.tsx)) to boost Google search engine visibility.
+*   **PWA Ready**: Configured with dynamic web app manifest (`public/manifest.webmanifest`) and standard XML sitemaps for offline integration.
 
 ---
 
@@ -95,16 +117,22 @@ portfolio/
 │   ├── services/             # Core capabilities showcase
 │   ├── globals.css           # Tailwind CSS directives & theme colors
 │   ├── layout.tsx            # Global layout with Navbar & Footer components
+│   ├── robots.ts             # SEO robots rules config
+│   ├── sitemap.ts            # Dynamic sitemap generator
 │   └── page.tsx              # Home landing page with Featured Projects & Capability summary
 ├── components/               # Reusable React components
-│   ├── home/                 # Home-specific layouts (Hero, FeaturedProjects)
+│   ├── home/                 # Home-specific layouts (Hero, FeaturedProjects, ResearchCallout)
 │   ├── layout/               # Nav, Footer, and PageWrappers
-│   ├── projects/             # Project-specific elements (PipelineVisualizer)
-│   └── ui/                   # Reusable UI primitives (Button, Input, etc.)
+│   ├── projects/             # Interactive items (ProjectDrawer, SkillsMatrix, GitHubDashboard, Architecture)
+│   ├── seo/                  # SEO Schemas (FAQSchema, JsonLd)
+│   └── ui/                   # Reusable UI primitives (Button, CustomCursor, RecruiterPanel, Doodles)
 ├── lib/
+│   ├── agent/                # Recruiter AI Agent NLP scanner engine logic
+│   │   └── recruiterAgent.ts
 │   ├── data.ts               # Core portfolio schema & JSON dataset (Single source of truth)
+│   ├── seo.ts                # Default metadata configurations
 │   └── utils.ts              # Tailwind merging utility functions
-├── public/                   # Static assets (images, pdfs, project thumbnails)
+├── public/                   # Static assets (optimized WebP images, manifests, PDFs)
 ├── DEPLOYMENT.md             # Detailed deployment steps (Vercel & Manual)
 └── README.md                 # Project documentation
 ```
