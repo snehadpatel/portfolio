@@ -174,7 +174,7 @@ export const DATA: DataType = {
                 "Built in a 36-hour hackathon sprint (6th place out of 160 teams) and actively scaling into a commercial product"
             ],
             link: "https://tetra027.web.app/",
-            github: "",
+            github: "https://github.com/Priya-bhatt-crazy/TETRA027",
             image: "/assets/projects/arcanum.webp",
             category: "EdTech & AI",
             roles: ["ml", "fullstack"],
