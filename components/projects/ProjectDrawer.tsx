@@ -16,6 +16,7 @@ interface ProjectDrawerProps {
 }
 
 const PROJECT_IMAGES: Record<string, string> = {
+    "arcanum-ai": "/assets/projects/arcanum.webp",
     deepshield: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80",
     "vegetable-classifier": "https://images.unsplash.com/photo-1574316071802-0d684efa7bf5?auto=format&fit=crop&w=1000&q=80",
     greensort: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1000&q=80",
@@ -24,6 +25,13 @@ const PROJECT_IMAGES: Record<string, string> = {
 };
 
 const PROJECT_PIPELINES: Record<string, string> = {
+    "arcanum-ai":
+`  [ Academic Query Input ] ───────( Multilingual Payload )───────> [ FastAPI Gateway ]
+                                                                       │
+                                                             ( Contextual Real-Time AI )
+                                                                       ▼
+  [ Classroom Telemetry UI ] <──────( Live Student Analytics )─────── [ Concept Simplifier Engine ]`,
+
     deepshield: 
 `  [ Next.js Frontend ] ─────────( Image Upload )────────> [ FastAPI Gateway ]
                                                                  │

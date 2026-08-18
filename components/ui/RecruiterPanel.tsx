@@ -95,7 +95,7 @@ const ROLE_BRIEFS: Record<Exclude<RecruiterRole, null>, RoleBrief> = {
 interface ChatMessage {
     sender: "agent" | "recruiter";
     text: string;
-    projectId?: "deepshield" | "greensort" | "suicide-prediction" | "supplier-ranking" | "vegetable-classifier";
+    projectId?: "deepshield" | "greensort" | "suicide-prediction" | "supplier-ranking" | "vegetable-classifier" | "arcanum-ai";
     timestamp: Date;
 }
 
@@ -568,6 +568,7 @@ export default function RecruiterPanel() {
                                                 </h4>
                                                 <div className="flex flex-wrap gap-1">
                                                     {[
+                                                        { label: "Arcanum AI EdTech?", q: "Tell me about Arcanum AI at TetraTHON 2026" },
                                                         { label: "YOLO edge sorter specs?", q: "How is Greensort optimized for the Raspberry Pi?" },
                                                         { label: "Deepfake classifier details?", q: "Tell me about DeepShield ViT model accuracy and tradeoffs" },
                                                         { label: "Suicide NLP context mapper?", q: "What is the CSRBOX Neo4j context mapping model?" },
