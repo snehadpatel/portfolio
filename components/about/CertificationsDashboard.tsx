@@ -4,8 +4,9 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { DATA, Certification, Achievement } from "@/lib/data";
 import { useRecruiterMode } from "@/lib/hooks/useRecruiterMode";
-import { Search, ExternalLink, Award, Sparkles, Star } from "lucide-react";
+import { Search, ExternalLink, Award, Sparkles, Star, Eye, X, Download } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 const CATEGORIES: { id: "all" | "cloud" | "graph" | "iot" | "analytics"; label: string }[] = [
     { id: "all", label: "All Credentials" },
@@ -19,6 +20,7 @@ export default function CertificationsDashboard() {
     const { role } = useRecruiterMode();
     const [searchQuery, setSearchQuery] = useState("");
     const [activeTab, setActiveTab] = useState<"all" | "cloud" | "graph" | "iot" | "analytics">("all");
+    const [selectedCertModal, setSelectedCertModal] = useState<{ title: string; image: string } | null>(null);
 
     // Helper to determine if credential matches recruiter role
     const matchesRecruiterRole = (cred: Certification | Achievement) => {
@@ -269,6 +271,17 @@ export default function CertificationsDashboard() {
                                                 <p className="text-sm text-slate-600 font-normal leading-relaxed">
                                                     {ach.desc}
                                                 </p>
+                                                {ach.certificateUrl && (
+                                                    <div className="pt-2">
+                                                        <button
+                                                            onClick={() => setSelectedCertModal({ title: ach.title, image: ach.certificateUrl! })}
+                                                            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-lg text-xs font-bold transition-colors shadow-sm"
+                                                        >
+                                                            <Eye className="w-3.5 h-3.5" />
+                                                            View Official Certificate
+                                                        </button>
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     </motion.div>
@@ -281,6 +294,59 @@ export default function CertificationsDashboard() {
                     </div>
                 </div>
             </div>
+
+            {/* Certificate Preview Modal */}
+            <AnimatePresence>
+                {selectedCertModal && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setSelectedCertModal(null)}
+                        className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4"
+                    >
+                        <motion.div
+                            initial={{ scale: 0.95, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.95, opacity: 0 }}
+                            onClick={(e) => e.stopPropagation()}
+                            className="bg-white rounded-3xl overflow-hidden max-w-4xl w-full border border-slate-200 shadow-2xl space-y-0 relative"
+                        >
+                            <div className="flex items-center justify-between p-5 border-b border-slate-100 bg-slate-50/50">
+                                <div>
+                                    <h3 className="font-bold text-slate-900 text-sm font-heading">{selectedCertModal.title}</h3>
+                                    <span className="text-xs text-slate-500 font-mono">Official Certificate of Achievement</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <a
+                                        href={selectedCertModal.image}
+                                        download
+                                        className="p-2 text-slate-400 hover:text-slate-800 rounded-lg hover:bg-slate-100 transition-colors"
+                                        title="Download Certificate"
+                                    >
+                                        <Download className="w-4 h-4" />
+                                    </a>
+                                    <button
+                                        onClick={() => setSelectedCertModal(null)}
+                                        className="p-2 text-slate-400 hover:text-slate-800 rounded-lg hover:bg-slate-100 transition-colors"
+                                    >
+                                        <X className="w-4 h-4" />
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="relative w-full aspect-[4/3] max-h-[70vh] bg-slate-900 flex items-center justify-center p-2">
+                                <Image
+                                    src={selectedCertModal.image}
+                                    alt={selectedCertModal.title}
+                                    fill
+                                    className="object-contain"
+                                    priority
+                                />
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }

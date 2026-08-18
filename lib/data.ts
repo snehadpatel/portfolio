@@ -90,6 +90,7 @@ export interface Achievement {
     desc: string;
     category: "hackathon" | "robotics" | "academic" | "general";
     date?: string;
+    certificateUrl?: string;
 }
 
 export interface DataType {
@@ -448,9 +449,10 @@ export const DATA: DataType = {
         {
             id: "tetrathon-2026",
             title: "6th Rank out of 160 Teams — TetraTHON 2026",
-            desc: "Co-created Arcanum AI, a real-time EdTech platform providing contextual explanations, multilingual support, and classroom intelligence. Led AI/ML, backend, and technical architecture in a 36-hour hackathon organized by NeoFolks, Navrachana University & ISEN Méditerranée. Now actively scaling into a full product.",
+            desc: "Team 'Twin Tech Girls' secured 6th Rank at TetraTHON 2026 — a 36-hour Indo-French AI Innovation Sprint hosted at Navrachana University, Vadodara (NUV) in partnership with ISEN Méditerranée, France (July 31 - Aug 2, 2026). Co-created Arcanum AI, leading AI/ML and backend technical architecture.",
             category: "hackathon",
-            date: "2026"
+            date: "2026",
+            certificateUrl: "/assets/tetrathon_certificate.jpg"
         },
         {
             id: "greensort-publication",
