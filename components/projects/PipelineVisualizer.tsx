@@ -39,6 +39,13 @@ const PIPELINE_STEPS: Record<string, Step[]> = {
         { title: "Pandas Cleaner", desc: "Imputing sparse logistics metrics" },
         { title: "Regression Engine", desc: "Supplier risk performance scoring" },
         { title: "Streamlit UI", desc: "Logistics ranking dashboard display" }
+    ],
+    "arcanum-ai": [
+        { title: "Academic Query Ingest", desc: "Multilingual student input & topic selection" },
+        { title: "FastAPI Gateway", desc: "Async request routing & session manager" },
+        { title: "Real-Time AI Engine", desc: "Contextual concept simplification & multi-modal explanations" },
+        { title: "Translation Layer", desc: "Dynamic multi-language adaptive pathways" },
+        { title: "Classroom Telemetry", desc: "Real-time comprehension analytics for educators" }
     ]
 };
 

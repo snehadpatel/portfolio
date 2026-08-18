@@ -160,6 +160,36 @@ export const DATA: DataType = {
     ],
     projects: [
         {
+            id: "arcanum-ai",
+            title: "Arcanum AI — Real-Time EdTech Intelligence",
+            description:
+                "An EdTech platform making complex academic concepts intuitive through real-time AI, contextual explanations, multilingual support, and classroom intelligence telemetry. Built at TetraTHON 2026 (6th Rank / 160 Teams) and currently scaling into a commercial product.",
+            techStack: ["Python", "FastAPI", "React", "Next.js", "AI/ML", "NLP", "Real-Time AI", "Tailwind CSS"],
+            features: [
+                "Real-time AI contextual explanations for simplifying complex academic concepts",
+                "Multilingual translation and adaptive context pathways for diverse learners",
+                "Classroom intelligence dashboard providing live student comprehension telemetry for educators",
+                "High-concurrency backend architecture engineered for instantaneous query response generation",
+                "Built in a 36-hour hackathon sprint (6th place out of 160 teams) and actively scaling into a commercial product"
+            ],
+            link: "https://tetra027.web.app/",
+            github: "",
+            image: "/assets/projects/arcanum.webp",
+            category: "EdTech & AI",
+            roles: ["ml", "fullstack"],
+            extended: {
+                problemStatement: "Students often struggle with dense academic concepts when static learning materials lack real-time context and multilingual translation. Meanwhile, educators lack live classroom telemetry to identify comprehension bottlenecks as they happen.",
+                constraints: {
+                    timeline: "36 Hours (TetraTHON 2026)",
+                    team: "5 Developers (AI/Backend Lead)",
+                    techStack: "Python, FastAPI, Real-Time AI, React, Firebase",
+                },
+                solution: "Engineered Arcanum AI, a real-time EdTech system delivering adaptive contextual explanations, language translation layers, and classroom intelligence analytics. As AI & Backend Developer, I led the AI/ML pipeline design, real-time backend API architecture, and prompt processing pathways.",
+                tradeoffs: "During the 36-hour hackathon, we prioritized low-latency inference routing and dynamic prompt engineering over offline model fine-tuning to ensure rock-solid real-time performance and instant response generation during live judge evaluations.",
+                impact: "Secured 6th Rank among 160 competing teams at TetraTHON 2026 (organized by NeoFolks, Navrachana University & ISEN Méditerranée). Currently deployed live at tetra027.web.app and actively scaling into a full commercial EdTech product."
+            }
+        },
+        {
             id: "deepshield",
             title: "DeepShield AI Forensics",
             description:
@@ -415,6 +445,13 @@ export const DATA: DataType = {
         }
     ],
     achievements: [
+        {
+            id: "tetrathon-2026",
+            title: "6th Rank out of 160 Teams — TetraTHON 2026",
+            desc: "Co-created Arcanum AI, a real-time EdTech platform providing contextual explanations, multilingual support, and classroom intelligence. Led AI/ML, backend, and technical architecture in a 36-hour hackathon organized by NeoFolks, Navrachana University & ISEN Méditerranée. Now actively scaling into a full product.",
+            category: "hackathon",
+            date: "2026"
+        },
         {
             id: "greensort-publication",
             title: "Research Paper (Written) — SustainX 2026",

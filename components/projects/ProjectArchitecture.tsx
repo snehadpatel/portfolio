@@ -5,7 +5,7 @@ import { Cpu, Camera, Terminal, ShieldCheck, Heart, Database, AlertCircle } from
 import { motion, AnimatePresence } from "framer-motion";
 
 interface ProjectArchitectureProps {
-    projectId: "deepshield" | "greensort" | "suicide-prediction" | "supplier-ranking" | "vegetable-classifier";
+    projectId: "deepshield" | "greensort" | "suicide-prediction" | "supplier-ranking" | "vegetable-classifier" | "arcanum-ai";
 }
 
 interface NodeDetail {
@@ -16,6 +16,32 @@ interface NodeDetail {
 }
 
 const ARCHITECTURE_METADATA: Record<string, Record<string, NodeDetail>> = {
+    "arcanum-ai": {
+        input: {
+            title: "Student & Classroom Input",
+            tech: "React, WebSockets",
+            description: "Receives raw student queries, complex academic prompts, or live classroom feeds for real-time processing.",
+            specs: { "Input": "Multilingual Text & Audio", "Protocol": "HTTPS / WebSocket", "Latency": "<10ms Ingestion" }
+        },
+        fastapi: {
+            title: "FastAPI Async Engine",
+            tech: "FastAPI, Python Asyncio",
+            description: "Manages session state, handles concurrent incoming requests, and routes payloads to specialized AI sub-modules.",
+            specs: { "Framework": "FastAPI", "Concurrency": "Async Event Loop", "Routing": "Context-Aware" }
+        },
+        aiengine: {
+            title: "Real-Time AI & Translation",
+            tech: "LLM Pipeline, NLP Models",
+            description: "Simplifies complex academic concepts, generates contextual explanations, and performs dynamic multi-language translation.",
+            specs: { "Models": "Real-Time AI & NLP", "Response": "Streaming Tokens", "Features": "Contextual & Multilingual" }
+        },
+        dashboard: {
+            title: "Classroom Intelligence UI",
+            tech: "Next.js, Tailwind CSS",
+            description: "Renders real-time comprehension telemetry and interactive learning widgets for educators and students.",
+            specs: { "Dashboard": "Student & Educator Views", "Analytics": "Comprehension Heatmaps", "Status": "Live at tetra027.web.app" }
+        }
+    },
     greensort: {
         camera: {
             title: "Pi Camera Input",
@@ -674,6 +700,103 @@ export default function ProjectArchitecture({ projectId }: ProjectArchitecturePr
                 </svg>
             );
         }
+        if (projectId === "arcanum-ai") {
+            return (
+                <svg viewBox="0 0 800 240" className="w-full h-full font-mono text-[10px]">
+                    <defs>
+                        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="3" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+                    </defs>
+
+                    {/* Signals flowing lines */}
+                    <path d="M 120 120 L 220 120" stroke="#818cf8" strokeWidth="2" strokeDasharray="5,5" className="animate-[dash_2s_linear_infinite]" />
+                    <path d="M 340 120 L 440 120" stroke="#a855f7" strokeWidth="2" strokeDasharray="5,5" className="animate-[dash_2s_linear_infinite]" />
+                    <path d="M 560 120 L 660 120" stroke="#10b981" strokeWidth="2" strokeDasharray="5,5" className="animate-[dash_2s_linear_infinite]" />
+
+                    {/* Node 1: Classroom Feed */}
+                    <g transform="translate(40, 70)" {...getNodeHandlers("input")}>
+                        <rect 
+                            width="80" 
+                            height="100" 
+                            rx="12" 
+                            fill="#1e293b" 
+                            stroke={activeNodeId === "input" ? "#818cf8" : "#475569"} 
+                            strokeWidth={activeNodeId === "input" ? "2.5" : "1.5"}
+                            filter={getGlowFilter("input")}
+                            className="transition-all duration-300"
+                        />
+                        <foreignObject x="0" y="15" width="80" height="35" className="pointer-events-none">
+                            <div className="flex justify-center text-slate-400"><Terminal className="w-6 h-6" /></div>
+                        </foreignObject>
+                        <text x="40" y="65" textAnchor="middle" fill="#94a3b8" fontSize="8" className="pointer-events-none">Classroom Feed</text>
+                        <text x="40" y="80" textAnchor="middle" fill="#cbd5e1" fontWeight="bold" className="pointer-events-none">Academic Query</text>
+                    </g>
+
+                    {/* Node 2: FastAPI Router */}
+                    <g transform="translate(220, 65)" {...getNodeHandlers("fastapi")}>
+                        <rect 
+                            width="120" 
+                            height="110" 
+                            rx="16" 
+                            fill="#064e3b" 
+                            stroke={activeNodeId === "fastapi" ? "#34d399" : "#10b981"} 
+                            strokeWidth={activeNodeId === "fastapi" ? "2.5" : "1.5"}
+                            filter={getGlowFilter("fastapi")}
+                            className="transition-all duration-300"
+                        />
+                        <foreignObject x="0" y="15" width="120" height="35" className="pointer-events-none">
+                            <div className="flex justify-center text-emerald-400"><Terminal className="w-7 h-7" /></div>
+                        </foreignObject>
+                        <text x="60" y="65" textAnchor="middle" fill="#6ee7b7" fontWeight="bold" className="pointer-events-none">FastAPI Router</text>
+                        <text x="60" y="80" textAnchor="middle" fill="#a7f3d0" fontSize="8" className="pointer-events-none">Async Session Mgmt</text>
+                        <text x="60" y="95" textAnchor="middle" fill="#a7f3d0" fontSize="8" className="pointer-events-none">High Concurrency</text>
+                    </g>
+
+                    {/* Node 3: Real-Time AI & Translation Engine */}
+                    <g transform="translate(440, 50)" {...getNodeHandlers("aiengine")}>
+                        <rect 
+                            width="120" 
+                            height="140" 
+                            rx="16" 
+                            fill="#1e1b4b" 
+                            stroke={activeNodeId === "aiengine" ? "#818cf8" : "#6366f1"} 
+                            strokeWidth={activeNodeId === "aiengine" ? "3" : "2"}
+                            filter={getGlowFilter("aiengine")}
+                            className="transition-all duration-300"
+                        />
+                        <foreignObject x="0" y="20" width="120" height="35" className="pointer-events-none">
+                            <div className="flex justify-center text-indigo-400"><Cpu className="w-8 h-8 animate-pulse" /></div>
+                        </foreignObject>
+                        <text x="60" y="75" textAnchor="middle" fill="#a5b4fc" fontWeight="bold" className="pointer-events-none">Real-Time AI</text>
+                        <text x="60" y="95" textAnchor="middle" fill="#818cf8" fontSize="8" className="pointer-events-none">Multilingual NLP</text>
+                        <rect x="20" y="105" width="80" height="20" rx="4" fill="#312e81" stroke="#4f46e5" className="pointer-events-none" />
+                        <text x="60" y="118" textAnchor="middle" fill="#e0e7ff" fontSize="8" fontWeight="bold" className="pointer-events-none">Concept Simplifier</text>
+                    </g>
+
+                    {/* Node 4: Classroom Telemetry UI */}
+                    <g transform="translate(660, 70)" {...getNodeHandlers("dashboard")}>
+                        <rect 
+                            width="100" 
+                            height="100" 
+                            rx="16" 
+                            fill="#3b0764" 
+                            stroke={activeNodeId === "dashboard" ? "#c084fc" : "#a855f7"} 
+                            strokeWidth={activeNodeId === "dashboard" ? "2.5" : "2"}
+                            filter={getGlowFilter("dashboard")}
+                            className="transition-all duration-300"
+                        />
+                        <foreignObject x="0" y="15" width="100" height="35" className="pointer-events-none">
+                            <div className="flex justify-center text-purple-400"><ShieldCheck className="w-7 h-7" /></div>
+                        </foreignObject>
+                        <text x="50" y="65" textAnchor="middle" fill="#d8b4fe" fontWeight="bold" className="pointer-events-none">EdTech UI</text>
+                        <text x="50" y="80" textAnchor="middle" fill="#e9d5ff" fontSize="8" className="pointer-events-none">tetra027.web.app</text>
+                    </g>
+                </svg>
+            );
+        }
+
         return null;
     };
 
@@ -685,14 +808,16 @@ export default function ProjectArchitecture({ projectId }: ProjectArchitecturePr
                 <div className="flex items-center gap-2 text-indigo-400 font-mono text-[10px] uppercase tracking-wider">
                     {projectId === "greensort" || projectId === "vegetable-classifier" ? (
                         <Cpu className="w-4 h-4" />
-                    ) : projectId === "deepshield" ? (
+                    ) : projectId === "deepshield" || projectId === "arcanum-ai" ? (
                         <ShieldCheck className="w-4 h-4" />
                     ) : (
                         <Database className="w-4 h-4" />
                     )}
                     <span>
                         System Architecture:{" "}
-                        {projectId === "greensort"
+                        {projectId === "arcanum-ai"
+                            ? "Arcanum AI Platform"
+                            : projectId === "greensort"
                             ? "Greensort IoT Sorter"
                             : projectId === "deepshield"
                             ? "DeepShield AI Forensics"

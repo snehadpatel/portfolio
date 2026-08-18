@@ -1,6 +1,6 @@
 export interface AgentResponse {
     answer: string;
-    matchedProjectId?: "deepshield" | "greensort" | "suicide-prediction" | "supplier-ranking" | "vegetable-classifier";
+    matchedProjectId?: "deepshield" | "greensort" | "suicide-prediction" | "supplier-ranking" | "vegetable-classifier" | "arcanum-ai";
     confidence: number;
 }
 
@@ -47,7 +47,11 @@ const SYNONYMS: Record<string, string> = {
     "gcp": "gcp-data",
     "aws": "aws-ml",
     "cgpa": "diploma-topper",
-    "gpa": "diploma-topper"
+    "gpa": "diploma-topper",
+    "tetrathon": "arcanum-ai",
+    "arcanum": "arcanum-ai",
+    "edtech": "arcanum-ai",
+    "multilingual": "arcanum-ai"
 };
 
 // Skill Keywords to match in Job Descriptions
@@ -66,6 +70,11 @@ const SKILLS_KEYWORD_MAP: Record<string, string[]> = {
 
 // Predefined detailed answers for recruiter questions
 const QA_DATABASE = [
+    {
+        keywords: ["arcanum", "tetrathon", "edtech", "hackathon", "multilingual", "classroom", "6th"],
+        projectId: "arcanum-ai" as const,
+        answer: "At TetraTHON 2026, Sneha co-built Arcanum AI, an EdTech platform delivering real-time AI contextual explanations, multilingual support, and classroom intelligence telemetry. Securing 6th rank out of 160 competing teams in a 36-hour hackathon (organized by NeoFolks, Navrachana University & ISEN Méditerranée), Sneha served as AI & Backend Developer, leading the AI/ML pipeline and backend technical architecture. The project is live at tetra027.web.app and currently scaling into a full commercial product."
+    },
     {
         keywords: ["deepshield", "deepfake", "forensics", "vit", "transformer", "fgsm"],
         projectId: "deepshield" as const,

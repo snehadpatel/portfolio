@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import PipelineVisualizer from "@/components/projects/PipelineVisualizer";
 
 const PROJECT_PIPELINES: Record<string, boolean> = {
+    "arcanum-ai": true,
     deepshield: true,
     "vegetable-classifier": true,
     greensort: true,
