@@ -95,7 +95,7 @@ const ROLE_BRIEFS: Record<Exclude<RecruiterRole, null>, RoleBrief> = {
 interface ChatMessage {
     sender: "agent" | "recruiter";
     text: string;
-    projectId?: "deepshield" | "greensort" | "suicide-prediction" | "supplier-ranking" | "vegetable-classifier" | "arcanum-ai";
+    projectId?: string;
     timestamp: Date;
 }
 
