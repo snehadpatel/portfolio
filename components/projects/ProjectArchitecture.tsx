@@ -5,7 +5,7 @@ import { Cpu, Camera, Terminal, ShieldCheck, Heart, Database, AlertCircle } from
 import { motion, AnimatePresence } from "framer-motion";
 
 interface ProjectArchitectureProps {
-    projectId: "deepshield" | "greensort" | "suicide-prediction" | "supplier-ranking" | "vegetable-classifier" | "arcanum-ai";
+    projectId: string;
 }
 
 interface NodeDetail {
@@ -797,7 +797,51 @@ export default function ProjectArchitecture({ projectId }: ProjectArchitecturePr
             );
         }
 
-        return null;
+        return (
+            <svg viewBox="0 0 800 240" className="w-full h-full font-mono text-[10px]">
+                <defs>
+                    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="3" result="blur" />
+                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    </filter>
+                </defs>
+                <path d="M 120 120 L 220 120" stroke="#818cf8" strokeWidth="2" strokeDasharray="5,5" className="animate-[dash_2s_linear_infinite]" />
+                <path d="M 340 120 L 440 120" stroke="#a855f7" strokeWidth="2" strokeDasharray="5,5" className="animate-[dash_2s_linear_infinite]" />
+                <path d="M 560 120 L 660 120" stroke="#10b981" strokeWidth="2" strokeDasharray="5,5" className="animate-[dash_2s_linear_infinite]" />
+                <g transform="translate(40, 70)">
+                    <rect width="80" height="100" rx="12" fill="#1e293b" stroke="#475569" strokeWidth="1.5" />
+                    <foreignObject x="0" y="15" width="80" height="35" className="pointer-events-none">
+                        <div className="flex justify-center text-slate-400"><Terminal className="w-6 h-6" /></div>
+                    </foreignObject>
+                    <text x="40" y="65" textAnchor="middle" fill="#94a3b8" fontSize="8">Input Payload</text>
+                    <text x="40" y="80" textAnchor="middle" fill="#cbd5e1" fontWeight="bold">REST / API</text>
+                </g>
+                <g transform="translate(220, 65)">
+                    <rect width="120" height="110" rx="16" fill="#064e3b" stroke="#10b981" strokeWidth="1.5" />
+                    <foreignObject x="0" y="15" width="120" height="35" className="pointer-events-none">
+                        <div className="flex justify-center text-emerald-400"><Cpu className="w-7 h-7" /></div>
+                    </foreignObject>
+                    <text x="60" y="65" textAnchor="middle" fill="#6ee7b7" fontWeight="bold">Processing Engine</text>
+                    <text x="60" y="80" textAnchor="middle" fill="#a7f3d0" fontSize="8">Async Pipeline</text>
+                </g>
+                <g transform="translate(440, 50)">
+                    <rect width="120" height="140" rx="16" fill="#1e1b4b" stroke="#6366f1" strokeWidth="2" />
+                    <foreignObject x="0" y="20" width="120" height="35" className="pointer-events-none">
+                        <div className="flex justify-center text-indigo-400"><Cpu className="w-8 h-8 animate-pulse" /></div>
+                    </foreignObject>
+                    <text x="60" y="75" textAnchor="middle" fill="#a5b4fc" fontWeight="bold">Core Model</text>
+                    <text x="60" y="95" textAnchor="middle" fill="#818cf8" fontSize="8">AI / Data Logic</text>
+                </g>
+                <g transform="translate(660, 70)">
+                    <rect width="100" height="100" rx="16" fill="#3b0764" stroke="#a855f7" strokeWidth="2" />
+                    <foreignObject x="0" y="15" width="100" height="35" className="pointer-events-none">
+                        <div className="flex justify-center text-purple-400"><ShieldCheck className="w-7 h-7" /></div>
+                    </foreignObject>
+                    <text x="50" y="65" textAnchor="middle" fill="#d8b4fe" fontWeight="bold">Output UI</text>
+                    <text x="50" y="80" textAnchor="middle" fill="#e9d5ff" fontSize="8">Production</text>
+                </g>
+            </svg>
+        );
     };
 
     const hasActiveDetails = activeNodeId && projectMetadata && projectMetadata[activeNodeId];
@@ -825,7 +869,9 @@ export default function ProjectArchitecture({ projectId }: ProjectArchitecturePr
                             ? "NLP Crisis Context Mapper"
                             : projectId === "vegetable-classifier"
                             ? "Local Crop Classifier"
-                            : "Logistics Supplier Ranker"}
+                            : projectId === "supplier-ranking"
+                            ? "Logistics Supplier Ranker"
+                            : `${projectId.toUpperCase()} System`}
                     </span>
                 </div>
                 {activeNodeId && (

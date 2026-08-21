@@ -50,8 +50,12 @@ const PIPELINE_STEPS: Record<string, Step[]> = {
 };
 
 export default function PipelineVisualizer({ projectId }: { projectId: string }) {
-    const steps = PIPELINE_STEPS[projectId];
-    if (!steps) return null;
+    const steps = PIPELINE_STEPS[projectId] || [
+        { title: "Data & Ingestion", desc: "API payload ingestion & preprocessing" },
+        { title: "Core Logic Engine", desc: "System execution & algorithm routing" },
+        { title: "Model / Analytics", desc: "Machine learning & pattern evaluation" },
+        { title: "Output & Visualization", desc: "Dynamic UI display & telemetry feeds" }
+    ];
 
     return (
         <div className="relative border border-slate-200/50 rounded-2xl bg-white/40 p-5 overflow-hidden shadow-sm">

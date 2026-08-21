@@ -1,6 +1,8 @@
+import { DATA } from "@/lib/data";
+
 export interface AgentResponse {
     answer: string;
-    matchedProjectId?: "deepshield" | "greensort" | "suicide-prediction" | "supplier-ranking" | "vegetable-classifier" | "arcanum-ai";
+    matchedProjectId?: string;
     confidence: number;
 }
 
@@ -167,8 +169,35 @@ export function answerQuestion(question: string): AgentResponse {
         };
     }
 
+    // Dynamic search across newly synced DATA.projects
+    const dynamicProject = DATA.projects.find((p) => {
+        const pTokens = cleanAndTokenize(`${p.title} ${p.description} ${p.category} ${p.techStack.join(" ")}`);
+        return getSimilarity(questionTokens, pTokens) > 0.15;
+    });
+
+    if (dynamicProject) {
+        return {
+            answer: `Regarding ${dynamicProject.title}: Sneha built this system using ${dynamicProject.techStack.join(", ")}. ${dynamicProject.description} Key features include: ${dynamicProject.features.slice(0, 2).join("; ")}.`,
+            matchedProjectId: dynamicProject.id,
+            confidence: 0.6
+        };
+    }
+
+    // Dynamic search across newly synced DATA.achievements
+    const dynamicAch = DATA.achievements.find((a) => {
+        const aTokens = cleanAndTokenize(`${a.title} ${a.desc} ${a.category}`);
+        return getSimilarity(questionTokens, aTokens) > 0.15;
+    });
+
+    if (dynamicAch) {
+        return {
+            answer: `Honor & Achievement: Sneha achieved '${dynamicAch.title}' (${dynamicAch.date || "Recent"}). ${dynamicAch.desc}`,
+            confidence: 0.6
+        };
+    }
+
     return {
-        answer: "I couldn't find a direct match for that question in Sneha's logs. Try asking about her 'Deepfake ViT model accuracy', 'Greensort latency optimization on Raspberry Pi', or 'Neo4j crisis mapping'.",
+        answer: "I couldn't find a direct match for that question in Sneha's logs. Try asking about her 'TetraTHON 6th rank', 'Deepfake ViT model accuracy', 'Greensort latency optimization on Raspberry Pi', or 'Neo4j crisis mapping'.",
         confidence: 0
     };
 }
