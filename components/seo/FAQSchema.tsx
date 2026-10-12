@@ -36,26 +36,26 @@ export function FAQJsonLd({ faqs }: { faqs: FAQItem[] }) {
 export const SERVICE_FAQS: FAQItem[] = [
     {
         question: "What AI and machine learning services does Sneha Patel offer?",
-        answer: "Sneha offers custom computer vision pipelines (image classification, deepfake detection, visual forensics), NLP and sentiment analysis systems, recommendation engines, IoT hardware prototyping with edge AI deployment, and end-to-end data pipeline consulting. All solutions are built with production-grade frameworks like PyTorch, TensorFlow, and FastAPI.",
+        answer: "Sneha specializes in computer vision pipelines (object detection, visual forensics, medical image triaging), context-aware AI copilots (AST parsing, token streaming, RAG), graph-augmented NLP (Neo4j, transformers), and edge AI hardware deployment. All solutions are built with production-grade frameworks like PyTorch, TensorFlow, FastAPI, and Next.js.",
     },
     {
-        question: "Can Sneha build a deepfake detection system?",
-        answer: "Yes. Sneha built DeepShield AI, a visual forensics pipeline achieving 97.5% accuracy on compressed GAN holdout sets. It uses Error Level Analysis, DCT frequency extraction, and a Vision Transformer (ViT) with Grad-CAM explainability. She also implements FGSM adversarial noise injection to proactively immunize photos against deepfakes.",
+        question: "Can Sneha build a deepfake detection or visual forensics system?",
+        answer: "Yes. Sneha built DeepShield AI, a dual-domain visual forensics pipeline combining Vision Transformers (ViT-Base-16) with frequency-domain analysis (Error Level Analysis and Discrete Cosine Transform) and Grad-CAM explainability. It was evaluated on FaceForensics++ and DFDC benchmarks, with documented robustness analyses under social media compression.",
     },
     {
         question: "Does Sneha work with IoT and embedded hardware?",
-        answer: "Absolutely. Sneha engineers physical prototypes integrating Raspberry Pi and Arduino with edge ML models. Her GreenSort project runs quantized YOLOv8 on a Raspberry Pi 4 for real-time waste sorting with under 180ms loop latency. She handles sensor integration, serial communication, and actuator coordination.",
+        answer: "Absolutely. Sneha engineers physical edge prototypes integrating Raspberry Pi and Arduino with optimized ML models. Her NeuraBin / GreenSort project (Top 6 / 160 at SustainX 2026) runs YOLOv8 on a Raspberry Pi 4 with Arduino Uno servo gate actuation, achieving 90 mAP across 4 waste streams at a 1.7s total cycle time with a ₹5,000 hardware budget.",
     },
     {
         question: "What programming languages and frameworks does Sneha use?",
-        answer: "Sneha is proficient in Python, Java, C/C++, JavaScript, TypeScript, and SQL. For AI/ML she uses PyTorch, TensorFlow, Keras, Scikit-Learn, and YOLO. For web development: Next.js, React, FastAPI, Flask, and Node.js. For databases: Neo4j, MongoDB, and MySQL. For hardware: Arduino and Raspberry Pi.",
+        answer: "Sneha is proficient in Python, Java, C/C++, TypeScript, JavaScript, and SQL/Cypher. For AI/ML: PyTorch, TensorFlow, Keras, Scikit-Learn, YOLOv8, and OpenCV. For web & APIs: Next.js 15, React, FastAPI, Flask, and Tailwind CSS. For databases: Neo4j, MongoDB, and MySQL. For embedded systems: Arduino, Raspberry Pi, and serial protocols.",
     },
     {
-        question: "Is Sneha available for freelance or contract work?",
-        answer: "Yes. Sneha is currently open to internships, freelance projects, and contract collaborations in Computer Vision, Machine Learning, IoT prototyping, and Data Engineering. You can reach out through her contact page to discuss project requirements.",
+        question: "Is Sneha available for internship or engineering roles?",
+        answer: "Yes. Sneha is actively seeking AI/ML engineering and software engineering internships, research fellowships, and technical project collaborations. You can reach out directly via sneha.dpatel@outlook.com or through her contact page.",
     },
     {
         question: "What certifications does Sneha hold?",
-        answer: "Sneha holds certifications from AWS (Machine Learning Foundations), Google Cloud (Data Engineer track), Neo4j (Certified Professional), IBM (Data Analysis with Python), and Cisco Networking Academy (IoT & Cybersecurity). All certifications are verifiable through her portfolio.",
+        answer: "Sneha holds 5 verified credentials: AWS Academy Graduate (Machine Learning Foundations), Google Cloud Academy (GCP Data Engineering), Neo4j Certified Professional, IBM (Data Analysis with Python), and Cisco Networking Academy (IoT & Cybersecurity).",
     },
 ];

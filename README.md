@@ -29,49 +29,55 @@ This portfolio showcases the work of **Sneha Patel**, a B.Tech Computer Science 
 
 ## 📁 Project Highlights & Architecture
 
-The portfolio showcases several advanced machine learning and hardware integration projects:
+The portfolio showcases verified AI, edge computing, and full-stack software systems:
 
-### 1. 🛡️ DeepShield AI Forensics
-*   **Objective**: Visual forensics pipeline to detect face swaps and GAN-generated deepfakes.
-*   **Tech Stack**: `PyTorch`, `FastAPI`, `Next.js`, `OpenCV`, `ViT-Base-16`, `FGSM`
-*   **Architecture**:
-    `Web Upload (Next.js) ➔ FastAPI API ➔ Forensic Extraction (ELA & DCT) ➔ Ensemble Pipeline (ViT) ➔ Grad-CAM Heatmap Visualizer`
-*   **Key Features**:
-    *   Grad-CAM visualization hooks to output pixel heatmaps of anomalous areas.
-    *   A prototype Fast Gradient Sign Method (FGSM) noise-injector to immunize original photos before uploading to the web.
-    *   Achieved **97.5% classification accuracy** on unseen GAN holdout sets.
+### 1. ⚡ Arcanum AI — Context-Aware IDE Copilot
+*   **Honor**: 6th Rank out of 160 Teams @ TetraTHON 2026 (36-hr National Hackathon by NeoFolks, Navrachana Univ & ISEN Méditerranée).
+*   **Role**: AI & Backend Developer (Co-founder).
+*   **Tech Stack**: `Next.js 15`, `FastAPI`, `Python`, `Tree-Sitter / AST`, `Monaco Editor`, `Tailwind CSS`.
+*   **Status**: Live MVP at [tetra027.web.app](https://tetra027.web.app); multi-agent vector RAG architecture on planned roadmap.
+*   **Key Capabilities**:
+    *   Active code buffer ingestion and dynamic token budget manager.
+    *   Sub-120ms token streaming pipeline via asynchronous FastAPI endpoints.
+    *   AST symbol extraction for context-grounded completions and refactor suggestions.
 
-### 2. 🥦 Local Crop Classifier Study
-*   **Objective**: Agricultural computer vision study comparing six CNN architectures trained on locally captured datasets to optimize edge deployments.
-*   **Tech Stack**: `PyTorch`, `ResNet18`, `Flask`, `OpenCV`, `Python`
-*   **Architecture**:
-    `Flask Web Form ➔ OpenCV Background Subtractor ➔ PyTorch ResNet18 ➔ Class Prediction Output`
-*   **Key Features**:
-    *   Preprocessed over 1,200 photos of regional vegetables (Karela, Parwal) under highly inconsistent wholesale market lighting.
-    *   Applied synthetic minority oversampling (SMOTE) and custom affine transforms to balance seasonal sets.
+### 2. ♻️ NeuraBin / GreenSort — Edge-AI Municipal Waste Sorter
+*   **Honor**: Top 6 Finalist / 160 Teams @ SustainX 2026 National Competition & Published Research Paper.
+*   **Role**: Hardware & Embedded AI Lead, Co-author.
+*   **Tech Stack**: `YOLOv8`, `Raspberry Pi 4 Model B (4GB)`, `Arduino Uno`, `MG996R Servo`, `OpenCV`, `Python`, `C++`.
+*   **Key Results**:
+    *   Achieved **90 mAP** across 4 waste streams (biodegradable, non-biodegradable, recyclable, hazardous) on custom edge dataset.
+    *   **1.7s total cycle time** (camera frame capture, edge inference, and mechanical servo gate drop).
+    *   Passed 8/8 physical edge trial cases; total bill of materials under ₹5,000 (~$60).
 
-### 3. ♻️ Greensort: IoT Waste Sorter
-*   **Objective**: Edge-AI hardware prototype running a quantized YOLOv8 model on a Raspberry Pi 4, communicating sorting signals to an Arduino-driven mechanical flap.
-*   **Tech Stack**: `YOLOv8`, `OpenCV`, `Python`, `Raspberry Pi`, `Arduino Uno`
-*   **Architecture**:
-    `Pi Camera ➔ Raspberry Pi (Quantized YOLOv8) ➔ USB Serial Port ➔ Arduino ➔ Servo Motors (Mechanical Flaps) ➔ Ultrasonic Level Sensors`
-*   **Key Features**:
-    *   Quantized YOLOv8 weights to INT8, achieving 12fps inference speed directly on Pi cores.
-    *   Synchronized physical servo flap transitions with camera capture and model inference lag under 180ms total loop latency.
+### 3. 🛡️ DeepShield AI — Dual-Domain Deepfake Forensics
+*   **Role**: Lead Developer & Researcher.
+*   **Tech Stack**: `PyTorch`, `FastAPI`, `Next.js`, `OpenCV`, `ViT-Base-16`, `ELA`, `2D-DCT`, `Grad-CAM`.
+*   **Key Capabilities**:
+    *   Dual-domain analysis pairing spatial Vision Transformers with Error Level Analysis (ELA) and 2D Discrete Cosine Transform (DCT) frequency grid artifacts.
+    *   Grad-CAM spatial anomaly heatmaps providing interpretable decision boundaries.
+    *   Rigorous evaluation on FaceForensics++ and DFDC benchmarks with candid documentation of compression degradation under social media transcoding.
 
-### 4. 🧠 NLP Crisis Context Mapper
-*   **Objective**: NLP crisis evaluation tool built during an internship at CSRBOX to map behavioral distress statements.
-*   **Tech Stack**: `Python`, `Scikit-Learn`, `Neo4j`, `NLP (TF-IDF, Tokenizers)`, `Pandas`
-*   **Key Features**:
-    *   Designed a Neo4j graph database schema mapping relationships between patient IDs, sentiment scores, and distress tokens.
-    *   Wrote Cypher queries to help evaluators trace chronological context pathways instead of isolated keywords.
+### 4. 🩺 DermaJourney — Clinical Dermatology Decision Support
+*   **Role**: ML Researcher & Co-author.
+*   **Tech Stack**: `PyTorch`, `EfficientNet-B4`, `Vision Transformer`, `ISIC Archive`, `Python`, `FastAPI`.
+*   **Key Capabilities**:
+    *   Dual-backbone vision ensemble evaluated on dermoscopic lesion benchmarks.
+    *   Symptom-conditioned Bayesian risk calculator with strict triage guardrails (Routine, Priority, Urgent Specialist).
+    *   Research manuscript focusing on decision support and referral thresholds over autonomous diagnosis.
 
-### 5. 🚛 Logistics Supplier Ranker
-*   **Objective**: Multi-variable regression model scoring cargo providers based on defects, costs, and delays.
-*   **Tech Stack**: `Python`, `Scikit-Learn`, `Regression Models`, `Pandas`, `Streamlit`
-*   **Key Features**:
-    *   Fitted custom multi-variable regression models weighting late-deliveries, defects, and costs.
-    *   Earned direct commendation from the CEO of Mesh Works for ranking accuracy.
+### 5. 🧠 Crisis Risk NLP & Knowledge Graph Mapping
+*   **Organization**: CSRBOX (Data Specialist Internship).
+*   **Tech Stack**: `Python`, `Scikit-Learn`, `Neo4j`, `Cypher`, `NLP (TF-IDF, BiLSTM, Transformers)`, `Pandas`.
+*   **Key Capabilities**:
+    *   Analyzed and preprocessed **101,110 text records** for distress polarity classification (~93.8% validation accuracy).
+    *   Architected Neo4j graph schema mapping chronological distress triggers and co-occurring crisis tokens with Cypher queries.
+
+### 6. 🚛 Logistics Supplier Ranker
+*   **Organization**: Mesh Works Hackathon (CEO Direct Commendation).
+*   **Tech Stack**: `Python`, `Scikit-Learn`, `Ridge Regression`, `Pandas`, `Streamlit`.
+*   **Key Capabilities**:
+    *   Multivariable regression weighting freight delays, defect logs, and delivery schedules to rank logistics carriers.
 
 ---
 

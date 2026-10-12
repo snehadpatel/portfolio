@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Github, ExternalLink, Clock, Users, Wrench, FileText } from "lucide-react";
+import { X, Github, ExternalLink, Clock, Users, Wrench, FileText, CheckCircle2, AlertCircle, ArrowUpRight } from "lucide-react";
 import { Project } from "@/lib/data";
 import { Button } from "@/components/ui/Button";
 import PipelineVisualizer from "./PipelineVisualizer";
@@ -17,62 +17,70 @@ interface ProjectDrawerProps {
 
 const PROJECT_IMAGES: Record<string, string> = {
     "arcanum-ai": "/assets/projects/arcanum.webp",
-    deepshield: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80",
-    "vegetable-classifier": "https://images.unsplash.com/photo-1574316071802-0d684efa7bf5?auto=format&fit=crop&w=1000&q=80",
-    greensort: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1000&q=80",
-    "supplier-ranking": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=80",
-    "suicide-prediction": "https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=1000&q=80"
+    greensort: "/assets/projects/waste.webp",
+    deepshield: "/assets/projects/deepshield.webp",
+    dermajourney: "/assets/projects/dermajourney.webp",
+    "suicide-prediction": "/assets/projects/suicide.webp",
+    "vegetable-classifier": "/assets/projects/veg.webp",
+    "supplier-ranking": "/assets/projects/supplier.webp",
 };
 
 const PROJECT_PIPELINES: Record<string, string> = {
     "arcanum-ai":
-`  [ Academic Query Input ] ───────( Multilingual Payload )───────> [ FastAPI Gateway ]
+`  [ Active Code Buffer / Tabs ] ─────( Monaco AST Ingest )─────> [ FastAPI Context Engine ]
                                                                        │
-                                                             ( Contextual Real-Time AI )
+                                                             ( Token Budget & Syntax Parse )
                                                                        ▼
-  [ Classroom Telemetry UI ] <──────( Live Student Analytics )─────── [ Concept Simplifier Engine ]`,
+  [ Monaco Workspace UI ] <────( Sub-120ms Token Stream )──── [ Copilot Completion Stream ]`,
 
-    deepshield: 
-`  [ Next.js Frontend ] ─────────( Image Upload )────────> [ FastAPI Gateway ]
-                                                                 │
-                                                       ( Forensic Extraction )
-                                                                 ▼
-  [ Grad-CAM Visualizer ] <────( Ensemble ViT Model )──── [ ELA & DCT Analysis ]`,
+    greensort:
+`  [ Camera / Conveyor Frame ] ────( 640x480 RGB Ingest )─────> [ Raspberry Pi 4 (YOLOv8) ]
+                                                                        │
+                                                              ( 4-Class 90 mAP Inference )
+                                                                        ▼
+  [ MG996R Servo Gate Flap ] <───( UART Serial over USB )────── [ Arduino Uno Actuation PWM ]`,
 
-    "vegetable-classifier": 
-`  [ Crop Camera Feed ] ───────( Capture Frame )───────> [ Background Subtractor ]
-                                                                 │
-                                                       ( HSV class filtering )
-                                                                 ▼
-  [ Predicted Variety ] <──────( PyTorch ResNet18 )────── [ 224x224 Normalized ]`,
+    deepshield:
+`  [ Image Input ] ──────────────( ELA & DCT Frequency )───────> [ Dual-Feature Extractor ]
+                                                                        │
+                                                              ( ViT-Base-16 Patches )
+                                                                        ▼
+  [ Explainable Grad-CAM ] <─────( Spatial Discrepancies )────── [ Classification Head ]`,
 
-    greensort: 
-`  [ Ultrasonic Trigger ] ────────( Pi Camera )────────> [ YOLOv8 Edge Detector ]
-                                                                 │
-                                                       ( Cat: Recycled/Bio/Haz )
-                                                                 ▼
-  [ Physical Flaps Servo ] <─────( Serial Port )─────── [ Arduino Controller ]`,
+    dermajourney:
+`  [ Dermoscopic Check-ins ] ────( Multi-Modal Ingestion )─────> [ Clinical NLP & Vision ]
+                                                                        │
+                                                              ( Lesion Delta Tracking )
+                                                                        ▼
+  [ Clinician Decision View ] <───( Longitudinal Analytics )──── [ Progression Scorer ]`,
 
-    "suicide-prediction": 
-`  [ Crisis Text Input ] ─────────( Clean Text )─────────> [ NLP TF-IDF Vector ]
-                                                                 │
-                                                        ( Sentiment Polarity )
-                                                                 ▼
-  [ Relationship Graph ] <──────( Neo4j Query )───────── [ Scikit-Learn Model ]`,
+    "vegetable-classifier":
+`  [ Crop Camera Feed ] ─────────( Capture Frame )──────────────> [ Background Subtractor ]
+                                                                        │
+                                                              ( HSV Class Filtering )
+                                                                        ▼
+  [ Predicted Variety ] <────────( PyTorch ResNet18 )─────────── [ 224x224 Normalized ]`,
 
-    "supplier-ranking": 
-`  [ Supplier Telemetry ] ───────( Logistics CSV )───────> [ pandas Dataframes ]
-                                                                 │
-                                                         ( Delay & Defect Calc )
-                                                                 ▼
-  [ Ranked Scorecard ] <──────( Regression Engine )────── [ Performance Index ]`
+    "suicide-prediction":
+`  [ Crisis Text Records ] ──────( Clean & Tokenize )───────────> [ TF-IDF & Sentiment Vectors ]
+                                                                        │
+                                                              ( Relationship Traversal )
+                                                                        ▼
+  [ Risk Classification ] <──────( Cypher Context Query )─────── [ Neo4j Graph Database ]`,
+
+    "supplier-ranking":
+`  [ Logistics Records CSV ] ────( Ingestion & Cleansing )──────> [ Pandas Normalization ]
+                                                                        │
+                                                              ( Delay & Defect Weighting )
+                                                                        ▼
+  [ Supplier Scorecard ] <───────( Multivariable Regression )─── [ Streamlit Risk UI ]`,
 };
 
 const SectionHeader = ({ num, title }: { num: string; title: string }) => (
-    <div className="flex items-center gap-3 mb-6 relative">
+    <div className="flex items-center gap-3 mb-4 relative">
         <span className="font-mono text-xs text-indigo-500 uppercase tracking-wider">{num} .</span>
-        <h2 className="text-xl font-heading font-normal italic text-slate-800 tracking-wide">{title}</h2>
-        <div className="h-[1px] flex-1 bg-gradient-to-r from-slate-200 to-transparent ml-2" />
+        <h2 className="text-lg md:text-xl font-heading font-bold text-slate-900 dark:text-slate-100 uppercase tracking-tight">{title}</h2>
+        <div className="h-[1px] flex-1 bg-gradient-to-r from-slate-200 dark:from-slate-800 to-transparent ml-2" />
     </div>
 );
 
@@ -90,16 +98,14 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, [onClose]);
 
-    // Trap focus inside the drawer for keyboard accessibility (WCAG AA)
+    // Trap focus inside drawer
     useEffect(() => {
         if (!isOpen) return;
 
-        // Small timeout to allow the drawer DOM nodes to render and be selectable
         const timer = setTimeout(() => {
             const drawer = drawerRef.current;
             if (!drawer) return;
 
-            // Find all focusable elements inside the drawer
             const focusableElements = drawer.querySelectorAll<HTMLElement>(
                 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
             );
@@ -108,24 +114,19 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
 
             const firstElement = focusableElements[0];
             const lastElement = focusableElements[focusableElements.length - 1];
-
-            // Store the previously focused element to restore it upon close
             const originalFocusedElement = document.activeElement as HTMLElement | null;
 
-            // Focus the close button or first element inside the drawer
             firstElement.focus();
 
             const handleTabKey = (e: KeyboardEvent) => {
                 if (e.key !== "Tab") return;
 
                 if (e.shiftKey) {
-                    // Shift + Tab: wrap from first back to last
                     if (document.activeElement === firstElement) {
                         lastElement.focus();
                         e.preventDefault();
                     }
                 } else {
-                    // Tab: wrap from last forward to first
                     if (document.activeElement === lastElement) {
                         firstElement.focus();
                         e.preventDefault();
@@ -135,7 +136,6 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
 
             window.addEventListener("keydown", handleTabKey);
 
-            // Cleanup function to restore focus and remove event listener
             return () => {
                 window.removeEventListener("keydown", handleTabKey);
                 if (originalFocusedElement) {
@@ -160,7 +160,7 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
     }, [isOpen]);
 
     if (!project) return null;
-    const imageUrl = PROJECT_IMAGES[project.id] || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80";
+    const imageUrl = project.image || PROJECT_IMAGES[project.id] || "/assets/projects/arcanum.webp";
 
     return (
         <AnimatePresence>
@@ -172,7 +172,7 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50"
+                        className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50"
                     />
 
                     {/* Sidebar Drawer Container */}
@@ -184,44 +184,43 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                         initial={{ x: "100%" }}
                         animate={{ x: 0 }}
                         exit={{ x: "100%" }}
-                        transition={{ type: "spring", damping: 30, stiffness: 220 }}
-                        className="fixed right-0 top-0 bottom-0 w-full max-w-xl md:max-w-2xl bg-white border-l border-slate-200/80 z-50 overflow-y-auto shadow-2xl flex flex-col"
+                        transition={{ type: "spring", damping: 28, stiffness: 220 }}
+                        className="fixed right-0 top-0 bottom-0 w-full max-w-xl md:max-w-2xl bg-white dark:bg-slate-900 border-l border-slate-200/80 dark:border-slate-800 z-50 overflow-y-auto shadow-2xl flex flex-col"
                     >
-                        {/* Cinematic Header Banner */}
-                        <div className="relative h-60 md:h-72 w-full overflow-hidden shrink-0 border-b border-slate-200/50">
-                            <motion.img
+                        {/* Header Banner */}
+                        <div className="relative h-60 md:h-72 w-full overflow-hidden shrink-0 border-b border-slate-200/50 dark:border-slate-800">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
                                 src={imageUrl}
                                 alt={project.title}
                                 className="w-full h-full object-cover"
-                                animate={{
-                                    scale: [1.02, 1.12, 1.02],
-                                    x: [0, -10, 0],
-                                    y: [0, -5, 0],
-                                }}
-                                transition={{
-                                    duration: 20,
-                                    repeat: Infinity,
-                                    ease: "easeInOut"
-                                }}
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/40 to-transparent" />
-                            
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent" />
+
                             <div className="absolute top-4 right-4 z-10 flex gap-2">
                                 <button
                                     onClick={onClose}
-                                    className="p-2 bg-white/90 backdrop-blur-md rounded-full border border-slate-200/60 text-slate-400 hover:text-slate-700 shadow-sm transition-colors"
+                                    className="p-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md rounded-full border border-slate-200/60 dark:border-slate-700 text-slate-500 hover:text-slate-900 dark:hover:text-white shadow-sm transition-colors"
+                                    aria-label="Close project drawer"
                                 >
                                     <X size={18} />
                                 </button>
                             </div>
 
-                            <div className="absolute bottom-6 left-6 right-6">
-                                <span className="px-2.5 py-1 text-[11px] font-bold bg-white/90 backdrop-blur-md text-slate-700 border border-slate-200 shadow-sm rounded-full font-mono uppercase tracking-wider">
-                                    {project.category}
-                                </span>
-                                <h1 
-                                    id="drawer-title" 
-                                    className="text-2xl md:text-3xl font-extrabold font-heading text-slate-800 mt-3 uppercase tracking-tight"
+                            <div className="absolute bottom-5 left-6 right-6 text-white">
+                                <div className="flex flex-wrap items-center gap-2 mb-2">
+                                    <span className="px-2.5 py-0.5 text-[10px] font-bold bg-white/20 backdrop-blur-md text-white border border-white/20 rounded-full font-mono uppercase tracking-wider">
+                                        {project.category}
+                                    </span>
+                                    {project.status && (
+                                        <span className="px-2.5 py-0.5 text-[10px] font-mono text-indigo-200 bg-indigo-950/60 border border-indigo-400/40 rounded-full">
+                                            {project.status}
+                                        </span>
+                                    )}
+                                </div>
+                                <h1
+                                    id="drawer-title"
+                                    className="text-2xl md:text-3xl font-extrabold font-heading text-white uppercase tracking-tight leading-tight"
                                 >
                                     {project.title}
                                 </h1>
@@ -229,181 +228,257 @@ export default function ProjectDrawer({ project, isOpen, onClose }: ProjectDrawe
                         </div>
 
                         {/* Scrollable Body Content */}
-                        <div className="p-6 md:p-8 space-y-12 flex-1 overflow-y-auto relative bg-[#F8F9FC] dark:bg-[#151926]">
-                            <div className="absolute inset-0 pointer-events-none opacity-[0.01] overflow-hidden">
-                                <div className="absolute inset-y-0 left-12 w-[1px] bg-slate-900" />
-                                <div className="absolute inset-y-0 right-12 w-[1px] bg-slate-900" />
-                            </div>
-
-                            {/* Links */}
+                        <div className="p-6 md:p-8 space-y-10 flex-1 overflow-y-auto bg-slate-50/50 dark:bg-slate-950/60">
+                            {/* Action Links */}
                             {(() => {
                                 const hasLiveDemo = project.link && project.link !== "#";
                                 const hasSourceCode = project.github && project.github !== "#";
                                 const hasPublication = !!project.publication;
                                 const buttonCount = [hasLiveDemo, hasSourceCode, hasPublication].filter(Boolean).length;
-                                
+
                                 if (buttonCount === 0) return null;
-                                
+
                                 return (
-                                    <div className={cn(
-                                        "grid gap-3 pb-2 relative",
-                                        buttonCount === 3 ? "grid-cols-3" : buttonCount === 2 ? "grid-cols-2" : "grid-cols-1"
-                                    )}>
+                                    <div
+                                        className={cn(
+                                            "grid gap-3 pb-2",
+                                            buttonCount === 3
+                                                ? "grid-cols-1 sm:grid-cols-3"
+                                                : buttonCount === 2
+                                                ? "grid-cols-1 sm:grid-cols-2"
+                                                : "grid-cols-1"
+                                        )}
+                                    >
                                         {hasLiveDemo && (
-                                            <Button variant="default" className="w-full text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white shadow-sm" asChild>
+                                            <Button
+                                                variant="default"
+                                                className="w-full text-xs font-bold bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 shadow-sm"
+                                                asChild
+                                            >
                                                 <Link href={project.link} target="_blank" rel="noopener noreferrer">
                                                     <ExternalLink className="w-3.5 h-3.5 mr-2" /> Live Demo
                                                 </Link>
                                             </Button>
                                         )}
                                         {hasSourceCode && (
-                                            <Button variant="outline" className="w-full text-xs font-bold bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-sm" asChild>
+                                            <Button
+                                                variant="outline"
+                                                className="w-full text-xs font-bold bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-50 shadow-sm"
+                                                asChild
+                                            >
                                                 <Link href={project.github} target="_blank" rel="noopener noreferrer">
-                                                    <Github className="w-3.5 h-3.5 mr-2" /> Source Code
+                                                    <Github className="w-3.5 h-3.5 mr-2" /> View Code
                                                 </Link>
                                             </Button>
                                         )}
-                                        {project.publication && (
-                                            <Button variant="outline" className="w-full text-xs font-bold bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-sm" asChild>
-                                                <Link href={project.publication.paperUrl} download>
-                                                    <FileText className="w-3.5 h-3.5 mr-2" /> Research Paper
-                                                </Link>
+                                        {project.publication && project.publication.paperUrl && (
+                                            <Button
+                                                variant="outline"
+                                                className="w-full text-xs font-bold bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-50 shadow-sm"
+                                                asChild
+                                            >
+                                                <a href={project.publication.paperUrl} download>
+                                                    <FileText className="w-3.5 h-3.5 mr-2" /> Paper (.docx)
+                                                </a>
                                             </Button>
                                         )}
                                     </div>
                                 );
                             })()}
 
-                            {/* 1. The Problem */}
-                            {project.extended?.problemStatement && (
-                                <section className="relative">
-                                    <SectionHeader num="01" title="The Problem" />
-                                    <p className="text-slate-700 text-sm leading-relaxed font-light bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-                                        {project.extended.problemStatement}
-                                    </p>
-                                </section>
-                            )}
+                            {/* 1. Problem Statement */}
+                            <section>
+                                <SectionHeader num="01" title="The Problem" />
+                                <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed font-light bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200/80 dark:border-slate-800 shadow-sm">
+                                    {project.problemStatement || project.extended?.problemStatement || project.description}
+                                </p>
+                            </section>
 
-                            {/* 2. Reality of the Work (Constraints) */}
-                            {project.extended?.constraints && (
-                                <section className="relative">
-                                    <SectionHeader num="02" title="The Constraints" />
-                                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                        <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-1">
-                                            <div className="flex items-center gap-2 text-indigo-500 mb-1">
-                                                <Clock size={14} />
-                                                <span className="text-xs font-mono font-bold uppercase tracking-wider">Timeline</span>
-                                            </div>
-                                            <span className="text-sm text-slate-700 font-semibold">{project.extended.constraints.timeline}</span>
-                                        </div>
-                                        <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-1">
-                                            <div className="flex items-center gap-2 text-indigo-500 mb-1">
-                                                <Users size={14} />
-                                                <span className="text-xs font-mono font-bold uppercase tracking-wider">Team</span>
-                                            </div>
-                                            <span className="text-sm text-slate-700 font-semibold">{project.extended.constraints.team}</span>
-                                        </div>
-                                        <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-1">
-                                            <div className="flex items-center gap-2 text-indigo-500 mb-1">
-                                                <Wrench size={14} />
-                                                <span className="text-xs font-mono font-bold uppercase tracking-wider">Core Tech</span>
-                                            </div>
-                                            <span className="text-sm text-slate-700 font-semibold">{project.extended.constraints.techStack}</span>
-                                        </div>
+                            {/* 2. My Contribution */}
+                            {project.contribution && (
+                                <section>
+                                    <SectionHeader num="02" title="My Contribution" />
+                                    <div className="bg-indigo-50/50 dark:bg-indigo-950/30 p-5 rounded-xl border border-indigo-100 dark:border-indigo-900/60 shadow-sm">
+                                        <p className="text-slate-800 dark:text-slate-200 text-sm leading-relaxed font-normal">
+                                            {project.contribution}
+                                        </p>
                                     </div>
                                 </section>
                             )}
 
-                            {/* 3. The Solution */}
-                            {project.extended?.solution && (
-                                <section className="relative">
-                                    <SectionHeader num="03" title="The Solution" />
-                                    <p className="text-slate-700 text-sm leading-relaxed font-light mb-6">
-                                        {project.extended.solution}
-                                    </p>
-                                    
-                                    {/* System Pipeline Schema */}
-                                    {PROJECT_PIPELINES[project.id] && (
-                                        <div className="mt-6">
-                                            <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 mb-3 block">System Architecture</span>
-                                            <PipelineVisualizer projectId={project.id} />
+                            {/* 3. The Solution & Architecture */}
+                            <section>
+                                <SectionHeader num="03" title="Solution & Architecture" />
+                                <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed font-light mb-4">
+                                    {project.extended?.solution || project.description}
+                                </p>
+
+                                {/* System Architecture Pipeline */}
+                                {PROJECT_PIPELINES[project.id] && (
+                                    <div className="my-5 p-4 rounded-xl bg-slate-900 text-slate-100 font-mono text-[11px] overflow-x-auto shadow-inner border border-slate-800">
+                                        <span className="text-[10px] uppercase text-indigo-400 font-semibold block mb-2 tracking-wider">
+                                            ASCII Pipeline Architecture
+                                        </span>
+                                        <pre className="whitespace-pre">{PROJECT_PIPELINES[project.id]}</pre>
+                                    </div>
+                                )}
+
+                                {/* Interactive Pipeline Diagram */}
+                                <div className="mt-4">
+                                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 mb-3 block">
+                                        Interactive Dataflow
+                                    </span>
+                                    <PipelineVisualizer projectId={project.id} />
+                                </div>
+                            </section>
+
+                            {/* 4. Implemented vs Planned Features (for Flagship Projects) */}
+                            {project.implementedFeatures && project.implementedFeatures.length > 0 && (
+                                <section>
+                                    <SectionHeader num="04" title="Development Status" />
+                                    <div className="space-y-4">
+                                        <div className="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200/70 dark:border-slate-800 shadow-sm">
+                                            <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-bold mb-3 flex items-center gap-1.5">
+                                                <CheckCircle2 className="w-3.5 h-3.5" /> Implemented Capabilities
+                                            </h4>
+                                            <ul className="space-y-2">
+                                                {project.implementedFeatures.map((f, i) => (
+                                                    <li key={i} className="text-xs text-slate-700 dark:text-slate-300 flex items-start gap-2">
+                                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 mt-1.5" />
+                                                        <span>{f}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+
+                                        {project.plannedFeatures && project.plannedFeatures.length > 0 && (
+                                            <div className="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200/70 dark:border-slate-800 shadow-sm">
+                                                <h4 className="text-xs font-mono uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-bold mb-3 flex items-center gap-1.5">
+                                                    <Clock className="w-3.5 h-3.5" /> Planned Roadmap
+                                                </h4>
+                                                <ul className="space-y-2">
+                                                    {project.plannedFeatures.map((f, i) => (
+                                                        <li key={i} className="text-xs text-slate-600 dark:text-slate-400 flex items-start gap-2">
+                                                            <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0 mt-1.5" />
+                                                            <span>{f}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )}
+                                    </div>
+                                </section>
+                            )}
+
+                            {/* 5. Constraints & Tech Stack */}
+                            <section>
+                                <SectionHeader num="05" title="Stack & Constraints" />
+                                <div className="space-y-4">
+                                    {project.extended?.constraints && (
+                                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                            <div className="bg-white dark:bg-slate-900 p-3.5 rounded-xl border border-slate-200/70 dark:border-slate-800 shadow-sm">
+                                                <div className="flex items-center gap-1.5 text-indigo-500 mb-1">
+                                                    <Clock size={13} />
+                                                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider">Timeline</span>
+                                                </div>
+                                                <span className="text-xs text-slate-700 dark:text-slate-300 font-semibold">{project.extended.constraints.timeline}</span>
+                                            </div>
+                                            <div className="bg-white dark:bg-slate-900 p-3.5 rounded-xl border border-slate-200/70 dark:border-slate-800 shadow-sm">
+                                                <div className="flex items-center gap-1.5 text-indigo-500 mb-1">
+                                                    <Users size={13} />
+                                                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider">Team</span>
+                                                </div>
+                                                <span className="text-xs text-slate-700 dark:text-slate-300 font-semibold">{project.extended.constraints.team}</span>
+                                            </div>
+                                            <div className="bg-white dark:bg-slate-900 p-3.5 rounded-xl border border-slate-200/70 dark:border-slate-800 shadow-sm">
+                                                <div className="flex items-center gap-1.5 text-indigo-500 mb-1">
+                                                    <Wrench size={13} />
+                                                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider">Tech Focus</span>
+                                                </div>
+                                                <span className="text-xs text-slate-700 dark:text-slate-300 font-semibold">{project.extended.constraints.techStack}</span>
+                                            </div>
                                         </div>
                                     )}
 
-                                    {/* Features */}
-                                    <div className="grid sm:grid-cols-2 gap-3 mt-6">
-                                        {project.features.map((feature, i) => (
-                                            <div key={i} className="flex items-start gap-3 p-4 rounded-xl border border-slate-200/50 bg-white shadow-sm">
-                                                <span className="font-mono text-xs text-indigo-500/80 mt-0.5">[{i + 1}]</span>
-                                                <span className="text-xs text-slate-700 leading-relaxed font-normal">{feature}</span>
-                                            </div>
+                                    {/* Tech Tags */}
+                                    <div className="flex flex-wrap gap-1.5 pt-2">
+                                        {project.techStack.map((tech) => (
+                                            <span
+                                                key={tech}
+                                                className="px-2.5 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-md text-xs font-mono text-slate-700 dark:text-slate-300 shadow-sm"
+                                            >
+                                                {tech}
+                                            </span>
                                         ))}
                                     </div>
-                                </section>
-                            )}
+                                </div>
+                            </section>
 
-                            {/* 4. Trade-offs */}
-                            {project.extended?.tradeoffs && (
-                                <section className="relative">
-                                    <SectionHeader num="04" title="Engineering Trade-offs" />
-                                    <div className="bg-white p-5 rounded-xl border border-amber-200/60 bg-amber-50/30 shadow-sm">
-                                        <p className="text-slate-700 text-sm leading-relaxed font-light">
-                                            <span className="font-bold text-amber-700/80 mr-2">Why?</span>
-                                            {project.extended.tradeoffs}
-                                        </p>
+                            {/* 6. Results, Evaluation & Trade-offs */}
+                            {(project.extended?.impact || project.extended?.tradeoffs) && (
+                                <section>
+                                    <SectionHeader num="06" title="Results & Evaluation" />
+                                    <div className="space-y-3">
+                                        {project.extended.impact && (
+                                            <div className="bg-slate-900 dark:bg-indigo-950 text-white p-5 rounded-xl shadow-sm">
+                                                <span className="text-[10px] font-mono uppercase tracking-wider text-indigo-300 font-bold block mb-1">
+                                                    Verified Results &amp; Impact
+                                                </span>
+                                                <p className="text-xs md:text-sm text-slate-100 leading-relaxed font-light">
+                                                    {project.extended.impact}
+                                                </p>
+                                            </div>
+                                        )}
+
+                                        {project.extended.tradeoffs && (
+                                            <div className="bg-amber-50/50 dark:bg-amber-950/30 p-4 rounded-xl border border-amber-200/60 dark:border-amber-900/50 shadow-sm">
+                                                <span className="text-[10px] font-mono uppercase tracking-wider text-amber-800 dark:text-amber-300 font-bold block mb-1">
+                                                    Engineering Trade-offs &amp; Limitations
+                                                </span>
+                                                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-light">
+                                                    {project.extended.tradeoffs}
+                                                </p>
+                                            </div>
+                                        )}
                                     </div>
                                 </section>
                             )}
 
-                            {/* 5. Proven Impact */}
-                            {project.extended?.impact && (
-                                <section className="relative">
-                                    <SectionHeader num="05" title="Proven Impact" />
-                                    <div className="bg-indigo-600 p-6 rounded-xl shadow-md text-white relative overflow-hidden">
-                                        {/* Background decoration */}
-                                        <div className="absolute -right-10 -top-10 text-indigo-500/30 font-serif text-[120px] font-bold italic leading-none pointer-events-none">
-                                            %
-                                        </div>
-                                        
-                                        <p className="text-indigo-50 text-sm md:text-base leading-relaxed font-medium relative z-10">
-                                            {project.extended.impact}
-                                        </p>
-                                    </div>
-                                </section>
-                            )}
-
-                            {/* 6. Academic Publication */}
+                            {/* 7. Academic Publication Details */}
                             {project.publication && (
-                                <section className="relative">
-                                    <SectionHeader num="06" title="Academic Publication" />
-                                    <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                                <section>
+                                    <SectionHeader num="07" title="Academic Publication" />
+                                    <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3">
                                         <div>
-                                            <span className="text-xs font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-1">Conference</span>
-                                            <span className="text-sm font-semibold text-slate-800">{project.publication.conference}</span>
-                                        </div>
-                                        <div>
-                                            <span className="text-xs font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-1">Paper Title</span>
-                                            <h3 className="text-sm font-bold text-slate-900 leading-snug">{project.publication.title}</h3>
+                                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-0.5">Venue</span>
+                                            <span className="text-sm font-semibold text-slate-800 dark:text-slate-200">{project.publication.venue || project.publication.conference}</span>
                                         </div>
                                         <div>
-                                            <span className="text-xs font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-1">Authors</span>
-                                            <span className="text-sm text-slate-700 font-normal">{project.publication.authors.join(", ")}</span>
+                                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-0.5">Title</span>
+                                            <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100">{project.publication.title}</h4>
                                         </div>
                                         <div>
-                                            <span className="text-xs font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-1">Abstract</span>
-                                            <p className="text-sm text-slate-600 leading-relaxed font-normal">{project.publication.abstract}</p>
+                                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-0.5">Authors</span>
+                                            <span className="text-xs text-slate-600 dark:text-slate-400 font-mono">{project.publication.authors.join(", ")}</span>
                                         </div>
-                                        <div className="pt-2">
-                                            <Button variant="outline" className="w-full text-xs font-bold bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-sm" asChild>
-                                                <Link href={project.publication.paperUrl} download>
-                                                    <FileText className="w-3.5 h-3.5 mr-2" /> Download Research Paper (.docx)
-                                                </Link>
-                                            </Button>
+                                        <div>
+                                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-indigo-500 block mb-0.5">Abstract</span>
+                                            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed bg-slate-50 dark:bg-slate-950 p-3 rounded-lg border border-slate-100 dark:border-slate-800">
+                                                {project.publication.abstract}
+                                            </p>
                                         </div>
+                                        {project.publication.paperUrl && (
+                                            <div className="pt-1">
+                                                <Button variant="outline" className="w-full text-xs font-bold bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 shadow-sm" asChild>
+                                                    <a href={project.publication.paperUrl} download>
+                                                        <FileText className="w-3.5 h-3.5 mr-2" /> Download Manuscript (.docx)
+                                                    </a>
+                                                </Button>
+                                            </div>
+                                        )}
                                     </div>
                                 </section>
                             )}
-
                         </div>
                     </motion.div>
                 </>

@@ -39,7 +39,7 @@ export const metadata: Metadata = {
         template: `%s | ${AUTHOR_NAME}`,
     },
     description:
-        "Sneha Patel is an AI & Systems Engineer building intelligent systems at the intersection of Computer Vision, Machine Learning, and IoT hardware. Explore projects like DeepShield AI (97.5% accuracy deepfake detection) and GreenSort (edge-AI waste sorting). Open to freelance, internship, and contract work.",
+        "Sneha Patel is a Computer Science Student & AI/ML Developer building intelligent systems across Computer Vision, Edge AI, Context-Aware Copilots, and Full-Stack Architectures. Explore projects including Arcanum AI (TetraTHON Top 6), NeuraBin / GreenSort (SustainX 2026), DeepShield AI, and DermaJourney.",
     keywords: DEFAULT_KEYWORDS,
     authors: [{ name: AUTHOR_NAME, url: SITE_URL }],
     creator: AUTHOR_NAME,
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: `${AUTHOR_NAME} | ${AUTHOR_TITLE}`,
         description:
-            "AI & Systems Engineer building computer vision pipelines, edge ML systems, and IoT hardware prototypes. Open to freelance & collaborations.",
+            "Computer Science Student & AI/ML Developer building computer vision pipelines, edge ML systems, context copilots, and full-stack software. Open to internships and research collaborations.",
         url: SITE_URL,
         siteName: SITE_NAME,
         locale: "en_US",
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: `${AUTHOR_NAME} | ${AUTHOR_TITLE}`,
         description:
-            "AI & Systems Engineer building computer vision pipelines, edge ML systems, and IoT hardware prototypes.",
+            "Computer Science Student & AI/ML Developer building computer vision pipelines, edge ML systems, context copilots, and full-stack software.",
         images: [DEFAULT_OG_IMAGE],
     },
     other: {

@@ -2,16 +2,17 @@ import type { Metadata } from "next";
 import { generatePageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = generatePageMetadata({
-    title: "Projects — AI, Computer Vision & IoT Engineering Work",
+    title: "Projects — AI/ML, Computer Vision, Edge Systems & NLP Work",
     description:
-        "Browse Sneha Patel's engineering portfolio: DeepShield AI deepfake detection (97.5% accuracy), GreenSort edge-AI waste sorting, CNN crop classifiers, NLP crisis context mapping with Neo4j, and logistics supplier ranking models. Each project includes problem statements, architecture decisions, and measured impact.",
+        "Browse Sneha Patel's technical portfolio: Arcanum AI context copilot (TetraTHON Top 6), NeuraBin / GreenSort edge waste sorting (SustainX 2026), DeepShield AI forensics, DermaJourney clinical triaging, and NLP crisis risk mapping with Neo4j. Includes live demos, code repositories, architecture diagrams, and research papers.",
     path: "/projects",
     keywords: [
         "AI projects portfolio",
+        "Arcanum AI copilot",
+        "NeuraBin GreenSort waste sorting",
         "deepfake detection project",
         "computer vision portfolio",
-        "IoT waste sorting project",
-        "machine learning project examples",
+        "DermaJourney clinical AI",
         "edge AI deployment",
         "YOLOv8 Raspberry Pi",
         "Vision Transformer deepfake",

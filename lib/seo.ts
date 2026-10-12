@@ -14,28 +14,33 @@ export const SITE_URL = "https://snehapatel.vercel.app";
 // ─── Brand constants ───────────────────────────────────────────────
 export const SITE_NAME = "Sneha Patel Portfolio";
 export const AUTHOR_NAME = "Sneha Patel";
-export const AUTHOR_TITLE = "AI & Systems Engineer";
+export const AUTHOR_TITLE = "AI/ML Developer & CS Student";
 export const DEFAULT_OG_IMAGE = "/og-image.png";
 export const THEME_COLOR = "#4f46e5"; // indigo-600
 
 // ─── Default keywords ──────────────────────────────────────────────
-// These are the long-tail terms clients actually search for.
+// These are the long-tail terms clients and recruiters actually search for.
 export const DEFAULT_KEYWORDS = [
     "Sneha Patel",
-    "AI engineer portfolio",
+    "Sneha Patel Portfolio",
+    "AI/ML Developer",
+    "Computer Science Student",
+    "Navrachana University",
+    "Arcanum AI",
+    "TetraTHON 2026",
+    "NeuraBin",
+    "GreenSort",
+    "SustainX 2026",
+    "DeepShield AI",
+    "DermaJourney",
     "computer vision developer",
     "machine learning engineer",
-    "freelance AI developer",
-    "IoT engineer",
-    "deepfake detection",
     "edge AI developer",
-    "Python machine learning",
-    "hire AI engineer India",
-    "computer vision freelancer",
     "PyTorch developer",
-    "embedded ML systems",
     "YOLOv8 edge deployment",
     "full stack AI developer",
+    "Neo4j graph database",
+    "FastAPI Next.js",
 ];
 
 // ─── Per-page metadata helper ──────────────────────────────────────

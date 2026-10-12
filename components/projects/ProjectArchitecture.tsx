@@ -18,42 +18,42 @@ interface NodeDetail {
 const ARCHITECTURE_METADATA: Record<string, Record<string, NodeDetail>> = {
     "arcanum-ai": {
         input: {
-            title: "Student & Classroom Input",
-            tech: "React, WebSockets",
-            description: "Receives raw student queries, complex academic prompts, or live classroom feeds for real-time processing.",
-            specs: { "Input": "Multilingual Text & Audio", "Protocol": "HTTPS / WebSocket", "Latency": "<10ms Ingestion" }
+            title: "Active Editor Buffer & AST",
+            tech: "Monaco Editor, Tree-Sitter",
+            description: "Ingests active code buffers, open tabs, and AST symbols to construct high-fidelity contextual prompts.",
+            specs: { "Input": "Multi-file Buffers & AST", "Protocol": "HTTPS / WebSocket", "Latency": "<15ms Buffer Sync" }
         },
         fastapi: {
-            title: "FastAPI Async Engine",
+            title: "FastAPI Context & Token Engine",
             tech: "FastAPI, Python Asyncio",
-            description: "Manages session state, handles concurrent incoming requests, and routes payloads to specialized AI sub-modules.",
-            specs: { "Framework": "FastAPI", "Concurrency": "Async Event Loop", "Routing": "Context-Aware" }
+            description: "Manages session state, extracts syntax hierarchy via AST parsing, and allocates token budgets dynamically.",
+            specs: { "Framework": "FastAPI", "Concurrency": "Async Event Loop", "Routing": "AST & Token Budgeting" }
         },
         aiengine: {
-            title: "Real-Time AI & Translation",
-            tech: "LLM Pipeline, NLP Models",
-            description: "Simplifies complex academic concepts, generates contextual explanations, and performs dynamic multi-language translation.",
-            specs: { "Models": "Real-Time AI & NLP", "Response": "Streaming Tokens", "Features": "Contextual & Multilingual" }
+            title: "Context Copilot & Token Streamer",
+            tech: "LLM Pipeline, LangChain/LlamaIndex",
+            description: "Generates context-grounded code completions, refactors, and inline explanations via low-latency streaming.",
+            specs: { "Latency": "<120ms First Token", "Response": "Streaming Token SSE", "Features": "Context-Aware & AST-Grounded" }
         },
         dashboard: {
-            title: "Classroom Intelligence UI",
-            tech: "Next.js, Tailwind CSS",
-            description: "Renders real-time comprehension telemetry and interactive learning widgets for educators and students.",
-            specs: { "Dashboard": "Student & Educator Views", "Analytics": "Comprehension Heatmaps", "Status": "Live at tetra027.web.app" }
+            title: "IDE Workspace UI",
+            tech: "Next.js 15, Tailwind CSS",
+            description: "Interactive Monaco code editor interface with real-time copilot chat and file tree telemetry.",
+            specs: { "Interface": "Monaco Editor & Chat", "Hackathon": "TetraTHON 2026 6th Rank", "Status": "Live at tetra027.web.app" }
         }
     },
     greensort: {
         camera: {
             title: "Pi Camera Input",
             tech: "OpenCV, Picamera API",
-            description: "Captures 640x480 resolution frame streams at 30 FPS under dynamic conveyor belt lighting conditions, feeding raw frame buffers into the processing pipeline.",
+            description: "Captures 640x480 resolution frame streams under dynamic conveyor lighting conditions, feeding raw frame buffers into the processing pipeline.",
             specs: { "Resolution": "640x480", "Rate": "30 FPS", "Format": "RGB NumPy" }
         },
         rpi4: {
             title: "Raspberry Pi 4 (Edge Compute)",
             tech: "YOLOv8, PyTorch, ONNX Runtime",
-            description: "Acts as the central edge processor. Performs crop detection and classification in real-time, executing localized inferences to distinguish recyclable materials.",
-            specs: { "Latency": "12ms / frame", "Weights": "INT8 Quantized", "Accuracy": "96.4%" }
+            description: "Acts as the central edge processor. Performs localized object detection and classification across 4 waste streams.",
+            specs: { "Cycle Time": "1.7s total", "Weights": "YOLOv8 Nano/Small", "mAP": "90 mAP (4 classes)" }
         },
         arduino: {
             title: "Arduino Uno",
@@ -91,13 +91,39 @@ const ARCHITECTURE_METADATA: Record<string, Record<string, NodeDetail>> = {
             title: "Vision Transformer (ViT)",
             tech: "PyTorch, Transformers",
             description: "Splits images into 16x16 flattened patches, using self-attention heads to model long-range spatial context and detect subtle pixel inconsistency signatures.",
-            specs: { "Model": "ViT-Base-16", "Parameters": "86 Million", "Accuracy": "97.5%" }
+            specs: { "Model": "ViT-Base-16", "Parameters": "86 Million", "Benchmark": "FaceForensics++ / DFDC" }
         },
         output: {
             title: "Grad-CAM & Forensics Verdict",
             tech: "PyTorch (Grad-CAM), Tailwind CSS",
             description: "Generates visual heatmaps using final-layer classification gradients, highlighting anomalous pixels directly on the image to explain the classification.",
-            specs: { "Accuracy": "97.5%", "Method": "Grad-CAM Heatmap", "Output": "Bounding Highlight" }
+            specs: { "Evaluation": "Dual-Domain Fusion", "Method": "Grad-CAM Heatmap", "Output": "Bounding Saliency" }
+        }
+    },
+    dermajourney: {
+        input: {
+            title: "Dermoscopic Image & Clinical Survey",
+            tech: "ISIC Archive, React UI",
+            description: "Ingests high-resolution dermoscopic lesion images alongside patient symptom responses (evolution, diameter, itching).",
+            specs: { "Source": "ISIC Dermoscopy Archive", "Metadata": "Lesion Age, Evolution", "Safety": "HIPAA/Consent Aligned" }
+        },
+        vision: {
+            title: "Dual-Backbone Vision Classifiers",
+            tech: "EfficientNet-B4 + ViT, PyTorch",
+            description: "Evaluates lesion patch embeddings and morphological contours across spatial resolution hierarchies.",
+            specs: { "Backbones": "EfficientNet-B4 + ViT", "Classes": "Melanoma, Nevus, Keratosis", "Interpretability": "Grad-CAM" }
+        },
+        bayesian: {
+            title: "Bayesian Risk Calculator",
+            tech: "Python, Scipy, NumPy",
+            description: "Fuses vision probabilities with prior demographic risk factors to generate condition-specific posterior odds.",
+            specs: { "Method": "Bayesian Likelihood Fusion", "Guardrail": "Strict Referral Threshold", "Output": "Confidence Stratification" }
+        },
+        triage: {
+            title: "Clinical Decision Support UI",
+            tech: "Next.js, Tailwind CSS",
+            description: "Surfaces Grad-CAM visual lesion saliency with explicit triage guidance (Routine, Priority, Urgent Specialist).",
+            specs: { "Role": "Decision Support (Non-Autonomous)", "Triage": "3-Tier Categorization", "Status": "Research Manuscript" }
         }
     },
     "suicide-prediction": {
@@ -403,7 +429,7 @@ export default function ProjectArchitecture({ projectId }: ProjectArchitecturePr
                         <foreignObject x="0" y="15" width="110" height="35" className="pointer-events-none">
                             <div className="flex justify-center text-emerald-400"><ShieldCheck className="w-7 h-7" /></div>
                         </foreignObject>
-                        <text x="55" y="65" textAnchor="middle" fill="#6ee7b7" fontWeight="bold" className="pointer-events-none">97.5% Acc</text>
+                        <text x="55" y="65" textAnchor="middle" fill="#6ee7b7" fontWeight="bold" className="pointer-events-none">Dual-Domain</text>
                         <text x="55" y="80" textAnchor="middle" fill="#a7f3d0" fontSize="8" className="pointer-events-none">Grad-CAM Heatmap</text>
                     </g>
                 </svg>
@@ -715,7 +741,7 @@ export default function ProjectArchitecture({ projectId }: ProjectArchitecturePr
                     <path d="M 340 120 L 440 120" stroke="#a855f7" strokeWidth="2" strokeDasharray="5,5" className="animate-[dash_2s_linear_infinite]" />
                     <path d="M 560 120 L 660 120" stroke="#10b981" strokeWidth="2" strokeDasharray="5,5" className="animate-[dash_2s_linear_infinite]" />
 
-                    {/* Node 1: Classroom Feed */}
+                    {/* Node 1: Code Buffer & AST */}
                     <g transform="translate(40, 70)" {...getNodeHandlers("input")}>
                         <rect 
                             width="80" 
@@ -730,11 +756,11 @@ export default function ProjectArchitecture({ projectId }: ProjectArchitecturePr
                         <foreignObject x="0" y="15" width="80" height="35" className="pointer-events-none">
                             <div className="flex justify-center text-slate-400"><Terminal className="w-6 h-6" /></div>
                         </foreignObject>
-                        <text x="40" y="65" textAnchor="middle" fill="#94a3b8" fontSize="8" className="pointer-events-none">Classroom Feed</text>
-                        <text x="40" y="80" textAnchor="middle" fill="#cbd5e1" fontWeight="bold" className="pointer-events-none">Academic Query</text>
+                        <text x="40" y="65" textAnchor="middle" fill="#94a3b8" fontSize="8" className="pointer-events-none">Code Buffer</text>
+                        <text x="40" y="80" textAnchor="middle" fill="#cbd5e1" fontWeight="bold" className="pointer-events-none">AST Extract</text>
                     </g>
 
-                    {/* Node 2: FastAPI Router */}
+                    {/* Node 2: FastAPI Context Router */}
                     <g transform="translate(220, 65)" {...getNodeHandlers("fastapi")}>
                         <rect 
                             width="120" 
@@ -749,12 +775,12 @@ export default function ProjectArchitecture({ projectId }: ProjectArchitecturePr
                         <foreignObject x="0" y="15" width="120" height="35" className="pointer-events-none">
                             <div className="flex justify-center text-emerald-400"><Terminal className="w-7 h-7" /></div>
                         </foreignObject>
-                        <text x="60" y="65" textAnchor="middle" fill="#6ee7b7" fontWeight="bold" className="pointer-events-none">FastAPI Router</text>
-                        <text x="60" y="80" textAnchor="middle" fill="#a7f3d0" fontSize="8" className="pointer-events-none">Async Session Mgmt</text>
-                        <text x="60" y="95" textAnchor="middle" fill="#a7f3d0" fontSize="8" className="pointer-events-none">High Concurrency</text>
+                        <text x="60" y="65" textAnchor="middle" fill="#6ee7b7" fontWeight="bold" className="pointer-events-none">Context Engine</text>
+                        <text x="60" y="80" textAnchor="middle" fill="#a7f3d0" fontSize="8" className="pointer-events-none">Token Budgeter</text>
+                        <text x="60" y="95" textAnchor="middle" fill="#a7f3d0" fontSize="8" className="pointer-events-none">Async FastAPI</text>
                     </g>
 
-                    {/* Node 3: Real-Time AI & Translation Engine */}
+                    {/* Node 3: Low-Latency Copilot Stream */}
                     <g transform="translate(440, 50)" {...getNodeHandlers("aiengine")}>
                         <rect 
                             width="120" 
@@ -769,13 +795,13 @@ export default function ProjectArchitecture({ projectId }: ProjectArchitecturePr
                         <foreignObject x="0" y="20" width="120" height="35" className="pointer-events-none">
                             <div className="flex justify-center text-indigo-400"><Cpu className="w-8 h-8 animate-pulse" /></div>
                         </foreignObject>
-                        <text x="60" y="75" textAnchor="middle" fill="#a5b4fc" fontWeight="bold" className="pointer-events-none">Real-Time AI</text>
-                        <text x="60" y="95" textAnchor="middle" fill="#818cf8" fontSize="8" className="pointer-events-none">Multilingual NLP</text>
+                        <text x="60" y="75" textAnchor="middle" fill="#a5b4fc" fontWeight="bold" className="pointer-events-none">Copilot Stream</text>
+                        <text x="60" y="95" textAnchor="middle" fill="#818cf8" fontSize="8" className="pointer-events-none">Sub-120ms Token</text>
                         <rect x="20" y="105" width="80" height="20" rx="4" fill="#312e81" stroke="#4f46e5" className="pointer-events-none" />
-                        <text x="60" y="118" textAnchor="middle" fill="#e0e7ff" fontSize="8" fontWeight="bold" className="pointer-events-none">Concept Simplifier</text>
+                        <text x="60" y="118" textAnchor="middle" fill="#e0e7ff" fontSize="8" fontWeight="bold" className="pointer-events-none">Code Generator</text>
                     </g>
 
-                    {/* Node 4: Classroom Telemetry UI */}
+                    {/* Node 4: Monaco IDE Telemetry UI */}
                     <g transform="translate(660, 70)" {...getNodeHandlers("dashboard")}>
                         <rect 
                             width="100" 
@@ -790,8 +816,105 @@ export default function ProjectArchitecture({ projectId }: ProjectArchitecturePr
                         <foreignObject x="0" y="15" width="100" height="35" className="pointer-events-none">
                             <div className="flex justify-center text-purple-400"><ShieldCheck className="w-7 h-7" /></div>
                         </foreignObject>
-                        <text x="50" y="65" textAnchor="middle" fill="#d8b4fe" fontWeight="bold" className="pointer-events-none">EdTech UI</text>
+                        <text x="50" y="65" textAnchor="middle" fill="#d8b4fe" fontWeight="bold" className="pointer-events-none">Monaco UI</text>
                         <text x="50" y="80" textAnchor="middle" fill="#e9d5ff" fontSize="8" className="pointer-events-none">tetra027.web.app</text>
+                    </g>
+                </svg>
+            );
+        }
+
+        if (projectId === "dermajourney") {
+            return (
+                <svg viewBox="0 0 800 240" className="w-full h-full font-mono text-[10px]">
+                    <defs>
+                        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="3" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+                    </defs>
+
+                    {/* Signals flowing lines */}
+                    <path d="M 120 120 L 220 120" stroke="#818cf8" strokeWidth="2" strokeDasharray="5,5" className="animate-[dash_2s_linear_infinite]" />
+                    <path d="M 340 120 L 440 120" stroke="#06b6d4" strokeWidth="2" strokeDasharray="5,5" className="animate-[dash_2s_linear_infinite]" />
+                    <path d="M 560 120 L 660 120" stroke="#10b981" strokeWidth="2" strokeDasharray="5,5" className="animate-[dash_2s_linear_infinite]" />
+
+                    {/* Node 1: Dermoscopy Input */}
+                    <g transform="translate(40, 70)" {...getNodeHandlers("input")}>
+                        <rect 
+                            width="80" 
+                            height="100" 
+                            rx="12" 
+                            fill="#1e293b" 
+                            stroke={activeNodeId === "input" ? "#818cf8" : "#475569"} 
+                            strokeWidth={activeNodeId === "input" ? "2.5" : "1.5"}
+                            filter={getGlowFilter("input")}
+                            className="transition-all duration-300"
+                        />
+                        <foreignObject x="0" y="15" width="80" height="35" className="pointer-events-none">
+                            <div className="flex justify-center text-slate-400"><Camera className="w-6 h-6" /></div>
+                        </foreignObject>
+                        <text x="40" y="65" textAnchor="middle" fill="#94a3b8" fontSize="8" className="pointer-events-none">ISIC Image</text>
+                        <text x="40" y="80" textAnchor="middle" fill="#cbd5e1" fontWeight="bold" className="pointer-events-none">Lesion Input</text>
+                    </g>
+
+                    {/* Node 2: Dual Vision Backbones */}
+                    <g transform="translate(220, 65)" {...getNodeHandlers("vision")}>
+                        <rect 
+                            width="120" 
+                            height="110" 
+                            rx="16" 
+                            fill="#0e7490" 
+                            stroke={activeNodeId === "vision" ? "#22d3ee" : "#06b6d4"} 
+                            strokeWidth={activeNodeId === "vision" ? "2.5" : "1.5"}
+                            filter={getGlowFilter("vision")}
+                            className="transition-all duration-300"
+                        />
+                        <foreignObject x="0" y="15" width="120" height="35" className="pointer-events-none">
+                            <div className="flex justify-center text-cyan-300"><Cpu className="w-7 h-7" /></div>
+                        </foreignObject>
+                        <text x="60" y="65" textAnchor="middle" fill="#a5f3fc" fontWeight="bold" className="pointer-events-none">Vision Ensemble</text>
+                        <text x="60" y="80" textAnchor="middle" fill="#cffafe" fontSize="8" className="pointer-events-none">EfficientNet + ViT</text>
+                        <text x="60" y="95" textAnchor="middle" fill="#cffafe" fontSize="8" className="pointer-events-none">Lesion Morphology</text>
+                    </g>
+
+                    {/* Node 3: Bayesian Risk Calculator */}
+                    <g transform="translate(440, 50)" {...getNodeHandlers("bayesian")}>
+                        <rect 
+                            width="120" 
+                            height="140" 
+                            rx="16" 
+                            fill="#1e1b4b" 
+                            stroke={activeNodeId === "bayesian" ? "#818cf8" : "#6366f1"} 
+                            strokeWidth={activeNodeId === "bayesian" ? "3" : "2"}
+                            filter={getGlowFilter("bayesian")}
+                            className="transition-all duration-300"
+                        />
+                        <foreignObject x="0" y="20" width="120" height="35" className="pointer-events-none">
+                            <div className="flex justify-center text-indigo-400"><Cpu className="w-8 h-8 animate-pulse" /></div>
+                        </foreignObject>
+                        <text x="60" y="75" textAnchor="middle" fill="#a5b4fc" fontWeight="bold" className="pointer-events-none">Bayesian Risk</text>
+                        <text x="60" y="95" textAnchor="middle" fill="#818cf8" fontSize="8" className="pointer-events-none">Symptom Odds Fusion</text>
+                        <rect x="20" y="105" width="80" height="20" rx="4" fill="#312e81" stroke="#4f46e5" className="pointer-events-none" />
+                        <text x="60" y="118" textAnchor="middle" fill="#e0e7ff" fontSize="8" fontWeight="bold" className="pointer-events-none">Safety Guardrails</text>
+                    </g>
+
+                    {/* Node 4: Decision Support UI */}
+                    <g transform="translate(660, 70)" {...getNodeHandlers("triage")}>
+                        <rect 
+                            width="100" 
+                            height="100" 
+                            rx="16" 
+                            fill="#064e3b" 
+                            stroke={activeNodeId === "triage" ? "#34d399" : "#10b981"} 
+                            strokeWidth={activeNodeId === "triage" ? "2.5" : "2"}
+                            filter={getGlowFilter("triage")}
+                            className="transition-all duration-300"
+                        />
+                        <foreignObject x="0" y="15" width="100" height="35" className="pointer-events-none">
+                            <div className="flex justify-center text-emerald-400"><ShieldCheck className="w-7 h-7" /></div>
+                        </foreignObject>
+                        <text x="50" y="65" textAnchor="middle" fill="#6ee7b7" fontWeight="bold" className="pointer-events-none">Clinical Triage</text>
+                        <text x="50" y="80" textAnchor="middle" fill="#a7f3d0" fontSize="8" className="pointer-events-none">Grad-CAM + Referral</text>
                     </g>
                 </svg>
             );

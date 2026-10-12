@@ -27,31 +27,31 @@ const ROLE_BRIEFS: Record<Exclude<RecruiterRole, null>, RoleBrief> = {
         focus: "Computer Vision, Deep Learning Pipelines, and Edge AI Optimization.",
         score: 98,
         highlights: [
-            "ViT-Base-16 model reaching 97.5% accuracy for Deepfake Forensics.",
-            "Edge deployment: quantized YOLOv8 running at 12fps on Raspberry Pi 4.",
-            "Compared 6 CNN designs under varying wholesale market lighting conditions."
+            "ViT-Base-16 dual-domain (spatial + ELA/DCT) deepfake forensics with Grad-CAM.",
+            "Edge deployment: YOLOv8 on Raspberry Pi 4 with 1.7s cycle latency (90 mAP, SustainX 2026).",
+            "Context-aware AI copilot with AST parsing & token stream pipelines (Arcanum AI, 6th/160)."
         ],
         atsChecklist: [
             { name: "PyTorch & TensorFlow", matched: true },
-            { name: "Computer Vision & YOLO", matched: true },
+            { name: "Computer Vision & YOLOv8", matched: true },
             { name: "Model Quantization & Edge AI", matched: true },
             { name: "Explainable AI (Grad-CAM)", matched: true },
-            { name: "NLP Sentiment Classification", matched: true }
+            { name: "Transformer & ViT Architectures", matched: true }
         ]
     },
     data: {
         title: "Data Specialist / Engineer",
-        focus: "Relational & Graph Databases, Pipeline Ingestion, and Predictive Analytics.",
+        focus: "Relational & Graph Databases, NLP Pipelines, and Predictive Analytics.",
         score: 95,
         highlights: [
-            "Neo4j graph databases integration mapping distress sentiment patterns.",
-            "Multivariable regression modeling cargo provider performance metrics.",
-            "Cypher queries mapping temporal context pathways in raw datasets."
+            "Analyzed 101K+ clinical text records with TF-IDF, BiLSTM, and Transformer baselines.",
+            "Neo4j graph schema mapping longitudinal crisis context & distress co-occurrence via Cypher.",
+            "Multivariable regression modeling cargo provider performance metrics."
         ],
         atsChecklist: [
             { name: "SQL & Cypher (Neo4j)", matched: true },
             { name: "Pandas & Scikit-Learn Data Cleaning", matched: true },
-            { name: "NLP Sentiment Pipelines", matched: true },
+            { name: "NLP Sentiment & Classification", matched: true },
             { name: "Decision Intelligence & Supplier Ranking", matched: true },
             { name: "Web Scraping & API Ingestion", matched: true }
         ]
@@ -62,14 +62,14 @@ const ROLE_BRIEFS: Record<Exclude<RecruiterRole, null>, RoleBrief> = {
         score: 97,
         highlights: [
             "Serial over USB linking Raspberry Pi 4 vision unit and Arduino Uno.",
-            "Mechanical sorting gates calibrated with high-torque MG996R servo.",
+            "Mechanical sorting gates calibrated with high-torque MG996R servo (8/8 edge trials passed).",
             "WSRO Nationals Robot Race Competitor with autonomous tracking."
         ],
         atsChecklist: [
             { name: "Raspberry Pi & Arduino Firmware", matched: true },
             { name: "Serial Over USB / UART / I2C", matched: true },
             { name: "Actuators & Servos Calibration", matched: true },
-            { name: "Sensor Integrations (Ultrasonic, Gas)", matched: true },
+            { name: "Sensor Integrations (Ultrasonic, Optical)", matched: true },
             { name: "Offline Inference (YOLO / Edge AI)", matched: true }
         ]
     },
@@ -78,16 +78,16 @@ const ROLE_BRIEFS: Record<Exclude<RecruiterRole, null>, RoleBrief> = {
         focus: "TypeScript Web Architectures, Responsive Frameworks, and API Integration.",
         score: 92,
         highlights: [
-            "Modern Next.js responsive portfolios utilizing glassmorphism and Framer Motion.",
-            "FastAPI / Flask microservices routing AI inference tasks.",
-            "Streamlit visualization dashboard mapping logistics performance logs."
+            "Arcanum AI platform: Next.js 15, FastAPI microservices, and Monaco IDE integration.",
+            "Modern responsive portfolios utilizing clean design systems, dark mode, and Framer Motion.",
+            "FastAPI / Flask microservices routing AI inference and AST extraction tasks."
         ],
         atsChecklist: [
             { name: "Next.js / React / TypeScript", matched: true },
             { name: "API Integrations (FastAPI / Flask)", matched: true },
             { name: "Tailwind CSS Responsive Design", matched: true },
-            { name: "State Caching (localStorage)", matched: true },
-            { name: "Interactive Canvas & Visual Interfaces", matched: true }
+            { name: "State Caching & Context Ingestion", matched: true },
+            { name: "Interactive Visual Interfaces & Monaco", matched: true }
         ]
     }
 };
@@ -568,11 +568,12 @@ export default function RecruiterPanel() {
                                                 </h4>
                                                 <div className="flex flex-wrap gap-1">
                                                     {[
-                                                        { label: "Arcanum AI EdTech?", q: "Tell me about Arcanum AI at TetraTHON 2026" },
-                                                        { label: "YOLO edge sorter specs?", q: "How is Greensort optimized for the Raspberry Pi?" },
-                                                        { label: "Deepfake classifier details?", q: "Tell me about DeepShield ViT model accuracy and tradeoffs" },
+                                                        { label: "Arcanum AI Co-founder?", q: "Tell me about Arcanum AI at TetraTHON 2026" },
+                                                        { label: "GreenSort edge specs?", q: "How is Greensort optimized for the Raspberry Pi?" },
+                                                        { label: "Deepfake forensics details?", q: "Tell me about DeepShield ViT model and tradeoffs" },
+                                                        { label: "DermaJourney research?", q: "What is the DermaJourney clinical AI research project?" },
                                                         { label: "Suicide NLP context mapper?", q: "What is the CSRBOX Neo4j context mapping model?" },
-                                                        { label: "Certificates?", q: "What AWS or GCP certifications does she hold?" }
+                                                        { label: "Certifications?", q: "What AWS or GCP certifications does she hold?" }
                                                     ].map((item, i) => (
                                                         <button
                                                             key={i}

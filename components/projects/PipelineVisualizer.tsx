@@ -41,11 +41,18 @@ const PIPELINE_STEPS: Record<string, Step[]> = {
         { title: "Streamlit UI", desc: "Logistics ranking dashboard display" }
     ],
     "arcanum-ai": [
-        { title: "Academic Query Ingest", desc: "Multilingual student input & topic selection" },
-        { title: "FastAPI Gateway", desc: "Async request routing & session manager" },
-        { title: "Real-Time AI Engine", desc: "Contextual concept simplification & multi-modal explanations" },
-        { title: "Translation Layer", desc: "Dynamic multi-language adaptive pathways" },
-        { title: "Classroom Telemetry", desc: "Real-time comprehension analytics for educators" }
+        { title: "Active Code Buffer", desc: "Monaco editor multi-file AST & open buffer ingest" },
+        { title: "Context Engine", desc: "FastAPI syntax extraction & dynamic token budgeting" },
+        { title: "Copilot Stream", desc: "Sub-120ms first-token generation & code completion" },
+        { title: "AST Grounding", desc: "Tree-sitter structural validation & lint checking" },
+        { title: "IDE Workspace", desc: "Real-time editor chat & file tree telemetry UI" }
+    ],
+    dermajourney: [
+        { title: "Clinical Narrative & Dermoscopy", desc: "Longitudinal symptom notes & dermoscopic images" },
+        { title: "Clinical NLP Extractor", desc: "Temporal symptom extraction & entity normalization" },
+        { title: "Lesion Delta Tracking", desc: "Sequential morphological change detection (ABCDE criteria)" },
+        { title: "Progression Model", desc: "Multi-modal longitudinal decision support scoring" },
+        { title: "Clinician Dashboard", desc: "Interpretable difference maps & uncertainty metrics" }
     ]
 };
 

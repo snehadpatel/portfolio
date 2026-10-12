@@ -26,11 +26,19 @@ const SYNONYMS: Record<string, string> = {
     "arduino": "greensort",
     "trash": "greensort",
     "hardware": "greensort",
+    "sustainx": "greensort",
+    "neurabin": "greensort",
     "suicide": "suicide-prediction",
     "crisis": "suicide-prediction",
     "neo4j": "suicide-prediction",
     "nlp": "suicide-prediction",
     "graph": "suicide-prediction",
+    "derma": "dermajourney",
+    "dermajourney": "dermajourney",
+    "skin": "dermajourney",
+    "melanoma": "dermajourney",
+    "clinical": "dermajourney",
+    "triaging": "dermajourney",
     "supplier": "supplier-ranking",
     "logistics": "supplier-ranking",
     "ranking": "supplier-ranking",
@@ -52,45 +60,50 @@ const SYNONYMS: Record<string, string> = {
     "gpa": "diploma-topper",
     "tetrathon": "arcanum-ai",
     "arcanum": "arcanum-ai",
-    "edtech": "arcanum-ai",
-    "multilingual": "arcanum-ai"
+    "copilot": "arcanum-ai",
+    "ide": "arcanum-ai",
+    "agent": "arcanum-ai"
 };
 
 // Skill Keywords to match in Job Descriptions
 const SKILLS_KEYWORD_MAP: Record<string, string[]> = {
     "PyTorch": ["pytorch", "torch", "deep learning", "nn", "neural network"],
     "TensorFlow": ["tensorflow", "keras", "tf"],
-    "YOLO": ["yolo", "yolov8", "object detection", "realtime detection"],
-    "Neo4j": ["neo4j", "graph database", "cypher", "nosql"],
+    "YOLO / CV": ["yolo", "yolov8", "object detection", "computer vision", "opencv"],
+    "Neo4j": ["neo4j", "graph database", "cypher", "nosql", "knowledge graph"],
     "Next.js": ["nextjs", "next.js", "react", "frontend", "typescript", "javascript"],
     "FastAPI": ["fastapi", "python api", "rest api", "backend"],
-    "Arduino": ["arduino", "microcontroller", "firmware", "c++", "serial"],
-    "Raspberry Pi": ["raspberry pi", "rpi", "edge hardware", "single board"],
-    "SQL": ["sql", "mysql", "database", "querying"],
+    "Embedded / IoT": ["arduino", "raspberry pi", "microcontroller", "firmware", "serial", "i2c", "edge ai"],
+    "NLP & Transformers": ["nlp", "transformers", "bert", "bilstm", "tf-idf", "hugging face"],
     "Data Analysis": ["pandas", "numpy", "regression", "data cleaning", "scikit-learn"]
 };
 
 // Predefined detailed answers for recruiter questions
 const QA_DATABASE = [
     {
-        keywords: ["arcanum", "tetrathon", "edtech", "hackathon", "multilingual", "classroom", "6th"],
+        keywords: ["arcanum", "tetrathon", "copilot", "ide", "hackathon", "agent", "token", "6th"],
         projectId: "arcanum-ai" as const,
-        answer: "At TetraTHON 2026, Sneha co-built Arcanum AI, an EdTech platform delivering real-time AI contextual explanations, multilingual support, and classroom intelligence telemetry. Securing 6th rank out of 160 competing teams in a 36-hour hackathon (organized by NeoFolks, Navrachana University & ISEN Méditerranée), Sneha served as AI & Backend Developer, leading the AI/ML pipeline and backend technical architecture. The project is live at tetra027.web.app and currently scaling into a full commercial product."
+        answer: "At TetraTHON 2026, Sneha co-built Arcanum AI, securing 6th rank out of 160 competing teams in a 36-hour hackathon (organized by NeoFolks, Navrachana University & ISEN Méditerranée). Serving as AI & Backend Developer, she architected the context-aware IDE copilot engine with active buffer ingestion, AST symbol extraction, and sub-120ms token streaming using FastAPI and Next.js 15. The implemented MVP is live at tetra027.web.app, with a multi-agent vector RAG architecture currently in active development."
     },
     {
-        keywords: ["deepshield", "deepfake", "forensics", "vit", "transformer", "fgsm"],
+        keywords: ["deepshield", "deepfake", "forensics", "vit", "transformer", "ela", "dct", "gradcam"],
         projectId: "deepshield" as const,
-        answer: "For DeepShield AI, Sneha engineered a dual-pipeline digital forensics system. First, it extracts Discrete Cosine Transform (DCT) and Error Level Analysis (ELA) compression metadata to expose tampering. These artifacts feed into a Vision Transformer (ViT-Base-16) model rather than a standard CNN, achieving 97.5% classification accuracy on compressed fakes. She also added an FGSM adversarial noise injection pipeline so developers can pre-emptively immunize faces from deepfake cloning before uploading."
+        answer: "For DeepShield AI, Sneha engineered a dual-domain digital forensics pipeline combining spatial features (ViT-Base-16) with frequency-domain artifacts (Discrete Cosine Transform / DCT and Error Level Analysis / ELA) and Grad-CAM spatial heatmaps for interpretability. Evaluated on benchmark fakes (FaceForensics++ and DFDC), the system achieved high laboratory validation accuracy while transparently documenting real-world limitations under aggressive social media compression and transcoding."
     },
     {
-        keywords: ["greensort", "waste", "sorter", "raspberry", "arduino", "servo", "latency", "edge", "offline", "quantization"],
+        keywords: ["greensort", "neurabin", "waste", "sorter", "raspberry", "arduino", "servo", "latency", "edge", "offline", "sustainx"],
         projectId: "greensort" as const,
-        answer: "GreenSort is an offline Edge-AI municipal solid waste sorter. Sneha ran a YOLOv8 object detection model on a Raspberry Pi 4. To get a responsive sorting speed, she quantized the model weights to INT8, achieving 12fps directly on the CPU cores. The Pi processes frames in under 80ms and coordinates sorting signals via Serial-over-USB to an Arduino Uno, which triggers mechanical flaps powered by a high-torque MG996R servo in under 180ms total loop latency."
+        answer: "NeuraBin / GreenSort is an edge-AI municipal waste sorting device that achieved Top 6 out of 160 teams at the SustainX 2026 National Competition. Running a customized YOLOv8 model on a Raspberry Pi 4 Model B (4GB), it achieved 90 mAP across 4 waste streams (biodegradable, non-biodegradable, recyclable, hazardous). The Pi communicates over Serial-over-USB to an Arduino Uno and high-torque MG996R servo, completing a full cycle (capture, inference, and flap actuation) in 1.7 seconds at an estimated hardware bill of materials under ₹5,000 (~$60)."
     },
     {
-        keywords: ["suicide", "crisis", "neo4j", "nlp", "graph", "sentiment", "context"],
+        keywords: ["dermajourney", "derma", "skin", "healthcare", "melanoma", "clinical", "triage", "biomarker"],
+        projectId: "dermajourney" as const,
+        answer: "DermaJourney is an AI-assisted dermatological clinical triaging and decision support system. It combines dual-backbone vision classifiers (EfficientNet-B4 + Vision Transformer) evaluated on ISIC dermoscopic datasets with a symptom-conditioned Bayesian risk calculator. Sneha co-authored research focusing on explainable Grad-CAM saliency heatmaps, strict safety guardrails, and 'referral required' confidence thresholds rather than unassisted autonomous diagnosis."
+    },
+    {
+        keywords: ["suicide", "crisis", "neo4j", "nlp", "graph", "sentiment", "context", "101k", "distress"],
         projectId: "suicide-prediction" as const,
-        answer: "During her CSRBOX internship, Sneha built an NLP crisis mapping engine. Relational databases failed to capture context over time, so she designed a Neo4j Graph Database schema connecting nodes for patient IDs, distress tokens, and sentiments. This enabled clinical counselors to use Cypher queries to trace context paths and chronological changes instead of matching isolated keywords, reducing false-positive alerts by 34%."
+        answer: "During her CSRBOX data engineering internship, Sneha analyzed over 101,110 text records to build a suicide & depression risk classification engine. She evaluated TF-IDF + Logistic Regression, BiLSTM, and Hugging Face transformer baselines (~93.8% validation accuracy). To overcome the loss of longitudinal context in flat tables, she architected a Neo4j knowledge graph schema mapping distress triggers, temporal sentiment progression, and co-occurring crisis tokens with Cypher queries."
     },
     {
         keywords: ["supplier", "logistics", "ranking", "regression", "pandas", "streamlit"],
@@ -100,15 +113,15 @@ const QA_DATABASE = [
     {
         keywords: ["vegetable", "crop", "classifier", "resnet", "opencv"],
         projectId: "vegetable-classifier" as const,
-        answer: "Sneha conducted an agricultural Computer Vision study evaluating six CNN architectures on edge devices. She manually compiled a dataset of 1,200 crop images in harsh, wholesale market lighting. Using OpenCV HSV color segmentation and background isolation filters, she optimized a lightweight MobileNet structure that cut latency by 45% while maintaining a 92% real-world accuracy rate on constrained edge microprocessors."
+        answer: "Sneha conducted an agricultural Computer Vision study evaluating six CNN architectures on edge devices. She manually compiled a dataset of 1,200 crop images in harsh wholesale market lighting. Using OpenCV HSV color segmentation and background isolation filters, she optimized a MobileNet pipeline that achieved responsive edge performance with ~92% real-world accuracy on constrained hardware."
     },
     {
         keywords: ["cgpa", "gpa", "academics", "marks", "education", "polytechnic", "diploma"],
-        answer: "Sneha has an exceptional academic track record. She graduated with a Diploma in Computer Engineering from Government Polytechnic for Girls, Ahmedabad, securing a 9.42 CGPA overall and a perfect SPI 10.0 in her final semester. She is currently maintaining excellent marks in her B.Tech CSE coursework at Navrachana University."
+        answer: "Sneha has an exceptional academic track record. She graduated with a Diploma in Computer Engineering from Government Polytechnic for Girls, Ahmedabad, securing a 9.42 CGPA overall and a perfect SPI 10.0 in her final semester. She is currently maintaining top-tier grades in her B.Tech CSE coursework at Navrachana University."
     },
     {
         keywords: ["certifications", "gcp", "aws", "cloud", "neo4j cert", "certified"],
-        answer: "Sneha holds multiple premium cloud and technical credentials: 1) AWS Academy Graduate in Machine Learning Foundations, 2) Google Cloud Academy Certified in GCP Data Engineering, 3) Neo4j Certified Professional in Graph Database Systems, 4) IBM Certified in Data Analysis with Python, and 5) Cisco Certified in IoT & Cybersecurity."
+        answer: "Sneha holds 5 verified certifications: 1) AWS Academy Graduate in Machine Learning Foundations, 2) Google Cloud Academy in GCP Data Engineering, 3) Neo4j Certified Professional in Graph Database Systems, 4) IBM Certified in Data Analysis with Python, and 5) Cisco Certified in IoT & Cybersecurity."
     }
 ];
 
@@ -197,7 +210,7 @@ export function answerQuestion(question: string): AgentResponse {
     }
 
     return {
-        answer: "I couldn't find a direct match for that question in Sneha's logs. Try asking about her 'TetraTHON 6th rank', 'Deepfake ViT model accuracy', 'Greensort latency optimization on Raspberry Pi', or 'Neo4j crisis mapping'.",
+        answer: "I couldn't find a direct match for that question in Sneha's verified logs. Try asking about 'Arcanum AI at TetraTHON', 'DeepShield dual-domain forensics', 'NeuraBin / GreenSort 90 mAP at SustainX', 'DermaJourney clinical AI research', or 'Neo4j 101k crisis mapping'.",
         confidence: 0
     };
 }

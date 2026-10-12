@@ -70,7 +70,7 @@ export default function ResumePage() {
                                         Sneha Patel
                                     </h3>
                                     <p className="text-xs text-slate-400 font-mono mt-0.5">
-                                        AI & Systems Engineer
+                                        AI/ML Developer & CS Student
                                     </p>
                                 </div>
                             </div>
@@ -111,23 +111,25 @@ export default function ResumePage() {
                                     <h5 className="text-xs font-semibold text-slate-800">Education</h5>
                                     <p className="text-xs text-slate-650 font-normal mt-1 leading-relaxed">
                                         B.Tech Computer Science Engineering @ Navrachana University<br />
-                                        Diploma Computer Engineering (9.42 CGPA, SPI 10)
+                                        Diploma Computer Engineering (9.42 CGPA, Final SPI 10.0)
                                     </p>
                                 </div>
 
                                 <div>
                                     <h5 className="text-xs font-semibold text-slate-800">Certifications</h5>
                                     <p className="text-xs text-slate-650 font-normal mt-1 leading-relaxed">
-                                        AWS Academy Cloud Foundations · Google Cloud Ingestion & Analytics · Neo4j Certified Professional
+                                        AWS Academy ML Foundations · Google Cloud Data Engineering · Neo4j Certified Professional · IBM Data Analysis · Cisco IoT
                                     </p>
                                 </div>
 
                                 <div>
-                                    <h5 className="text-xs font-semibold text-slate-800">Key Projects</h5>
+                                    <h5 className="text-xs font-semibold text-slate-800">Key Projects & Research</h5>
                                     <p className="text-xs text-slate-650 font-normal mt-1 leading-relaxed">
-                                        • DeepShield AI (97.5% Acc Deepfake classification)<br />
-                                        • Greensort (IoT Edge Waste Sorting System)<br />
-                                        • NLP Suicide Sentiment Graph Context Mapper
+                                        • Arcanum AI (6th Rank / 160 Teams @ TetraTHON 2026)<br />
+                                        • NeuraBin / GreenSort (Top 6 @ SustainX 2026, 90 mAP Edge Sorter)<br />
+                                        • DeepShield AI (Dual-Domain ViT Deepfake Forensics)<br />
+                                        • DermaJourney (Clinical Dermatology Triage Support)<br />
+                                        • Crisis Risk NLP (101K+ Records, Neo4j Graph Mapper)
                                     </p>
                                 </div>
                             </div>

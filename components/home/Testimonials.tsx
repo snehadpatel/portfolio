@@ -14,22 +14,28 @@ interface Testimonial {
 
 const testimonials: Testimonial[] = [
     {
-        quote: "We were genuinely impressed by the team's presentation and analytical logic. The supplier ranking agent showcased impressive depth, earning our high commendation and appreciation.",
-        name: "CEO, Mesh Works",
-        role: "Hackathon Judge",
-        context: "AI Supplier Ranking Agent — Hackathon Commendation",
+        quote: "Her team delivered an outstanding context-aware developer copilot within 36 hours, distinguishing itself for technical depth, AST token parsing, and clean architecture across 160 teams.",
+        name: "TetraTHON 2026 Jury",
+        role: "NeoFolks, Navrachana University & ISEN",
+        context: "Arcanum AI — 6th Rank National Finalist Award",
+    },
+    {
+        quote: "The NeuraBin edge waste sorting prototype demonstrated impressive engineering practicality, achieving 90 mAP across 4 streams with a 1.7s cycle time within a ₹5,000 hardware budget.",
+        name: "SustainX 2026 Technical Panel",
+        role: "National Competition & Research Track",
+        context: "NeuraBin / GreenSort — Top 6 Finalist & Published Paper",
     },
     {
         quote: "Her graph database integration mapped sentiment patterns our standard NLP pipeline couldn't detect. The Neo4j context pathways added a new dimension to our risk assessment.",
         name: "CSRBOX Mentorship Team",
         role: "Internship Supervisor",
-        context: "NLP Crisis Context Mapper — Data Specialist Internship",
+        context: "NLP Crisis Context Mapper — 101K+ Records Analyzed",
     },
     {
-        quote: "Represented the institution in national-level championship, demonstrating exceptional autonomous robot design with real-time obstacle detection and path optimization.",
-        name: "WSRO Nationals Panel",
-        role: "Competition Review",
-        context: "WSRO Nationals Robot Race — Autonomous Tracking Robot",
+        quote: "We were genuinely impressed by the team's presentation and analytical logic. The supplier ranking agent showcased impressive depth, earning our high commendation and appreciation.",
+        name: "CEO, Mesh Works",
+        role: "Hackathon Judge",
+        context: "AI Supplier Ranking Agent — Hackathon Commendation",
     },
 ];
 
