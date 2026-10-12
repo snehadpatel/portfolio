@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { FileText, Download, ExternalLink, BookOpen, Clock, CheckCircle } from "lucide-react";
-import { SparkleDoodle } from "@/components/ui/Doodles";
+import { Download, ExternalLink, Clock, CheckCircle } from "lucide-react";
 import { DATA } from "@/lib/data";
 
 export default function ResearchCallout() {

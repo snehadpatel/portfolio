@@ -6,7 +6,7 @@
  *  ----------------------------------------------------------------- */
 
 import { SITE_URL, SITE_NAME, AUTHOR_NAME, AUTHOR_TITLE, DEFAULT_OG_IMAGE } from "@/lib/seo";
-import { DATA } from "@/lib/data";
+import { DATA, PublicationDetails } from "@/lib/data";
 
 // ─── Person Schema ─────────────────────────────────────────────────
 // Tells Google WHO you are — powers knowledge panels & "People also search for".
@@ -147,12 +147,7 @@ interface ProjectJsonLdProps {
     image: string;
     techStack: string[];
     github?: string;
-    publication?: {
-        title: string;
-        authors: string[];
-        conference: string;
-        abstract: string;
-    };
+    publication?: PublicationDetails;
 }
 
 export function ProjectJsonLd({
@@ -198,7 +193,7 @@ export function ProjectJsonLd({
                 name: author,
             })),
             description: publication.abstract,
-            publisher: publication.conference,
+            publisher: publication.conference || publication.venue || "Academic Publication",
             url: `${SITE_URL}${url}`,
         });
     }

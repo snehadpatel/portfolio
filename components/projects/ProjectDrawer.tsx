@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Github, ExternalLink, Clock, Users, Wrench, FileText, CheckCircle2, AlertCircle, ArrowUpRight } from "lucide-react";
+import { X, Github, ExternalLink, Clock, Users, Wrench, FileText, CheckCircle2 } from "lucide-react";
 import { Project } from "@/lib/data";
 import { Button } from "@/components/ui/Button";
 import PipelineVisualizer from "./PipelineVisualizer";

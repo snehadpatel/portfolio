@@ -2,7 +2,7 @@
 
 import { DATA } from "@/lib/data";
 import Link from "next/link";
-import { ArrowRight, Download, FileText, CheckCircle, Clock } from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
 import { UnderlineDoodle, CircuitTraceDoodle, CurlyArrowDoodle, ScribbleHighlightDoodle, SparkleDoodle, BulbDoodle } from "@/components/ui/Doodles";
 import { useRecruiterMode } from "@/lib/hooks/useRecruiterMode";
 import CertificationsDashboard from "@/components/about/CertificationsDashboard";
